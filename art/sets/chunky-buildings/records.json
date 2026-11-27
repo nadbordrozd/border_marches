@@ -3937,5 +3937,440 @@
         "height": 64
       }
     ]
+  },
+  "horde-halls-r1": {
+    "id": "horde-halls-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "38e6b960-d765-4d41-a328-80f8f93f929e",
+    "submittedAt": "2026-11-27T09:14:03.001Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Village Hall (a small fat rusty iron shack with a moss green roof and a big war horn on top); Town Hall (the same shack grown: two lopsided storeys of rusty iron and scrap planks, moss green roofs and the war horn); City Hall (the same hall grown huge: a fat lopsided junk palace of rusty iron with moss green roofs and big horns). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-r1-0.png sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 123331,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Village Hall (a small fat rusty iron shack with a moss green roof and a big war horn on top); Town Hall (the same shack grown: two lopsided storeys of rusty iron and scrap planks, moss green roofs and the war horn); City Hall (the same hall grown huge: a fat lopsided junk palace of rusty iron with moss green roofs and big horns). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:15:20.680Z",
+    "usageUsd": 0.08185711728201972,
+    "candidates": [
+      {
+        "file": "horde-halls-r1-0.png",
+        "sha256": "7133501ee3114cdc51e4f6a4b8bab5c3aa20a6557739455a2c971b3ee80acbce",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-1.png",
+        "sha256": "2a839692adc88568977ade61827757ceb85f1d4141f0f05ef8704d0b7c7887be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-2.png",
+        "sha256": "f245c7db04a902428ffd6d25fd4c09d2592aac4059a434128b5915fcb66d6cc0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-3.png",
+        "sha256": "0b00fc368b7f34f56e9ee5ffaf99878b399ba6de29aefb792306b67de3b84f6d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-4.png",
+        "sha256": "895631c5db4aaac43a3f9bc7df6deedcc569f405793fe3c47fe2d4ce1dfcdd13",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-5.png",
+        "sha256": "4aebdfada0501534a58bc9c288f9aeb387acef8960d280bf046f3d1a1e9e70f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-6.png",
+        "sha256": "043e054ded0f19505032301d6d6196ac26ba72bfb0baae27998e62397dadfa2b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-7.png",
+        "sha256": "0c6169093c3139078d1efbe093383168bb404eaa9d1e5914cad70afd647cc1be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-8.png",
+        "sha256": "c17d4bae7e952c51cfc50a6dee46e493d5b783e9a2a3a033311233a6c16a9ad8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-9.png",
+        "sha256": "e885778d36e57adf7ed651aae6ca65ee74488e950e30b15ddfc575d0eadad929",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-10.png",
+        "sha256": "583efa07df83db82810a13512f21ea9cb30393b10e89cea53499736ea1563b83",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-11.png",
+        "sha256": "61c6ca47efb5c38455b66caf8cdaa425a824b17671ca085901dc1e5b1164b796",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-12.png",
+        "sha256": "e60aec8f1a4fe8099549ea60e96b838663c4fa5d0b8ca38af6b03d2935e39f21",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-13.png",
+        "sha256": "0b88eb8aacc36fe83a384b47f6ec25d06205e836e9bb03f47e2dbf613797b2d7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-14.png",
+        "sha256": "6e9aa00d9b20a2d6a89f66b13630b01583a435ee954960563a43f0fac7e3e4f9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-r1-15.png",
+        "sha256": "b53383f9c2ee15addd0dcca3305b151a8216d93c7081cfb956904171987ccaa6",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-sheds-r1": {
+    "id": "horde-sheds-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "64b11e13-698e-4ed9-bec7-51566513ddf4",
+    "submittedAt": "2026-11-27T09:15:21.170Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Scrap Wall (a thick wall of rusty corrugated iron sheets with fat sharpened logs at both ends and a small plank gate); Skull Tower (a fat squat lookout tower of rusty iron on thick log stilts with a huge cream horned ox skull on top); Powder Shed (a squat rusty iron shed with a moss green roof and black powder barrels by the door); Tavern (a rusty iron grog shack with a moss green roof, barrels and a big mug sign). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-r1-0.png sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 123332,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Scrap Wall (a thick wall of rusty corrugated iron sheets with fat sharpened logs at both ends and a small plank gate); Skull Tower (a fat squat lookout tower of rusty iron on thick log stilts with a huge cream horned ox skull on top); Powder Shed (a squat rusty iron shed with a moss green roof and black powder barrels by the door); Tavern (a rusty iron grog shack with a moss green roof, barrels and a big mug sign). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:17:03.946Z",
+    "usageUsd": 0.08197606319851346,
+    "candidates": [
+      {
+        "file": "horde-sheds-r1-0.png",
+        "sha256": "738411a855cb1fe998842ab765a283aa483d71e3327189450cc5d506e56e62b1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-1.png",
+        "sha256": "922caad7597f4751688f120e359a67c35be88f0d8835c90898d7762b6822959c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-2.png",
+        "sha256": "d41a5368a5f883ebaea7dfb3c2582b5ddd2af49c4e0d87a244d653684a2f49cd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-3.png",
+        "sha256": "8852dbed6f8fec258245786dc89dd95ad44173dc0361863866472be08f46700a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-4.png",
+        "sha256": "1211e6450e71f4db93d798e711c195cdd24da336542dafe0da4148683deaa0d4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-5.png",
+        "sha256": "028a28392b14e3d8f84fb2e2dec88ff460d7c77a5a74c1b2bf01be5648a4be3a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-6.png",
+        "sha256": "61d8a19d1e3599023e61ccd3c5d1941b9eaf63192c8e42175758fef98635e980",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-7.png",
+        "sha256": "9fcad0cb39b62026283650a00e8744847994197319fad463bc675c587ea48c0b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-8.png",
+        "sha256": "ea9ddd0bc85a8ae96032a2b38fb20fa0c23e05a2ed56759b380f8f529cd83043",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-9.png",
+        "sha256": "d93a0b8cf0fc49f0e2fb95d066b00cc55a0fa77dad73a838e4493e2f3739b04c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-10.png",
+        "sha256": "c35dcc6a0cdad8cd38bd77cd40f08804af8f590263b46149c6af79b7d601d69c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-11.png",
+        "sha256": "6f5a1c808e56bd089806b5f0d90d97eb1b1e9dd0c24c2d2b3988264a8ade9b6d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-12.png",
+        "sha256": "c4a8631e5a7026b0bd40a87de57b5199b222504b83dff3f0a6027dcd7c3fbfb5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-13.png",
+        "sha256": "0432de8addeae54877096c7b8fdb4954ca7ad5108c2b9d10d756594c20b52898",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-14.png",
+        "sha256": "626266b5d6aaa068dfe19697560bf80ee5e7335f5b75c4bf8cd1440f8d431559",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-sheds-r1-15.png",
+        "sha256": "5a0c335b342bfeac3c2e6c909ada0270383760558aecce52ab5a9d4472292cd3",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-yard-r1": {
+    "id": "horde-yard-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ce195cbd-2a86-4136-a949-71dddab1feee",
+    "submittedAt": "2026-11-27T09:17:04.089Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Marketplace (a scrap plank stall with a striped dull red and cream cloth awning piled with crates and sacks); Resource Silo (a fat rusty iron silo with a moss green cone roof beside a woodpile and an ore wheelbarrow); Great Flinger (a giant wheeled catapult of logs and rusty iron with a long scrap-wood arm and a big spoon). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-r1-0.png sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 123333,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Marketplace (a scrap plank stall with a striped dull red and cream cloth awning piled with crates and sacks); Resource Silo (a fat rusty iron silo with a moss green cone roof beside a woodpile and an ore wheelbarrow); Great Flinger (a giant wheeled catapult of logs and rusty iron with a long scrap-wood arm and a big spoon). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:18:52.267Z",
+    "usageUsd": 0.08199595957332187,
+    "candidates": [
+      {
+        "file": "horde-yard-r1-0.png",
+        "sha256": "122d1b2b751821e2b7b1ee3a502b55eaed55581f376462181a5658bc6840dc5d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-1.png",
+        "sha256": "0257ff2ac66f2ab8ca2d1ab3efdf5ee0cf8f3f8b6ee469728f8f0920ed55cd4e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-2.png",
+        "sha256": "f6f4cfe8d550e73c87ab9d59de9e56be679978a787ce862676a5974fe6407825",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-3.png",
+        "sha256": "b9afde55029502e44499bcf6641bc58733492f11ef11b19975c88b44483a9769",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-4.png",
+        "sha256": "c8345abf638ca34e1f323569096fd2b1cb201e0a151ff89a6b06a9fe213ec36a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-5.png",
+        "sha256": "c7398facddc7b9c6219fb6e5e469f4f1039ad7287c685cb01432a61b585d2cb5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-6.png",
+        "sha256": "3455408611c03ec60fe5ee0994b89e851236222ad54f0dd2d358a56b29053148",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-7.png",
+        "sha256": "2f64b0ab23ac54e184b46de7e981bef0c2d475d28dd962a9515cf646c4c280cb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-8.png",
+        "sha256": "a8cfa60b92a8e5a54fa0861d6fb995ec2d2922623da0e05125960424f3c0dabd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-9.png",
+        "sha256": "464274d55f885c34cf16bd1db2bc67204a758cb4bb9b6850cfe657d162d356da",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-10.png",
+        "sha256": "df8bd613f2afae6db1402da4855efa8c4ba6719e3432a73b1994974e5b9ec8e3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-11.png",
+        "sha256": "174296407d455ef2e176242215efdaa75c426e33ae0f51ba51989b84864ea052",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-12.png",
+        "sha256": "13209b38b53117d47d0374600e13901fc0b5c54ea28e6bf3a541d65f06702168",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-13.png",
+        "sha256": "60455e157e9d05f5a5ae18fcaa0defb942da5360c3613bd31d503ed2b5d2e9c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-14.png",
+        "sha256": "631f33d4141d7318a5840155161887d6766d5e5672397ae11f46cb5a0ed97a7d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-yard-r1-15.png",
+        "sha256": "3827779e6e278640a94831857bcdbac97640c6bb63f4d92952917285625c8377",
+        "width": 64,
+        "height": 64
+      }
+    ]
   }
 }

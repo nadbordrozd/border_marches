@@ -1833,5 +1833,245 @@
     "verdict": "REJECTED",
     "notes": "Mint Press: brown-red front, off the mint colour",
     "at": "2026-11-27T00:14:16.004Z"
+  },
+  "horde-halls-r1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall (bzc.123): fat rusty plank-and-iron shack under a moss green roof with an oversized cream war horn on top; cute and simple",
+    "at": "2026-11-27T09:20:01.557Z"
+  },
+  "horde-halls-r1#9": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall (bzc.123): the shack grown to two lopsided storeys of rusty iron and planks, moss green roofs and the war horn on top",
+    "at": "2026-11-27T09:20:01.651Z"
+  },
+  "horde-halls-r1#14": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall (bzc.123): the hall grown huge: a fat junk palace of rusty iron with big cream horns, moss green roofs, dull red cloth and spotted hide; the biggest of the three",
+    "at": "2026-11-27T09:20:01.743Z"
+  },
+  "horde-halls-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "village hall take; #12 has the bigger, clearer war horn",
+    "at": "2026-11-27T09:20:01.838Z"
+  },
+  "horde-halls-r1#4": {
+    "verdict": "REJECTED",
+    "notes": "village hall take; #12 has the bigger, clearer war horn",
+    "at": "2026-11-27T09:20:01.956Z"
+  },
+  "horde-halls-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "village hall take; #12 has the bigger, clearer war horn",
+    "at": "2026-11-27T09:20:02.064Z"
+  },
+  "horde-halls-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "town hall take; #9 reads cleaner as the village hall grown",
+    "at": "2026-11-27T09:20:02.174Z"
+  },
+  "horde-halls-r1#5": {
+    "verdict": "REJECTED",
+    "notes": "town hall take; #9 reads cleaner as the village hall grown",
+    "at": "2026-11-27T09:20:02.287Z"
+  },
+  "horde-halls-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "town hall take; #9 reads cleaner as the village hall grown",
+    "at": "2026-11-27T09:20:02.394Z"
+  },
+  "horde-halls-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:02.496Z"
+  },
+  "horde-halls-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:02.598Z"
+  },
+  "horde-halls-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:02.697Z"
+  },
+  "horde-halls-r1#7": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:02.799Z"
+  },
+  "horde-halls-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:02.901Z"
+  },
+  "horde-halls-r1#11": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:03.008Z"
+  },
+  "horde-halls-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "city hall take; #14 is fatter with the boldest horns (#11 reads as a castle, #10 as a tent, others muddier at 1x)",
+    "at": "2026-11-27T09:20:03.112Z"
+  },
+  "horde-sheds-r1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "scrap-wall (bzc.123): a thick wall of rusty patched planks between two fat sharpened logs with a small plank gate; the stakes grown into a wall, no yellow",
+    "at": "2026-11-27T09:20:03.216Z"
+  },
+  "horde-sheds-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "scrap wall with stray specks under it and a muddled front",
+    "at": "2026-11-27T09:20:03.317Z"
+  },
+  "horde-sheds-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "a stake palisade: would share the Stakes silhouette; specks under it",
+    "at": "2026-11-27T09:20:03.421Z"
+  },
+  "horde-sheds-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "ragged wall with loose specks and horns spilling under it",
+    "at": "2026-11-27T09:20:03.523Z"
+  },
+  "horde-sheds-r1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "skull-tower (bzc.123): a squat round rusty barrel tower on thick log legs with a ladder, crowned by a big cream horned ox skull",
+    "at": "2026-11-27T09:20:03.628Z"
+  },
+  "horde-sheds-r1#5": {
+    "verdict": "REJECTED",
+    "notes": "skull tower on a tall plank base: reads as a hut, not a tower on stilts",
+    "at": "2026-11-27T09:20:03.727Z"
+  },
+  "horde-sheds-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "skull tower with ram horns and thin legs; #4 is stouter",
+    "at": "2026-11-27T09:20:03.825Z"
+  },
+  "horde-sheds-r1#7": {
+    "verdict": "REJECTED",
+    "notes": "the skull's eye sockets and fangs read demonic or undead",
+    "at": "2026-11-27T09:20:03.930Z"
+  },
+  "horde-sheds-r1#9": {
+    "verdict": "ACCEPTED",
+    "notes": "powder-shed (bzc.123): squat rusty plank shed under a moss green roof with black powder barrels stacked by the door",
+    "at": "2026-11-27T09:20:04.037Z"
+  },
+  "horde-sheds-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "powder shed with a grass tuft at its foot",
+    "at": "2026-11-27T09:20:04.137Z"
+  },
+  "horde-sheds-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "powder shed without the moss roof: plain brown box",
+    "at": "2026-11-27T09:20:04.228Z"
+  },
+  "horde-sheds-r1#11": {
+    "verdict": "REJECTED",
+    "notes": "L-shaped shed: the barrels hide in the corner",
+    "at": "2026-11-27T09:20:04.323Z"
+  },
+  "horde-sheds-r1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern (bzc.123): a rusty grog shack under a moss green roof with a big mug sign, barrels and a warm lit door",
+    "at": "2026-11-27T09:20:04.416Z"
+  },
+  "horde-sheds-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "tavern on a plank deck with a thin roof frame; muddier than #12",
+    "at": "2026-11-27T09:20:04.507Z"
+  },
+  "horde-sheds-r1#14": {
+    "verdict": "REJECTED",
+    "notes": "two-storey tavern would share the Town Hall silhouette",
+    "at": "2026-11-27T09:20:04.607Z"
+  },
+  "horde-sheds-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "barrel-roofed shack: no moss roof and no clear mug sign",
+    "at": "2026-11-27T09:20:04.712Z"
+  },
+  "horde-yard-r1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace (bzc.123): a scrap plank stall under a striped dull red and cream awning piled with sacks and planks",
+    "at": "2026-11-27T09:20:04.817Z"
+  },
+  "horde-yard-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "two moss-roofed shacks: two buildings, not a market stall",
+    "at": "2026-11-27T09:20:04.926Z"
+  },
+  "horde-yard-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "stall on thin posts, emptier than #0",
+    "at": "2026-11-27T09:20:05.030Z"
+  },
+  "horde-yard-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "stall with a sign board and spread crates: busier than #0",
+    "at": "2026-11-27T09:20:05.124Z"
+  },
+  "horde-yard-r1#4": {
+    "verdict": "REJECTED",
+    "notes": "awning sags over a heap of sacks; the stall itself barely shows",
+    "at": "2026-11-27T09:20:05.222Z"
+  },
+  "horde-yard-r1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo (bzc.123): a fat rusty iron silo under a moss green cone beside a woodpile and an ore wheelbarrow",
+    "at": "2026-11-27T09:20:05.317Z"
+  },
+  "horde-yard-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "rust cone roof loses the moss accent",
+    "at": "2026-11-27T09:20:05.411Z"
+  },
+  "horde-yard-r1#7": {
+    "verdict": "REJECTED",
+    "notes": "patched moss silo reads as a tree stump",
+    "at": "2026-11-27T09:20:05.508Z"
+  },
+  "horde-yard-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "boiler with pipes, not a silo",
+    "at": "2026-11-27T09:20:05.606Z"
+  },
+  "horde-yard-r1#9": {
+    "verdict": "REJECTED",
+    "notes": "barrel silo smaller and busier than #5",
+    "at": "2026-11-27T09:20:05.709Z"
+  },
+  "horde-yard-r1#11": {
+    "verdict": "ACCEPTED",
+    "notes": "great-flinger (bzc.123): a fat wheeled catapult of logs with rusty iron bracing and a big scrap-wood spoon arm; the Keystone at a glance",
+    "at": "2026-11-27T09:20:05.813Z"
+  },
+  "horde-yard-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "catapult with a small claw spoon, thinner than #11",
+    "at": "2026-11-27T09:20:05.910Z"
+  },
+  "horde-yard-r1#12": {
+    "verdict": "REJECTED",
+    "notes": "grey spoon and thin frame",
+    "at": "2026-11-27T09:20:06.007Z"
+  },
+  "horde-yard-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "small boxy cart, the arm too short to read as a flinger",
+    "at": "2026-11-27T09:20:06.105Z"
+  },
+  "horde-yard-r1#14": {
+    "verdict": "REJECTED",
+    "notes": "close to #11 but lighter and thinner",
+    "at": "2026-11-27T09:20:06.198Z"
+  },
+  "horde-yard-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "thin spindly frame with a hanging chain",
+    "at": "2026-11-27T09:20:06.294Z"
   }
 }

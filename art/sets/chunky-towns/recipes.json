@@ -32,6 +32,10 @@
       "outline": true,
       "detail": true,
       "shading": true
+    },
+    "styleHordeR": {
+      "take": "horde-fort-r1#0",
+      "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
     }
   },
   "defaults": {
@@ -211,6 +215,91 @@
       "seed": 114111,
       "subject": "Subject: a cosy little sweet hamlet, smaller than a town, about two thirds of the image wide and lower than a palace: at the back centre a fat gingerbread cottage #b86b34 with #7d4420 shadows under a strawberry pink #e2589b roof with #a8336c shadows dripping white royal icing #fff4ec and a round gumdrop chimney, crowded round it little sweet-shop cottages of gingerbread with pink and mint #7fd6b5 icing roofs, gumdrops and a lollipop; across the front a low fence of red and white striped candy canes #e03a3e with a gate arch of two crossed candy canes in the exact middle.",
       "negative": "purple, violet, gore, palace, clock, tower, cake, stone wall"
+    },
+    {
+      "id": "horde-fort-r1",
+      "concept": "HORDE WARLORD'S HOLD (fort 2-3), bzc.123 palette: rusty iron, moss green roofs",
+      "seed": 123301,
+      "subject": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "horde-fort-r2",
+      "concept": "HORDE WARLORD'S HOLD (fort 2-3), bzc.123 palette: rusty iron, moss green roofs (second seed)",
+      "seed": 123302,
+      "subject": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "horde-fort-r3",
+      "concept": "HORDE WARLORD'S HOLD (fort 2-3), bzc.123 palette: weathered blue-grey tin with rust, moss green roofs",
+      "seed": 123303,
+      "subject": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of weathered blue-grey corrugated tin #9aa3a5 with big orange rust patches #b0582c under a moss green #74943e corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it tin and scrap plank shacks with moss green and rusty roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "horde-camp-r1",
+      "concept": "HORDE WARCAMP (fort 0-1), bzc.123 palette, style image the new Hold",
+      "seed": 123311,
+      "styleImage": {
+        "take": "horde-fort-r1#0",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the boss hall, not the tower and not the layout"
+      },
+      "styleOptions": "@palOpts",
+      "subject": "Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold, tin hall, watchtower, stone wall"
+    },
+    {
+      "id": "horde-camp-r2",
+      "concept": "HORDE WARCAMP (fort 0-1), bzc.123 palette, style image the new Hold (second seed)",
+      "seed": 123312,
+      "styleImage": {
+        "take": "horde-fort-r1#0",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the boss hall, not the tower and not the layout"
+      },
+      "styleOptions": "@palOpts",
+      "subject": "Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold, tin hall, watchtower, stone wall"
+    },
+    {
+      "id": "horde-camp-r3",
+      "concept": "HORDE WARCAMP (fort 0-1), bzc.123 palette, re-roll with the inn style image: r1/r2 copied the Hold's layout",
+      "seed": 123313,
+      "subject": "Subject: a goblin ramshackle warcamp, lower than a fortress, about two thirds of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little lean-to shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs, dull red #8e3b2e cloth awnings, a stove chimney, barrels and scrap; across the front a low crooked fence of thin sharpened stakes #b8733a with a gap between two tall stakes crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, yellow roof, bright yellow, gold, hall, watchtower, thick wall"
+    },
+    {
+      "id": "goblin-city-1-r1",
+      "concept": "GOBLIN CAMP (level 1), bzc.123 palette",
+      "width": 88,
+      "height": 96,
+      "seed": 123321,
+      "styleImage": "@styleHordeR",
+      "styleOptions": "@palOpts",
+      "subject": "Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs huddled in front of it, a dull red #8e3b2e cloth awning, a heap of scrap and a stove chimney; a dark doorway at the bottom centre.",
+      "negative": "goblin, yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "goblin-city-2-r1",
+      "concept": "GOBLIN WARCAMP (level 2), bzc.123 palette",
+      "width": 96,
+      "height": 100,
+      "seed": 123322,
+      "styleImage": "@styleHordeR",
+      "styleOptions": "@palOpts",
+      "subject": "Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower beside it, crowded round it a spotted tawny hide tent and rusty shacks with moss green and rust roofs, and a short fence of sharpened log stakes #b8733a across the front with a plain plank gate at the bottom centre.",
+      "negative": "goblin, yellow roof, bright yellow, gold, skull"
+    },
+    {
+      "id": "goblin-city-3-r1",
+      "concept": "GOBLIN HOLD (level 3), bzc.123 palette",
+      "width": 96,
+      "height": 104,
+      "seed": 123323,
+      "styleImage": "@styleHordeR",
+      "styleOptions": "@palOpts",
+      "subject": "Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower, crowded round it rusty shacks with moss green and rust roofs, dull red #8e3b2e cloth and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre.",
+      "negative": "goblin, yellow roof, bright yellow, gold"
     }
   ],
   "outputs": [
@@ -324,21 +413,21 @@
     },
     {
       "path": "public/assets/towns/horde-warcamp-3x2.png",
-      "from": "horde-camp-a#0",
+      "from": "horde-camp-r3#0",
       "width": 240,
       "height": 184,
       "steps": [
         {
           "op": "crop",
           "x": 0,
-          "y": 13,
+          "y": 17,
           "width": 232,
-          "height": 156
+          "height": 143
         },
         {
           "op": "pad",
           "width": 240,
-          "height": 160,
+          "height": 147,
           "anchor": "top"
         },
         {
@@ -351,21 +440,21 @@
     },
     {
       "path": "public/assets/towns/goblin-hold-3x2.png",
-      "from": "horde-fort-s1#0",
+      "from": "horde-fort-r1#0",
       "width": 240,
       "height": 184,
       "steps": [
         {
           "op": "crop",
           "x": 0,
-          "y": 6,
+          "y": 7,
           "width": 232,
-          "height": 163
+          "height": 165
         },
         {
           "op": "pad",
           "width": 240,
-          "height": 167,
+          "height": 169,
           "anchor": "top"
         },
         {
@@ -423,19 +512,19 @@
     },
     {
       "path": "public/assets/towns/goblin-city-1.png",
-      "from": "goblin-city-1-a#0",
+      "from": "goblin-city-1-r1#2",
       "width": 88,
       "height": 96
     },
     {
       "path": "public/assets/towns/goblin-city-2.png",
-      "from": "goblin-city-2-a#1",
+      "from": "goblin-city-2-r1#3",
       "width": 96,
       "height": 100
     },
     {
       "path": "public/assets/towns/goblin-city-3.png",
-      "from": "goblin-city-3-a#0",
+      "from": "goblin-city-3-r1#0",
       "width": 96,
       "height": 104
     },

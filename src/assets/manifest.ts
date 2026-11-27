@@ -516,29 +516,30 @@ export const TOWN_ASSETS: readonly TownAsset[] = [
     rightY: 89.5,
     fullness: 0.54,
   }),
+  // The goblin camps repainted without the hazard yellow (bead bzc.123).
   town("goblin-city-1", "goblin", 1, 88, 96, { x: 44, y: 56 }, null, {
-    contactY: 92,
+    contactY: 95,
     left: 0,
-    right: 78,
-    leftY: 84.5,
-    rightY: 85.5,
-    fullness: 0.74,
+    right: 85,
+    leftY: 90.5,
+    rightY: 86.5,
+    fullness: 0.78,
   }),
   town("goblin-city-2", "goblin", 2, 96, 100, { x: 48, y: 60 }, null, {
-    contactY: 98,
-    left: 5,
-    right: 90,
-    leftY: 90.5,
-    rightY: 89.5,
-    fullness: 0.64,
+    contactY: 92,
+    left: 4,
+    right: 96,
+    leftY: 84.5,
+    rightY: 85.5,
+    fullness: 0.65,
   }),
   town("goblin-city-3", "goblin", 3, 96, 104, { x: 48, y: 64 }, null, {
-    contactY: 96,
-    left: 1,
+    contactY: 102,
+    left: 0,
     right: 96,
-    leftY: 86.5,
-    rightY: 86.5,
-    fullness: 0.66,
+    leftY: 93.5,
+    rightY: 91.5,
+    fullness: 0.52,
   }),
   town("village", "neutral", null, 72, 72, { x: 36, y: 32 }, null, {
     contactY: 72,
@@ -1117,7 +1118,9 @@ function town3x2(
  * The Lost World town, the goblin Warlord's Hold (also the Horde town's fort
  * stage) and the v0.2 faction towns at 3x2, redrawn as cute, chunky clusters
  * round a central landmark by bead bzc.97 (set chunky-towns); the Candy
- * Kingdom's hamlet and palace in the same style (bead bzc.114).
+ * Kingdom's hamlet and palace in the same style (bead bzc.114). The Horde's
+ * two stages repainted in rusty iron, moss green and dull red, without the
+ * hazard yellow (bead bzc.123).
  */
 export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
   town3x2(
@@ -1131,15 +1134,15 @@ export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
     "goblin-hold-3x2",
     "goblin",
     "fort",
-    [24, 17, 191, 163],
-    "chunky-towns/horde-fort-s1#0",
+    [18, 15, 203, 165],
+    "chunky-towns/horde-fort-r1#0",
   ),
   town3x2(
     "horde-warcamp-3x2",
     "goblin",
     "camp",
-    [24, 24, 191, 156],
-    "chunky-towns/horde-camp-a#0",
+    [24, 37, 191, 143],
+    "chunky-towns/horde-camp-r3#0",
   ),
   town3x2(
     "realm-village-3x2",

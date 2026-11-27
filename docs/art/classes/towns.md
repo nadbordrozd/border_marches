@@ -6,7 +6,10 @@ see [Map town direction](#map-town-direction-bzc97)); town-screen buildings
 redrawn in the same style on 2026-11-26 (bead `border_marches-bzc.98`, see
 [Town-screen buildings](#town-screen-buildings-bzc98)); the Candy Kingdom's
 town art added in the same style on 2026-11-27 (bead `border_marches-bzc.114`,
-see [Candy Kingdom town art](#candy-kingdom-town-art-bzc114)). Specialises
+see [Candy Kingdom town art](#candy-kingdom-town-art-bzc114)); the Horde's
+towns and buildings repainted without the yellow on 2026-11-27 (bead
+`border_marches-bzc.123`, see
+[Horde palette](#horde-palette-without-the-yellow-bzc123)). Specialises
 [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction towns: their
 map sprites and their town-screen art (building sprites and backdrops).
 
@@ -28,7 +31,8 @@ and toppled statue. The map towns now follow those:
   slightly-from-above front view and the sun at the bottom left. The style
   image is the roadside inn (`art/masters/map-objects/inn-a-0.png`).
 - **Faction at a glance.** Faction colours on the roofs (blue cones, violet
-  slate, hazard yellow, tawny thatch) and one signature gate (twin-towered
+  slate, moss green since bzc.123 (first hazard yellow), tawny thatch) and
+  one signature gate (twin-towered
   gatehouse, iron gate between lantern pillars, horned ox skull, dinosaur
   skull jaws).
 - **Two stages read apart.** The camp stage (fort 0-1) is lower and has a
@@ -128,6 +132,45 @@ follows the two sections above with no new rule; its calls:
   Keystone Hall, `candy-cane-fence`, `gingerbread-wall` and
   `sugar-glass-keep` fort 1-3.
 
+## Horde palette without the yellow (bzc.123)
+
+The user liked the map towns but found the goblins' bright yellow roofs
+"slightly offputting" (Candy and Restless "look very good"). The Horde's
+hazard yellow `#f2c230` and clean light tin are replaced by a grimier,
+earthier palette; the shapes, landmarks and geometry are unchanged:
+
+- **Palette.** Rusty corrugated iron `#8c7d6e` with orange rust streaks
+  `#b0582c`, moss green `#6e8b3d` corrugated roofs (the faction colour at a
+  glance; it matches the goblins' map accent green), scrap planks `#8a5a32`,
+  dull red `#8e3b2e` cloth patches and awnings, sharpened logs `#b8733a`,
+  tawny spotted hide, cream ox skull. Negatives `yellow roof, bright yellow,
+  gold`. The gold of the Loot Pile and the yellow-and-black hazard stripes of
+  the Racing Track and Launch Ramp stay: they are gold and racing markings,
+  not roofs.
+- **Map towns.** Fort stage (`horde-fort-r1`): the tall boss hall under a
+  moss roof, the scrap-wood lookout tower, packed rusty shacks, the spotted
+  tent and the horned ox skull gate in a thick stake wall; style image the
+  inn as before. A blue-grey rusty tin take (`horde-fort-r3`) had the nicest
+  metal but a thin ring round an empty yard and was rejected. Camp stage
+  (`horde-camp-r3`): the big spotted hide dome among moss-roofed lean-tos
+  behind a low stake fence. The new Hold as style image copied its layout
+  into the camp twice (`horde-camp-r1`, `r2`), so the camp was re-rolled
+  with the inn, as the bzc.97 camps were. Level towns 1-3 (`goblin-city-*-r1`)
+  take the new Hold as style image with its palette; a skull over crossed
+  bones at the gate reads pirate or undead and was rejected.
+- **Buildings.** Yes, for consistency: every Horde building with a yellow
+  roof or arm was redrawn with the new Hold as style image (`@hordeR`), in
+  three calls: the halls (a moss-roofed shack with a war horn, grown to two
+  storeys, grown to a horned junk palace), Scrap Wall, Skull Tower (a squat
+  rusty barrel tower on log legs under an ox skull), Powder Shed, Tavern,
+  Marketplace (dull red and cream awning), Resource Silo (moss cone) and
+  Great Flinger (scrap-wood arm). The other twelve were already brown, hide,
+  log or moss and are kept.
+
+The palette reads darker and earthier than the Candy and Restless towns by
+design (a junkyard, not a sweet shop), and the moss roofs and cream skull
+carry it on grass, badlands and snow.
+
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
@@ -141,8 +184,9 @@ follows the two sections above with no new rule; its calls:
 
 The lookups are in `src/assets/town-art.ts`; the data lists (building ids per
 faction, fort and Keystone buildings) are in `src/assets/town-buildings.ts`.
-The Horde's fort stage is the accepted Warlord's Hold (`towns-3x2`): its tin
-wall is the Scrap Wall and its watchtower the Skull Tower.
+The Horde's fort stage is the Warlord's Hold (`chunky-towns/horde-fort-r1`
+since bzc.123): its stake wall stands for the Scrap Wall and its watchtower
+for the Skull Tower.
 
 Building ids are the faction documents' names (section 9 of
 `docs/design/FACTION_*.md`) in kebab case without apostrophes
@@ -156,7 +200,7 @@ role aliases.
 | --- | --- | --- |
 | Realm (`humans`) | cream limestone `#e6d8b4` / `#b3a07a`, white plaster with dark timbers, tabard blue `#2f6fd0` / `#1f4a8f` and red-brown `#a8492f` roofs | a white chapel with a blue steeple among packed red-roofed cottages behind a plank fence and a little blue-roofed gate / a fat blue-coned keep among packed timber houses behind a thick crenellated wall with a twin-towered gatehouse |
 | Restless (`undead`) | slate `#5b5866` / `#3a3842`, shroud violet `#7a4fb5` / `#4e2f7a` roofs, bone white `#d8d0bc`, black iron; spooky-cute, never gory | a little violet-roofed chapel among crypts, a gravedigger's cottage and tombstones behind iron railings / a tall crooked slate cathedral with a manor and a bone-white domed mausoleum behind a slate wall with a black iron gate |
-| Horde (`goblins`) | riveted tin `#b8bcc0` / `#7d8288`, hazard yellow `#f2c230` roofs, sharpened logs `#b8733a`, tawny spotted hide | a big spotted hide tent among yellow-roofed tin shacks behind a stake fence with a horned-skull gate / the Warlord's Hold: a tall tin boss hall and a lookout tower behind a stake wall |
+| Horde (`goblins`) | rusty corrugated iron `#8c7d6e` with rust `#b0582c`, moss green `#6e8b3d` roofs, scrap planks `#8a5a32`, dull red `#8e3b2e` cloth, sharpened logs `#b8733a`, tawny spotted hide; no yellow (bzc.123) | a big spotted hide dome among moss-roofed rusty lean-tos behind a low stake fence with a horned-skull gate / the Warlord's Hold: a tall rusty boss hall under a moss roof and a scrap-wood lookout tower behind a thick stake wall |
 | Candy Kingdom (`candy`) | gingerbread `#b86b34` / `#7d4420`, royal icing `#fff4ec`, strawberry pink `#e2589b` / `#a8336c` roofs, candy-cane red `#e03a3e` and white stripes, mint `#7fd6b5`, sugar glass `#8fe3e8`; no purple | a fat gingerbread cottage with an icing-dripped pink roof among sweet-shop cottages behind a candy-cane fence with a crossed-cane gate / a tiered-cake palace with a cuckoo-clock tower and sugar-glass turrets behind a gingerbread wall with the crossed-cane gate between lollipops |
 | Lost World (`lost-world`) | tawny thatch, tawny hide with dark brown spots, cream bone, red-orange paint, basalt | one 3x2 stage: a huge thatched longhouse among plump huts behind a log fence with a dinosaur-skull gate; levels 1-3 grow from three huts round a totem |
 

@@ -1144,5 +1144,554 @@
         "height": 176
       }
     ]
+  },
+  "horde-fort-r1": {
+    "id": "horde-fort-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "bcfbda78-ea3d-48a0-b8e4-698fb176fecd",
+    "submittedAt": "2026-11-27T09:05:25.486Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123301,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:06:32.968Z",
+    "usageUsd": 0.08082656492127313,
+    "candidates": [
+      {
+        "file": "horde-fort-r1-0.png",
+        "sha256": "8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-fort-r2": {
+    "id": "horde-fort-r2",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0bf9caae-ce70-4d4d-9da2-ad84ad37bada",
+    "submittedAt": "2026-11-27T09:06:33.160Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123302,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it rusty iron and scrap plank #8a5a32 shacks with moss green and rust patched roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:07:56.499Z",
+    "usageUsd": 0.08067075430022345,
+    "candidates": [
+      {
+        "file": "horde-fort-r2-0.png",
+        "sha256": "0640c626d4520ab3d0cc5ac04f84119015e11be776091846a851f2d09fe6e866",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-fort-r3": {
+    "id": "horde-fort-r3",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "97b1a2df-d1d9-4fe1-8fd4-e15dbcd3d422",
+    "submittedAt": "2026-11-27T09:08:15.714Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of weathered blue-grey corrugated tin #9aa3a5 with big orange rust patches #b0582c under a moss green #74943e corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it tin and scrap plank shacks with moss green and rusty roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123303,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of weathered blue-grey corrugated tin #9aa3a5 with big orange rust patches #b0582c under a moss green #74943e corrugated roof, a crooked scrap-wood lookout tower beside it, crowded round it tin and scrap plank shacks with moss green and rusty roofs and dull red #8e3b2e cloth patches, a big tawny spotted hide tent and scrap heaps; across the front a thick wall of crooked sharpened log stakes #b8733a and a big gate crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:09:22.763Z",
+    "usageUsd": 0.08053330334027609,
+    "candidates": [
+      {
+        "file": "horde-fort-r3-0.png",
+        "sha256": "4a1de9a0490b0bd7e11d183b9521cb9215944028c0ec642cda05e5553353b997",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-camp-r1": {
+    "id": "horde-camp-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "409724bc-440e-4922-a2ff-edebfb1787d3",
+    "submittedAt": "2026-11-27T09:09:57.646Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-r1#0 sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the boss hall, not the tower and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123311,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold, tin hall, watchtower, stone wall."
+    },
+    "at": "2026-11-27T09:12:01.233Z",
+    "usageUsd": 0.08035875611835055,
+    "candidates": [
+      {
+        "file": "horde-camp-r1-0.png",
+        "sha256": "826877a586a7dea4ec958862f81a6265f96094bf58e69fa6a301d1709f49e114",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-camp-r2": {
+    "id": "horde-camp-r2",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "eb14ecc2-89ba-42ce-97a8-ba48e0f5d4ec",
+    "submittedAt": "2026-11-27T09:12:01.354Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-r1#0 sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the boss hall, not the tower and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123312,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d and rusty patched roofs, dull red #8e3b2e cloth awnings, a stove chimney and scrap; across the front a short crooked fence of sharpened log stakes #b8733a, a gap between two tall stakes crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold, tin hall, watchtower, stone wall."
+    },
+    "at": "2026-11-27T09:13:08.473Z",
+    "usageUsd": 0.080505582385593,
+    "candidates": [
+      {
+        "file": "horde-camp-r2-0.png",
+        "sha256": "02a345e67f289759e9fab9ee7467f724eac201b920c40032de5609c0c250eb5f",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-camp-r3": {
+    "id": "horde-camp-r3",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ecf068de-c1a9-43bc-bd30-feaba98f572e",
+    "submittedAt": "2026-11-27T09:13:34.162Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin ramshackle warcamp, lower than a fortress, about two thirds of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little lean-to shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs, dull red #8e3b2e cloth awnings, a stove chimney, barrels and scrap; across the front a low crooked fence of thin sharpened stakes #b8733a with a gap between two tall stakes crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 123313,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin ramshackle warcamp, lower than a fortress, about two thirds of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots, crowded round it little lean-to shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs, dull red #8e3b2e cloth awnings, a stove chimney, barrels and scrap; across the front a low crooked fence of thin sharpened stakes #b8733a with a gap between two tall stakes crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold, hall, watchtower, thick wall."
+    },
+    "at": "2026-11-27T09:14:41.065Z",
+    "usageUsd": 0.08036610465579563,
+    "candidates": [
+      {
+        "file": "horde-camp-r3-0.png",
+        "sha256": "4b689457c0605f92cf127aa9930660b7c3f57e37adea4ab1a93afb0286c791b5",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "goblin-city-1-r1": {
+    "id": "goblin-city-1-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5a29fc74-771b-4324-a01f-13b7610f93ce",
+    "submittedAt": "2026-11-27T09:14:41.645Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs huddled in front of it, a dull red #8e3b2e cloth awning, a heap of scrap and a stove chimney; a dark doorway at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-r1#0 sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 88,
+        "height": 96
+      },
+      "no_background": true,
+      "seed": 123321,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c and scrap planks #8a5a32 under moss green #6e8b3d roofs huddled in front of it, a dull red #8e3b2e cloth awning, a heap of scrap and a stove chimney; a dark doorway at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:15:48.735Z",
+    "usageUsd": 0.08076130141152277,
+    "candidates": [
+      {
+        "file": "goblin-city-1-r1-0.png",
+        "sha256": "eb2bac0867df466a254d44fc32a5ee08e750b090ed366ccb3ca797b4ae3a62fb",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-r1-1.png",
+        "sha256": "2af0805a688d449e752b264e3051da24fe7dc6a6cb48be87d1c4f7fa83692e27",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-r1-2.png",
+        "sha256": "4ec51e8b0676ce489a58c309eb83b036fbb633cf82f48d76ad7e90ea4dc20427",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-r1-3.png",
+        "sha256": "7bcaade25713884588f9edac4441972d483e3c2349b5f3153ebbb25ac1cfcbfe",
+        "width": 88,
+        "height": 96
+      }
+    ]
+  },
+  "goblin-city-2-r1": {
+    "id": "goblin-city-2-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "142977fb-de40-48c0-8c22-b2d10709e692",
+    "submittedAt": "2026-11-27T09:15:49.018Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower beside it, crowded round it a spotted tawny hide tent and rusty shacks with moss green and rust roofs, and a short fence of sharpened log stakes #b8733a across the front with a plain plank gate at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-r1#0 sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 100
+      },
+      "no_background": true,
+      "seed": 123322,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower beside it, crowded round it a spotted tawny hide tent and rusty shacks with moss green and rust roofs, and a short fence of sharpened log stakes #b8733a across the front with a plain plank gate at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold, skull."
+    },
+    "at": "2026-11-27T09:17:00.822Z",
+    "usageUsd": 0.08058777202500238,
+    "candidates": [
+      {
+        "file": "goblin-city-2-r1-0.png",
+        "sha256": "2ced580ffe06d8d56e20030785df7c58f7e61159c55ee7990b9466b7be50aa2b",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-r1-1.png",
+        "sha256": "820d878321147ec5639f254811cb9ebec5f3290b315a1f6868fe09ee764bcbca",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-r1-2.png",
+        "sha256": "65a6052ce75e18bc5f613cc5ac1c590440fa81bad8ec9d030f8cf9e78c0e53ba",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-r1-3.png",
+        "sha256": "d75868abfc011a49174eecbdd67cf5c86857cfd149162af31fe80e9ac4d5a020",
+        "width": 96,
+        "height": 100
+      }
+    ]
+  },
+  "goblin-city-3-r1": {
+    "id": "goblin-city-3-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f6232036-0a66-4bbe-99cc-c3746f78bdff",
+    "submittedAt": "2026-11-27T09:17:00.990Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower, crowded round it rusty shacks with moss green and rust roofs, dull red #8e3b2e cloth and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-r1#0 sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 123323,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower, crowded round it rusty shacks with moss green and rust roofs, dull red #8e3b2e cloth and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, yellow roof, bright yellow, gold."
+    },
+    "at": "2026-11-27T09:18:28.198Z",
+    "usageUsd": 0.08082187403572931,
+    "candidates": [
+      {
+        "file": "goblin-city-3-r1-0.png",
+        "sha256": "354c309a6bd430bc6ce9ee099b31130649c7e51fa34237c09b1fd2fad7952945",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-r1-1.png",
+        "sha256": "cdb97c7e516013210358dc2e503ff77d40f27a1f0eea0175efdfb1b80d6601e1",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-r1-2.png",
+        "sha256": "fd5a227e268381ac691e4046fb7a4255cf0a0603f349289564b9d78d77616477",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-r1-3.png",
+        "sha256": "f5de1a4d15e4a53ffaf7d06ef259abf411400dca89716aff768233b62dda5d57",
+        "width": 96,
+        "height": 104
+      }
+    ]
   }
 }

@@ -30,6 +30,10 @@
     "candy": {
       "file": "art/masters/chunky-towns/candy-fort-s1-0.png",
       "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+    },
+    "hordeR": {
+      "file": "art/masters/chunky-towns/horde-fort-r1-0.png",
+      "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
     }
   },
   "defaults": {
@@ -277,6 +281,30 @@
       "styleImage": "@candy",
       "subject": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Candy-Cane Fence (a chunky round ring of fat red and white candy canes round a small gingerbread gate hut with a pink roof and an arch of two crossed candy canes); Bread Oven (a fat domed red brick oven standing on its own round brick foot, a gingerbread chimney and a glowing orange door); Mint Press (a squat mint-green press with a big crank wheel on top and a stack of round mints in its mouth); The Four O'Clock (a fat stout gingerbread cuckoo-clock tower, a big clock face at four, a pink roof and a giant teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5.",
       "negative": "purple, violet, gore, slab"
+    },
+    {
+      "id": "horde-halls-r1",
+      "concept": "HORDE: Village Hall, Town Hall, City Hall in the bzc.123 palette (rusty iron, moss green roofs)",
+      "seed": 123331,
+      "styleImage": "@hordeR",
+      "subject": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Village Hall (a small fat rusty iron shack with a moss green roof and a big war horn on top); Town Hall (the same shack grown: two lopsided storeys of rusty iron and scrap planks, moss green roofs and the war horn); City Hall (the same hall grown huge: a fat lopsided junk palace of rusty iron with moss green roofs and big horns). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, tawny spotted hide.",
+      "negative": "yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "horde-sheds-r1",
+      "concept": "HORDE: Scrap Wall, Skull Tower, Powder Shed, Tavern in the bzc.123 palette",
+      "seed": 123332,
+      "styleImage": "@hordeR",
+      "subject": "Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Scrap Wall (a thick wall of rusty corrugated iron sheets with fat sharpened logs at both ends and a small plank gate); Skull Tower (a fat squat lookout tower of rusty iron on thick log stilts with a huge cream horned ox skull on top); Powder Shed (a squat rusty iron shed with a moss green roof and black powder barrels by the door); Tavern (a rusty iron grog shack with a moss green roof, barrels and a big mug sign). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a.",
+      "negative": "yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "horde-yard-r1",
+      "concept": "HORDE: Marketplace, Resource Silo, Great Flinger in the bzc.123 palette",
+      "seed": 123333,
+      "styleImage": "@hordeR",
+      "subject": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Marketplace (a scrap plank stall with a striped dull red and cream cloth awning piled with crates and sacks); Resource Silo (a fat rusty iron silo with a moss green cone roof beside a woodpile and an ore wheelbarrow); Great Flinger (a giant wheeled catapult of logs and rusty iron with a long scrap-wood arm and a big spoon). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a.",
+      "negative": "yellow roof, bright yellow, gold"
     }
   ],
   "outputs": [
@@ -319,21 +347,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/city-hall.png",
-      "from": "horde-halls-a#9",
+      "from": "horde-halls-r1#14",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 1,
+          "x": 3,
           "y": 1,
-          "width": 63,
-          "height": 62
+          "width": 60,
+          "height": 61
         },
         {
           "op": "pad",
-          "width": 63,
-          "height": 64,
+          "width": 60,
+          "height": 63,
           "anchor": "top"
         },
         {
@@ -373,20 +401,20 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/great-flinger.png",
-      "from": "horde-civic-a#3",
+      "from": "horde-yard-r1#11",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 0,
-          "y": 2,
-          "width": 64,
+          "x": 2,
+          "y": 1,
+          "width": 60,
           "height": 62
         },
         {
           "op": "pad",
-          "width": 64,
+          "width": 60,
           "height": 64,
           "anchor": "top"
         },
@@ -518,21 +546,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/marketplace.png",
-      "from": "horde-s1#12",
+      "from": "horde-yard-r1#0",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 9,
+          "x": 5,
+          "y": 5,
           "width": 53,
-          "height": 48
+          "height": 54
         },
         {
           "op": "pad",
           "width": 53,
-          "height": 50,
+          "height": 56,
           "anchor": "top"
         },
         {
@@ -686,20 +714,20 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/powder-shed.png",
-      "from": "horde-dwell-a#4",
+      "from": "horde-sheds-r1#9",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 1,
-          "y": 3,
-          "width": 62,
+          "x": 2,
+          "y": 2,
+          "width": 61,
           "height": 59
         },
         {
           "op": "pad",
-          "width": 62,
+          "width": 61,
           "height": 61,
           "anchor": "top"
         },
@@ -740,21 +768,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/resource-silo.png",
-      "from": "horde-civic-a#12",
+      "from": "horde-yard-r1#5",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 0,
-          "y": 1,
-          "width": 64,
-          "height": 63
+          "x": 1,
+          "y": 3,
+          "width": 62,
+          "height": 56
         },
         {
           "op": "pad",
-          "width": 64,
-          "height": 64,
+          "width": 62,
+          "height": 58,
           "anchor": "top"
         },
         {
@@ -767,21 +795,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/scrap-wall.png",
-      "from": "horde-forts-a#8",
+      "from": "horde-sheds-r1#0",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
           "x": 2,
-          "y": 5,
-          "width": 60,
-          "height": 54
+          "y": 3,
+          "width": 61,
+          "height": 53
         },
         {
           "op": "pad",
-          "width": 60,
-          "height": 56,
+          "width": 61,
+          "height": 55,
           "anchor": "top"
         },
         {
@@ -794,21 +822,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/skull-tower.png",
-      "from": "horde-forts-a#13",
+      "from": "horde-sheds-r1#4",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 1,
-          "width": 44,
-          "height": 61
+          "x": 9,
+          "y": 0,
+          "width": 46,
+          "height": 64
         },
         {
           "op": "pad",
-          "width": 44,
-          "height": 63,
+          "width": 46,
+          "height": 64,
           "anchor": "top"
         },
         {
@@ -848,21 +876,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/tavern.png",
-      "from": "horde-civic-a#9",
+      "from": "horde-sheds-r1#12",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 2,
-          "y": 2,
+          "x": 1,
+          "y": 3,
           "width": 61,
-          "height": 60
+          "height": 59
         },
         {
           "op": "pad",
           "width": 61,
-          "height": 62,
+          "height": 61,
           "anchor": "top"
         },
         {
@@ -875,20 +903,20 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/town-hall.png",
-      "from": "horde-halls-a#4",
+      "from": "horde-halls-r1#9",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
+          "x": 9,
           "y": 1,
-          "width": 47,
+          "width": 46,
           "height": 62
         },
         {
           "op": "pad",
-          "width": 47,
+          "width": 46,
           "height": 64,
           "anchor": "top"
         },
@@ -902,21 +930,21 @@
     },
     {
       "path": "public/assets/towns/buildings/goblins/village-hall.png",
-      "from": "horde-halls-a#0",
+      "from": "horde-halls-r1#12",
       "width": 64,
       "height": 64,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 3,
-          "width": 51,
-          "height": 60
+          "x": 8,
+          "y": 2,
+          "width": 47,
+          "height": 61
         },
         {
           "op": "pad",
-          "width": 51,
-          "height": 62,
+          "width": 47,
+          "height": 63,
           "anchor": "top"
         },
         {

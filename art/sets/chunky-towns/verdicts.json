@@ -218,5 +218,95 @@
     "verdict": "ACCEPTED",
     "notes": "Candy camp (candy-hamlet-3x2): a fat gingerbread cottage with an icing-dripped pink roof and a gumdrop chimney at the back centre, pink- and mint-roofed sweet-shop cottages packed round it, a candy-cane fence with the crossed-cane arch gate near the centre; no clock tower, no palace: lower and plainly the camp beside the fort; one loose gumdrop in the gap between houses is kept as scenery",
     "at": "2026-11-26T23:56:42.483Z"
+  },
+  "horde-fort-r1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord's Hold (bzc.123): tall rusty corrugated-iron boss hall under a moss green roof at the back centre, crooked scrap-wood lookout tower, packed rusty shacks with moss green and rust roofs and dull red cloth, spotted hide tent, scrap heaps, thick stake wall with the horned ox skull gate centred; no yellow; dense and chunky, reads on light and dark",
+    "at": "2026-11-27T09:09:40.486Z"
+  },
+  "horde-fort-r2#0": {
+    "verdict": "REJECTED",
+    "notes": "sparse ring of shacks round an open yard with a white blotch inside the stake wall; the hall stands alone, less dense than r1",
+    "at": "2026-11-27T09:09:40.584Z"
+  },
+  "horde-fort-r3#0": {
+    "verdict": "REJECTED",
+    "notes": "best tin colour (blue-grey with rust) but a thin stake ring round an empty transparent yard with gaps between the shacks: the ring layout the bzc.97 direction rejects",
+    "at": "2026-11-27T09:09:40.687Z"
+  },
+  "horde-camp-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "the Hold's style image copied its layout: same front shacks, thick stake wall and gate as horde-fort-r1 with a hide dome in place of the hall; the camp would read as a copy of the fort",
+    "at": "2026-11-27T09:19:12.461Z"
+  },
+  "horde-camp-r2#0": {
+    "verdict": "REJECTED",
+    "notes": "same layout copy of horde-fort-r1 as camp-r1 (front shacks and thick stake wall), the dome flatter",
+    "at": "2026-11-27T09:19:12.582Z"
+  },
+  "horde-camp-r3#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Horde warcamp (bzc.123): big plump spotted hide boss tent at the back centre, rusty iron and scrap-plank lean-tos with moss green roofs and dull red cloth awnings packed round it, barrels and scrap, a low crooked stake fence with the horned ox skull gap centred; no yellow, no hall or tower, plainly the lighter stage beside the Hold",
+    "at": "2026-11-27T09:19:12.707Z"
+  },
+  "goblin-city-1-r1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 1 (bzc.123): spotted hide tent at the back centre behind moss-green-roofed rusty shacks, a dull red awning and a dark doorway at the bottom centre; small, chunky, no tower",
+    "at": "2026-11-27T09:19:12.829Z"
+  },
+  "goblin-city-1-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "lookout tower belongs to level 2 and up",
+    "at": "2026-11-27T09:19:12.950Z"
+  },
+  "goblin-city-1-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "lookout tower and a ragged plank skirt spilling to the right edge",
+    "at": "2026-11-27T09:19:13.072Z"
+  },
+  "goblin-city-1-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "no tent landmark, a muddle of brown plank shacks at 1x",
+    "at": "2026-11-27T09:19:13.193Z"
+  },
+  "goblin-city-2-r1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 2 (bzc.123): rusty iron hall under a moss green roof with a lookout tower, hide tent and rusty shacks inside a stake fence with a plain plank gate centred; no skull gate, so lighter than level 3",
+    "at": "2026-11-27T09:19:13.316Z"
+  },
+  "goblin-city-2-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "sparse: hall and tent on a white ground patch with the fence detached in front",
+    "at": "2026-11-27T09:19:13.437Z"
+  },
+  "goblin-city-2-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "a pale ground patch inside the fence and a lone hall: the ring-round-a-yard layout",
+    "at": "2026-11-27T09:19:13.559Z"
+  },
+  "goblin-city-2-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "white blotch at the gate gap",
+    "at": "2026-11-27T09:19:13.682Z"
+  },
+  "goblin-city-3-r1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 3 (bzc.123): tall rusty iron boss hall under a moss green roof, lookout tower, packed shacks with red cloth and a hide tent, thick stake wall with the horned ox skull gate centred; matches the new Hold",
+    "at": "2026-11-27T09:19:13.801Z"
+  },
+  "goblin-city-3-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "skull over crossed bones at the gate reads pirate or undead",
+    "at": "2026-11-27T09:19:13.918Z"
+  },
+  "goblin-city-3-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "good but the hall is less central and the gate skull smaller than #0",
+    "at": "2026-11-27T09:19:14.041Z"
+  },
+  "goblin-city-3-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "skull over crossed bones at the gate reads pirate or undead",
+    "at": "2026-11-27T09:19:14.154Z"
   }
 }
