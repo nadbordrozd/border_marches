@@ -87,6 +87,17 @@ export const CREATURE_ART: Readonly<Record<string, string>> = {
   // Summons (CONTENT_CREATURES.md section 4).
   seedling: "stray-seedling",
   shade: "stray-shade",
+  // Sea guardians and the Conch of the Deep's summon (NAVAL.md sections 4
+  // and 10.2, bead bzc.157).
+  jellyfish: "sea-jellyfish",
+  "drowned-sailor": "sea-drowned-sailor",
+  "giant-crab": "sea-giant-crab",
+  corsair: "sea-corsair",
+  siren: "sea-siren",
+  hammerhead: "sea-hammerhead",
+  "sea-serpent": "sea-sea-serpent",
+  kraken: "sea-kraken",
+  "hermit-crab": "sea-hermit-crab",
 };
 
 /** Hero class id -> HERO_ASSETS key (adventure-map sprite). */

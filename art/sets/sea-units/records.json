@@ -1,0 +1,701 @@
+{
+  "jellyfish-a": {
+    "id": "jellyfish-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f13d342e-99a7-46ad-95e4-d68ec591362c",
+    "submittedAt": "2026-11-27T12:00:10.322Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Jellyfish, one small chunky cute round jellyfish floating upright, thick single-colour black outline, turned slightly down and to the right: a big round dome bell of soft pink #f28bb8 with #c25588 shading and a pale #ffd6e8 shine, a sleepy smiling face with half-closed big eyes on the front of the bell, a frilly skirt under the bell, five short curly stinging ribbon tentacles hanging below in pink and lavender #b99be0, the tentacle tips are the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 44,
+        "height": 60
+      },
+      "no_background": true,
+      "seed": 57101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Jellyfish, one small chunky cute round jellyfish floating upright, thick single-colour black outline, turned slightly down and to the right: a big round dome bell of soft pink #f28bb8 with #c25588 shading and a pale #ffd6e8 shine, a sleepy smiling face with half-closed big eyes on the front of the bell, a frilly skirt under the bell, five short curly stinging ribbon tentacles hanging below in pink and lavender #b99be0, the tentacle tips are the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, bubbles, splash, ripple, fish, pedestal, ground plate, platform, scenery, background, shadow on the ground, transparent body, glass."
+    },
+    "at": "2026-11-27T12:00:10.326Z",
+    "usageUsd": 0.007250390185250177,
+    "candidates": [
+      {
+        "file": "jellyfish-a-0.png",
+        "sha256": "b63b1156b90439bdfec374c90759efd66454f6229978cc9fa27e941751ade9b2",
+        "width": 44,
+        "height": 60
+      }
+    ]
+  },
+  "giant-crab-a": {
+    "id": "giant-crab-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0a98aa0d-74dd-46c3-8466-2e2ed45654c6",
+    "submittedAt": "2026-11-27T12:00:34.294Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Giant Crab, one big chunky cute crab filling the whole width of the image, thick single-colour black outline, facing down and to the right: a wide round domed shell like a helmet in coral orange #f07a3a with #b84a22 shading and cream #fbe3c4 bumps, two big googly eyes on short stalks with a cheerful grin under them, one huge oversized claw raised high on the right and one small claw at the front, six short pointed orange legs, all the leg tips visible and lowest in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 56
+      },
+      "no_background": true,
+      "seed": 57301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Giant Crab, one big chunky cute crab filling the whole width of the image, thick single-colour black outline, facing down and to the right: a wide round domed shell like a helmet in coral orange #f07a3a with #b84a22 shading and cream #fbe3c4 bumps, two big googly eyes on short stalks with a cheerful grin under them, one huge oversized claw raised high on the right and one small claw at the front, six short pointed orange legs, all the leg tips visible and lowest in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, bubbles, sand, rocks, pedestal, ground plate, platform, scenery, background, shadow on the ground, hermit shell, red."
+    },
+    "at": "2026-11-27T12:00:34.296Z",
+    "usageUsd": 0.0074728066921234135,
+    "candidates": [
+      {
+        "file": "giant-crab-a-0.png",
+        "sha256": "602b54bfe623c93d1c23770553d6f096083ee37b05e0e8bc44311349754fcf65",
+        "width": 56,
+        "height": 56
+      }
+    ]
+  },
+  "kraken-a": {
+    "id": "kraken-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-de6f1375-b100-4ab8-aa30-91aee062046d",
+    "submittedAt": "2026-11-27T12:01:45.920Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Kraken, one huge chunky cute smug octopus filling the whole width of the image, thick single-colour black outline, turned down and to the right: a big round bulbous purple #8a4fc4 head with #5b2f8f shading and pale lilac #d8b8f0 spots, big half-lidded smug eyes and a self-satisfied smirk, eight thick curling arms with pale pink #f3c6dc suckers, several arms curling up high at both sides, one arm in front bearing a small sailor's tattoo of a red heart and an anchor, the curled arm tips at the bottom are the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 57801,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Kraken, one huge chunky cute smug octopus filling the whole width of the image, thick single-colour black outline, turned down and to the right: a big round bulbous purple #8a4fc4 head with #5b2f8f shading and pale lilac #d8b8f0 spots, big half-lidded smug eyes and a self-satisfied smirk, eight thick curling arms with pale pink #f3c6dc suckers, several arms curling up high at both sides, one arm in front bearing a small sailor's tattoo of a red heart and an anchor, the curled arm tips at the bottom are the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, ship, boat, horror, scary, teeth, slime, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-27T12:01:45.923Z",
+    "usageUsd": 0.012802601946724786,
+    "candidates": [
+      {
+        "file": "kraken-a-0.png",
+        "sha256": "8d31c68da16dc0d0450b5a7c427dc4ac44b0c3def793fd71897ce2426b1f7786",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "drowned-sailor-a": {
+    "id": "drowned-sailor-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b3628e83-d61f-4b48-a669-feb31320ae1c",
+    "submittedAt": "2026-11-27T12:02:32.797Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Drowned Sailor, a chunky cute soggy skeleton sailor with a huge round skull about half of the figure's height: big dark round eye sockets with tiny pale sea-green #9fe0c8 glints, a goofy toothy grin, a tattered navy blue #2a5d9f sailor's cap, a torn white and sea-blue striped sailor shirt, ragged sand #e8d3a0 trousers, strands of dark green seaweed draped on his bony shoulders and arms, ivory bones, an oversized long wooden boat hook with an iron hook held upright in his right hand, bony bare feet; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 57201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Drowned Sailor, a chunky cute soggy skeleton sailor with a huge round skull about half of the figure's height: big dark round eye sockets with tiny pale sea-green #9fe0c8 glints, a goofy toothy grin, a tattered navy blue #2a5d9f sailor's cap, a torn white and sea-blue striped sailor shirt, ragged sand #e8d3a0 trousers, strands of dark green seaweed draped on his bony shoulders and arms, ivory bones, an oversized long wooden boat hook with an iron hook held upright in his right hand, bony bare feet; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, sword, shield, crown, purple, red, black cloak, water, puddle, waves."
+    },
+    "at": "2026-11-27T12:02:32.801Z",
+    "usageUsd": 0.007949453115463257,
+    "candidates": [
+      {
+        "file": "drowned-sailor-a-0.png",
+        "sha256": "67ba9d4a6ce7eb96e04569c6d9fce2c3cbe2204ac187cc270a3add806c632d15",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "corsair-a": {
+    "id": "corsair-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9ec1e0b5-7008-4008-b46d-d2dc021b5cbd",
+    "submittedAt": "2026-11-27T12:02:58.564Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Corsair, a chunky cute cheerful pirate woman with a huge round head about half of the figure's height: a big grin, a black eyepatch over one eye, a bright scarlet #d8392b bandana with a knot and tails, a gold hoop earring, a loose white shirt, a teal #2fa7b8 sash, brown trousers tucked into tall black boots, a coil of rope slung over her shoulder, an oversized curved silver cutlass raised in her right hand; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 57401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Corsair, a chunky cute cheerful pirate woman with a huge round head about half of the figure's height: a big grin, a black eyepatch over one eye, a bright scarlet #d8392b bandana with a knot and tails, a gold hoop earring, a loose white shirt, a teal #2fa7b8 sash, brown trousers tucked into tall black boots, a coil of rope slung over her shoulder, an oversized curved silver cutlass raised in her right hand; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, gun, pistol, parrot, hat, tricorn, crown, shield, armour, water, ship."
+    },
+    "at": "2026-11-27T12:02:58.566Z",
+    "usageUsd": 0.007615311092800565,
+    "candidates": [
+      {
+        "file": "corsair-a-0.png",
+        "sha256": "9dda2d60caf2c082fcde49b05164cc7d6ce4e50c6ca327e8049d686282a9b206",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "siren-a": {
+    "id": "siren-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-8a61cf57-83dc-40ec-bd6f-9d377cf94fac",
+    "submittedAt": "2026-11-27T12:03:29.475Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Siren, one chunky cute mermaid with a big round head about half of her height, thick single-colour black outline, turned down and to the right: a pretty face with big eyes and an open mouth mid-song, a few tiny music notes floating by her head, very long flowing sea-green #3fbf9a hair with a pink scallop shell comb in it, a seashell top, a big curled fish tail in teal #2fa7b8 with #1f6f86 scales shading and a wide seafoam #bfeee0 fin, she sits upright on her curled tail, the curl of the tail is the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 57501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Siren, one chunky cute mermaid with a big round head about half of her height, thick single-colour black outline, turned down and to the right: a pretty face with big eyes and an open mouth mid-song, a few tiny music notes floating by her head, very long flowing sea-green #3fbf9a hair with a pink scallop shell comb in it, a seashell top, a big curled fish tail in teal #2fa7b8 with #1f6f86 scales shading and a wide seafoam #bfeee0 fin, she sits upright on her curled tail, the curl of the tail is the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, rock, water, waves, splash, legs, feet, trident, weapon, pedestal, ground plate, platform, scenery, background, shadow on the ground, nudity."
+    },
+    "at": "2026-11-27T12:03:29.483Z",
+    "usageUsd": 0.00822566490703159,
+    "candidates": [
+      {
+        "file": "siren-a-0.png",
+        "sha256": "3c68967643a15f3238231e4a5321eba8504aa1838affc3b28d9764a470247c74",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "hammerhead-a": {
+    "id": "hammerhead-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-027d5177-26fe-4e68-a334-7418f637bd2a",
+    "submittedAt": "2026-11-27T12:03:52.977Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Hammerhead, one big chunky cute hammerhead shark leaping upward, filling the whole width and most of the height of the image, thick single-colour black outline, its head turned down and to the right toward the viewer: an oversized wide flat hammer-shaped head as wide as the image with a round eye at each end, a huge toothy grin under it, a plump steel blue #4f7fa8 body with #2f5677 shading and a white belly, a tall dorsal fin, two side fins, the curved tail fin at the bottom is the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 57601,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Hammerhead, one big chunky cute hammerhead shark leaping upward, filling the whole width and most of the height of the image, thick single-colour black outline, its head turned down and to the right toward the viewer: an oversized wide flat hammer-shaped head as wide as the image with a round eye at each end, a huge toothy grin under it, a plump steel blue #4f7fa8 body with #2f5677 shading and a white belly, a tall dorsal fin, two side fins, the curved tail fin at the bottom is the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, bubbles, legs, clothes, hat, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-27T12:03:52.979Z",
+    "usageUsd": 0.007466386609607273,
+    "candidates": [
+      {
+        "file": "hammerhead-a-0.png",
+        "sha256": "6170abd4283e9d9ac21dfad6dc20bcd7936856eb56e0886bd47db435e8f53b3b",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sea-serpent-a": {
+    "id": "sea-serpent-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-cfc86f28-f85b-4fd9-9aec-ffc1345a7b68",
+    "submittedAt": "2026-11-27T12:04:23.567Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sea Serpent, one large chunky cute long sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round dragon-like head with big friendly eyes and a toothy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 striped belly, the body in three big round coils one behind another, a fin at the tail tip, the lowest coil is the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 57701,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Sea Serpent, one large chunky cute long sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round dragon-like head with big friendly eyes and a toothy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 striped belly, the body in three big round coils one behind another, a fin at the tail tip, the lowest coil is the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, legs, wings, fire, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-27T12:04:23.569Z",
+    "usageUsd": 0.008236144728130765,
+    "candidates": [
+      {
+        "file": "sea-serpent-a-0.png",
+        "sha256": "4012d1aa40883ee57e9b5291e3bfeb65c9ce364bc1e915a66d8728b871c7465c",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "hermit-crab-a": {
+    "id": "hermit-crab-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9a5612a6-55ff-477d-9b48-c0773b7eb7a5",
+    "submittedAt": "2026-11-27T12:04:51.803Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Hermit Crab, one tiny chunky cute hermit crab, thick single-colour black outline, facing down and to the right: a big spiral sea snail shell in cream #fbe3c4 and sand #e8d3a0 with coral orange #f07a3a stripes on its back, a small coral orange crab peeking out of the shell opening at the front, two big googly eyes on stalks, two small claws and short legs, the legs are the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 57901,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Hermit Crab, one tiny chunky cute hermit crab, thick single-colour black outline, facing down and to the right: a big spiral sea snail shell in cream #fbe3c4 and sand #e8d3a0 with coral orange #f07a3a stripes on its back, a small coral orange crab peeking out of the shell opening at the front, two big googly eyes on stalks, two small claws and short legs, the legs are the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, sand, rocks, pedestal, ground plate, platform, scenery, background, shadow on the ground, red."
+    },
+    "at": "2026-11-27T12:04:51.806Z",
+    "usageUsd": 0.007997104671266344,
+    "candidates": [
+      {
+        "file": "hermit-crab-a-0.png",
+        "sha256": "4d9a2849d76385c144f9cddf9c0e43382e34be770028fcf543cbf0000244ff24",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "corsair-a-clean": {
+    "id": "corsair-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "d91c0181-4a6c-4113-9ebe-209d5907578b",
+    "submittedAt": "2026-11-27T12:05:54.166Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove the red smudges: the red streaks on her cheek under the eyepatch and the red marks on her right wrist become clean plain skin of the same skin colour as the rest of her face and hands. Keep the pirate, her red bandana, eyepatch, gold earring, grin, white shirt, teal sash, rope, cutlass and boots, her colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take sea-units/corsair-a#0 sha256 9dda2d60caf2c082fcde49b05164cc7d6ce4e50c6ca327e8049d686282a9b206",
+      "width": 56,
+      "height": 80,
+      "seed": 57402,
+      "no_background": true,
+      "description": "Remove the red smudges: the red streaks on her cheek under the eyepatch and the red marks on her right wrist become clean plain skin of the same skin colour as the rest of her face and hands. Keep the pirate, her red bandana, eyepatch, gold earring, grin, white shirt, teal sash, rope, cutlass and boots, her colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T12:06:19.908Z",
+    "usageUsd": 0.00726408158408271,
+    "candidates": [
+      {
+        "file": "corsair-a-clean-0.png",
+        "sha256": "0992e5bf366c03865bd5d10841e00989c3c9b1cb8df2b98d5c7fd230b0e6400d",
+        "width": 56,
+        "height": 80
+      },
+      {
+        "file": "corsair-a-clean-1.png",
+        "sha256": "0992e5bf366c03865bd5d10841e00989c3c9b1cb8df2b98d5c7fd230b0e6400d",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "siren-a-clean": {
+    "id": "siren-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "a3ca5a94-a326-4231-b07a-e675b1685d92",
+    "submittedAt": "2026-11-27T12:06:20.039Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove the dark grey rock under her tail and the small white music notes floating beside her head, leaving those areas transparent, so the mermaid rests on her own curled teal tail with nothing at all under it. Keep the mermaid, her sea-green hair, pink shell comb, shell top, singing face and teal tail with its pale fin, her colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take sea-units/siren-a#0 sha256 3c68967643a15f3238231e4a5321eba8504aa1838affc3b28d9764a470247c74",
+      "width": 56,
+      "height": 80,
+      "seed": 57502,
+      "no_background": true,
+      "description": "Remove the dark grey rock under her tail and the small white music notes floating beside her head, leaving those areas transparent, so the mermaid rests on her own curled teal tail with nothing at all under it. Keep the mermaid, her sea-green hair, pink shell comb, shell top, singing face and teal tail with its pale fin, her colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T12:06:35.516Z",
+    "usageUsd": 0.006373312817679512,
+    "candidates": [
+      {
+        "file": "siren-a-clean-0.png",
+        "sha256": "0bc6f2803946fd42d85e6998604eb5d1f794c923eae366992056f6b1dab3183c",
+        "width": 56,
+        "height": 80
+      },
+      {
+        "file": "siren-a-clean-1.png",
+        "sha256": "0bc6f2803946fd42d85e6998604eb5d1f794c923eae366992056f6b1dab3183c",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "hermit-crab-a-clean": {
+    "id": "hermit-crab-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "50440cf4-b572-44f4-83dc-cca90108893a",
+    "submittedAt": "2026-11-27T12:06:35.595Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the dark blue-green puddle and sand plate under the crab, leaving that area transparent, so the crab and its shell stand on a transparent background with nothing at all under its legs. Keep the hermit crab, its big striped spiral shell, red body, eyes and claws, its colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take sea-units/hermit-crab-a#0 sha256 4d9a2849d76385c144f9cddf9c0e43382e34be770028fcf543cbf0000244ff24",
+      "width": 40,
+      "height": 40,
+      "seed": 57902,
+      "no_background": true,
+      "description": "Remove all ground: erase the dark blue-green puddle and sand plate under the crab, leaving that area transparent, so the crab and its shell stand on a transparent background with nothing at all under its legs. Keep the hermit crab, its big striped spiral shell, red body, eyes and claws, its colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T12:07:06.297Z",
+    "usageUsd": 0.007689568652047052,
+    "candidates": [
+      {
+        "file": "hermit-crab-a-clean-0.png",
+        "sha256": "c6a637cc40a239682a28e9f0eccb4c401543f4bb063cbf5506d1a115d1e918bc",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "hermit-crab-a-clean-1.png",
+        "sha256": "c6a637cc40a239682a28e9f0eccb4c401543f4bb063cbf5506d1a115d1e918bc",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "sea-serpent-b": {
+    "id": "sea-serpent-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-40b91d43-99d9-4bb0-a8cf-683fa8d3e740",
+    "submittedAt": "2026-11-27T12:08:01.888Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round head with huge round friendly eyes, no eyebrows and a happy open smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body looped in three big round humps side by side like a sea monster on an old map, a fin at the tail tip, the bottom of the humps is the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 57702,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round head with huge round friendly eyes, no eyebrows and a happy open smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body looped in three big round humps side by side like a sea monster on an old map, a fin at the tail tip, the bottom of the humps is the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, legs, wings, fire, angry, frown, horns, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-27T12:08:01.890Z",
+    "usageUsd": 0.010966463936699762,
+    "candidates": [
+      {
+        "file": "sea-serpent-b-0.png",
+        "sha256": "1a8e03559283ae06b494bf1589b0b078fc89ef5f49b4cfa7c2281fd9e28da9cb",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "sea-serpent-a-friendly": {
+    "id": "sea-serpent-a-friendly",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "64c55e4c-5842-4fb3-969e-ea3b0c2c5402",
+    "submittedAt": "2026-11-27T12:08:27.750Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Make the face friendly and cute: give the serpent big round friendly eyes with large dark pupils and a white shine, remove the frowning angry eyebrow ridges, and turn the mouth into a happy closed smile. Keep the head pointing down and to the right, the seafoam frilled crest, the teal scaled body with its sand belly and coils, the tail fin, the colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take sea-units/sea-serpent-a#0 sha256 4012d1aa40883ee57e9b5291e3bfeb65c9ce364bc1e915a66d8728b871c7465c",
+      "width": 72,
+      "height": 88,
+      "seed": 57703,
+      "no_background": true,
+      "description": "Make the face friendly and cute: give the serpent big round friendly eyes with large dark pupils and a white shine, remove the frowning angry eyebrow ridges, and turn the mouth into a happy closed smile. Keep the head pointing down and to the right, the seafoam frilled crest, the teal scaled body with its sand belly and coils, the tail fin, the colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T12:09:08.981Z",
+    "usageUsd": 0.007665489488177829,
+    "candidates": [
+      {
+        "file": "sea-serpent-a-friendly-0.png",
+        "sha256": "b1c3c58ced44a17b2330521075961747f93075e9919a72c0c53eb15b3f335a95",
+        "width": 72,
+        "height": 88
+      },
+      {
+        "file": "sea-serpent-a-friendly-1.png",
+        "sha256": "b1c3c58ced44a17b2330521075961747f93075e9919a72c0c53eb15b3f335a95",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "sea-serpent-c": {
+    "id": "sea-serpent-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9695fce5-dcee-45d7-9135-a5aca8d9a44c",
+    "submittedAt": "2026-11-27T12:09:45.100Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head and snout pointing down and to the right toward the bottom right corner: a big round head with huge round friendly eyes and a happy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body in big round coils behind the head, a fin at the tail tip, the bottom of the coils is the lowest thing in the image; solid opaque colours; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 57704,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head and snout pointing down and to the right toward the bottom right corner: a big round head with huge round friendly eyes and a happy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body in big round coils behind the head, a fin at the tail tip, the bottom of the coils is the lowest thing in the image; solid opaque colours; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, legs, wings, fire, angry, frown, horns, facing left, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-27T12:09:45.105Z",
+    "usageUsd": 0.008796694331698947,
+    "candidates": [
+      {
+        "file": "sea-serpent-c-0.png",
+        "sha256": "d7a4f4d54f6613954cb41f2e42565e6859105e101247663050a9b23d997d4a9b",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  }
+}

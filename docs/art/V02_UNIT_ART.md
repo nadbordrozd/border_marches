@@ -120,6 +120,51 @@ the `dwarves` variant of `faction-outpost`; the first outpost take
 `lineup-grass.png` (beside the Realm, the Horde and the stray Pulp Wars
 dwarves), `portraits.png`, `outposts-*.png` and `takes-*.png`.
 
+## Sea guardians (bead `border_marches-bzc.157`)
+
+The eight sea guardians and the summoned Hermit Crab of
+[NAVAL.md sections 4 and 10.2](../design/NAVAL.md#10-art), in the new set
+`sea-units`: the faction-units endpoint, layers and `@piece` options, facing
+south-east, one static sprite each with a 1:1 crop as its 48x48 portrait
+(the Hermit Crab's take is 40x40, so its portrait is the whole crab padded
+to 48x48). The Drowned Sailor and the Corsair hold weapons and take the
+unit class layer; the rest drop it and name the outline and the facing, as
+`rock-candy-dragon-b`. A sea palette is written into each subject (sea teal
+`#2fa7b8`, deep sea blue `#2a5d9f`, seafoam `#bfeee0`, coral orange
+`#f07a3a`, sand `#e8d3a0`), with the pink Jellyfish and purple Kraken that
+NAVAL 10.2 names. **No water, splash or ripple is baked in**: NAVAL 3.8
+draws the waterline and ripple ring in code, and the code shadow stands
+under every unit as before. Registered as neutral units in
+`src/assets/v02-units.ts`, `src/assets/unit-art.ts` (`CREATURE_ART`, by the
+NAVAL ids) and `src/assets/unit-tops.ts`; sprite keys are `sea-<id>`.
+
+| Id | Sprite key | Take | Canvas |
+| --- | --- | --- | --- |
+| `jellyfish` | `sea-jellyfish` | `jellyfish-a#0`, generated at 44x60, padded | 56x80 |
+| `drowned-sailor` | `sea-drowned-sailor` | `drowned-sailor-a#0` | 56x80 |
+| `giant-crab` | `sea-giant-crab` | `giant-crab-a#0`, generated at 56x56, padded | 56x80 |
+| `corsair` | `sea-corsair` | `corsair-a-clean#0` (edit) | 56x80 |
+| `siren` | `sea-siren` | `siren-a-clean#0` (ground-plate edit) | 56x80 |
+| `hammerhead` | `sea-hammerhead` | `hammerhead-a#0` | 56x80 |
+| `sea-serpent` | `sea-sea-serpent` | `sea-serpent-a-friendly#0` (face edit) | 72x88 |
+| `kraken` | `sea-kraken` | `kraken-a#0` | 88x104 |
+| `hermit-crab` | `sea-hermit-crab` | `hermit-crab-a-clean#0` (ground-plate edit), generated at 40x40, padded | 56x80 |
+
+Rejected, each with its reason in `verdicts.json`: a Corsair whose red
+cheek and wrist streaks read as blood (fixed by an edit), a Siren sitting
+on a grey rock (removed by an edit; her two music notes stayed and read on
+water and deck), a Hermit Crab on a puddle plate (removed by an edit), a
+Sea Serpent that frowned with small angry eyes (`sea-serpent-a`; the edit
+`sea-serpent-a-friendly` gives it big friendly eyes and keeps its
+south-east facing), a friendly re-roll facing south-west (`sea-serpent-b`)
+and a blobby baby-dragon re-roll (`sea-serpent-c`). The Giant Crab's stalk
+eyes came back as round eyes under its helmet shell and the Drowned Sailor
+wears a tricorn rather than a cap (both accepted). Review sheets (not in
+git) are in the bead's worktree under `.orchestration/screens/bzc157/`:
+`lineup-water.png`, `lineup-deep.png` and `lineup-deck.png` (beside
+Deepforge, Candy and stray units at 1:1 and x2), `portraits.png` and
+`takes-*.png`.
+
 ## Hero classes
 
 Every hero rides, as on a Heroes map, on a mount of its own so a hero never

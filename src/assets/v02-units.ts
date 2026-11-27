@@ -122,6 +122,19 @@ const UNIT_ROWS: readonly Row[] = [
   ["stray-beanstalk-giant", "neutral", 88, 104, [96, 26, 65, 16, 66]],
   ["stray-seedling", "neutral", 56, 80, [73, 18, 38, 13, 45]],
   ["stray-shade", "neutral", 56, 80, [60, 12, 36, 9, 44]],
+  // Sea guardians and the summoned Hermit Crab: new (set sea-units, bead
+  // bzc.157, docs/design/NAVAL.md section 10.2). The Jellyfish, the Giant
+  // Crab and the Hermit Crab are small takes padded bottom-centred into
+  // 56x80; no water is baked in (the battle code draws the waterline).
+  ["sea-jellyfish", "neutral", 56, 80, [74, 12, 41, 10, 47]],
+  ["sea-drowned-sailor", "neutral", 56, 80, [80, 7, 36, 7, 45]],
+  ["sea-giant-crab", "neutral", 56, 80, [77, 8, 43, 2, 49]],
+  ["sea-corsair", "neutral", 56, 80, [75, 11, 39, 11, 39]],
+  ["sea-siren", "neutral", 56, 80, [76, 23, 44, 6, 49]],
+  ["sea-hammerhead", "neutral", 56, 80, [72, 21, 35, 11, 39]],
+  ["sea-sea-serpent", "neutral", 72, 88, [82, 19, 53, 9, 58]],
+  ["sea-kraken", "neutral", 88, 104, [99, 26, 68, 26, 69]],
+  ["sea-hermit-crab", "neutral", 56, 80, [74, 17, 41, 11, 46]],
 ];
 
 /** Hero class map sprites (set class-heroes), all mounted, 72x88. */

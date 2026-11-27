@@ -1,0 +1,97 @@
+{
+  "jellyfish-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sleepy smiling pink bell with curly ribbon tentacles; reads at native size on light and dark",
+    "at": "2026-11-27T12:10:09.391Z"
+  },
+  "giant-crab-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "coral-orange helmet shell, one huge raised claw, cheerful face; the stalk eyes came back as round eyes under the shell rim (accepted: they read as eyes at native size)",
+    "at": "2026-11-27T12:10:09.533Z"
+  },
+  "kraken-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "huge smug purple octopus, arms curling up on both sides, heart tattoo on the front arm; cute, not a horror",
+    "at": "2026-11-27T12:10:09.774Z"
+  },
+  "drowned-sailor-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soggy skeleton in a sailor stripe shirt with seaweed hair and a boat hook; a tricorn rather than a cap (accepted: still reads sailor, apart from the Restless skeleton)",
+    "at": "2026-11-27T12:10:10.269Z"
+  },
+  "corsair-a#0": {
+    "verdict": "REJECTED",
+    "notes": "right design, but red streaks on her cheek and wrist read as blood: fixed by the edit corsair-a-clean",
+    "at": "2026-11-27T12:10:10.729Z"
+  },
+  "corsair-a-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "the corsair with clean skin: red bandana, eyepatch, gold earring, rope and a raised cutlass",
+    "at": "2026-11-27T12:10:11.072Z"
+  },
+  "corsair-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same fix as #0; #0 keeps the face slightly cleaner",
+    "at": "2026-11-27T12:10:11.410Z"
+  },
+  "siren-a#0": {
+    "verdict": "REJECTED",
+    "notes": "she sits on a dark grey rock (a ground plate) and has outline-less white notes: edited by siren-a-clean",
+    "at": "2026-11-27T12:10:11.622Z"
+  },
+  "siren-a-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rock removed, she rests on her curled teal tail; the two music notes stayed (kept: they read on water and deck, harmless above her head)",
+    "at": "2026-11-27T12:10:11.976Z"
+  },
+  "siren-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same as #0 with the notes; #0 chosen",
+    "at": "2026-11-27T12:10:12.351Z"
+  },
+  "hammerhead-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "grinning leaping hammerhead, the hammer head the widest thing; no legs or clothes, so it never reads as the stray Loan Shark",
+    "at": "2026-11-27T12:10:20.300Z"
+  },
+  "sea-serpent-a#0": {
+    "verdict": "REJECTED",
+    "notes": "faces south-east and coils well but frowns with small angry eyes; face fixed by sea-serpent-a-friendly",
+    "at": "2026-11-27T12:10:20.642Z"
+  },
+  "sea-serpent-b#0": {
+    "verdict": "REJECTED",
+    "notes": "friendly, but the snout points to the left (south-west); never mirrored",
+    "at": "2026-11-27T12:10:20.984Z"
+  },
+  "sea-serpent-a-friendly#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sea-serpent-a with big round friendly eyes and a smile, still facing south-east",
+    "at": "2026-11-27T12:10:21.233Z"
+  },
+  "sea-serpent-a-friendly#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit; its eyes look more to the viewer, #0 keeps the south-east gaze",
+    "at": "2026-11-27T12:10:21.514Z"
+  },
+  "sea-serpent-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a chubby baby dragon facing the viewer, short and blobby: reads less as a long sea serpent than the edited sea-serpent-a",
+    "at": "2026-11-27T12:10:21.960Z"
+  },
+  "hermit-crab-a#0": {
+    "verdict": "REJECTED",
+    "notes": "dark puddle and sand plate under the crab: removed by hermit-crab-a-clean",
+    "at": "2026-11-27T12:10:22.299Z"
+  },
+  "hermit-crab-a-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "tiny red hermit crab peeking out of a striped spiral shell, plate removed",
+    "at": "2026-11-27T12:10:22.706Z"
+  },
+  "hermit-crab-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same as #0; #0 chosen",
+    "at": "2026-11-27T12:10:22.983Z"
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "set": "sea-units",
+  "bead": "border_marches-bzc.157",
+  "class": "units",
+  "exploration": false,
+  "_doc": "The eight sea guardians and the summoned Hermit Crab of docs/design/NAVAL.md (sections 4 and 10.2), made as the faction-units Candy and Deepforge creatures were: create-image-pixen, the @piece options, the style, three-quarter camera and south-west light layers, facing south-east and never mirrored. Figures that hold a weapon (the Drowned Sailor, the Corsair) take the unit class layer; the living creatures with no feet to stand on (Jellyfish, crabs, Siren, Hammerhead, Sea Serpent, Kraken) drop the class layer and name the outline, the facing and 'lowest part lowest', as rock-candy-dragon-b and the Deepforge machines did. Sea palette (the orchestrator's call, every colour in the subject): sea teal #2fa7b8, deep sea blue #2a5d9f, seafoam #bfeee0, coral orange #f07a3a, sand #e8d3a0; colours avoid the faction signatures except where NAVAL 10.2 names them (the pink Jellyfish, the purple Kraken). No water, splash or ripple is baked into a sprite: NAVAL 3.8 draws the waterline and ripple ring in code, and the game's code shadow stands under every unit as before. Small creatures (the tier 1 Jellyfish, the Giant Crab, the Hermit Crab) are generated small and padded bottom-centred into 56x80; sizes rise with tier (tiers 1-4 56x80, the Sea Serpent 72x88, the Kraken 88x104). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "beast": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west"
+    ]
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-unit"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "jellyfish-a",
+      "concept": "JELLYFISH",
+      "width": 44,
+      "height": 60,
+      "seed": 57101,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Jellyfish, one small chunky cute round jellyfish floating upright, thick single-colour black outline, turned slightly down and to the right: a big round dome bell of soft pink #f28bb8 with #c25588 shading and a pale #ffd6e8 shine, a sleepy smiling face with half-closed big eyes on the front of the bell, a frilly skirt under the bell, five short curly stinging ribbon tentacles hanging below in pink and lavender #b99be0, the tentacle tips are the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, bubbles, splash, ripple, fish, pedestal, ground plate, platform, scenery, background, shadow on the ground, transparent body, glass",
+      "notes": "Tier 1 swimmer (Stinging Bell); generated small and padded into 56x80."
+    },
+    {
+      "id": "drowned-sailor-a",
+      "concept": "DROWNED SAILOR",
+      "width": 56,
+      "height": 80,
+      "seed": 57201,
+      "options": "@piece",
+      "subject": "Subject: Drowned Sailor, a chunky cute soggy skeleton sailor with a huge round skull about half of the figure's height: big dark round eye sockets with tiny pale sea-green #9fe0c8 glints, a goofy toothy grin, a tattered navy blue #2a5d9f sailor's cap, a torn white and sea-blue striped sailor shirt, ragged sand #e8d3a0 trousers, strands of dark green seaweed draped on his bony shoulders and arms, ivory bones, an oversized long wooden boat hook with an iron hook held upright in his right hand, bony bare feet; simple shapes and very few details.",
+      "negative": "sword, shield, crown, purple, red, black cloak, water, puddle, waves",
+      "notes": "Tier 2 swimmer (Dead Weight). Sailor stripes, seaweed and the boat hook keep him apart from the Restless skeleton."
+    },
+    {
+      "id": "giant-crab-a",
+      "concept": "GIANT CRAB",
+      "width": 56,
+      "height": 56,
+      "seed": 57301,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Giant Crab, one big chunky cute crab filling the whole width of the image, thick single-colour black outline, facing down and to the right: a wide round domed shell like a helmet in coral orange #f07a3a with #b84a22 shading and cream #fbe3c4 bumps, two big googly eyes on short stalks with a cheerful grin under them, one huge oversized claw raised high on the right and one small claw at the front, six short pointed orange legs, all the leg tips visible and lowest in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, bubbles, sand, rocks, pedestal, ground plate, platform, scenery, background, shadow on the ground, hermit shell, red",
+      "notes": "Tier 2 swimmer (Carapace); a wide low crab generated square and padded into 56x80."
+    },
+    {
+      "id": "corsair-a",
+      "concept": "CORSAIR",
+      "width": 56,
+      "height": 80,
+      "seed": 57401,
+      "options": "@piece",
+      "subject": "Subject: Corsair, a chunky cute cheerful pirate woman with a huge round head about half of the figure's height: a big grin, a black eyepatch over one eye, a bright scarlet #d8392b bandana with a knot and tails, a gold hoop earring, a loose white shirt, a teal #2fa7b8 sash, brown trousers tucked into tall black boots, a coil of rope slung over her shoulder, an oversized curved silver cutlass raised in her right hand; simple shapes and very few details.",
+      "negative": "gun, pistol, parrot, hat, tricorn, crown, shield, armour, water, ship",
+      "notes": "Tier 3 (Swing Across), the one non-swimmer."
+    },
+    {
+      "id": "siren-a",
+      "concept": "SIREN",
+      "width": 56,
+      "height": 80,
+      "seed": 57501,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Siren, one chunky cute mermaid with a big round head about half of her height, thick single-colour black outline, turned down and to the right: a pretty face with big eyes and an open mouth mid-song, a few tiny music notes floating by her head, very long flowing sea-green #3fbf9a hair with a pink scallop shell comb in it, a seashell top, a big curled fish tail in teal #2fa7b8 with #1f6f86 scales shading and a wide seafoam #bfeee0 fin, she sits upright on her curled tail, the curl of the tail is the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "rock, water, waves, splash, legs, feet, trident, weapon, pedestal, ground plate, platform, scenery, background, shadow on the ground, nudity",
+      "notes": "Tier 3 swimmer (Siren Song)."
+    },
+    {
+      "id": "hammerhead-a",
+      "concept": "HAMMERHEAD",
+      "width": 56,
+      "height": 80,
+      "seed": 57601,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Hammerhead, one big chunky cute hammerhead shark leaping upward, filling the whole width and most of the height of the image, thick single-colour black outline, its head turned down and to the right toward the viewer: an oversized wide flat hammer-shaped head as wide as the image with a round eye at each end, a huge toothy grin under it, a plump steel blue #4f7fa8 body with #2f5677 shading and a white belly, a tall dorsal fin, two side fins, the curved tail fin at the bottom is the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, splash, bubbles, legs, clothes, hat, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "Tier 4 swimmer (Blood in the Water). No legs or clothes to keep it apart from the stray Loan Shark."
+    },
+    {
+      "id": "sea-serpent-a",
+      "concept": "SEA SERPENT",
+      "width": 72,
+      "height": 88,
+      "seed": 57701,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Sea Serpent, one large chunky cute long sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round dragon-like head with big friendly eyes and a toothy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 striped belly, the body in three big round coils one behind another, a fin at the tail tip, the lowest coil is the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, splash, legs, wings, fire, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "Tier 5 (large) swimmer (Coil)."
+    },
+    {
+      "id": "kraken-a",
+      "concept": "KRAKEN",
+      "width": 88,
+      "height": 104,
+      "seed": 57801,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Kraken, one huge chunky cute smug octopus filling the whole width of the image, thick single-colour black outline, turned down and to the right: a big round bulbous purple #8a4fc4 head with #5b2f8f shading and pale lilac #d8b8f0 spots, big half-lidded smug eyes and a self-satisfied smirk, eight thick curling arms with pale pink #f3c6dc suckers, several arms curling up high at both sides, one arm in front bearing a small sailor's tattoo of a red heart and an anchor, the curled arm tips at the bottom are the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, splash, ship, boat, horror, scary, teeth, slime, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "Tier 6 (giant) swimmer (Many Arms). Drawn whole with no water (the code draws the waterline)."
+    },
+    {
+      "id": "hermit-crab-a",
+      "concept": "HERMIT CRAB",
+      "width": 40,
+      "height": 40,
+      "seed": 57901,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Hermit Crab, one tiny chunky cute hermit crab, thick single-colour black outline, facing down and to the right: a big spiral sea snail shell in cream #fbe3c4 and sand #e8d3a0 with coral orange #f07a3a stripes on its back, a small coral orange crab peeking out of the shell opening at the front, two big googly eyes on stalks, two small claws and short legs, the legs are the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, sand, rocks, pedestal, ground plate, platform, scenery, background, shadow on the ground, red",
+      "notes": "The Conch of the Deep's summon (Carapace); tiny, padded into 56x80."
+    },
+    {
+      "id": "corsair-a-clean",
+      "concept": "CORSAIR",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 56,
+      "height": 80,
+      "seed": 57402,
+      "edit": {
+        "take": "corsair-a#0"
+      },
+      "subject": "Remove the red smudges: the red streaks on her cheek under the eyepatch and the red marks on her right wrist become clean plain skin of the same skin colour as the rest of her face and hands. Keep the pirate, her red bandana, eyepatch, gold earring, grin, white shirt, teal sash, rope, cutlass and boots, her colours, the thick black outline and the art style exactly the same.",
+      "notes": "Edit of corsair-a#0: the design is right but the red streaks on her cheek and wrist read as blood."
+    },
+    {
+      "id": "siren-a-clean",
+      "concept": "SIREN",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 56,
+      "height": 80,
+      "seed": 57502,
+      "edit": {
+        "take": "siren-a#0"
+      },
+      "subject": "Remove the dark grey rock under her tail and the small white music notes floating beside her head, leaving those areas transparent, so the mermaid rests on her own curled teal tail with nothing at all under it. Keep the mermaid, her sea-green hair, pink shell comb, shell top, singing face and teal tail with its pale fin, her colours, the thick black outline and the art style exactly the same.",
+      "notes": "Edit of siren-a#0: she sits on a grey rock (a ground plate) and the white notes have no outline, so they vanish on light ground."
+    },
+    {
+      "id": "hermit-crab-a-clean",
+      "concept": "HERMIT CRAB",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 40,
+      "height": 40,
+      "seed": 57902,
+      "edit": {
+        "take": "hermit-crab-a#0"
+      },
+      "subject": "Remove all ground: erase the dark blue-green puddle and sand plate under the crab, leaving that area transparent, so the crab and its shell stand on a transparent background with nothing at all under its legs. Keep the hermit crab, its big striped spiral shell, red body, eyes and claws, its colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of hermit-crab-a#0."
+    },
+    {
+      "id": "sea-serpent-b",
+      "concept": "SEA SERPENT",
+      "width": 72,
+      "height": 88,
+      "seed": 57702,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head turned down and to the right: a big round head with huge round friendly eyes, no eyebrows and a happy open smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body looped in three big round humps side by side like a sea monster on an old map, a fin at the tail tip, the bottom of the humps is the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, splash, legs, wings, fire, angry, frown, horns, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "sea-serpent-a reads as a serpent but frowns with small angry eyes (NAVAL 10 asks for friendly monsters with big eyes) and makes one S-curve, not three coils."
+    },
+    {
+      "id": "sea-serpent-a-friendly",
+      "concept": "SEA SERPENT",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 72,
+      "height": 88,
+      "seed": 57703,
+      "edit": { "take": "sea-serpent-a#0" },
+      "subject": "Make the face friendly and cute: give the serpent big round friendly eyes with large dark pupils and a white shine, remove the frowning angry eyebrow ridges, and turn the mouth into a happy closed smile. Keep the head pointing down and to the right, the seafoam frilled crest, the teal scaled body with its sand belly and coils, the tail fin, the colours, the thick black outline and the art style exactly the same.",
+      "notes": "Face edit of sea-serpent-a#0, which faces south-east correctly but frowns (sea-serpent-b is friendly but faces south-west)."
+    },
+    {
+      "id": "sea-serpent-c",
+      "concept": "SEA SERPENT",
+      "width": 72,
+      "height": 88,
+      "seed": 57704,
+      "fragments": "@beast",
+      "options": "@piece",
+      "subject": "Subject: Sea Serpent, one large chunky cute friendly sea serpent filling the whole width of the image, thick single-colour black outline, its head and snout pointing down and to the right toward the bottom right corner: a big round head with huge round friendly eyes and a happy smile, a frilled crest of seafoam #bfeee0 fins on its head and down its neck, a long fat round body of teal #2fa7b8 scales with #1f6f86 shading and a pale sand #e8d3a0 belly, the body in big round coils behind the head, a fin at the tail tip, the bottom of the coils is the lowest thing in the image; solid opaque colours; simple shapes and very few details.",
+      "negative": "water, waves, splash, legs, wings, fire, angry, frown, horns, facing left, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "sea-serpent-b is friendly but its snout points to the left (south-west): the facing named twice."
+    }
+  ],
+  "outputs": [
+    { "path": "public/assets/units/sea-jellyfish.png", "from": "jellyfish-a#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-jellyfish.png", "from": "jellyfish-a#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }, { "op": "crop", "x": 4, "y": 22, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-drowned-sailor.png", "from": "drowned-sailor-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-drowned-sailor.png", "from": "drowned-sailor-a#0", "steps": [{ "op": "crop", "x": 2, "y": 0, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-giant-crab.png", "from": "giant-crab-a#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-giant-crab.png", "from": "giant-crab-a#0", "steps": [{ "op": "crop", "x": 4, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-corsair.png", "from": "corsair-a-clean#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-corsair.png", "from": "corsair-a-clean#0", "steps": [{ "op": "crop", "x": 4, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-siren.png", "from": "siren-a-clean#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-siren.png", "from": "siren-a-clean#0", "steps": [{ "op": "crop", "x": 4, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-hammerhead.png", "from": "hammerhead-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-hammerhead.png", "from": "hammerhead-a#0", "steps": [{ "op": "crop", "x": 4, "y": 8, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-sea-serpent.png", "from": "sea-serpent-a-friendly#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/sea-sea-serpent.png", "from": "sea-serpent-a-friendly#0", "steps": [{ "op": "crop", "x": 18, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-kraken.png", "from": "kraken-a#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/sea-kraken.png", "from": "kraken-a#0", "steps": [{ "op": "crop", "x": 20, "y": 20, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/sea-hermit-crab.png", "from": "hermit-crab-a-clean#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/sea-hermit-crab.png", "from": "hermit-crab-a-clean#0", "steps": [{ "op": "pad", "width": 48, "height": 48, "anchor": "center" }], "width": 48, "height": 48 }
+  ]
+}

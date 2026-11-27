@@ -95,19 +95,20 @@ const NEUTRALS = [
   "shade",
 ];
 /**
- * The sea guardians and the Hermit Crab (NAVAL.md 4, bead bzc.152): data
- * before art (bead 9a registers their sea-<id> sprites).
+ * docs/design/NAVAL.md sections 4 and 10.2 (art: bead bzc.157): the eight
+ * sea guardians in tier order, then the Conch of the Deep's Hermit Crab,
+ * each with its canvas (sizes rise with tier).
  */
-const AWAITING_ART: readonly string[] = [
-  "jellyfish",
-  "drowned-sailor",
-  "giant-crab",
-  "corsair",
-  "siren",
-  "hammerhead",
-  "sea-serpent",
-  "kraken",
-  "hermit-crab",
+const SEA_CREATURES: readonly (readonly [string, number, number])[] = [
+  ["jellyfish", 56, 80],
+  ["drowned-sailor", 56, 80],
+  ["giant-crab", 56, 80],
+  ["corsair", 56, 80],
+  ["siren", 56, 80],
+  ["hammerhead", 56, 80],
+  ["sea-serpent", 72, 88],
+  ["kraken", 88, 104],
+  ["hermit-crab", 56, 80],
 ];
 const HERO_CLASSES = [
   "knight-errant",
@@ -164,7 +165,6 @@ describe("unit art lookups", () => {
     // bead border_marches-9is: Orc Brute and Troll drew the placeholder on
     // screens that used unitArt alone.
     for (const def of Object.values(CREATURES)) {
-      if (AWAITING_ART.includes(def.id)) continue;
       expect({ id: def.id, own: hasUnitArt(def.id) }).toEqual({
         id: def.id,
         own: true,
@@ -174,28 +174,56 @@ describe("unit art lookups", () => {
         key: def.sprite,
       });
     }
-    for (const id of Object.keys(SUMMONED_CREATURES)) {
-      if (AWAITING_ART.includes(id)) continue;
+    for (const id of Object.keys(SUMMONED_CREATURES))
       expect({ id, own: hasUnitArt(id) }).toEqual({ id, own: true });
+  });
+
+  it("gives the sea guardians and the Hermit Crab sprites and portraits", () => {
+    for (const [id, w, h] of SEA_CREATURES) {
+      expect({ id, art: hasUnitArt(id) }).toEqual({ id, art: true });
+      const unit = unitArt(id);
+      expect([unit.key, unit.w, unit.h, unit.faction]).toEqual([
+        `sea-${id}`,
+        w,
+        h,
+        "neutral",
+      ]);
+      expect(existsSync(join(PUBLIC, unit.path)), unit.path).toBe(true);
+      const portrait = unitPortrait(id);
+      expect(portrait).toBe(assetByKey(`portrait-sea-${id}`));
+      expect([portrait.w, portrait.h, portrait.unit]).toEqual([
+        48,
+        48,
+        unit.key,
+      ]);
+      expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(true);
     }
   });
 
-  it("draws the sea guardians as their sea-<id> sprite or the placeholder", () => {
-    // NAVAL.md 10.2: their art is bead 9a's; until it is registered they
-    // fall back to the placeholder, then to the data's sprite key.
-    for (const id of AWAITING_ART) {
-      const sprite = Object.hasOwn(CREATURES, id)
-        ? CREATURES[id as keyof typeof CREATURES].sprite
-        : `sea-${id}`;
-      expect(sprite).toBe(`sea-${id}`);
-      expect(unitArt(id).key).toBe(hasUnitArt(id) ? sprite : PLACEHOLDER_UNIT);
+  it("agrees with the sea guardians' data (bead bzc.152)", () => {
+    // The eight guardians are creatures whose data names sea-<id>; the
+    // Hermit Crab is a summon with no data sprite, drawn by its id.
+    for (const [id] of SEA_CREATURES) {
+      if (id === "hermit-crab") {
+        expect(Object.hasOwn(CREATURES, id)).toBe(false);
+        expect(Object.hasOwn(SUMMONED_CREATURES, id)).toBe(true);
+        expect(unitArt(id).key).toBe("sea-hermit-crab");
+        continue;
+      }
+      expect(Object.hasOwn(CREATURES, id), id).toBe(true);
+      const def = CREATURES[id as keyof typeof CREATURES];
+      expect({ id, sprite: def.sprite }).toEqual({ id, sprite: `sea-${id}` });
+      expect({ id, key: unitArt(id).key }).toEqual({ id, key: def.sprite });
     }
   });
 
   it("uses a different sprite for every creature", () => {
-    const keys = [...FACTION_CREATURES, ...MVP_NEUTRALS, ...NEUTRALS].map(
-      (id) => unitArt(id).key,
-    );
+    const keys = [
+      ...FACTION_CREATURES,
+      ...MVP_NEUTRALS,
+      ...NEUTRALS,
+      ...SEA_CREATURES.map(([id]) => id),
+    ].map((id) => unitArt(id).key);
     expect(new Set(keys).size).toBe(keys.length);
   });
 
