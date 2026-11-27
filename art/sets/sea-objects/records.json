@@ -1,0 +1,1277 @@
+{
+  "pearl-bed-a": {
+    "id": "pearl-bed-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ddafe810-3da2-4794-bf93-df9c4a7b91d4",
+    "submittedAt": "2026-11-27T12:01:58.807Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a pearl bed at sea: a low cluster of chunky rounded sea rocks #7a8a94 with #4e5c66 shadows dotted with barnacles, three huge open clam shells #eadccf with pink insides #f0a8b8 each holding one big shining violet pearl #c99af5 with a #e9d5ff highlight, two little orange starfish on the rocks. Nearly the full image wide and about half of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158201,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: a pearl bed at sea: a low cluster of chunky rounded sea rocks #7a8a94 with #4e5c66 shadows dotted with barnacles, three huge open clam shells #eadccf with pink insides #f0a8b8 each holding one big shining violet pearl #c99af5 with a #e9d5ff highlight, two little orange starfish on the rocks. Nearly the full image wide and about half of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, mermaid, fish, creature."
+    },
+    "at": "2026-11-27T12:02:55.193Z",
+    "usageUsd": 0.08084187963273791,
+    "candidates": [
+      {
+        "file": "pearl-bed-a-0.png",
+        "sha256": "3e7fd09c490fff00852e11637c9ff52bb9e7e1ca061dfd250c1bea63c506dae5",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pearl-bed-a-1.png",
+        "sha256": "7ff1365a86a8be303ec43da217b2f871414bdc85c1cac5f4c1bc10ee6aa32b0a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pearl-bed-a-2.png",
+        "sha256": "433e00839f13a44bf234e09e925fe64195fce630b9829fd4926998cd12396afd",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pearl-bed-a-3.png",
+        "sha256": "fd63ffb21482fb194349a59a129569adb5319f8772f3302cadcd1e24b7b6ed9e",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "tiny-a": {
+    "id": "tiny-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "931b2a5b-af80-42a8-a06c-1d02809f9fbe",
+    "submittedAt": "2026-11-27T12:02:55.278Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these: a round fat buoy striped red #d84a3a and white with an iron cage on top holding a brass bell #d9a63a; a rounded sea rock #7a8a94 holding a big open golden scallop shell #f2c230 full of gold coins; a little round sea shrine of pale blue-grey stone #8fb0bc with a seashell dome and a glowing blue spiral emblem #4aa8e8; a whirlpool's rim, a flat oval ring of small dark wet rocks #4e5c66 and white foam, its middle empty and transparent. About three quarters of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 158202,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: each image a different one of these: a round fat buoy striped red #d84a3a and white with an iron cage on top holding a brass bell #d9a63a; a rounded sea rock #7a8a94 holding a big open golden scallop shell #f2c230 full of gold coins; a little round sea shrine of pale blue-grey stone #8fb0bc with a seashell dome and a glowing blue spiral emblem #4aa8e8; a whirlpool's rim, a flat oval ring of small dark wet rocks #4e5c66 and white foam, its middle empty and transparent. About three quarters of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, mermaid."
+    },
+    "at": "2026-11-27T12:04:58.808Z",
+    "usageUsd": 0.08182237945662604,
+    "candidates": [
+      {
+        "file": "tiny-a-0.png",
+        "sha256": "fb6d8540b757519abccb44201acd124735aa4af8cccb263d169662f00266a234",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-1.png",
+        "sha256": "64e466f9ef0726b8332f4d85290dd3a9376d290fed145f74fb91bdd095024a33",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-2.png",
+        "sha256": "a4089cff246828245773a82d964d0a6013b0f443e5ae8e644e45407127409931",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-3.png",
+        "sha256": "19b39a8662dc64a3df585462fe95eeca78efa732b4fbece469c701f2440fc072",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-4.png",
+        "sha256": "a8c96eb31aa936b97ca5e8bdd4575395bb9c0a20dc5e049f9e7f3140d0805ed7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-5.png",
+        "sha256": "e72ba84efcd612cbd249d6a5dea1c7ac8cd192f85683052e61db90438c0dfecc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-6.png",
+        "sha256": "bcb375fb67ed9edcaad7ddd310509ad0d52e7bb72521cd1fde002d30fd1738dd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-7.png",
+        "sha256": "784a67212bf46c12d13dedf76ccedc8af4b7171241c6f2dc725e68418e67366f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-8.png",
+        "sha256": "b5fc00a5f7ad80b90828c187c28f9c856e2a9438bc3f53d3a359cbd762a598d9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-9.png",
+        "sha256": "4419e94a1d6c4a1ad2210f54f03a4f45091882f0164c8dbb7d7bd3272fb7bd0b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-10.png",
+        "sha256": "a783073539b80aa24ca760cb4cf55dccd36d862108c104bc580424e2846e1c53",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-11.png",
+        "sha256": "ccdb3fd4225998a792782940523204b172060ae701e1281db2c5bd536c050889",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-12.png",
+        "sha256": "3fc7d06e2fdadad76f85596ced8c40fb0671257677abb43e41d8588cc7f506f2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-13.png",
+        "sha256": "0164fac434ee782ac188f98fa03af326f4b93a9cb16ba7b980ba658e5f642a8b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-14.png",
+        "sha256": "1d86632d60624a59a81572d3c8accaaf16cd7923f82abb344de8ebe107acc451",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "tiny-a-15.png",
+        "sha256": "4d79cc76249c3c25c9094b45bd71f8f8db9647733c6746e8cbca75afbc7067fb",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "siren-grotto-a": {
+    "id": "siren-grotto-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d48737f6-13b3-4893-85bf-fe1f5f8c9ec5",
+    "submittedAt": "2026-11-27T12:05:56.595Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a siren's grotto at sea: a chunky rounded sea cave of pale teal-grey rock #6f9a9c with #46686c shadows, a big dark arched cave mouth at the front left framed with pink and cream seashells and pearls, curtains of green seaweed #4f9a5a hanging at its sides, a big pink conch shell #f0a8b8 on its top, a golden harp #d9a63a leaning on a small rock seat beside the mouth. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158203,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: a siren's grotto at sea: a chunky rounded sea cave of pale teal-grey rock #6f9a9c with #46686c shadows, a big dark arched cave mouth at the front left framed with pink and cream seashells and pearls, curtains of green seaweed #4f9a5a hanging at its sides, a big pink conch shell #f0a8b8 on its top, a golden harp #d9a63a leaning on a small rock seat beside the mouth. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, mermaid, creature."
+    },
+    "at": "2026-11-27T12:07:03.562Z",
+    "usageUsd": 0.08049612140655518,
+    "candidates": [
+      {
+        "file": "siren-grotto-a-0.png",
+        "sha256": "e20e0e61ea093dd1017405960fd9d96dd949983c6a61fb9c704d83b034d2f42e",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "siren-grotto-a-1.png",
+        "sha256": "8c28ec041e854b2d5cfbd4e0b19b814f4ac3f174412eb08548bd69a3160a3f48",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "siren-grotto-a-2.png",
+        "sha256": "1a5dc5bb81051e372fcd240a138dd8b296e5b178649ee199406ccd53691c69b8",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "siren-grotto-a-3.png",
+        "sha256": "30f3ed136dc5600b1561349da092737b496a9ecab00925d88bc641e3e69abe2e",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "sirens-rock-a": {
+    "id": "sirens-rock-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6bc5d42f-21d1-42d4-a57f-e8c4bf1c722a",
+    "submittedAt": "2026-11-27T12:07:03.660Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the sirens' rock at sea: one tall craggy pinnacle of dark slate-grey rock #5e6a78 with #3c4450 shadows, a smooth flat seat near its top with a big golden lyre #d9a63a resting on it, a hand mirror and a golden comb on a ledge, a few pale bones and a broken oar at its foot, pink coral tufts #f07aa0 at its base. About three quarters of the image wide and nearly its full height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158204,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: the sirens' rock at sea: one tall craggy pinnacle of dark slate-grey rock #5e6a78 with #3c4450 shadows, a smooth flat seat near its top with a big golden lyre #d9a63a resting on it, a hand mirror and a golden comb on a ledge, a few pale bones and a broken oar at its foot, pink coral tufts #f07aa0 at its base. About three quarters of the image wide and nearly its full height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, mermaid, skull, creature."
+    },
+    "at": "2026-11-27T12:08:15.663Z",
+    "usageUsd": 0.08051120199097528,
+    "candidates": [
+      {
+        "file": "sirens-rock-a-0.png",
+        "sha256": "478b6fb4987af7edb625bf83d276f52df55f2c257720a20f24a80aadd0180948",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sirens-rock-a-1.png",
+        "sha256": "9f569bcd9540e259e29dceb1cf2b908d8d827b6b13f2d38f3260e2b1351f264a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sirens-rock-a-2.png",
+        "sha256": "149a29fd2fac3421adbb3fc9c6279e0aebd505ca2cdf34a09fba1b5687ed70f0",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sirens-rock-a-3.png",
+        "sha256": "cca6f4ea8e88eb8ccd7f1d011dcd8213e6ad947e0bb28fdf193577917b42d68c",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "shipwreck-a": {
+    "id": "shipwreck-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8a912633-d0ba-4400-8d12-ffa99ca34b60",
+    "submittedAt": "2026-11-27T12:08:16.159Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a shipwreck at sea, a guarded treasure bank: a broken old wooden sailing ship #7a5230 with #4e331c shadows sunk to its deck and tilted, its bow rising out of the water at the right, a snapped mast with a torn grey-green sail #8a9a88, green seaweed and barnacles on its planks, a small open treasure chest with gold coins and a few barrels on its broken deck. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158205,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: a shipwreck at sea, a guarded treasure bank: a broken old wooden sailing ship #7a5230 with #4e331c shadows sunk to its deck and tilted, its bow rising out of the water at the right, a snapped mast with a torn grey-green sail #8a9a88, green seaweed and barnacles on its planks, a small open treasure chest with gold coins and a few barrels on its broken deck. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, skeleton figure, creature, sky ship."
+    },
+    "at": "2026-11-27T12:09:28.198Z",
+    "usageUsd": 0.08066109347343445,
+    "candidates": [
+      {
+        "file": "shipwreck-a-0.png",
+        "sha256": "ee35d9a8e7e438205120c647397f2fccec40e63c6de53c54a623b0588c880562",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shipwreck-a-1.png",
+        "sha256": "f3ec8f590f9f7aa30737935054e1756a176da90c20491808b67bfc81921a8907",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shipwreck-a-2.png",
+        "sha256": "ee7f36c430111bf6758ebff211dd4f42694c0c337c10f90bc27f0dce163b0d8a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shipwreck-a-3.png",
+        "sha256": "6b89e498fbc670a331cc992e11294974bc8af5dd02347940ef5dce566b1799d4",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "coral-grotto-a": {
+    "id": "coral-grotto-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "bfeafc96-fd1e-4cde-a158-56cff8389aa9",
+    "submittedAt": "2026-11-27T12:09:28.371Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a coral grotto at sea, a guarded treasure bank: a chunky rounded reef mound around a stone arch of grey rock #7a8a94 with #4e5c66 shadows and a dark cave mouth at the front, covered in big branching corals of pink #f07aa0, orange #f39a4a and violet #a855f7, a few violet pearls and a dark iron ore chunk at the mouth. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158206,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: a coral grotto at sea, a guarded treasure bank: a chunky rounded reef mound around a stone arch of grey rock #7a8a94 with #4e5c66 shadows and a dark cave mouth at the front, covered in big branching corals of pink #f07aa0, orange #f39a4a and violet #a855f7, a few violet pearls and a dark iron ore chunk at the mouth. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, mermaid, fish, creature."
+    },
+    "at": "2026-11-27T12:10:31.167Z",
+    "usageUsd": 0.08071036126878527,
+    "candidates": [
+      {
+        "file": "coral-grotto-a-0.png",
+        "sha256": "689b3f4ed61bcb9e27a749c74f225d7860367224e23ee39b38c991ffe6e4a791",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "coral-grotto-a-1.png",
+        "sha256": "f401a974a980747c0fb4dd3e1abf0a31d0927c20bfec29bea768dc5502b09105",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "coral-grotto-a-2.png",
+        "sha256": "e81f3aa36e2a730cdf30d4130cf5098b9771d5cc9b9b569ed7dd41641c667415",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "coral-grotto-a-3.png",
+        "sha256": "b23ac7fa01613ac9e2e1f72e4d44cfc79e3f39d9e2b0bdf553a6a779fdc1d7e1",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "krakens-deep-a": {
+    "id": "krakens-deep-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b0ec3050-5a69-489b-8d2e-40f52eb21449",
+    "submittedAt": "2026-11-27T12:10:31.309Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the kraken's deep, a great guarded treasure bank at sea: a wide ring of huge jagged black rocks #3c4450 with #262c34 shadows around a dark navy hole of deep water #1e2f5a, three big curling purple tentacles #8a4fc0 with pale pink suckers rising out of the hole, a sunken ship's broken mast leaning on the rocks at the left, a gold treasure chest and a heap of gold coins on a rock at the front right. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 200,
+        "height": 144
+      },
+      "no_background": true,
+      "seed": 158207,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: the kraken's deep, a great guarded treasure bank at sea: a wide ring of huge jagged black rocks #3c4450 with #262c34 shadows around a dark navy hole of deep water #1e2f5a, three big curling purple tentacles #8a4fc0 with pale pink suckers rising out of the hole, a sunken ship's broken mast leaning on the rocks at the left, a gold treasure chest and a heap of gold coins on a rock at the front right. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, octopus head, eyes, face."
+    },
+    "at": "2026-11-27T12:11:23.059Z",
+    "usageUsd": 0.08021907292471991,
+    "candidates": [
+      {
+        "file": "krakens-deep-a-0.png",
+        "sha256": "f65ef495d04761d7cf67662ed3819491cc2ba046d72515887f10dfa8e86ea640",
+        "width": 200,
+        "height": 144
+      }
+    ]
+  },
+  "lighthouse-a": {
+    "id": "lighthouse-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "90e0c7df-ed36-46cc-8627-f65efdd13aeb",
+    "submittedAt": "2026-11-27T12:11:23.154Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-sea-object.txt",
+          "text": "Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small lighthouse on its own little rock islet at sea: a chunky round tower striped red #d84a3a and white #f4f1ea, a small dark wooden door, a lantern room at the top with a big warm yellow light #ffd24a and a dark red cap roof, standing on a rounded lump of grey rocks #7a8a94 with #4e5c66 shadows. The islet nearly the full image wide, the tower nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 96
+      },
+      "no_background": true,
+      "seed": 158208,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site at sea, a chunky landmark seen from the front with the camera slightly above it, like the towns and sites of the same map: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It rises out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image; all around it is the empty transparent background. Subject: a small lighthouse on its own little rock islet at sea: a chunky round tower striped red #d84a3a and white #f4f1ea, a small dark wooden door, a lantern room at the top with a big warm yellow light #ffd24a and a dark red cap roof, standing on a rounded lump of grey rocks #7a8a94 with #4e5c66 shadows. The islet nearly the full image wide, the tower nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water surface, sea area, waves, ripples, pedestal, ground plate, platform, sand disc, terrain slab, cast shadow, background, sky, second building, person, light beam, glow halo."
+    },
+    "at": "2026-11-27T12:12:24.984Z",
+    "usageUsd": 0.08167801944414775,
+    "candidates": [
+      {
+        "file": "lighthouse-a-0.png",
+        "sha256": "1f3a742a872458bbb935d946474d381a9f22f7aabb18a12274bb0273e948f776",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-1.png",
+        "sha256": "591306432fc9dea088cb3d76e78db3b6508cc31d15d5d5a68c9535605c3da7e1",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-2.png",
+        "sha256": "68c3efe86aa070f543270c6d2cd3ecb9b2baf36c6785f9aaeea843d3748d0236",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-3.png",
+        "sha256": "2cc410852f4e92aabdae54f0a5d87d378f750682ef192f29a394d99b873f1b35",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-4.png",
+        "sha256": "9c8a9db43557ca5b1028a4d8d58e55a531d0cbbac1dbe11e5e3e23fdbad25b6d",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-5.png",
+        "sha256": "0a4311386a6d13b8bc58ab2c0a079e0c094357d48ed09604b98211e6b0fd649d",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-6.png",
+        "sha256": "066e2213176611b326f086b7c254896dc0b2677d3b296124905687f2d1b5cc15",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-7.png",
+        "sha256": "48d6ec81828722e7473cf11fd104d6870ff60b136fc1ade1b6794d1e8ee6bf0f",
+        "width": 64,
+        "height": 96
+      },
+      {
+        "file": "lighthouse-a-8.png",
+        "sha256": "ea94abc93ad5409b255d9ee596a5ccdc940c2789d6bb476819a74d0f7054d556",
+        "width": 64,
+        "height": 96
+      }
+    ]
+  },
+  "fishing-village-a": {
+    "id": "fishing-village-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "79e4936a-67f9-4683-b430-637da87b3dfc",
+    "submittedAt": "2026-11-27T12:12:25.092Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky fishing village on a shore: two plump little cottages of whitewashed stone #e8e2d4 with blue-grey slate roofs #5a7088 and round chimneys, their doors at the front left, a wooden fish-drying rack with three hanging silver fish at the front left, a stack of barrels and a coiled brown net at the front, a small blue rowboat #3f6fa0 pulled up on its side at the right. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158209,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky fishing village on a shore: two plump little cottages of whitewashed stone #e8e2d4 with blue-grey slate roofs #5a7088 and round chimneys, their doors at the front left, a wooden fish-drying rack with three hanging silver fish at the front left, a stack of barrels and a coiled brown net at the front, a small blue rowboat #3f6fa0 pulled up on its side at the right. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, water, sea, fisherman, animal."
+    },
+    "at": "2026-11-27T12:13:27.891Z",
+    "usageUsd": 0.0805661629041036,
+    "candidates": [
+      {
+        "file": "fishing-village-a-0.png",
+        "sha256": "6b065b82aad30539df784ae8257613fe4f8208e3939352896216dc653f05ecdd",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fishing-village-a-1.png",
+        "sha256": "2e0ce6c4eedc9e127479a62c0692edd5108398e65c8f26bc72db70249d85e2f4",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fishing-village-a-2.png",
+        "sha256": "d438075de7328285d11d6d759d64f17a7bc912039e92deba5fb98bcef17c31cb",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fishing-village-a-3.png",
+        "sha256": "54d51c25a3caff49e6f1cbb57bc2ee91daca39a4230682a621e5c85d08a8218c",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "pirate-cove-a": {
+    "id": "pirate-cove-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "20166772-20b2-4ae9-82cc-69e749ff78ae",
+    "submittedAt": "2026-11-27T12:13:27.982Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a pirate cove on a shore: a ramshackle chunky shack of patched brown planks #7a5230 with #4e331c shadows built into a rounded sandy-brown rock outcrop #a08a6a, a crooked roof, a big dark doorway at the front left, a black flag with a white skull on a pole on its roof, an old iron cannon, a stack of barrels and a small treasure chest at the front. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 158210,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a pirate cove on a shore: a ramshackle chunky shack of patched brown planks #7a5230 with #4e331c shadows built into a rounded sandy-brown rock outcrop #a08a6a, a crooked roof, a big dark doorway at the front left, a black flag with a white skull on a pole on its roof, an old iron cannon, a stack of barrels and a small treasure chest at the front. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, water, sea, pirate figure, animal."
+    },
+    "at": "2026-11-27T12:14:27.412Z",
+    "usageUsd": 0.08057209685113695,
+    "candidates": [
+      {
+        "file": "pirate-cove-a-0.png",
+        "sha256": "b120261a9b079687c24e880d599bff7e0a6f03e3ca94c08df15b1deb3c53474a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pirate-cove-a-1.png",
+        "sha256": "60bf31be76370eb3f515494fc47e670a8facd3163b03f8ce3e32560aa8c6715a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pirate-cove-a-2.png",
+        "sha256": "3ac1cd533b57ab026eeca7a15f50821c28afa25c8fc84d3947fc8e77efaf8326",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pirate-cove-a-3.png",
+        "sha256": "0ac1a3d3c9c65dd5971ba2b561250c4090ebf88696f705e82a0adf18dfaf8f50",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "shipwright-a": {
+    "id": "shipwright-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e2d98cbf-acea-46c5-be2c-7f9ab050113f",
+    "submittedAt": "2026-11-27T12:14:27.566Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky shipwright's yard on a shore: a big wooden boat shed of warm brown planks #8a5a2c with a steep red-brown roof #9a4a32, its wide open front showing the curved wooden ribs of an unfinished round boat hull on a cradle, a wooden crane with a hanging rope and pulley at the right, stacks of planks, a tar barrel and a saw at the front left. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 200,
+        "height": 144
+      },
+      "no_background": true,
+      "seed": 158211,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky shipwright's yard on a shore: a big wooden boat shed of warm brown planks #8a5a2c with a steep red-brown roof #9a4a32, its wide open front showing the curved wooden ribs of an unfinished round boat hull on a cradle, a wooden crane with a hanging rope and pulley at the right, stacks of planks, a tar barrel and a saw at the front left. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, water, sea, worker, animal."
+    },
+    "at": "2026-11-27T12:15:24.111Z",
+    "usageUsd": 0.08035213613510132,
+    "candidates": [
+      {
+        "file": "shipwright-a-0.png",
+        "sha256": "5d1a71b135a9318014fc06a14780fd991dfa2d1013a48e1affdbb113d1324ca9",
+        "width": 200,
+        "height": 144
+      }
+    ]
+  },
+  "ferry-landing-a": {
+    "id": "ferry-landing-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "219d56bd-4c25-44d3-8614-e6f4e41f5e0a",
+    "submittedAt": "2026-11-27T12:15:24.197Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small ferry landing on a shore: a stubby wooden plank jetty on fat round posts, a tall post at its front left with a big brass bell #d9a63a and a hanging lantern, a coiled thick rope, a little wooden rowboat #3f6fa0 tied beside it. Each image a slightly different one. About three quarters of the image wide and most of its height."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 158212,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a small ferry landing on a shore: a stubby wooden plank jetty on fat round posts, a tall post at its front left with a big brass bell #d9a63a and a hanging lantern, a coiled thick rope, a little wooden rowboat #3f6fa0 tied beside it. Each image a slightly different one. About three quarters of the image wide and most of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, water, sea, person, animal."
+    },
+    "at": "2026-11-27T12:17:07.312Z",
+    "usageUsd": 0.08236002002822028,
+    "candidates": [
+      {
+        "file": "ferry-landing-a-0.png",
+        "sha256": "018ab61e3a145cf26420bd7d6847dff06f855bc6c719c0f689e22f8fbe6e62c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-1.png",
+        "sha256": "9cb252ab9a40f32cb04ef155c1c23a89ca649bd88d789370eb477a230837fea0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-2.png",
+        "sha256": "d7fd05e475aac01e29af7621ba7f003b80b06cab0fd57f0e3884c5bd84f7fe8c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-3.png",
+        "sha256": "a04db4255d1a0b41c34751d0db26a75a59d57cda8936ec9b1728f213ded0397f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-4.png",
+        "sha256": "938dc58c726b556abdec1aee44e866ef69973e7d123c8709de3fb2dd8303f207",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-5.png",
+        "sha256": "6af15fa82540319166f0e045586947f0c4cd5c98ec1a4b3133a364a1d0c9dbc4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-6.png",
+        "sha256": "612231f4ca4561e258f808fa53e5949e26bda2062b611d5f24fd16e253cae81b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-7.png",
+        "sha256": "043dc3332dd884b539997899030ac650cc1383b9ccd80f08dc16026ab77a2be8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-8.png",
+        "sha256": "b78e2f26b074238b9f7c26b5f9c3d9c28a6cc0c5b8606764bf146acc6b6dbfa0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-9.png",
+        "sha256": "a5dce26cfd5e7f307d85cbc0e47c609cf4ee1131fd918e891bf180d4e6173542",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-10.png",
+        "sha256": "a1a9088dd8af61f728137626831420ff135afd7f4cacaaf2f50a3e6bb7549d85",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-11.png",
+        "sha256": "cadcf15ceb218139014c3c1ecc4bdadea07d2970e1f88781b05bfb6e76790ddf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-12.png",
+        "sha256": "d0acdc15b026e267a9bed9316dbef9f4d232173fbeee483f3db9092024c5d08b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-13.png",
+        "sha256": "a7fc8db1a0381818a5c5532d30f2ff624244704266169a417731f0024b8c1a9c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-14.png",
+        "sha256": "987d80ab25148599f44eda2f034e08e20714d945e84acf50cf6d70f82d75af80",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "ferry-landing-a-15.png",
+        "sha256": "70690626da053ea1ca89a1b1d1096956b47ed436262e64b65d5fa9f541b1d6c8",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "pickups-a": {
+    "id": "pickups-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "82da5fa4-c715-4190-9027-7b0dc9e35763",
+    "submittedAt": "2026-11-27T12:17:07.421Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small floating pickup of a board-game map, seen from the front with the camera slightly above it, thick black outline. Each image a different one of these: flotsam, three broken brown wooden planks #8a5a2c and a small barrel bunched together; a sea chest, a small wooden chest #7a4a24 with brass bands #d9a63a and a tuft of green seaweed on its lid; a castaway, a tiny log raft with a little chibi survivor in rags waving one arm; a message in a bottle, a fat green glass bottle #4fa07a lying on its side with a cork and a rolled paper scroll inside. Nearly the full image wide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 158213,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: one small floating pickup of a board-game map, seen from the front with the camera slightly above it, thick black outline. Each image a different one of these: flotsam, three broken brown wooden planks #8a5a2c and a small barrel bunched together; a sea chest, a small wooden chest #7a4a24 with brass bands #d9a63a and a tuft of green seaweed on its lid; a castaway, a tiny log raft with a little chibi survivor in rags waving one arm; a message in a bottle, a fat green glass bottle #4fa07a lying on its side with a cork and a rolled paper scroll inside. Nearly the full image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, waves, splash, ground, shadow."
+    },
+    "at": "2026-11-27T12:19:07.188Z",
+    "usageUsd": 0.11887126991483901,
+    "candidates": [
+      {
+        "file": "pickups-a-0.png",
+        "sha256": "d2a049df7ece1c1b173729946ce647a6371ae285a42ad0112c595c16e9e676dc",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-1.png",
+        "sha256": "2022003960cf96dde13fc93219b5d16abb6fe14f7d4d7231f9b0d619851cfc3e",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-2.png",
+        "sha256": "f2ec439798c6633337e7a4e2d51d892bf3228b7605b5945d3b8397236e6ee4ac",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-3.png",
+        "sha256": "309745e82dbcb9963890d37f19058535c479f3594ffe99816c1d53b45a1be88d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-4.png",
+        "sha256": "4bec0038d78e49f771f27a143d80e5aba9fed217151a715cf13800bf55686c89",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-5.png",
+        "sha256": "acb0c5b0f386a6ee13ef0a898e4e688a20fa017e0560e49b8535267b5b35caaf",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-6.png",
+        "sha256": "e940f7d71e07587499b7143f9931d19a40301c247509f7d00eec5f6f9436dbff",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-7.png",
+        "sha256": "875eecc9a3763786053d40de2e3e5ae66e6fc0c4bc8652113457d00f33ee2e8f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-8.png",
+        "sha256": "545f36d2ea40990f86365df6c8a9292df47c9956b3bd0b3ff74ebd830ae696ab",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-9.png",
+        "sha256": "bfa39ab4b2386ddc83f73a8175b7981dbb896beedb81f238b31d2bb7dd0ee4d1",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-10.png",
+        "sha256": "fe10519849f9b2e720fb52cb274c64e9d8103943eeb23c0a8fef4dc9b85d8105",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-11.png",
+        "sha256": "b7cb849f13c8d0cdc2409d571f600a7e4e3c0cec746d77489c91222cb7359ffa",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-12.png",
+        "sha256": "c18d7b9c64cd77aab0f6bd76ccd8c9c1bee27f3cb99bcb9099e281f6bd1c541c",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-13.png",
+        "sha256": "c3fad5477b2cd8a165074970123ef54ca77a8d57929917b9d99bc6d5a9a7088f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-14.png",
+        "sha256": "84cf6812aef39a6a746718f60d2cb5ff6d0d9ed726f7d0adb38a195e8f0cbd7d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-15.png",
+        "sha256": "f0e5eadd340518d69029229da337740185ce463f6ed4bbdcc8577f1eee4baff7",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-16.png",
+        "sha256": "ada109724e0ad2f66ff15e5bbc1bf3c1e795c2a90c36aac5cbf6076a783c89ba",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-17.png",
+        "sha256": "a6f3cb338b60f8c39ed1eb004ea9bcd4089ebd825cd4fdc59aad8bd5ca8006aa",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-18.png",
+        "sha256": "4af53be0197c6381be67f4c3aa13ff30c266394d437b861acd37928e8d0175e6",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-19.png",
+        "sha256": "b415dd51dfc9312fb54e418cb41121437ef4bf497052ff2e25f8086faec4f529",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-20.png",
+        "sha256": "1fe9a023b1d49b3254dc634f482df8c03dd09c74476b3b8b4faf50ccd13b0404",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-21.png",
+        "sha256": "86626e384374366ee89808e9d47c377d9b83e7e3e9e192be04d37e8d7c0a3c78",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-22.png",
+        "sha256": "f6a2ab367a41b244147754c9564109f6a5c6c4ee9be080af5f4e0910ee51ea31",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-23.png",
+        "sha256": "6452e7091f66ddfcb56160b31dd31cf9f21033fc2d433d5955ef550c705692cf",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-24.png",
+        "sha256": "a7bcb39caf0c997ab7af4ae450a7abd60aee55230ba5cf93c0b6de0bd386acd7",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-25.png",
+        "sha256": "b19d2e625b4d476f9462534a988f05882978125166fb47e9b77f70d0f16594a5",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-26.png",
+        "sha256": "27685dd0e400da489d112785dfb9530a95f2bb66985a6542743e0f9d5aef2cd2",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-27.png",
+        "sha256": "8012318e7c80492f225da74b9676e789e0a2a0154a5dcc18882dc5127baf6618",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-28.png",
+        "sha256": "143d5f2bfbfeea3380bf79ca6d658478757e2b43d0610d55cfed87dc182bb5b8",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-29.png",
+        "sha256": "ee9bb7a0efe4e67f6f6ea7d9a593c34ba4bb4ce2c93453c696d5a98aa562890d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-30.png",
+        "sha256": "4aeabbb09727e0739d4ede0980653076e1f59845413ac8e05731500dbe07e647",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-31.png",
+        "sha256": "b20a16d5be1dabef8e5ed83473924d092e12a149993333a90b6301766c81963e",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-32.png",
+        "sha256": "5c8a8b6c7d78687711977e01797c08a1232eed3276940f5b2346f84662d51499",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-33.png",
+        "sha256": "e8cdc4e16cf013ad1da3ca752b3b7cd0a6a28523ee1a3af208d476c8ae13eeb0",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-34.png",
+        "sha256": "b63d782f3e3559ecdd0c28d506667d15c28178bffdd4dc769e27773c62d2db61",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "pickups-a-35.png",
+        "sha256": "8f9e19fd7c4f62a9c8a9411c4b0ed8a65a1d28ecd20d993074da0c0586bf0f75",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  }
+}

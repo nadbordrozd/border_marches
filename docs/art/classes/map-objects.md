@@ -103,6 +103,80 @@ ruins with a stone face over the door) on 128 x 128 (2x2), the Hag's
 Cauldron on 64 x 64 (1x1), one look each (the temple's three sizes share
 it). `ART_ROWS` names them by `@swamp-sites/<take>`.
 
+### Sea and coastal sites, and ships (bead bzc.158)
+
+Studio sets `art/sets/sea-objects` and `art/sets/ships`, for the naval
+layer of [NAVAL.md](../../design/NAVAL.md) (sections 5 and 10). Same recipe
+as the candy and volcanic sites: `generate-image-v2` at native size, the
+chunky roadside inn (`map-objects/inn-a#0`) as style image for outline,
+pixel size, chunky shapes and viewing angle only. Two new class layers:
+
+- `class-sea-object` (sea sites, entrance a sea cell): the site rises out of
+  undrawn water, its bottom a flat waterline hugged by a thin white foam
+  band (`#f2fbfc`, two or three pixels); everything around it transparent,
+  so the map's own water shows. About half the accepted takes kept the band
+  (pearl bed, buoy, mermaid rock, Sirens' Rock, small coral grotto,
+  whirlpool); the grottos, wrecks, lighthouse islet and the shrine meet the
+  water with their own rock or planks. If the map wants a foam ring under
+  every sea site, it is a code overlay like the pickups' ripple (follow-up
+  for the render bead), not a re-roll.
+- `class-ship`: a chunky toy boat seen from the side and slightly above,
+  bow to the right, the hull cut flat at the waterline; no water, wake or
+  foam (the bob and the wake are code, NAVAL.md 10.1).
+
+Coastal sites (Fishing Village, Pirate Cove, Shipwright, Ferry Landing)
+stand on the shore and use `class-map-object` like the land sites. Pickups
+(Flotsam, Sea Chest, Castaway, Message in a Bottle) get the style and light
+layers and the subject only, as the artifact pickups, 40 x 40, at the
+pickup seat; their bob and ripple ring are code (NAVAL.md 5.6).
+
+| Type | Footprint | Take | Derived |
+| --- | --- | --- | --- |
+| Pearl Bed | 2x2 sea | `pearl-bed-a#0` | 117 x 69 |
+| Siren Grotto | 2x2 sea | `siren-grotto-a#0` | 110 x 91 |
+| Sirens' Rock | 2x2 sea | `sirens-rock-a#0` | 106 x 106 |
+| Shipwreck small / medium / large | 2x2 sea | `shipwreck-a#0`, `#1`, `#2` | 89 x 71, 109 x 84, 121 x 104 |
+| Coral Grotto small / medium / large | 2x2 sea | `coral-grotto-a#0`, `#1`, `#3` | 79 x 58, 104 x 80, 121 x 108 |
+| Kraken's Deep | 3x2 sea | `krakens-deep-a#0` | 146 x 108 |
+| Buoy, Mermaid Rock, Shrine of the Tides, Whirlpool | 1x1 sea | `tiny-a#0`, `#4`, `#10`, `#15` (one call, four subjects) | 44 x 60, 62 x 55, 52 x 60, 60 x 50 |
+| Lighthouse (on its islet) | 1x1 sea | `lighthouse-a#0` (64 x 96 canvas) | 55 x 80 |
+| Fishing Village | 2x2 coastal | `fishing-village-a#0` | 117 x 93 |
+| Pirate Cove | 2x2 coastal | `pirate-cove-a#3` | 112 x 100 |
+| Shipwright | 3x2 coastal | `shipwright-a#0` | 164 x 105 |
+| Ferry Landing | 1x1 coastal | `ferry-landing-a#9` | 61 x 58 |
+| Flotsam, Sea Chest, Castaway, Message in a Bottle | 1x1 sea pickups | `pickups-a#0`, `#9`, `#19`, `#29` (one 40 x 40 call, four subjects, 36 candidates) | 31 x 27, 26 x 30, 31 x 31, 30 x 29 |
+| Moored Boat | 1x1 sea | `ships/moored-a#0` | 96 x 82 |
+
+The Sea Chest keeps a tuft of seaweed on its lid so it is not the land
+treasure chest; the Castaway is a survivor waving on a log raft (a person,
+as NAVAL.md 5.6 asks).
+
+The whirlpool is drawn whole (rocky rim round a white foam spiral): every
+take with an empty middle read as a hole or a pond. NAVAL.md 10.2 wanted
+only the rim with the water spinning in code; the render bead can spin an
+overlay on top, or cut the middle with a recorded `edits` step.
+
+**Ships** (set `ships`, 96 x 88 canvas, one facing, never mirrored): the
+sailing ship `sailing-b#2` (96 x 85), the moored ship `moored-a#0` (96 x
+82, made with the sailing take as a reference image so the hull matches;
+it is also the Moored Boat object's art, `moored-boat.png`), the pirate
+ship `pirate-a#0` (95 x 86, the Corsair guard on the map). The first
+recipe (`sailing-a`) gave long galleons with pointed bows, rejected for
+NAVAL.md's "round boats like bath toys"; `sailing-b` asked for a short deep
+tub hull. NAVAL.md 10.2 estimated Pixen; `generate-image-v2` with the inn
+as style image keeps the ships in the map objects' style. Ships are 96 px
+wide on their one cell (8 px over each side), the foot at the bottom
+centre on the waterline.
+
+Owner colour: the sailing and moored ships' sail and pennant are plain
+white `#f5f1ea` (light `#fcf9f7`, `#e6e1d8`) with a pale grey shadow
+(`#cdc7be`, `#d8d0c5`). `SHIP_ART[look].ownerKey` in
+`src/assets/map-objects.ts` lists the exact colours; the renderer recolours
+those pixels at x >= 26 to the owner's colour (grey for neutral), keeping
+the shadow tone darker. The same colours left of x = 26 are the stern
+lantern's glass and one highlight at the stern, and stay. The pirate's black
+sail is not recoloured.
+
 ### Artifacts on the map and the Mystery Bag (bead bzc.105)
 
 Studio set `art/sets/artifact-pickups`, the pickups' recipe (the sawmill as

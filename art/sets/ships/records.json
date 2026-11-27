@@ -1,0 +1,306 @@
+{
+  "sailing-a": {
+    "id": "sailing-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "4d0e81de-38e7-4b36-b7a0-57611b7347c8",
+    "submittedAt": "2026-11-27T12:00:50.637Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-ship.txt",
+          "text": "Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a plump little sloop like a bath toy, its bow pointing to the right: a short round fat hull of warm brown planks #9a6232 with #6a3f1e shadows and a cream rail stripe #efe3c2, a round porthole, one stout mast with one big fat billowing sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel on the back deck. About four fifths of the image wide, the sail reaching near the top."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 158101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background. Subject: a plump little sloop like a bath toy, its bow pointing to the right: a short round fat hull of warm brown planks #9a6232 with #6a3f1e shadows and a cream rail stripe #efe3c2, a round porthole, one stout mast with one big fat billowing sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel on the back deck. About four fifths of the image wide, the sail reaching near the top. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, sea surface, waves, wake, foam, splash, ripples, ground, platform, cast shadow, background, sky, crowd, flag emblem, logo, second ship."
+    },
+    "at": "2026-11-27T12:01:57.978Z",
+    "usageUsd": 0.08051346447732714,
+    "candidates": [
+      {
+        "file": "sailing-a-0.png",
+        "sha256": "919f6df5c69cd22b60bd17035fff48a513f9d3350ca8ab7098866e31561e0289",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-a-1.png",
+        "sha256": "8b519df26fbc91f7d5068051c6e2faacb389a523fdd5e46411d0cc05491fce9f",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-a-2.png",
+        "sha256": "caf72c62fef75db96e761a0ff3eb7a63ade01321b4ff3f6d71f2ccb9cb44d217",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-a-3.png",
+        "sha256": "45373cbd8f3f62d81ed7ad63c574dcb13a553215bed031343811cfa16ab49235",
+        "width": 96,
+        "height": 88
+      }
+    ]
+  },
+  "sailing-b": {
+    "id": "sailing-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "73573d46-2f9e-4ea0-b2e3-74a19295702c",
+    "submittedAt": "2026-11-27T12:04:53.662Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-ship.txt",
+          "text": "Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a plump round little sailing boat like a rubber bath toy, its bow pointing to the right: a short deep tub-shaped hull almost as tall as it is long, rounded at both ends, warm brown planks #9a6232 with #6a3f1e shadows and a dark brown rail, two round portholes, one stout mast in the middle with one big fat puffed-out square sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel at the back. About three quarters of the image wide, the sail reaching near the top."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 158102,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background. Subject: a plump round little sailing boat like a rubber bath toy, its bow pointing to the right: a short deep tub-shaped hull almost as tall as it is long, rounded at both ends, warm brown planks #9a6232 with #6a3f1e shadows and a dark brown rail, two round portholes, one stout mast in the middle with one big fat puffed-out square sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel at the back. About three quarters of the image wide, the sail reaching near the top. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, sea surface, waves, wake, foam, splash, ripples, ground, platform, cast shadow, background, sky, crowd, flag emblem, logo, second ship, anchor, long pointed bow."
+    },
+    "at": "2026-11-27T12:06:16.022Z",
+    "usageUsd": 0.08058727169036865,
+    "candidates": [
+      {
+        "file": "sailing-b-0.png",
+        "sha256": "9a0e78db114d26ce7726c0289b0cd79a578db535b820848ba9575cf50e865031",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-b-1.png",
+        "sha256": "206542e70d69c69c4b48313e8575161554e24ebc45dc0060d100fd085e26b820",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-b-2.png",
+        "sha256": "6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "sailing-b-3.png",
+        "sha256": "c347d57c4635fb55e0e77a2d30a02dc09a6f6b1e65f9186f0a6f439b64c7faae",
+        "width": 96,
+        "height": 88
+      }
+    ]
+  },
+  "moored-a": {
+    "id": "moored-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f9ef959d-aeab-4d1b-9a71-2d99aa1ea874",
+    "submittedAt": "2026-11-27T12:06:59.689Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-ship.txt",
+          "text": "Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the same plump round little sailing boat as the reference, at anchor with nobody aboard, its bow pointing to the right: the same short deep tub-shaped hull of warm brown planks #9a6232 with #6a3f1e shadows and two round portholes, the same stout mast but its plain white sail #f6f4ee furled and tied tight in a fat roll along a low yard, a small plain white triangular pennant at the masthead, a taut anchor rope running from the bow down to the waterline at the right. About three quarters of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above viewing angle; not the subject, not the colours and not the layout"
+      },
+      "reference_images": [
+        {
+          "source": "take ships/sailing-b#2 sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+          "usage": "the same ship: copy its round tub hull, planks, colours, mast and size exactly"
+        }
+      ],
+      "image_size": {
+        "width": 96,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 158103,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background. Subject: the same plump round little sailing boat as the reference, at anchor with nobody aboard, its bow pointing to the right: the same short deep tub-shaped hull of warm brown planks #9a6232 with #6a3f1e shadows and two round portholes, the same stout mast but its plain white sail #f6f4ee furled and tied tight in a fat roll along a low yard, a small plain white triangular pennant at the masthead, a taut anchor rope running from the bow down to the waterline at the right. About three quarters of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, sea surface, waves, wake, foam, splash, ripples, ground, platform, cast shadow, background, sky, person, captain, crew, open sail, second ship."
+    },
+    "at": "2026-11-27T12:08:21.786Z",
+    "usageUsd": 0.08054395712746515,
+    "candidates": [
+      {
+        "file": "moored-a-0.png",
+        "sha256": "897ac2efaa8e522df543a70a8558d09232282f54cebea09bf728fdbf8c6578fe",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "moored-a-1.png",
+        "sha256": "a424cfc39d65e1bb52f52895dcc738acbfc818b2336b4e5d51d8eb7395d320af",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "moored-a-2.png",
+        "sha256": "b67de11138b2e4551b3cc8703348e33de57eb142503563b620acd543e6357623",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "moored-a-3.png",
+        "sha256": "926bf8dd452be618812df22eeaa564259ed8ddd6c9e08715953ce3de1b2d2021",
+        "width": 96,
+        "height": 88
+      }
+    ]
+  },
+  "pirate-a": {
+    "id": "pirate-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "134b2b31-da6b-4af4-94ac-d8a4a5de5818",
+    "submittedAt": "2026-11-27T12:08:22.203Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-ship.txt",
+          "text": "Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a plump round little pirate ship like the reference, its bow pointing to the right: the same short deep tub-shaped hull but of dark weathered planks #4a3628 with #2c1f16 shadows and a few lighter patches, one stout mast with a big fat black sail #2a2a30 with a dark grey #4a4a52 shadow and a patch sewn on it, a small black pennant with a white skull at the masthead, three tiny chibi pirates in red bandanas peeking over the rail. About three quarters of the image wide, the sail reaching near the top."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above viewing angle; not the subject, not the colours and not the layout"
+      },
+      "reference_images": [
+        {
+          "source": "take ships/sailing-b#2 sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+          "usage": "the same ship shape: copy its round tub hull, mast and size, but not its colours"
+        }
+      ],
+      "image_size": {
+        "width": 96,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 158104,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one ship on the adventure map, a chunky round toy-like boat seen from the side with the camera slightly above it, so we see its hull's side and a little of its deck. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It floats on sea water that is not drawn: the hull's bottom is cut flat at the waterline and is the lowest thing in the image; all around it is the empty transparent background. Subject: a plump round little pirate ship like the reference, its bow pointing to the right: the same short deep tub-shaped hull but of dark weathered planks #4a3628 with #2c1f16 shadows and a few lighter patches, one stout mast with a big fat black sail #2a2a30 with a dark grey #4a4a52 shadow and a patch sewn on it, a small black pennant with a white skull at the masthead, three tiny chibi pirates in red bandanas peeking over the rail. About three quarters of the image wide, the sail reaching near the top. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, water, sea surface, waves, wake, foam, splash, ripples, ground, platform, cast shadow, background, sky, second ship, cannon smoke."
+    },
+    "at": "2026-11-27T12:09:50.095Z",
+    "usageUsd": 0.0805224170419905,
+    "candidates": [
+      {
+        "file": "pirate-a-0.png",
+        "sha256": "ecdf57606646af8a5f5641586c8c57d519ef3a096dd6d7cbdf091e34af0a1bd1",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "pirate-a-1.png",
+        "sha256": "e28b095feec8fca7471429b989ba558213efe09afcdc8e47b3b8313503fee441",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "pirate-a-2.png",
+        "sha256": "b54983fe3896424bcbcc7f93d68f5b66cabedf3bc2d4f555be5a95cc1c7342f3",
+        "width": 96,
+        "height": 88
+      },
+      {
+        "file": "pirate-a-3.png",
+        "sha256": "0e07fb2788012c3c80ed09f031c7de6c82a4ddaa6cfe748f621b2b1a6dd73ce4",
+        "width": 96,
+        "height": 88
+      }
+    ]
+  }
+}

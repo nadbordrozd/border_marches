@@ -12,6 +12,7 @@ import {
   MAP_OBJECT_TYPE_IDS,
   MAP_OBJECT_TYPES,
   REUSED_OBJECT_ART,
+  SHIP_ART,
 } from "../../src/assets/map-objects";
 import {
   artFor,
@@ -55,8 +56,21 @@ describe("map object types (bzc.16)", () => {
     ]);
     // 62 catalogue types, 4 winter sites (bzc.87), 4 desert sites (bzc.88),
     // the Mystery Bag (bzc.105), 3 volcanic sites (bzc.125), 3 candy sites
-    // (bzc.124), 3 swamp sites (bzc.126).
-    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4 + 4 + 1 + 3 + 3 + 3);
+    // (bzc.124), 3 swamp sites (bzc.126), 20 sea and coastal sites (bzc.158).
+    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(
+      62 + 4 + 4 + 1 + 3 + 3 + 3 + 20,
+    );
+    const krakensDeep = MAP_OBJECT_TYPES.find((t) => t.id === "krakens-deep");
+    expect([krakensDeep?.cols, krakensDeep?.rows]).toEqual([3, 2]);
+    expect(
+      MAP_OBJECT_TYPES.filter(
+        (t) =>
+          t.seat === "pickup" &&
+          ["flotsam", "sea-chest", "castaway", "message-in-a-bottle"].includes(
+            t.id,
+          ),
+      ),
+    ).toHaveLength(4);
     for (const t of ["infernal-forge", "brimstone-pit", "shrine-of-embers"])
       expect(MAP_OBJECT_TYPE_IDS).toContain(t);
     for (const t of ["witchs-hut", "drowned-temple", "hags-cauldron"])
@@ -98,7 +112,10 @@ describe("map object sprites (bzc.16)", () => {
   it("fit their footprint's width", () => {
     for (const asset of MAP_OBJECT_ASSETS) {
       const type = MAP_OBJECT_TYPES.find((t) => t.id === asset.type)!;
-      expect({ key: asset.key, fits: asset.w <= type.cols * CELL_PX }).toEqual({
+      // The Moored Boat is the moored ship, 96 px wide on one cell like every
+      // ship (NAVAL.md 10.1): it overhangs its cell by 8 px a side.
+      const width = type.id === "moored-boat" ? 96 : type.cols * CELL_PX;
+      expect({ key: asset.key, fits: asset.w <= width }).toEqual({
         key: asset.key,
         fits: true,
       });
@@ -113,6 +130,48 @@ describe("map object sprites (bzc.16)", () => {
       expect(art.foot.x).toBeLessThan(asset.w);
       expect(art.foot.y).toBeLessThan(asset.h);
     }
+  });
+});
+
+describe("ships (bzc.158)", () => {
+  it("are manifest assets, 96 px wide at most, the moored one the Moored Boat's", () => {
+    const listed = new Set(ALL_ASSETS);
+    for (const ship of Object.values(SHIP_ART)) {
+      expect(listed.has(ship.asset)).toBe(true);
+      const { w, h } = rgbaOf(ship.asset.path);
+      expect([ship.look, w, h]).toEqual([
+        ship.look,
+        ship.asset.w,
+        ship.asset.h,
+      ]);
+      expect(w).toBeLessThanOrEqual(96);
+      expect(ship.foot).toEqual({ x: Math.floor(w / 2), y: h - 1 });
+    }
+    expect(SHIP_ART.moored.asset).toBe(artFor("moored-boat")?.asset);
+  });
+
+  it("key the white sail and pennant for the owner colour", () => {
+    for (const ship of Object.values(SHIP_ART)) {
+      if (ship.ownerKey === null) continue;
+      const { w, h, px } = rgbaOf(ship.asset.path);
+      const keys = new Set(ship.ownerKey.colours);
+      let sail = 0;
+      for (let y = 0; y < h; y += 1)
+        for (let x = ship.ownerKey.minX; x < w; x += 1) {
+          const i = (y * w + x) * 4;
+          if ((px[i + 3] ?? 0) === 0) continue;
+          const hex = `#${[px[i], px[i + 1], px[i + 2]]
+            .map((v) => (v ?? 0).toString(16).padStart(2, "0"))
+            .join("")}`;
+          if (keys.has(hex)) sail += 1;
+        }
+      // A real sail, not a few stray pixels.
+      expect({ look: ship.look, big: sail > 120 }).toEqual({
+        look: ship.look,
+        big: true,
+      });
+    }
+    expect(SHIP_ART.pirate.ownerKey).toBeNull();
   });
 });
 

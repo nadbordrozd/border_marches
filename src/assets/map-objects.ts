@@ -114,6 +114,28 @@ export const MAP_OBJECT_TYPE_IDS = [
   "witchs-hut",
   "drowned-temple",
   "hags-cauldron",
+  // Sea and coastal sites (bead bzc.158, docs/design/NAVAL.md 5; sets
+  // sea-objects and ships). The rules are beads bzc.149 and bzc.151.
+  "pearl-bed",
+  "fishing-village",
+  "pirate-cove",
+  "siren-grotto",
+  "shipwright",
+  "buoy",
+  "mermaid-rock",
+  "lighthouse",
+  "sirens-rock",
+  "shrine-of-the-tides",
+  "ferry-landing",
+  "shipwreck",
+  "coral-grotto",
+  "krakens-deep",
+  "flotsam",
+  "sea-chest",
+  "castaway",
+  "message-in-a-bottle",
+  "moored-boat",
+  "whirlpool",
 ] as const;
 
 export type MapObjectTypeId = (typeof MAP_OBJECT_TYPE_IDS)[number];
@@ -225,6 +247,27 @@ const TYPE_ROWS: readonly (readonly [
   ["witchs-hut", "Witch's Hut", 2, 2, ""],
   ["drowned-temple", "Drowned Temple", 2, 2, ""],
   ["hags-cauldron", "Hag's Cauldron", 1, 1, ""],
+  // Sea and coastal sites (bead bzc.158, NAVAL.md 5.2-5.6).
+  ["pearl-bed", "Pearl Bed", 2, 2, ""],
+  ["fishing-village", "Fishing Village", 2, 2, ""],
+  ["pirate-cove", "Pirate Cove", 2, 2, ""],
+  ["siren-grotto", "Siren Grotto", 2, 2, ""],
+  ["shipwright", "Shipwright", 3, 2, ""],
+  ["buoy", "Buoy", 1, 1, ""],
+  ["mermaid-rock", "Mermaid Rock", 1, 1, ""],
+  ["lighthouse", "Lighthouse", 1, 1, ""],
+  ["sirens-rock", "Sirens' Rock", 2, 2, ""],
+  ["shrine-of-the-tides", "Shrine of the Tides", 1, 1, ""],
+  ["ferry-landing", "Ferry Landing", 1, 1, ""],
+  ["shipwreck", "Shipwreck", 2, 2, ""],
+  ["coral-grotto", "Coral Grotto", 2, 2, ""],
+  ["krakens-deep", "Kraken's Deep", 3, 2, ""],
+  ["flotsam", "Flotsam", 1, 1, "p"],
+  ["sea-chest", "Sea Chest", 1, 1, "p"],
+  ["castaway", "Castaway", 1, 1, "p"],
+  ["message-in-a-bottle", "Message in a Bottle", 1, 1, "p"],
+  ["moored-boat", "Moored Boat", 1, 1, ""],
+  ["whirlpool", "Whirlpool", 1, 1, ""],
 ];
 
 export const MAP_OBJECT_TYPES: readonly MapObjectType[] = TYPE_ROWS.map(
@@ -431,6 +474,35 @@ const ART_ROWS: readonly (readonly [
   ["witchs-hut", "", 90, 118, "@swamp-sites/witch-hut-a#3"],
   ["drowned-temple", "", 104, 97, "@swamp-sites/ruins-a#1"],
   ["hags-cauldron", "", 62, 56, "@swamp-sites/cauldron-a#0"],
+  // Sea and coastal sites (bead bzc.158, set sea-objects): sea sites rise
+  // out of undrawn water (most with a thin foam band at the waterline);
+  // coastal ones stand on the shore.
+  ["pearl-bed", "", 117, 69, "@sea-objects/pearl-bed-a#0"],
+  ["fishing-village", "", 117, 93, "@sea-objects/fishing-village-a#0"],
+  ["pirate-cove", "", 112, 100, "@sea-objects/pirate-cove-a#3"],
+  ["siren-grotto", "", 110, 91, "@sea-objects/siren-grotto-a#0"],
+  ["shipwright", "", 164, 105, "@sea-objects/shipwright-a#0"],
+  ["buoy", "", 44, 60, "@sea-objects/tiny-a#0"],
+  ["mermaid-rock", "", 62, 55, "@sea-objects/tiny-a#4"],
+  ["lighthouse", "", 55, 80, "@sea-objects/lighthouse-a#0"],
+  ["sirens-rock", "", 106, 106, "@sea-objects/sirens-rock-a#0"],
+  ["shrine-of-the-tides", "", 52, 60, "@sea-objects/tiny-a#10"],
+  ["ferry-landing", "", 61, 58, "@sea-objects/ferry-landing-a#9"],
+  ["shipwreck", "small", 89, 71, "@sea-objects/shipwreck-a#0"],
+  ["shipwreck", "medium", 109, 84, "@sea-objects/shipwreck-a#1"],
+  ["shipwreck", "large", 121, 104, "@sea-objects/shipwreck-a#2"],
+  ["coral-grotto", "small", 79, 58, "@sea-objects/coral-grotto-a#0"],
+  ["coral-grotto", "medium", 104, 80, "@sea-objects/coral-grotto-a#1"],
+  ["coral-grotto", "large", 121, 108, "@sea-objects/coral-grotto-a#3"],
+  ["krakens-deep", "", 146, 108, "@sea-objects/krakens-deep-a#0"],
+  // Sea pickups float at the pickup seat; the bob and ripple are code.
+  ["flotsam", "", 31, 27, "@sea-objects/pickups-a#0"],
+  ["sea-chest", "", 26, 30, "@sea-objects/pickups-a#9"],
+  ["castaway", "", 31, 31, "@sea-objects/pickups-a#19"],
+  ["message-in-a-bottle", "", 30, 29, "@sea-objects/pickups-a#29"],
+  // The Moored Boat is the moored ship (set ships), 96 px wide on its cell.
+  ["moored-boat", "", 96, 82, "@ships/moored-a#0"],
+  ["whirlpool", "", 60, 50, "@sea-objects/tiny-a#15"],
 ];
 
 /**
@@ -470,3 +542,78 @@ export const MAP_OBJECT_ASSETS: readonly MapObjectAsset[] = ART_ROWS.map(
     };
   },
 );
+
+/** The three ship looks of docs/design/NAVAL.md 10.1. */
+export type ShipLook = "sailing" | "moored" | "pirate";
+
+/**
+ * A ship sprite (bead bzc.158, set `ships`): one facing only, bow to the
+ * right, never mirrored; 96 px wide on its one cell (8 px over each side).
+ * The foot is the bottom centre, the hull's waterline; the bob and the wake
+ * are drawn in code.
+ */
+export interface ShipArt {
+  readonly look: ShipLook;
+  readonly asset: ImageAsset;
+  readonly foot: Point;
+  readonly source: string;
+  /**
+   * The owner-colour key (NAVAL.md 10.1, RULES_V2 5.10): pixels of exactly
+   * these colours at x >= `minX` are the sail and pennant (white, with a pale
+   * grey shadow) to recolour to the owner's colour, grey for neutral. The
+   * same colours left of `minX` are the stern lantern's glass and one
+   * highlight at the stern, which stay. Null: not recoloured (the pirate's black
+   * sail is its own).
+   */
+  readonly ownerKey: {
+    readonly colours: readonly string[];
+    readonly minX: number;
+  } | null;
+}
+
+const shipAsset = (file: string, w: number, h: number): ImageAsset => ({
+  key: `map-object-${file}`,
+  path: `assets/objects/map/${file}.png`,
+  w,
+  h,
+  category: "map-object",
+});
+
+const SAILING_SHIP = shipAsset("ship-sailing", 96, 85);
+const PIRATE_SHIP = shipAsset("ship-pirate", 95, 86);
+/** The moored ship is the Moored Boat object's own sprite (ART_ROWS). */
+const MOORED_SHIP: MapObjectAsset = (() => {
+  const asset = MAP_OBJECT_ASSETS.find((a) => a.type === "moored-boat");
+  if (asset === undefined) throw new Error("no Moored Boat art");
+  return asset;
+})();
+
+export const SHIP_ART: Readonly<Record<ShipLook, ShipArt>> = {
+  sailing: {
+    look: "sailing",
+    asset: SAILING_SHIP,
+    foot: { x: 48, y: 84 },
+    source: "ships/sailing-b#2",
+    ownerKey: { colours: ["#f5f1ea", "#e6e1d8", "#cdc7be"], minX: 26 },
+  },
+  moored: {
+    look: "moored",
+    asset: MOORED_SHIP,
+    foot: MOORED_SHIP.foot,
+    source: MOORED_SHIP.source,
+    ownerKey: {
+      colours: ["#fcf9f7", "#f5f1ea", "#d8d0c5", "#cdc7be"],
+      minX: 26,
+    },
+  },
+  pirate: {
+    look: "pirate",
+    asset: PIRATE_SHIP,
+    foot: { x: 47, y: 85 },
+    source: "ships/pirate-a#0",
+    ownerKey: null,
+  },
+};
+
+/** The ship sprites that are not object art (the moored one is). */
+export const SHIP_ASSETS: readonly ImageAsset[] = [SAILING_SHIP, PIRATE_SHIP];

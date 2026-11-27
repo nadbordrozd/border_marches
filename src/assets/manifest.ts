@@ -40,7 +40,7 @@ import type { ForestGround } from "./ground-family";
 import type { ResourceId, Terrain } from "../core/map/types";
 import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
-import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "./map-objects";
+import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS, SHIP_ASSETS } from "./map-objects";
 import { OWNER_FLAG } from "./owner-flag";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
@@ -1411,6 +1411,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...PEAK_ASSETS,
   ...MAP_OBJECT_ASSETS,
   ARTIFACT_CLOTH,
+  ...SHIP_ASSETS,
   OWNER_FLAG,
   ...BUILDING_ART_ASSETS,
   ...TOWN_BACKDROP_ASSETS,

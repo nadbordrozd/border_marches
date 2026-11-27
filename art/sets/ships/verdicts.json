@@ -1,0 +1,82 @@
+{
+  "sailing-a#0": {
+    "verdict": "REJECTED",
+    "notes": "clean, but a long galleon hull with a pointed bow, not the round bath-toy boat of NAVAL.md 10.1",
+    "at": "2026-11-27T12:06:47.963Z"
+  },
+  "sailing-a#1": {
+    "verdict": "REJECTED",
+    "notes": "long hull with a cabin hiding the captain; not round",
+    "at": "2026-11-27T12:06:48.086Z"
+  },
+  "sailing-a#2": {
+    "verdict": "REJECTED",
+    "notes": "long hull, and an anchor hangs at the bow: wrong for a sailing ship",
+    "at": "2026-11-27T12:06:48.212Z"
+  },
+  "sailing-a#3": {
+    "verdict": "REJECTED",
+    "notes": "long pointed hull and a crow's nest; busier than needed",
+    "at": "2026-11-27T12:06:48.340Z"
+  },
+  "sailing-b#0": {
+    "verdict": "REJECTED",
+    "notes": "plump and clean, but no pennant (a crow's nest instead), and the doc's owner colour needs a pennant",
+    "at": "2026-11-27T12:06:48.470Z"
+  },
+  "sailing-b#1": {
+    "verdict": "REJECTED",
+    "notes": "tall stern castle and rigging lines: a galleon again, busy at 1x",
+    "at": "2026-11-27T12:06:48.590Z"
+  },
+  "sailing-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "Ship, sailing: a round deep tub hull, one fat plain white sail and a big plain white pennant (both recolourable), the captain at the wheel at the stern; bow to the right, reads at 1x on both waters",
+    "at": "2026-11-27T12:06:48.710Z"
+  },
+  "sailing-b#3": {
+    "verdict": "REJECTED",
+    "notes": "criss-cross rigging lines turn to noise at 1x",
+    "at": "2026-11-27T12:06:48.826Z"
+  },
+  "moored-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Ship, moored (and the Moored Boat): the sailing ship's round tub hull with nobody aboard, the white sail furled in bundles on its yards, a white pennant to recolour (grey for neutral) and an anchor rope from the bow",
+    "at": "2026-11-27T12:10:27.080Z"
+  },
+  "moored-a#1": {
+    "verdict": "REJECTED",
+    "notes": "rigging lines and a long streaming pennant: busier than #0, and the furled sail is thin",
+    "at": "2026-11-27T12:10:27.311Z"
+  },
+  "moored-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0; its stern lantern pokes out further",
+    "at": "2026-11-27T12:10:27.530Z"
+  },
+  "moored-a#3": {
+    "verdict": "REJECTED",
+    "notes": "rigging lines cross the hull and the stern is a plain tub; less like the sailing ship than #0",
+    "at": "2026-11-27T12:10:27.835Z"
+  },
+  "pirate-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Pirate ship: the same round hull in dark weathered planks, a big black patched sail, a skull pennant and three red-bandana pirates peeking over the rail; reads as the Corsair guard at 1x",
+    "at": "2026-11-27T12:10:28.041Z"
+  },
+  "pirate-a#1": {
+    "verdict": "REJECTED",
+    "notes": "warm brown hull and a cabin: too close to the player's sailing ship at 1x",
+    "at": "2026-11-27T12:10:28.179Z"
+  },
+  "pirate-a#2": {
+    "verdict": "REJECTED",
+    "notes": "second sail and rigging lines: a galleon, noisy at 1x",
+    "at": "2026-11-27T12:10:28.480Z"
+  },
+  "pirate-a#3": {
+    "verdict": "REJECTED",
+    "notes": "warm brown hull with a lit stern cabin; the pirates' read rests only on the sail",
+    "at": "2026-11-27T12:10:28.811Z"
+  }
+}

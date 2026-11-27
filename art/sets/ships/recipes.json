@@ -1,0 +1,127 @@
+{
+  "set": "ships",
+  "bead": "border_marches-bzc.158",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The ships of the naval layer (bead bzc.158, docs/design/NAVAL.md 10.1): the sailing ship, the moored ship (also the Moored Boat object) and the pirate ship, one facing only (bow to the right, never mirrored), on a 96 x 88 canvas. generate-image-v2 at native display size with the roadside inn (map-objects/inn-a#0) as style image for the chunky rounded shapes, outline, pixel size and viewing angle only, like every chunky map object since bead bzc.97 (NAVAL.md 10.2 estimated Pixen; the style image keeps the ships in the map objects' style). The sail and pennant of the sailing and moored ships are plain white so the renderer can recolour them to the owner's colour; the bob and wake are drawn in code, so nothing is drawn under the hull. Layers: style, light-south-west, class-ship, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleInn": {
+      "file": "art/masters/map-objects/inn-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-ship"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleInn",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "sailing-a",
+      "concept": "SHIP, SAILING (a hero's ship; sail and pennant recoloured to the owner)",
+      "width": 96,
+      "height": 88,
+      "seed": 158101,
+      "subject": "Subject: a plump little sloop like a bath toy, its bow pointing to the right: a short round fat hull of warm brown planks #9a6232 with #6a3f1e shadows and a cream rail stripe #efe3c2, a round porthole, one stout mast with one big fat billowing sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel on the back deck. About four fifths of the image wide, the sail reaching near the top.",
+      "negative": "crowd, flag emblem, logo, second ship"
+    },
+    {
+      "id": "sailing-b",
+      "concept": "SHIP, SAILING, plumper (sailing-a came out as long galleons with pointed bows, not round bath toys)",
+      "width": 96,
+      "height": 88,
+      "seed": 158102,
+      "subject": "Subject: a plump round little sailing boat like a rubber bath toy, its bow pointing to the right: a short deep tub-shaped hull almost as tall as it is long, rounded at both ends, warm brown planks #9a6232 with #6a3f1e shadows and a dark brown rail, two round portholes, one stout mast in the middle with one big fat puffed-out square sail of plain white #f6f4ee with pale grey #cfcbc2 shadow, a small plain white triangular pennant at the masthead, a tiny chibi captain in a blue coat #2f5f9f and a brown hat at a round ship's wheel at the back. About three quarters of the image wide, the sail reaching near the top.",
+      "negative": "crowd, flag emblem, logo, second ship, anchor, long pointed bow"
+    },
+    {
+      "id": "moored-a",
+      "concept": "SHIP, MOORED (no hero aboard; also the Moored Boat object); pennant recoloured, grey for neutral",
+      "width": 96,
+      "height": 88,
+      "seed": 158103,
+      "references": [
+        {
+          "take": "sailing-b#2",
+          "usage": "the same ship: copy its round tub hull, planks, colours, mast and size exactly"
+        }
+      ],
+      "subject": "Subject: the same plump round little sailing boat as the reference, at anchor with nobody aboard, its bow pointing to the right: the same short deep tub-shaped hull of warm brown planks #9a6232 with #6a3f1e shadows and two round portholes, the same stout mast but its plain white sail #f6f4ee furled and tied tight in a fat roll along a low yard, a small plain white triangular pennant at the masthead, a taut anchor rope running from the bow down to the waterline at the right. About three quarters of the image wide.",
+      "negative": "person, captain, crew, open sail, second ship, water"
+    },
+    {
+      "id": "pirate-a",
+      "concept": "PIRATE SHIP (the Corsair guard on the map)",
+      "width": 96,
+      "height": 88,
+      "seed": 158104,
+      "references": [
+        {
+          "take": "sailing-b#2",
+          "usage": "the same ship shape: copy its round tub hull, mast and size, but not its colours"
+        }
+      ],
+      "subject": "Subject: a plump round little pirate ship like the reference, its bow pointing to the right: the same short deep tub-shaped hull but of dark weathered planks #4a3628 with #2c1f16 shadows and a few lighter patches, one stout mast with a big fat black sail #2a2a30 with a dark grey #4a4a52 shadow and a patch sewn on it, a small black pennant with a white skull at the masthead, three tiny chibi pirates in red bandanas peeking over the rail. About three quarters of the image wide, the sail reaching near the top.",
+      "negative": "second ship, water, cannon smoke, text"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/ship-sailing.png",
+      "from": "sailing-b#2",
+      "width": 96,
+      "height": 85,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 3,
+          "width": 96,
+          "height": 85
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/moored-boat.png",
+      "from": "moored-a#0",
+      "width": 96,
+      "height": 82,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 96,
+          "height": 82
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/ship-pirate.png",
+      "from": "pirate-a#0",
+      "width": 95,
+      "height": 86,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 95,
+          "height": 86
+        }
+      ]
+    }
+  ]
+}

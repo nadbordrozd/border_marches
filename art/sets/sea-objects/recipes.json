@@ -1,0 +1,520 @@
+{
+  "set": "sea-objects",
+  "bead": "border_marches-bzc.158",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The sea and coastal map objects of the naval layer (bead bzc.158, docs/design/NAVAL.md 5 and 10.2). generate-image-v2 at native display size (2x2 on 128 x 128, 3x2 on 200 x 144, 1x1 on 64 x 64, the lighthouse on 64 x 96, pickups on 40 x 40) with the roadside inn (map-objects/inn-a#0) as style image for the chunky rounded shapes, outline, pixel size and viewing angle only. Sea sites (entrance a sea cell) use the class-sea-object layer: they rise out of undrawn water with a thin white foam band at the waterline. Coastal sites (Fishing Village, Pirate Cove, Shipwright, Ferry Landing) stand on land and use class-map-object. Pickups float with a bob and ripple drawn in code, so they get the style and light layers and the subject only, as the artifact pickups. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleInn": {
+      "file": "art/masters/map-objects/inn-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-sea-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleInn",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "pearl-bed-a",
+      "concept": "PEARL BED (2x2 sea producer, +1 essence a day)",
+      "width": 128,
+      "height": 128,
+      "seed": 158201,
+      "subject": "Subject: a pearl bed at sea: a low cluster of chunky rounded sea rocks #7a8a94 with #4e5c66 shadows dotted with barnacles, three huge open clam shells #eadccf with pink insides #f0a8b8 each holding one big shining violet pearl #c99af5 with a #e9d5ff highlight, two little orange starfish on the rocks. Nearly the full image wide and about half of its height, its front facing the viewer.",
+      "negative": "person, mermaid, fish, creature"
+    },
+    {
+      "id": "tiny-a",
+      "concept": "1x1 SEA SITES: Buoy, Mermaid Rock, Shrine of the Tides, Whirlpool rim",
+      "width": 64,
+      "height": 64,
+      "seed": 158202,
+      "subject": "Subject: each image a different one of these: a round fat buoy striped red #d84a3a and white with an iron cage on top holding a brass bell #d9a63a; a rounded sea rock #7a8a94 holding a big open golden scallop shell #f2c230 full of gold coins; a little round sea shrine of pale blue-grey stone #8fb0bc with a seashell dome and a glowing blue spiral emblem #4aa8e8; a whirlpool's rim, a flat oval ring of small dark wet rocks #4e5c66 and white foam, its middle empty and transparent. About three quarters of the image wide.",
+      "negative": "person, mermaid"
+    },
+    {
+      "id": "siren-grotto-a",
+      "concept": "SIREN GROTTO (2x2 sea dwelling of Sirens)",
+      "width": 128,
+      "height": 128,
+      "seed": 158203,
+      "subject": "Subject: a siren's grotto at sea: a chunky rounded sea cave of pale teal-grey rock #6f9a9c with #46686c shadows, a big dark arched cave mouth at the front left framed with pink and cream seashells and pearls, curtains of green seaweed #4f9a5a hanging at its sides, a big pink conch shell #f0a8b8 on its top, a golden harp #d9a63a leaning on a small rock seat beside the mouth. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "person, mermaid, creature"
+    },
+    {
+      "id": "sirens-rock-a",
+      "concept": "SIRENS' ROCK (2x2 sea site, XP for creatures)",
+      "width": 128,
+      "height": 128,
+      "seed": 158204,
+      "subject": "Subject: the sirens' rock at sea: one tall craggy pinnacle of dark slate-grey rock #5e6a78 with #3c4450 shadows, a smooth flat seat near its top with a big golden lyre #d9a63a resting on it, a hand mirror and a golden comb on a ledge, a few pale bones and a broken oar at its foot, pink coral tufts #f07aa0 at its base. About three quarters of the image wide and nearly its full height, its front facing the viewer.",
+      "negative": "person, mermaid, skull, creature"
+    },
+    {
+      "id": "shipwreck-a",
+      "concept": "SHIPWRECK (2x2 sea bank, sizes)",
+      "width": 128,
+      "height": 128,
+      "seed": 158205,
+      "subject": "Subject: a shipwreck at sea, a guarded treasure bank: a broken old wooden sailing ship #7a5230 with #4e331c shadows sunk to its deck and tilted, its bow rising out of the water at the right, a snapped mast with a torn grey-green sail #8a9a88, green seaweed and barnacles on its planks, a small open treasure chest with gold coins and a few barrels on its broken deck. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height.",
+      "negative": "person, skeleton figure, creature, sky ship"
+    },
+    {
+      "id": "coral-grotto-a",
+      "concept": "CORAL GROTTO (2x2 sea bank, sizes)",
+      "width": 128,
+      "height": 128,
+      "seed": 158206,
+      "subject": "Subject: a coral grotto at sea, a guarded treasure bank: a chunky rounded reef mound around a stone arch of grey rock #7a8a94 with #4e5c66 shadows and a dark cave mouth at the front, covered in big branching corals of pink #f07aa0, orange #f39a4a and violet #a855f7, a few violet pearls and a dark iron ore chunk at the mouth. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "person, mermaid, fish, creature"
+    },
+    {
+      "id": "krakens-deep-a",
+      "concept": "KRAKEN'S DEEP (3x2 sea bank, at most one per map)",
+      "width": 200,
+      "height": 144,
+      "seed": 158207,
+      "subject": "Subject: the kraken's deep, a great guarded treasure bank at sea: a wide ring of huge jagged black rocks #3c4450 with #262c34 shadows around a dark navy hole of deep water #1e2f5a, three big curling purple tentacles #8a4fc0 with pale pink suckers rising out of the hole, a sunken ship's broken mast leaning on the rocks at the left, a gold treasure chest and a heap of gold coins on a rock at the front right. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "person, octopus head, eyes, face, sky"
+    },
+    {
+      "id": "lighthouse-a",
+      "concept": "LIGHTHOUSE (1x1 sea site on its rock islet, 64 x 96)",
+      "width": 64,
+      "height": 96,
+      "seed": 158208,
+      "subject": "Subject: a small lighthouse on its own little rock islet at sea: a chunky round tower striped red #d84a3a and white #f4f1ea, a small dark wooden door, a lantern room at the top with a big warm yellow light #ffd24a and a dark red cap roof, standing on a rounded lump of grey rocks #7a8a94 with #4e5c66 shadows. The islet nearly the full image wide, the tower nearly the full image tall.",
+      "negative": "person, light beam, glow halo, sky"
+    },
+    {
+      "id": "fishing-village-a",
+      "concept": "FISHING VILLAGE (2x2 coastal producer, +500 gold a day)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-map-object"
+      ],
+      "width": 128,
+      "height": 128,
+      "seed": 158209,
+      "subject": "Subject: a cute chunky fishing village on a shore: two plump little cottages of whitewashed stone #e8e2d4 with blue-grey slate roofs #5a7088 and round chimneys, their doors at the front left, a wooden fish-drying rack with three hanging silver fish at the front left, a stack of barrels and a coiled brown net at the front, a small blue rowboat #3f6fa0 pulled up on its side at the right. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "water, sea, fisherman, animal"
+    },
+    {
+      "id": "pirate-cove-a",
+      "concept": "PIRATE COVE (2x2 coastal dwelling of Corsairs)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-map-object"
+      ],
+      "width": 128,
+      "height": 128,
+      "seed": 158210,
+      "subject": "Subject: a pirate cove on a shore: a ramshackle chunky shack of patched brown planks #7a5230 with #4e331c shadows built into a rounded sandy-brown rock outcrop #a08a6a, a crooked roof, a big dark doorway at the front left, a black flag with a white skull on a pole on its roof, an old iron cannon, a stack of barrels and a small treasure chest at the front. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "water, sea, pirate figure, animal"
+    },
+    {
+      "id": "shipwright-a",
+      "concept": "SHIPWRIGHT (3x2 coastal service, sells ships)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-map-object"
+      ],
+      "width": 200,
+      "height": 144,
+      "seed": 158211,
+      "subject": "Subject: a cute chunky shipwright's yard on a shore: a big wooden boat shed of warm brown planks #8a5a2c with a steep red-brown roof #9a4a32, its wide open front showing the curved wooden ribs of an unfinished round boat hull on a cradle, a wooden crane with a hanging rope and pulley at the right, stacks of planks, a tar barrel and a saw at the front left. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "water, sea, worker, animal"
+    },
+    {
+      "id": "ferry-landing-a",
+      "concept": "FERRY LANDING (1x1 coastal teleport, in pairs)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-map-object"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 158212,
+      "subject": "Subject: a small ferry landing on a shore: a stubby wooden plank jetty on fat round posts, a tall post at its front left with a big brass bell #d9a63a and a hanging lantern, a coiled thick rope, a little wooden rowboat #3f6fa0 tied beside it. Each image a slightly different one. About three quarters of the image wide and most of its height.",
+      "negative": "water, sea, person, animal"
+    },
+    {
+      "id": "pickups-a",
+      "concept": "SEA PICKUPS: Flotsam, Sea Chest, Castaway, Message in a Bottle (40 x 40)",
+      "fragments": [
+        "style",
+        "light-south-west"
+      ],
+      "width": 40,
+      "height": 40,
+      "seed": 158213,
+      "subject": "Subject: one small floating pickup of a board-game map, seen from the front with the camera slightly above it, thick black outline. Each image a different one of these: flotsam, three broken brown wooden planks #8a5a2c and a small barrel bunched together; a sea chest, a small wooden chest #7a4a24 with brass bands #d9a63a and a tuft of green seaweed on its lid; a castaway, a tiny log raft with a little chibi survivor in rags waving one arm; a message in a bottle, a fat green glass bottle #4fa07a lying on its side with a cork and a rolled paper scroll inside. Nearly the full image wide.",
+      "negative": "water, waves, splash, ground, shadow, text, letters"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/pearl-bed.png",
+      "from": "pearl-bed-a#0",
+      "width": 117,
+      "height": 69,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 37,
+          "width": 117,
+          "height": 69
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/fishing-village.png",
+      "from": "fishing-village-a#0",
+      "width": 117,
+      "height": 93,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 15,
+          "width": 117,
+          "height": 93
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/pirate-cove.png",
+      "from": "pirate-cove-a#3",
+      "width": 112,
+      "height": 100,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 12,
+          "width": 112,
+          "height": 100
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/siren-grotto.png",
+      "from": "siren-grotto-a#0",
+      "width": 110,
+      "height": 91,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 19,
+          "width": 110,
+          "height": 91
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shipwright.png",
+      "from": "shipwright-a#0",
+      "width": 164,
+      "height": 105,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 20,
+          "y": 16,
+          "width": 164,
+          "height": 105
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/buoy.png",
+      "from": "tiny-a#0",
+      "width": 44,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 2,
+          "width": 44,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/mermaid-rock.png",
+      "from": "tiny-a#4",
+      "width": 62,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 62,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/lighthouse.png",
+      "from": "lighthouse-a#0",
+      "width": 55,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 55,
+          "height": 80
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sirens-rock.png",
+      "from": "sirens-rock-a#0",
+      "width": 106,
+      "height": 106,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 12,
+          "width": 106,
+          "height": 106
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shrine-of-the-tides.png",
+      "from": "tiny-a#10",
+      "width": 52,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 52,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/ferry-landing.png",
+      "from": "ferry-landing-a#9",
+      "width": 61,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 61,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shipwreck-small.png",
+      "from": "shipwreck-a#0",
+      "width": 89,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 33,
+          "width": 89,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shipwreck-medium.png",
+      "from": "shipwreck-a#1",
+      "width": 109,
+      "height": 84,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 21,
+          "width": 109,
+          "height": 84
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shipwreck-large.png",
+      "from": "shipwreck-a#2",
+      "width": 121,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 121,
+          "height": 104
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/coral-grotto-small.png",
+      "from": "coral-grotto-a#0",
+      "width": 79,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 25,
+          "y": 42,
+          "width": 79,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/coral-grotto-medium.png",
+      "from": "coral-grotto-a#1",
+      "width": 104,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 22,
+          "width": 104,
+          "height": 80
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/coral-grotto-large.png",
+      "from": "coral-grotto-a#3",
+      "width": 121,
+      "height": 108,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 121,
+          "height": 108
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/krakens-deep.png",
+      "from": "krakens-deep-a#0",
+      "width": 146,
+      "height": 108,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 28,
+          "y": 20,
+          "width": 146,
+          "height": 108
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/flotsam.png",
+      "from": "pickups-a#0",
+      "width": 31,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 31,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sea-chest.png",
+      "from": "pickups-a#9",
+      "width": 26,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 26,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/castaway.png",
+      "from": "pickups-a#19",
+      "width": 31,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 31,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/message-in-a-bottle.png",
+      "from": "pickups-a#29",
+      "width": 30,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 30,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/whirlpool.png",
+      "from": "tiny-a#15",
+      "width": 60,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 60,
+          "height": 50
+        }
+      ]
+    }
+  ]
+}

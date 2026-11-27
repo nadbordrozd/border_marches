@@ -1,0 +1,537 @@
+{
+  "pearl-bed-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Pearl Bed: low wide rock cluster, three pink clams with violet (essence) pearls, clear foam band at the waterline; reads at 1x on deep and shallow water",
+    "at": "2026-11-27T12:06:23.253Z"
+  },
+  "pearl-bed-a#1": {
+    "verdict": "REJECTED",
+    "notes": "tall stacked pile, the top clam pokes up like a spire; less calm than #0",
+    "at": "2026-11-27T12:06:23.375Z"
+  },
+  "pearl-bed-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good, but the rock arch reads as a cave, too close to the grottos; #0 is clearer",
+    "at": "2026-11-27T12:06:23.504Z"
+  },
+  "pearl-bed-a#3": {
+    "verdict": "REJECTED",
+    "notes": "busy heap of five clams, no foam band; noisier than #0",
+    "at": "2026-11-27T12:06:23.622Z"
+  },
+  "tiny-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Buoy: fat red-white striped buoy, bell in an iron cage, foam band; the simplest read of the four buoys",
+    "at": "2026-11-27T12:06:23.747Z"
+  },
+  "tiny-a#1": {
+    "verdict": "REJECTED",
+    "notes": "buoy squashed wide, candy-stripe body with barnacle clutter at the foot",
+    "at": "2026-11-27T12:06:23.882Z"
+  },
+  "tiny-a#2": {
+    "verdict": "REJECTED",
+    "notes": "buoy with a brown wooden cage and a dirty flag; muddier than #0",
+    "at": "2026-11-27T12:06:24.009Z"
+  },
+  "tiny-a#3": {
+    "verdict": "REJECTED",
+    "notes": "buoy with a side lantern; near duplicate of #0 with extra clutter",
+    "at": "2026-11-27T12:06:24.137Z"
+  },
+  "tiny-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "Mermaid Rock: a golden scallop full of coins on a round sea rock, foam band; the luck site reads as shell and treasure at 1x",
+    "at": "2026-11-27T12:06:24.280Z"
+  },
+  "tiny-a#5": {
+    "verdict": "REJECTED",
+    "notes": "closed shell between two boulders, no coins, no foam: reads as a plain rock",
+    "at": "2026-11-27T12:06:24.426Z"
+  },
+  "tiny-a#6": {
+    "verdict": "REJECTED",
+    "notes": "good but starfish clutter and a fainter foam band; #4 is cleaner",
+    "at": "2026-11-27T12:06:24.555Z"
+  },
+  "tiny-a#7": {
+    "verdict": "REJECTED",
+    "notes": "dark mossy rock under a towering shell, heavy and murky at 1x",
+    "at": "2026-11-27T12:06:24.688Z"
+  },
+  "tiny-a#8": {
+    "verdict": "REJECTED",
+    "notes": "the shrine reads as a stone igloo or cave, no columns",
+    "at": "2026-11-27T12:06:24.822Z"
+  },
+  "tiny-a#9": {
+    "verdict": "REJECTED",
+    "notes": "pale shrine on a foam disc; the emblem is tiny and the body washes out on shallow water",
+    "at": "2026-11-27T12:06:24.979Z"
+  },
+  "tiny-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "Shrine of the Tides: shell-domed shrine with a big glowing blue spiral in its doorway and starfish; the strongest read of the shrines (its foot is stone, the foam band faint)",
+    "at": "2026-11-27T12:06:25.113Z"
+  },
+  "tiny-a#11": {
+    "verdict": "REJECTED",
+    "notes": "dark seaweed-hung shrine whose emblem is a small diamond; murkier than #10",
+    "at": "2026-11-27T12:06:25.238Z"
+  },
+  "tiny-a#12": {
+    "verdict": "REJECTED",
+    "notes": "whirlpool as a bright white disc in a rock ring: reads as a hole or a pond, not a spin",
+    "at": "2026-11-27T12:06:25.361Z"
+  },
+  "tiny-a#13": {
+    "verdict": "REJECTED",
+    "notes": "one open spiral arm and no rim; ragged, reads as smoke",
+    "at": "2026-11-27T12:06:25.478Z"
+  },
+  "tiny-a#14": {
+    "verdict": "REJECTED",
+    "notes": "dark see-through swirl with planks: noisy at 1x",
+    "at": "2026-11-27T12:06:25.593Z"
+  },
+  "tiny-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "Whirlpool: a ring of dark wet rocks round a white foam spiral; reads as a whirlpool at 1x on both waters (the spiral is baked, code may add the spin over it)",
+    "at": "2026-11-27T12:06:25.716Z"
+  },
+  "siren-grotto-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Siren Grotto: a round teal sea cave, its arch framed in pink shells, a pink conch on top, seaweed and a golden harp; reads as the sirens' home at 1x (no foam band: the rock meets the water directly)",
+    "at": "2026-11-27T12:08:13.052Z"
+  },
+  "siren-grotto-a#1": {
+    "verdict": "REJECTED",
+    "notes": "stepped cone with a small mouth; harp and conch read smaller, less inviting than #0",
+    "at": "2026-11-27T12:08:13.205Z"
+  },
+  "siren-grotto-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0 with a heavier seaweed curtain",
+    "at": "2026-11-27T12:08:13.336Z"
+  },
+  "siren-grotto-a#3": {
+    "verdict": "REJECTED",
+    "notes": "spiky crag with shell garlands: busy, and the jagged top fights the chunky style",
+    "at": "2026-11-27T12:08:13.523Z"
+  },
+  "sirens-rock-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Sirens' Rock: a tall dark crag with a big golden lyre on its seat, mirror and comb on the ledges, bones, an oar, pink coral and a foam band; the clearest lyre of the four",
+    "at": "2026-11-27T12:09:53.743Z"
+  },
+  "sirens-rock-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0 with carved steps; the lyre sits lower and reads smaller",
+    "at": "2026-11-27T12:09:54.002Z"
+  },
+  "sirens-rock-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0, the crag a lumpier pile",
+    "at": "2026-11-27T12:09:54.234Z"
+  },
+  "sirens-rock-a#3": {
+    "verdict": "REJECTED",
+    "notes": "stair-cut crag reads as a ruined tower, busier than #0",
+    "at": "2026-11-27T12:09:54.452Z"
+  },
+  "shipwreck-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Shipwreck small: a low broken hull, one snapped mast with a torn grey-green sail, a chest on deck; modest, as a small bank should be",
+    "at": "2026-11-27T12:09:54.862Z"
+  },
+  "shipwreck-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Shipwreck medium: a tilted broken hull, two snapped masts and torn sails, gold on deck; a clear step up from #0",
+    "at": "2026-11-27T12:09:55.320Z"
+  },
+  "shipwreck-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "Shipwreck large: a big three-masted wreck in torn sails, gold in its open hold; the grandest and still readable at 1x",
+    "at": "2026-11-27T12:09:55.712Z"
+  },
+  "shipwreck-a#3": {
+    "verdict": "REJECTED",
+    "notes": "large: darker, mossier and split in two; at 1x the dark planks and moss turn to mush beside #2",
+    "at": "2026-11-27T12:09:55.908Z"
+  },
+  "coral-grotto-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Coral Grotto small: a low grey rock dome with a small cave mouth, a few coral sprigs and violet pearls, a foam band; modest",
+    "at": "2026-11-27T12:11:55.135Z"
+  },
+  "coral-grotto-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Coral Grotto medium: a wider rock mound, a bigger cave mouth, more pink, orange and violet coral and ore chunks at the mouth; a clear step up",
+    "at": "2026-11-27T12:11:55.546Z"
+  },
+  "coral-grotto-a#2": {
+    "verdict": "REJECTED",
+    "notes": "large: a tall grey cave with the coral only at its edges; reads as a plain cave beside #3",
+    "at": "2026-11-27T12:11:55.705Z"
+  },
+  "coral-grotto-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "Coral Grotto large: a grand rock arch under a crown of big pink, orange and violet corals, pearls and dark ore at the mouth; the richest look of the three",
+    "at": "2026-11-27T12:11:56.048Z"
+  },
+  "krakens-deep-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Kraken's Deep: a wide ring of black rocks round a dark navy pool, three curling purple tentacles rising from it, a sunken mast and a gold chest; reads as the one great sea bank at 1x (the only candidate of a 200 x 144 call)",
+    "at": "2026-11-27T12:11:56.363Z"
+  },
+  "lighthouse-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lighthouse: a fat red-and-white striped tower with a warm lit lantern and a red cap on a round grey rock islet with steps; the chunkiest, clearest of the nine (no foam band: the islet meets the water)",
+    "at": "2026-11-27T12:12:49.391Z"
+  },
+  "lighthouse-a#1": {
+    "verdict": "REJECTED",
+    "notes": "squat tower with a shed tacked on its side; the shed reads as a second building",
+    "at": "2026-11-27T12:12:50.506Z"
+  },
+  "lighthouse-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spiral-striped tower on a stepped islet: candy-cane stripes, too close to the Candy Kingdom's look",
+    "at": "2026-11-27T12:12:51.170Z"
+  },
+  "lighthouse-a#3": {
+    "verdict": "REJECTED",
+    "notes": "slim tower with a gallery and a ladder; thinner and busier than #0",
+    "at": "2026-11-27T12:12:52.468Z"
+  },
+  "lighthouse-a#4": {
+    "verdict": "REJECTED",
+    "notes": "jagged spiky rocks and a weathervane; the spikes fight the chunky style",
+    "at": "2026-11-27T12:12:53.106Z"
+  },
+  "lighthouse-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a little jetty juts from the islet: reads as a second object",
+    "at": "2026-11-27T12:12:53.422Z"
+  },
+  "lighthouse-a#6": {
+    "verdict": "REJECTED",
+    "notes": "small leaning tower with a pipe on a mossy rock: weak at 1x",
+    "at": "2026-11-27T12:12:53.703Z"
+  },
+  "lighthouse-a#7": {
+    "verdict": "REJECTED",
+    "notes": "stone-walled base and a crane: a pier, not an islet",
+    "at": "2026-11-27T12:12:53.967Z"
+  },
+  "lighthouse-a#8": {
+    "verdict": "REJECTED",
+    "notes": "crates and barrels clutter the islet; near duplicate of #0 otherwise",
+    "at": "2026-11-27T12:12:54.303Z"
+  },
+  "fishing-village-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Fishing Village: two plump whitewashed cottages under blue slate roofs, a fish-drying rack at the front left, net, barrels and a blue rowboat at the right; reads as a shore village beside the inn",
+    "at": "2026-11-27T12:14:46.354Z"
+  },
+  "fishing-village-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0 with the rack half hidden behind the net",
+    "at": "2026-11-27T12:14:46.488Z"
+  },
+  "fishing-village-a#2": {
+    "verdict": "REJECTED",
+    "notes": "three gables and two tall chimneys: busier, the cottages merge at 1x",
+    "at": "2026-11-27T12:14:46.639Z"
+  },
+  "fishing-village-a#3": {
+    "verdict": "REJECTED",
+    "notes": "one cottage with dormers: reads as a single house, not a village",
+    "at": "2026-11-27T12:14:46.876Z"
+  },
+  "pirate-cove-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but the shack hides the rock; reads as a plain hut with a flag beside #3",
+    "at": "2026-11-27T12:14:47.082Z"
+  },
+  "pirate-cove-a#1": {
+    "verdict": "REJECTED",
+    "notes": "stair-roofed shack in a pale rock: the roof tiles turn to noise at 1x",
+    "at": "2026-11-27T12:14:47.297Z"
+  },
+  "pirate-cove-a#2": {
+    "verdict": "REJECTED",
+    "notes": "tall barn shape; the rock is a thin backdrop",
+    "at": "2026-11-27T12:14:47.467Z"
+  },
+  "pirate-cove-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "Pirate Cove: a patched plank shack built into a big round sandy rock, a skull flag on top, a cannon, barrels and a small chest at the front; the most cove-like of the four",
+    "at": "2026-11-27T12:14:47.661Z"
+  },
+  "shipwright-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Shipwright: a big plank boat shed under a red-brown roof, an unfinished round hull on its cradle inside, a timber crane at the right and planks and tools at the front left; reads as the place to buy ships (the only candidate of a 200 x 144 call)",
+    "at": "2026-11-27T12:15:36.919Z"
+  },
+  "ferry-landing-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but the bell is small; #9 carries the bell better",
+    "at": "2026-11-27T12:17:35.175Z"
+  },
+  "ferry-landing-a#1": {
+    "verdict": "REJECTED",
+    "notes": "gallows-like post over the jetty: reads grim",
+    "at": "2026-11-27T12:17:35.301Z"
+  },
+  "ferry-landing-a#2": {
+    "verdict": "REJECTED",
+    "notes": "jetty fills the cell and the boat is cut short at the right",
+    "at": "2026-11-27T12:17:35.438Z"
+  },
+  "ferry-landing-a#3": {
+    "verdict": "REJECTED",
+    "notes": "grey weathered planks: dull and reads as a ruin",
+    "at": "2026-11-27T12:17:35.563Z"
+  },
+  "ferry-landing-a#4": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #9 with a lower post",
+    "at": "2026-11-27T12:17:35.704Z"
+  },
+  "ferry-landing-a#5": {
+    "verdict": "REJECTED",
+    "notes": "railings and a rope tangle: busy at 1x",
+    "at": "2026-11-27T12:17:35.828Z"
+  },
+  "ferry-landing-a#6": {
+    "verdict": "REJECTED",
+    "notes": "gallows-like post, no lantern",
+    "at": "2026-11-27T12:17:35.950Z"
+  },
+  "ferry-landing-a#7": {
+    "verdict": "REJECTED",
+    "notes": "the boat merges into the jetty and a stray light pixel floats at the right",
+    "at": "2026-11-27T12:17:36.080Z"
+  },
+  "ferry-landing-a#8": {
+    "verdict": "REJECTED",
+    "notes": "a little roofed shed on the jetty: a second building",
+    "at": "2026-11-27T12:17:36.209Z"
+  },
+  "ferry-landing-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "Ferry Landing: a stubby plank jetty on round posts, a tall post at its front left with a big brass bell and a lantern, a coiled rope and a blue rowboat tied alongside; the bell is the clearest of the sixteen",
+    "at": "2026-11-27T12:17:36.335Z"
+  },
+  "ferry-landing-a#10": {
+    "verdict": "REJECTED",
+    "notes": "forest of posts and no visible bell: noise at 1x",
+    "at": "2026-11-27T12:17:36.462Z"
+  },
+  "ferry-landing-a#11": {
+    "verdict": "REJECTED",
+    "notes": "small bell, the jetty a bare frame",
+    "at": "2026-11-27T12:17:36.622Z"
+  },
+  "ferry-landing-a#12": {
+    "verdict": "REJECTED",
+    "notes": "an extra flag post; bell smaller than #9",
+    "at": "2026-11-27T12:17:36.751Z"
+  },
+  "ferry-landing-a#13": {
+    "verdict": "REJECTED",
+    "notes": "the jetty points away and the boat sits behind it: weak silhouette",
+    "at": "2026-11-27T12:17:36.882Z"
+  },
+  "ferry-landing-a#14": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #9, the bell half behind the post",
+    "at": "2026-11-27T12:17:37.012Z"
+  },
+  "ferry-landing-a#15": {
+    "verdict": "REJECTED",
+    "notes": "steps at the front and the boat hidden: reads as a stage",
+    "at": "2026-11-27T12:17:37.145Z"
+  },
+  "pickups-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Flotsam: two crossed brown planks and a small barrel, the clearest bundle of wood at 1x (wood and gold pickup)",
+    "at": "2026-11-27T12:19:44.788Z"
+  },
+  "pickups-a#1": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:45.015Z"
+  },
+  "pickups-a#2": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:45.225Z"
+  },
+  "pickups-a#3": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:45.552Z"
+  },
+  "pickups-a#4": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:51.521Z"
+  },
+  "pickups-a#5": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:53.612Z"
+  },
+  "pickups-a#6": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:54.553Z"
+  },
+  "pickups-a#7": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:55.133Z"
+  },
+  "pickups-a#8": {
+    "verdict": "REJECTED",
+    "notes": "another flotsam bundle; plank-only crosses read as a sign or an X, and #0 is the clearest",
+    "at": "2026-11-27T12:19:55.604Z"
+  },
+  "pickups-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "Sea Chest: a small brass-banded wooden chest with a tuft of green seaweed on its lid; the seaweed tells it from the land treasure chest",
+    "at": "2026-11-27T12:19:55.908Z"
+  },
+  "pickups-a#10": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:56.171Z"
+  },
+  "pickups-a#11": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:56.420Z"
+  },
+  "pickups-a#12": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:56.733Z"
+  },
+  "pickups-a#13": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:57.336Z"
+  },
+  "pickups-a#14": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:57.711Z"
+  },
+  "pickups-a#15": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:57.877Z"
+  },
+  "pickups-a#16": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:58.039Z"
+  },
+  "pickups-a#17": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:58.201Z"
+  },
+  "pickups-a#18": {
+    "verdict": "REJECTED",
+    "notes": "another sea chest; a bare chest is too close to the land treasure chest, or the seaweed reads weaker than #9",
+    "at": "2026-11-27T12:19:58.336Z"
+  },
+  "pickups-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "Castaway: a little survivor on a log raft waving one arm; the wave reads at 1x",
+    "at": "2026-11-27T12:19:58.485Z"
+  },
+  "pickups-a#20": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:58.608Z"
+  },
+  "pickups-a#21": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:58.734Z"
+  },
+  "pickups-a#22": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:58.881Z"
+  },
+  "pickups-a#23": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:59.005Z"
+  },
+  "pickups-a#24": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:59.136Z"
+  },
+  "pickups-a#25": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:59.262Z"
+  },
+  "pickups-a#26": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:59.468Z"
+  },
+  "pickups-a#27": {
+    "verdict": "REJECTED",
+    "notes": "another castaway; seated or with an axe the survivor does not read as calling for rescue like #19",
+    "at": "2026-11-27T12:19:59.684Z"
+  },
+  "pickups-a#28": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:19:59.825Z"
+  },
+  "pickups-a#29": {
+    "verdict": "ACCEPTED",
+    "notes": "Message in a Bottle: a fat green bottle on its side with a cork and a rolled paper inside; clean, no stray sprigs",
+    "at": "2026-11-27T12:19:59.986Z"
+  },
+  "pickups-a#30": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:00.352Z"
+  },
+  "pickups-a#31": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:00.562Z"
+  },
+  "pickups-a#32": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:00.799Z"
+  },
+  "pickups-a#33": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:01.084Z"
+  },
+  "pickups-a#34": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:01.290Z"
+  },
+  "pickups-a#35": {
+    "verdict": "REJECTED",
+    "notes": "another bottle; seaweed sprigs or rope wraps add clutter beside #29",
+    "at": "2026-11-27T12:20:01.519Z"
+  }
+}
