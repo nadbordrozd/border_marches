@@ -21,6 +21,7 @@ import {
 } from "../../data/named-maps.ts";
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
 import { decorateMap } from "./decorate.ts";
+import { keepWaysRound } from "./passages.ts";
 import { relayRoads, roadMayCross } from "./gen/objects.ts";
 import { LEGACY_COMPOSITION } from "./gen/config.ts";
 import {
@@ -71,7 +72,7 @@ const NAMED_CONFIG: {
   terrain: Pick<GenConfig["terrain"], NamedLandscape>;
   objects: Pick<
     GenConfig["objects"],
-    "keepWaysOpen" | "density" | "reserveRare"
+    "keepWaysOpen" | "density" | "reserveRare" | "waysRound" | "mystery"
   >;
   clusters: Partial<GenConfig["clusters"]>;
   hoards: Pick<GenConfig["hoards"], "rate">;
@@ -86,6 +87,11 @@ const NAMED_CONFIG: {
     keepWaysOpen: false,
     density: { start: 26, middle: 20, town: 22, hold: 24 },
     reserveRare: false,
+    // Bead bzc.110: buildNamedMap moves the buildings that stand in a way
+    // aside after the edits (keepWaysRound) instead.
+    waysRound: false,
+    // Nor their artifacts in bags (their edits name them by id).
+    mystery: { share: 0, treasureShare: 0 },
   },
   // Bead bzc.96 (map composition): the named maps keep the obstacle
   // clusters, fill and pockets they were authored on, with no treasure
@@ -492,6 +498,8 @@ export function buildNamedMap(defOrId: NamedMapDef | string): GameMap {
   // Bead bzc.95: sites step off the roads, and the roads bend round the
   // few that cannot.
   stepOffRoads(map);
+  // Bead bzc.110: and no building stands in a way.
+  keepWaysRound(map);
   relayRoads(map, resolveConfig(namedConfig(def)), def.size);
   // Decorations last, seeded from the map, round the edited objects too
   // (bead bzc.72).

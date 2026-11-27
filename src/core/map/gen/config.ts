@@ -359,6 +359,20 @@ export interface GenConfig {
      * maps, which were authored without it.
      */
     reserveRare: boolean;
+    /**
+     * Bead bzc.110: no building (src/core/map/passages.ts isBuilding)
+     * stands where a way needs it: with its entrance shut too, every open
+     * cell round it stays joined (pickups count as taken). Off for the
+     * named maps, whose edits name generated objects by place: their
+     * builder moves the few that stand in a way aside instead (named.ts).
+     */
+    waysRound: boolean;
+    /**
+     * Bead bzc.110: the share of loose Trinkets and Wonders that lie in a
+     * Mystery Bag instead (src/core/map/mystery.ts), and the share in the
+     * treasure clusters and pockets. The rest lie in full view.
+     */
+    mystery: { share: number; treasureShare: number };
   };
 
   /**
@@ -519,7 +533,7 @@ export const LEGACY_COMPOSITION: {
   hoards: Pick<GenConfig["hoards"], "rate" | "start">;
   clearings: Pick<GenConfig["clearings"], "enabled">;
   fields: Pick<GenConfig["fields"], "enabled" | "plazaRadius">;
-  objects: Pick<GenConfig["objects"], "reserveRare">;
+  objects: Pick<GenConfig["objects"], "reserveRare" | "waysRound" | "mystery">;
 } = {
   clusters: LEGACY_CLUSTERS,
   hoards: {
@@ -528,7 +542,13 @@ export const LEGACY_COMPOSITION: {
   },
   clearings: { enabled: false },
   fields: { enabled: false, plazaRadius: 0 },
-  objects: { reserveRare: false },
+  // Nor the later placing rules of bead bzc.110 (ways round buildings,
+  // Mystery Bags), so a map is as it was.
+  objects: {
+    reserveRare: false,
+    waysRound: false,
+    mystery: { share: 0, treasureShare: 0 },
+  },
 };
 
 export const DEFAULT_GEN_CONFIG: GenConfig = {
@@ -743,6 +763,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     oneWayMinDays: 1,
     keepWaysOpen: true,
     reserveRare: true,
+    waysRound: true,
+    mystery: { share: 0.25, treasureShare: 0.5 },
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 

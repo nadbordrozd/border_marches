@@ -153,8 +153,10 @@ const SNAPSHOT: Record<
   // (undead) in its edits to keep one neutral town per faction.
   "keepers-toll": {
     base: "aab2b4a1",
-    built: "a678e407",
-    objects: 354,
+    // Bead bzc.110: buildings moved out of the ways (the oasis that had
+    // no room removed by an edit).
+    built: "a277b33b",
+    objects: 353,
     towns: [
       ["town-1", 7, 7, null],
       ["town-2", 35, 40, null],
@@ -165,7 +167,8 @@ const SNAPSHOT: Record<
   },
   "hourglass-marches": {
     base: "58b2a7db",
-    built: "b5a7db71",
+    // Bead bzc.110: buildings moved out of the ways.
+    built: "0c878e82",
     objects: 719,
     towns: [
       ["town-1", 30, 60, null],
@@ -181,7 +184,8 @@ const SNAPSHOT: Record<
   // composition (treasure clusters, clearings, ponds) and re-authored.
   "ninefold-landfall": {
     base: "be968b02",
-    built: "80e35d68",
+    // Bead bzc.110: buildings moved out of the ways.
+    built: "759306e2",
     objects: 846,
     towns: [
       ["town-1", 62, 59, null],

@@ -86,7 +86,10 @@ describe("map composition (bzc.96)", { timeout: 120_000 }, () => {
         expect(guard.data["value"], label).toBe(sum);
         for (const o of loot) {
           expect(isPickup(o), `${label} ${o.id}`).toBe(true);
-          expect(["resource-pile", "loose-artifact"]).toContain(o.data["type"]);
+          // A Mystery Bag (bead bzc.110) is an artifact in a bag.
+          expect(["resource-pile", "loose-artifact", "mystery-bag"]).toContain(
+            o.data["type"],
+          );
           if (o.kind === "artifact") artifacts++;
           // On the guard's back, every other cell beside it a wall, a
           // pickup or the guard's zone of control.
@@ -207,6 +210,7 @@ describe("map composition (bzc.96)", { timeout: 120_000 }, () => {
             (t) =>
               t === "resource-pile" ||
               t === "loose-artifact" ||
+              t === "mystery-bag" ||
               sites.has(
                 DEFAULT_GEN_CONFIG.objects.table.find((r) => r.type === t)
                   ?.id ?? "",

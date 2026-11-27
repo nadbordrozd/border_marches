@@ -38,6 +38,9 @@ import {
 import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
 import type { ObjectTypeId } from "../../../data/objectTypes.ts";
 import { isPickup } from "../../game/site-state.ts";
+import { isBuilding, leavesWayRound } from "../passages.ts";
+import { MYSTERY_TYPE, mysteryItem } from "../mystery.ts";
+import { findArtifact, isCursed } from "../../../data/artifacts.ts";
 import { preferFrosting } from "./candy.ts";
 import { desertSites } from "./desert.ts";
 import { carveHoards, hoardRate } from "./hoards.ts";
@@ -73,6 +76,7 @@ import {
   TERRAIN_OF,
   corridorMask,
   homeCell,
+  isOpen,
   isWalkable,
   newState,
   stageRng,
@@ -268,7 +272,9 @@ function commit(st: GenState, obj: MapObject): void {
     const i = g.idx(bx, by);
     st.occupied[i] = 1;
     st.objBlocked[i] = 1;
+    st.footWall[i] = 1;
   }
+  if (isBuilding(obj)) st.building[g.idx(obj.x, obj.y)] = 1;
 }
 
 // ---------------------------------------------------------------------------
@@ -1278,6 +1284,18 @@ export function placeObjects(st: GenState): PlacementReport {
     // cell (placed after them) keeps off them.
     const offRoad =
       oc.keepWaysOpen && roadMayCross({ kind: req.row.kind }) === "never";
+    const round =
+      oc.waysRound &&
+      !beside &&
+      isBuilding({
+        id: req.row.id,
+        kind: req.row.kind,
+        x: 0,
+        y: 0,
+        footprint: { ...req.row.footprint },
+        blocked: [],
+        data: { ...req.row.data, type: req.row.type },
+      });
     const corner = (e: number): number => {
       const x = g.x(e) - req.row.entrance[0];
       const y = g.y(e) - req.row.entrance[1];
@@ -1324,7 +1342,8 @@ export function placeObjects(st: GenState): PlacementReport {
         cand.push({ e, s });
       }
       cand.sort((p, q) => q.s - p.s || p.e - q.e);
-      let pick: { e: number; foot: number[]; gc: number } | undefined;
+      let pick:
+        { e: number; foot: number[]; gc: number; fill: number[] } | undefined;
       for (const { e } of cand) {
         const foot = multi ? footprintOf(req.row, e) : [e];
         if (!foot) continue;
@@ -1352,6 +1371,14 @@ export function placeObjects(st: GenState): PlacementReport {
         }
         if ((multi || beside) && !keepsConnected(st, e, foot, beside)) continue;
         if (offRoad && !roads && !waysOpen(e, foot)) continue;
+        // Bead bzc.110: a building leaves a way round it (the empty nook
+        // behind it, if that is all it would cut off, grows wood).
+        let fill: number[] = [];
+        if (round) {
+          const f = nookFill(st, e, foot, fillable);
+          if (f === null || f.includes(gc)) continue;
+          fill = f;
+        }
         // Nor may it wall in a pickup next door.
         if (beside && !leavesSide(e)) continue;
         // A pocket's pickup is taken only from inside the pocket.
@@ -1363,11 +1390,16 @@ export function placeObjects(st: GenState): PlacementReport {
             .some((k) => isWalkable(st, k) && pocketOf[k] !== req.pocket)
         )
           continue;
-        pick = { e, foot, gc };
+        pick = { e, foot, gc, fill };
         break;
       }
       if (!pick) continue;
       const c = pick;
+      for (const k of c.fill) {
+        st.obstacle[k] = O.forest;
+        st.room[k] = -1;
+        base[k] = 0;
+      }
       const id = nextId(req.row.id);
       const obj: MapObject = {
         id,
@@ -1419,6 +1451,45 @@ export function placeObjects(st: GenState): PlacementReport {
    * from the other starts (small maps have little room between them).
    */
   const stand: Request[] = [];
+  /** Open cells a building's empty nook may fill (nothing kept open). */
+  const fillable = (k: number): boolean =>
+    st.occupied[k] === 0 &&
+    st.road[k] === 0 &&
+    corridor[k] === 0 &&
+    st.keepOpen[k] === 0 &&
+    st.plaza[k] === 0 &&
+    (pocketOf[k] ?? -1) < 0 &&
+    !hoardSites.some((h) => h.guard === k) &&
+    !guardReqs.some((q) => q.cell === k);
+  const arng = stageRng(st, "aside");
+  const pileFor = (r: Request): boolean => {
+    if (!oc.waysRound || r.rule === true || multi(r)) return false;
+    if (
+      collectedBeside(r.row) ||
+      roadMayCross({ kind: r.row.kind }) !== "never"
+    )
+      return false;
+    const own = r.zones[0] ?? 0;
+    const row = arng.weighted(
+      resourceRows,
+      resourceRows.map((q) => q.weights[kindOf(own)] ?? 0),
+    );
+    if (row === undefined) return false;
+    const data = roll(arng, row, tierOf(own));
+    const value = valueOf(row, data);
+    return tryPlace(
+      {
+        ...r,
+        row,
+        data,
+        value,
+        guarded: r.pocket < 0 && guardedIn(row, value, own, data),
+        label: `${r.label} (pile)`,
+      },
+      true,
+      arng,
+    );
+  };
   const place = (r: Request, roads: boolean): void => {
     if (tryPlace(r, roads, r.order ?? rng)) return;
     // Its own stream, so the rest of the map draws as it would without.
@@ -1468,6 +1539,10 @@ export function placeObjects(st: GenState): PlacementReport {
       return;
     }
     if (!r.required) {
+      // Bead bzc.110: a single-cell building of the fill with no place
+      // that leaves a way round it gives way to a resource pile (which
+      // may stand in a way), so the zone keeps its share of things.
+      if (roads && pileFor(r)) return;
       report.unplaced++;
       return;
     }
@@ -1570,11 +1645,13 @@ export function placeObjects(st: GenState): PlacementReport {
     const p = String(o.data["pair"]);
     pairCount.set(p, (pairCount.get(p) ?? 0) + 1);
   }
-  st.objects = st.objects.filter(
-    (o) =>
+  st.objects = st.objects.filter((o) => {
+    const keep =
       o.data["type"] !== "two-way-waystone" ||
-      pairCount.get(String(o.data["pair"])) === 2,
-  );
+      pairCount.get(String(o.data["pair"])) === 2;
+    if (!keep) st.building[g.idx(o.x, o.y)] = 0;
+    return keep;
+  });
 
   // A pickup is gone once taken: guards close passes and rings are
   // measured without it.
@@ -1689,6 +1766,7 @@ export function placeObjects(st: GenState): PlacementReport {
     st.objects = st.objects.filter((o) => o !== tent);
     const i = g.idx(tent.x, tent.y);
     st.occupied[i] = 0;
+    st.building[i] = 0;
     entrances[i] = 0;
   }
 
@@ -1748,6 +1826,12 @@ export function placeObjects(st: GenState): PlacementReport {
     }));
     o.data["fv"] = Math.round(target);
   }
+  // Bead bzc.110: some loose artifacts become Mystery Bags, more of them
+  // in the treasure clusters and pockets (before the quests, which never
+  // name a bag's hidden artifact).
+  const treasure = new Set<number>(hoardSites.flatMap((h) => h.loot));
+  for (let i = 0; i < g.n; i++) if ((pocketOf[i] ?? -1) >= 0) treasure.add(i);
+  bagArtifacts(st, treasure, nextId);
   // Quests name placed objects and guards (CONTENT_MAP_OBJECTS section 5).
   assignQuests(st, stageRng(st, "quests"));
   placeOneWayWaystones(st, {
@@ -1764,6 +1848,51 @@ export function placeObjects(st: GenState): PlacementReport {
   });
 
   return report;
+}
+
+/**
+ * Bead bzc.110 (the user: "there can be some special pickupable item that
+ * has a surprise artifact in it but the usual artifact on adventure map
+ * should be fully visible"): a share of the loose Trinkets and Wonders
+ * (`objects.mystery.share`; `treasureShare` in the cells of `treasure`,
+ * the treasure clusters and pockets) become a Mystery Bag of the same grade
+ * on the same cell ({@link mysteryItem}), drawn from their own stream so
+ * the rest of the map is as it would be without. Guards that held the
+ * artifact hold the bag. The strange thing near home stays as it is.
+ */
+function bagArtifacts(
+  st: GenState,
+  treasure: ReadonlySet<number>,
+  nextId: (prefix: string) => string,
+): void {
+  const { g } = st;
+  const { share, treasureShare } = st.cfg.objects.mystery;
+  if (share <= 0 && treasureShare <= 0) return;
+  const rng = stageRng(st, "mystery");
+  const renamed = new Map<string, string>();
+  st.objects = st.objects.map((o) => {
+    if (o.kind !== "artifact" || o.data["type"] !== "loose-artifact") return o;
+    if (o.data["strange"] === true) return o;
+    const art = findArtifact(String(o.data["artifact"] ?? ""));
+    if (art === undefined || art.kind !== "worn" || isCursed(art.id)) return o;
+    if (art.pieceOf !== undefined) return o;
+    if (art.grade !== "trinket" && art.grade !== "wonder") return o;
+    const chance = treasure.has(g.idx(o.x, o.y)) ? treasureShare : share;
+    if (!rng.chance(chance)) return o;
+    const id = nextId(MYSTERY_TYPE);
+    renamed.set(o.id, id);
+    // Its value stays (its guard was sized by it).
+    return mysteryItem(st, id, o.x, o.y, {
+      grade: art.grade,
+      data: { value: o.data["value"] },
+    });
+  });
+  if (renamed.size === 0) return;
+  for (const o of st.objects) {
+    const held = o.data["guards"];
+    if (o.kind !== "monster" || !Array.isArray(held)) continue;
+    o.data["guards"] = held.map((id) => renamed.get(String(id)) ?? id);
+  }
 }
 
 /**
@@ -1829,7 +1958,8 @@ function placeOneWayWaystones(
         (i) =>
           ok(i) &&
           st.road[i] === 0 &&
-          keepsConnected(st, i, [i], true, ctx.shut),
+          keepsConnected(st, i, [i], true, ctx.shut) &&
+          (!cfg.objects.waysRound || waysRound(st, i, [i])),
       ),
     );
     if (entrances.length === 0) continue;
@@ -1861,6 +1991,7 @@ function placeOneWayWaystones(
       },
     });
     st.occupied[e] = 1;
+    st.building[e] = 1;
     if (ctx.shut) ctx.shut[e] = 1;
     // The exit is an ordinary cell, but nothing may stand on it.
     st.occupied[exit] = 1;
@@ -1958,6 +2089,95 @@ function visitable(
     if (canStep(st, j, g.x(e) - g.x(j), g.y(e) - g.y(j), walk)) stepIn = true;
   }
   return n >= 2 && stepIn;
+}
+
+/**
+ * Bead bzc.110: whether a building at `e` (footprint `foot`, the entrance
+ * among it) leaves a way round itself ({@link leavesWayRound}): pickups
+ * count as taken (only footprints are walls) and guards as passed.
+ */
+function waysRound(st: GenState, e: number, foot: readonly number[]): boolean {
+  return leavesWayRound(
+    st.g.w,
+    st.g.h,
+    e,
+    foot,
+    (k) => isOpen(st, k) && st.footWall[k] === 0,
+    (k) => st.building[k] === 1,
+  );
+}
+
+/** The largest empty nook behind a building that grows wood (bead bzc.110). */
+const NOOK_MAX = 3;
+
+/**
+ * Bead bzc.110: the cells to fill with wood so a building at `e` leaves a
+ * way round it ({@link waysRound}): none when it already does; else every
+ * part it would cut off is an empty nook of at most NOOK_MAX `fillable`
+ * cells walled in but for the building, and with those nooks walled the
+ * rest stays joined. Null when it stands in a way.
+ */
+function nookFill(
+  st: GenState,
+  e: number,
+  foot: readonly number[],
+  fillable: (k: number) => boolean,
+): number[] | null {
+  if (waysRound(st, e, foot)) return [];
+  const { g } = st;
+  const open = (k: number): boolean => isOpen(st, k) && st.footWall[k] === 0;
+  const node = (k: number): boolean =>
+    open(k) && !foot.includes(k) && st.building[k] === 0;
+  const nook = new Set<number>();
+  const done = new Set<number>();
+  for (const f of foot) {
+    for (const r of g.around(f, N8)) {
+      if (!node(r) || done.has(r)) continue;
+      // The part behind this cell, if it is small.
+      const part = [r];
+      const seen = new Set([r]);
+      let big = false;
+      for (let q = 0; q < part.length && !big; q++) {
+        const i = part[q] as number;
+        for (const j of g.around(i, N8)) {
+          if (seen.has(j) || !node(j)) continue;
+          if (!canStep(st, i, g.x(j) - g.x(i), g.y(j) - g.y(i), open)) continue;
+          seen.add(j);
+          part.push(j);
+          if (part.length > NOOK_MAX) {
+            big = true;
+            break;
+          }
+        }
+      }
+      for (const i of part) done.add(i);
+      if (big) continue;
+      // Empty, and walled in but for the building.
+      const walled = part.every(
+        (i) =>
+          fillable(i) &&
+          g
+            .around(i, N8)
+            .every((j) => !open(j) || seen.has(j) || foot.includes(j)),
+      );
+      // The wood joins a range or wood already there (no new lone mass).
+      const leans = part.some((i) =>
+        g.around(i, N8).some((j) => st.obstacle[j] !== O.none),
+      );
+      if (!walled || !leans) return null;
+      for (const i of part) nook.add(i);
+    }
+  }
+  if (nook.size === 0) return null;
+  const joined = leavesWayRound(
+    g.w,
+    g.h,
+    e,
+    foot,
+    (k) => open(k) && !nook.has(k),
+    (k) => st.building[k] === 1,
+  );
+  return joined ? [...nook] : null;
 }
 
 /**

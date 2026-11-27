@@ -9,6 +9,7 @@
  * guard" or "visit a site".
  */
 import { findArtifact } from "../../../data/artifacts.ts";
+import { isMystery } from "../mystery.ts";
 import type { Prize, Quest } from "../../../data/objectTypes.ts";
 import { STRAY_HOMES } from "../../../data/strays.ts";
 import type { Rng } from "../../rng.ts";
@@ -32,8 +33,11 @@ export function assignQuests(st: GenState, rng: Rng): void {
   const monsters = objs.filter(
     (o) => o.kind === "monster" && o.data["pass"] !== true,
   );
+  // Bead bzc.110: a Mystery Bag is a pickup whose artifact stays hidden,
+  // so no quest names it or its artifact.
   const sites = objs.filter(
     (o) =>
+      !isMystery(o) &&
       VISITABLE.has(o.kind) &&
       typeof o.data["type"] === "string" &&
       o.data["type"] !== "seer-hut" &&
@@ -41,7 +45,10 @@ export function assignQuests(st: GenState, rng: Rng): void {
   );
   const artifacts = objs
     .filter(
-      (o) => o.kind === "artifact" && typeof o.data["artifact"] === "string",
+      (o) =>
+        o.kind === "artifact" &&
+        !isMystery(o) &&
+        typeof o.data["artifact"] === "string",
     )
     .map((o) => String(o.data["artifact"]));
   const hutCreatures = objs

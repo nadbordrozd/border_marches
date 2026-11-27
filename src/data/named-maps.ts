@@ -374,6 +374,14 @@ const KEEPERS_TOLL: NamedMapDef = {
       at: [24, 42],
       note: "The school shrine fills the gap the south road runs through.",
     },
+    // Bead bzc.110: no building stands in a way. The builder moves the
+    // rest aside; this one has no room to go in the home valley.
+    {
+      op: "remove",
+      id: "oasis-2",
+      at: [9, 20],
+      note: "The oasis and the ore pit below it are the only way into the nook east of them; the oasis goes, so the nook keeps a way past the pit.",
+    },
   ],
 };
 

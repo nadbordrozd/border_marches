@@ -23,8 +23,11 @@ import {
 // academy on M seeds 12, 16 and 17, was six of 1-30), so S 21 and M 12.
 // Bead bzc.115: M 12 rolls a candy zone, which re-rolls its fill (no
 // academy since), so M 16.
+// Bead bzc.110: the buildings that keep a way round move the fill again
+// (a fallen adventurer on S seeds 27, 28 and 29 of 1-30, was 7, 19, 27
+// and 28), so S 27.
 const SEEDS: Record<MapSize, readonly number[]> = {
-  S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21],
+  S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21, 27],
   M: [1, 2, 3, 4, 5, 6, 16],
   L: [1, 2, 3, 4],
 };
@@ -66,9 +69,8 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
   it("places every placeable catalogue type on some map of each size", () => {
     // Event tiles and signs are map-authored; the Keepers' Vault is a rule
     // of medium and large maps (CONTENT_MAP_OBJECTS 3.4).
-    // The Mystery Bag (bead bzc.105) waits for its placing rule (bead
-    // bzc.110, which drops it from this list).
-    const authored: ObjectTypeId[] = ["event-tile", "sign", "mystery-bag"];
+    // The Mystery Bag (bead bzc.105) is placed since bead bzc.110.
+    const authored: ObjectTypeId[] = ["event-tile", "sign"];
     // The desert sites (bead bzc.88) stand only on maps that roll a desert
     // (tests/core/map/desert.test.ts).
     const desert: ObjectTypeId[] = [

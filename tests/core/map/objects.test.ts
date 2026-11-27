@@ -55,9 +55,8 @@ describe("catalogue placement", () => {
     for (const seed of [1, 2, 3, 4]) {
       for (const o of map(seed, "L").objects) seen.add(typeOf(o));
     }
-    // The Mystery Bag (bead bzc.105) waits for its placing rule (bead
-    // bzc.110, which drops it from this list).
-    const authored: ObjectTypeId[] = ["event-tile", "sign", "mystery-bag"];
+    // The Mystery Bag (bead bzc.105) is placed since bead bzc.110.
+    const authored: ObjectTypeId[] = ["event-tile", "sign"];
     for (const t of Object.keys(OBJECT_TYPES) as ObjectTypeId[]) {
       if (authored.includes(t)) continue;
       expect(seen, t).toContain(t);

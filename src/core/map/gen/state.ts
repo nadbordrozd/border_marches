@@ -123,6 +123,13 @@ export interface GenState {
   occupied: Uint8Array;
   /** Cells blocked by an object footprint (impassable). */
   objBlocked: Uint8Array;
+  /**
+   * Bead bzc.110: the footprint cells alone (objBlocked without the
+   * pickups, which a hero takes out of the way), and the entrances of the
+   * buildings no way may need (src/core/map/passages.ts isBuilding).
+   */
+  footWall: Uint8Array;
+  building: Uint8Array;
   road: Uint8Array;
   passes: PassInfo[];
   gaps: GapInfo[];
@@ -162,6 +169,8 @@ export function newState(
     plaza: new Uint8Array(g.n),
     occupied: new Uint8Array(g.n),
     objBlocked: new Uint8Array(g.n),
+    footWall: new Uint8Array(g.n),
+    building: new Uint8Array(g.n),
     road: new Uint8Array(g.n),
     passes: [],
     gaps: [],

@@ -219,6 +219,74 @@ ratio 0.87 (> 0.85), start-to-start 1.18 (< 1.2); before: 0.50, 0.22,
 0.22, 0.14, 0.27, 0.96, 1/1/1, 0.79, 0.89, 1.17. Building it takes about
 120 ms (was about 105).
 
+## 7. Bead bzc.110: a way round every building; Mystery Bags
+
+The user: "these buildings should be placed such that there is always a
+path around them. they shouldn't obstruct passages (even if it would be
+possible to pass by stepping on the shrine first). Stuff that you pick up
+such as resources are exempt from this. they are allowed to be in the way",
+and "there can be some special pickupable item that has a surprise artifact
+in it but the usual artifact on adventure map should be fully visible."
+
+**The rule** (`src/core/map/passages.ts`). A building is what the
+pathfinder walks round (bead bzc.107): the entrance of a mine, dwelling,
+site, bank or waystone that is not a pickup. Towns are destinations;
+pickups, guards and gates may stand in a way. For every two open cells a
+hero walks between with the entrances open, a walk exists that steps on no
+building (pathfinder steps: eight ways, a diagonal barred only between two
+walls; pickups count as taken). `findObstructions` also flags a building
+reached only over another one. `tests/core/map/passages.test.ts` checks the
+rule with the pathfinder's own `moveContext`, `isImpassableCell` and
+`cutsCorner` on S 1-8, M 1-6, L 1-3 and every named map.
+
+**Random maps** check it as each building is placed (`objects.waysRound`):
+with its cells and every other entrance shut, the open cells that stepped
+into its cells stay joined, in a window of two cells first and else over
+the map (a search from every side at once that stops when the small side
+runs out). An empty nook of up to three cells that only the building would
+cut off, walled in and leaning on a wood or range, grows wood instead
+(never a guard's cell, road, corridor or plaza). A single-cell building of
+the fill with no such place tries a resource pile in its stead.
+
+**Named maps** keep their bases (the edits name objects by place) and are
+repaired after the edits (`keepWaysRound`), least change first: empty dead
+ends behind a building grow wood; buildings move a few cells aside (same
+ground, zone and stretch between guards and gates, held by their guard,
+never a new footprint on a way between starts or within three days of a
+start, as near each start as before where it can); a building trades
+places with a pickup next to it where the pickup seals no way; a run of up
+to three wood or rock cells opens a way round (never past a guard outside
+its zone, a gate or a range); last, a move farther, leaving its guard
+behind if it must (never a mine). The Keepers' Toll's oasis by the western
+ore pit had no room in the home valley and is removed by an edit. The
+known cases are gone: the Ninefold's corridor wells and banks, and its
+quest gate (gates may close a way by design; the start-to-start ratio
+stays 1.18, inside 1.2).
+
+**Mystery Bags** (`objects.mystery`): a quarter of the loose Trinkets and
+Wonders, half of those in treasure clusters and pockets, lie in a bag of the
+same grade (`mysteryItem`, same cell and value, its guard holds the bag);
+the rest, and every Marvel piece, consumable and strange thing, lie in full
+view. Quests never name a bag or its artifact. The named maps have none.
+
+| Size |        | Buildings in a way / map | Visitable /100 | Land passable % | Clusters | Bags | Loose artifacts | ms  |
+| ---- | ------ | ------------------------ | -------------- | --------------- | -------- | ---- | --------------- | --- |
+| S    | before | 36.9                     | 21.4           | 53.5            | 6.5      | 0    | 8.6             | 28  |
+| S    | after  | 0                        | 20.5           | 53.3            | 6.5      | 1.6  | 6.6             | 30  |
+| M    | before | 62.1                     | 21.9           | 53.0            | 10.6     | 0    | 11.7            | 52  |
+| M    | after  | 0                        | 21.2           | 52.8            | 10.6     | 2.7  | 8.6             | 53  |
+| L    | before | 163.8                    | 23.7           | 52.5            | 22.6     | 0    | 27.2            | 168 |
+| L    | after  | 0                        | 23.0           | 52.3            | 22.6     | 5.4  | 21.9            | 175 |
+
+Seeds 1-10, default players, means; ms best of five on a loaded machine.
+The rule costs about 3 % of the visitable objects (narrow valleys hold
+fewer sites). Named maps, buildings in a way before and after: the Keepers'
+Toll 59 and 0, the Hourglass Marches 108 and 0, the Ninefold Landfall 131
+and 0; building them takes about 55, 140 and 180 ms (were 36, 89 and 120:
+the repair runs about 20, 47 and 60 ms). Their fairness stays inside the
+named-map test's bounds (the Ninefold: sites ratio 0.76, fights 0.86,
+start-to-start 1.18).
+
 [rmg]: https://vcmi.eu/developers/RMG_Description/
 [tpl]: https://vcmi.eu/modders/Random_Map_Template
 [tp]: https://sources.debian.org/src/vcmi/1.6.5%2Bdfsg-2/lib/rmg/modificators/TreasurePlacer.cpp
