@@ -36,7 +36,8 @@ import { displayObjects } from "../../src/ui/objects.ts";
 
 /**
  * Every terrain sprite the map view draws for a game state: trees and peaks
- * (key, box, foot), doodads, crown bands and the map's decorations.
+ * (key, box, foot), doodads, crown bands, the trodden patches under the
+ * buildings and the map's decorations.
  */
 function terrainSprites(state: GameState): string[] {
   const plan = planTerrain(state.map);
@@ -53,6 +54,8 @@ function terrainSprites(state: GameState): string[] {
     ...plan.bands.map(
       (b) => `band ${b.key} ${box(b)} ${b.trees.map((t) => t.key).join("+")}`,
     ),
+    // The trodden patches under the buildings (bead bzc.138).
+    ...plan.layout.patches.map((p) => `patch ${p.cx},${p.cy} ${p.rx}x${p.ry}`),
     ...mapDecorations(state.map).map(
       (d) =>
         `decoration ${d.id}/${d.variant} ${d.x},${d.y} ${JSON.stringify(d.at ?? null)}`,

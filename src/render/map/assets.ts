@@ -4,6 +4,7 @@
  * textured grounds and the water tiles).
  */
 import {
+  GROUND_EDGE_MASK,
   GROUND_OVERLAYS,
   GROUND_TERRAINS,
   GROUND_TEXTURES,
@@ -24,7 +25,7 @@ import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, calmTexture } from "./ground";
-import type { GroundSources, PixelImage } from "./ground";
+import type { EdgeMask, GroundSources, PixelImage } from "./ground";
 import { crackOverlay } from "./terrain-motion";
 import type { CrackOverlay } from "./terrain-motion";
 
@@ -85,6 +86,7 @@ export function mapAssetList(): ImageAsset[] {
   return [
     ...Object.values(GROUND_TEXTURES),
     ...Object.values(GROUND_OVERLAYS).filter((a) => a !== undefined),
+    GROUND_EDGE_MASK,
     ...WATER_TILES,
     ...MOUNTAIN_PIECES,
     ...TOWN_3X2_ASSETS,
@@ -138,6 +140,19 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
         readPixels(get(asset), asset.w, asset.h),
       );
   }
+  // The border brush (bead bzc.138): one byte per pixel, from its grey.
+  const edgePixels = readPixels(
+    get(GROUND_EDGE_MASK),
+    GROUND_EDGE_MASK.w,
+    GROUND_EDGE_MASK.h,
+  );
+  const edge: EdgeMask = {
+    size: GROUND_EDGE_MASK.w,
+    values: Uint8Array.from(
+      { length: GROUND_EDGE_MASK.w * GROUND_EDGE_MASK.h },
+      (_, p) => edgePixels.data[p * 4] ?? 128,
+    ),
+  };
   const water = (depth: "shallow" | "deep"): PixelImage[] =>
     WATER_TILES.filter((tile) => tile.depth === depth).map((tile) =>
       readPixels(get(tile), tile.w, tile.h),
@@ -147,6 +162,7 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
     ground: {
       textures,
       overlays,
+      edge,
       water: { shallow: water("shallow"), deep: water("deep") },
     },
   };

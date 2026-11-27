@@ -63,25 +63,6 @@
       "negative": "tiles, tile grid, squares, bricks, plates, slabs, paving, puddles, holes, blobs, dots, circles, stones, rocks, pebbles, ice sheet, cracks, footprints, tracks, tree, snowman, snowflake, object, character, frame, border, horizon, sky"
     }
   ],
-  "outputs": [
-    {
-      "path": "public/assets/terrain/grounds/snow.png",
-      "from": "base-e#0"
-    },
-    {
-      "path": "public/assets/terrain/grounds/snow-swatch.png",
-      "from": "base-e#0",
-      "width": 80,
-      "height": 80,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 160,
-          "y": 160,
-          "width": 80,
-          "height": 80
-        }
-      ]
-    }
-  ]
+  "outputs": [],
+  "_outputs": "Since bead bzc.138 the ground texture and swatch are baked by tools/art/ground-bake.mjs (art/bake/grounds.json), not derived here."
 }

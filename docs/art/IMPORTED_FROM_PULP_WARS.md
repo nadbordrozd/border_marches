@@ -21,15 +21,15 @@ on light and dark).
 | Units | 36 (13 added by bead bzc.14) |
 | Portraits | 36 (13 added by bead bzc.14) |
 | Towns | 0 (7 replaced by studio art, bead bzc.97) |
-| Textured grounds | 5 |
-| Ground swatches | 5 |
+| Textured grounds | 0 (5 replaced by baked grounds, bead bzc.138) |
+| Ground swatches | 0 (5 replaced by baked grounds, bead bzc.138) |
 | Water | 4 |
 | Mountain massif pieces | 28 |
 | Mountain extras | 2 |
 | Forest pieces | 100 |
 | Forest seam clumps | 18 |
 | Map objects | 18 |
-| **Total** | **252** |
+| **Total** | **242** |
 
 ## How these files relate to the studio pipeline
 
@@ -181,25 +181,16 @@ recipes that name `public/assets/towns/goblin-city-3.png` as their style
 image were generated from the imported file (sha256
 `51fa40e9fe9cce62eb0510740dfa87283a555b4bc5f5c0c2c984727a30e11bf0`).
 
-### Textured grounds
+### Textured grounds and ground swatches
 
-| Source | Destination | Size | sha256 |
-| --- | --- | --- | --- |
-| `public/assets/chibi/terrain/faction-grass/world/chibi-neutral-ground.png` | `public/assets/terrain/grounds/grass.png` | 640x640 | `0ccd5041b0765dc6e1484732457380b8206b741c33f2292f951193846ef7f860` |
-| `public/assets/chibi/terrain/faction-grass/world/chibi-dinosaur-ground.png` | `public/assets/terrain/grounds/jungle.png` | 480x480 | `395fa0894c382cb695427f4427a37e8bdd1fc9689f0a39a1d9e7e9eb58274231` |
-| `public/assets/chibi/terrain/faction-grass/world/chibi-goblin-ground.png` | `public/assets/terrain/grounds/steppe.png` | 640x640 | `e0ae06945a032e7dd9434f3199620b11f5213080a1e82522b044cd3505c48e49` |
-| `public/assets/chibi/terrain/faction-grass/world/chibi-martian-ground.png` | `public/assets/terrain/grounds/badlands.png` | 640x640 | `319f8228b04b7a331d437d66a7fefd87307271ffde116cb2adeb69c9a8ac05eb` |
-| `public/assets/chibi/terrain/faction-grass/world/chibi-undead-ground.png` | `public/assets/terrain/grounds/wasteland.png` | 640x640 | `f3181d92e95f3ad8d02dd5d842e6fd065716c2709f97c8409ca842282979d32a` |
-
-### Ground swatches
-
-| Source | Destination | Size | sha256 |
-| --- | --- | --- | --- |
-| `public/assets/chibi/terrain/faction-grass/chibi-neutral-grass-1.png` | `public/assets/terrain/grounds/grass-swatch.png` | 80x80 | `e734f203c72f94ec128907b44e0e25d942219f09eb94e6e543d3b4172cf7d2c9` |
-| `public/assets/chibi/terrain/faction-grass/chibi-dinosaur-grass-1.png` | `public/assets/terrain/grounds/jungle-swatch.png` | 80x80 | `abc87b61c408182c4bf8213a5b4f4d631140495f1dbbec46dbab9366ab92bb92` |
-| `public/assets/chibi/terrain/faction-grass/chibi-goblin-grass-1.png` | `public/assets/terrain/grounds/steppe-swatch.png` | 80x80 | `e37cffea072bcf14a1e03862407c34fdade345ff0bcd16112437759d339dd959` |
-| `public/assets/chibi/terrain/faction-grass/chibi-martian-grass-1.png` | `public/assets/terrain/grounds/badlands-swatch.png` | 80x80 | `cf5ec1614d86e9f0402f2f5a87951873f4db034c700d6742553b2ae374ee684e` |
-| `public/assets/chibi/terrain/faction-grass/chibi-undead-grass-1.png` | `public/assets/terrain/grounds/wasteland-swatch.png` | 80x80 | `8557f6cdf174cd10774b29bd65ec91f92df7cef002e9c687b217711ed7b16838` |
+The five imported grounds (`chibi-neutral-ground`, `chibi-dinosaur-ground`,
+`chibi-goblin-ground`, `chibi-martian-ground` and `chibi-undead-ground`
+under `public/assets/chibi/terrain/faction-grass/world/` in Pulp Wars) and
+their swatches (`chibi-<faction>-grass-1.png`) were replaced at the same
+paths by grounds baked from PixelLab takes in bead bzc.138
+([classes/grounds.md](classes/grounds.md)); their mean colours carry over
+as the baked grounds' colours. The originals stay in Pulp Wars and in this
+repository's git history.
 
 ### Water
 

@@ -1,6 +1,6 @@
 /**
  * The ground layer of the adventure map, painted pixel by pixel into cached
- * chunks: textured grounds, the ranked spill between grounds, water with the
+ * chunks: textured grounds, the ranked border cut between grounds, water with the
  * shallow/deep shelf, the coast sand and surf, the forest shade and the dirt
  * roads. Everything is a pure function of the map and world pixel
  * coordinates, so neighbouring cells and chunks always continue each other.
@@ -30,12 +30,21 @@
  * meander (`borderLevel`) instead of the cell edges, so borders round the
  * cell staircase into curves. Mountain ranges are drawn over the ground by
  * the peaks (peaks.ts), not here.
+ *
+ * Bead bzc.138 (the ground rollout, docs/art/classes/grounds.md): the
+ * textures are baked offline from PixelLab takes (tools/art/ground-bake.mjs);
+ * the Pulp Wars spill is replaced by a brush cut with a rim on the lower
+ * ground (`groundEdgeAt`, the baked `EdgeMask`); a two-scale colour drift
+ * in dithered palettes runs over every ground (`DRIFT`); and buildings stand
+ * in trodden patches (`groundPatches`).
  */
 import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
-import type { GameMap } from "../../core/map/types";
+import { objectBounds } from "../../core/map/types";
+import type { GameMap, MapObject } from "../../core/map/types";
 import { buildCanopyField, canopyTint } from "./canopy";
 import type { CanopyField } from "./canopy";
+import { bayer, driftAt, driftGrid } from "./ground-noise";
 import { hash4 } from "./hash";
 import {
   ROAD_COLOURS,
@@ -72,10 +81,12 @@ export interface GroundCalm {
   readonly dark: number;
 }
 
+/**
+ * No ground is calmed at load since bead bzc.138: every texture is baked
+ * offline (tools/art/ground-bake.mjs) at its recorded colour and spread.
+ */
 export const GROUND_CALM: Readonly<Partial<Record<GroundTerrain, GroundCalm>>> =
-  {
-    steppe: { radius: 40, flatten: 0.85, contrast: 0.8, dark: 0.6 },
-  };
+  {};
 
 /** Box blur of one channel layout (RGBA) with wrap-around, radius r. */
 function wrapBlur(image: PixelImage, r: number): Float32Array {
@@ -159,6 +170,12 @@ export interface GroundSources {
    * bzc.83: the volcanic cracks, terrain-motion.ts crackOverlay).
    */
   readonly overlays?: Readonly<Partial<Record<GroundTerrain, CrackOverlay>>>;
+  /**
+   * The brush that cuts the borders between grounds and frays the trodden
+   * patches (bead bzc.138, {@link EdgeMask}). Without it the borders are the
+   * smooth field's meandering contour alone.
+   */
+  readonly edge?: EdgeMask;
   readonly water: {
     readonly shallow: readonly PixelImage[];
     readonly deep: readonly PixelImage[];
@@ -235,24 +252,73 @@ export function edgeDistance(bits: number, px: number, py: number): number {
   return d;
 }
 
-/** FACTION_GRASS_SPILL_V7. */
-export const SPILL = {
-  width: 10,
-  waves: [4, 2.6, 1.6],
-  speckReach: 7,
-  speckShare: 7,
-  block: 2,
+/**
+ * The brush that cuts the borders between grounds (bead bzc.138): a
+ * tileable grey table baked offline (tools/art/ground-bake.mjs, from the
+ * ink-blot take `ground-lab-pixen/ink-p` mixed with a slow noise). Byte v
+ * stands for the edge value (v / 255 * 2 - 1) * EDGE.range.
+ */
+export interface EdgeMask {
+  readonly size: number;
+  readonly values: Uint8Array;
+}
+
+/**
+ * The mask transition (bead bzc.127 experiment C, bead bzc.138): a higher
+ * ground reaches `base` px past the smooth field's contour plus `amp` times
+ * the brush (in [-range, range]), so lobes, bites and droplets run both
+ * ways. Amp 11 keeps every lobe inside the 3 x 3 rank neighbourhood (the
+ * lab clipped at 15). Under the cut the lower ground gets a 1 px dark line
+ * (`line` px) and a dithered rim band (RIM width), within `band` px.
+ */
+export const EDGE = {
+  base: 2,
+  amp: 11,
+  range: 1.4,
+  line: 1.2,
+  band: 6,
+  /** How far a trodden patch's edge is frayed by the brush (in radii). */
+  patchFray: 0.2,
 } as const;
 
-/** How far a spill reaches at world pixel (wx, wy). */
-export function spillReach(wx: number, wy: number): number {
-  return (
-    SPILL.width +
-    SPILL.waves[0] * Math.sin(TURN * (5 * wx + 4 * wy) + 1.3) +
-    SPILL.waves[1] * Math.sin(TURN * (11 * wy - 9 * wx) + 0.4) +
-    SPILL.waves[2] * Math.sin(TURN * (23 * wx + 19 * wy) + 2.6)
-  );
+/** The brush value at world pixel (wx, wy) for ground `rank`, in [-range, range]. */
+export function edgeValue(
+  mask: EdgeMask | undefined,
+  wx: number,
+  wy: number,
+  rank: number,
+): number {
+  if (mask === undefined) return 0;
+  const n = mask.size;
+  const x = (((wx + 373 * rank) % n) + n) % n;
+  const y = (((wy + 611 * rank) % n) + n) % n;
+  return ((mask.values[y * n + x] ?? 128) / 127.5 - 1) * EDGE.range;
 }
+
+/** The rim a lower ground shows under a cut: a line and a band tint (RGB multipliers). */
+interface Rim {
+  readonly line: readonly [number, number, number];
+  readonly band: readonly [number, number, number];
+  readonly width: number;
+}
+
+const RIM: Readonly<Record<GroundTerrain, Rim>> = {
+  grass: { line: [0.72, 0.76, 0.76], band: [0.9, 0.91, 0.9], width: 4 },
+  steppe: { line: [0.76, 0.76, 0.74], band: [0.92, 0.91, 0.88], width: 4 },
+  jungle: { line: [0.7, 0.74, 0.76], band: [0.88, 0.9, 0.9], width: 4 },
+  badlands: { line: [0.7, 0.7, 0.72], band: [0.87, 0.86, 0.86], width: 5 },
+  wasteland: { line: [0.74, 0.74, 0.76], band: [0.9, 0.9, 0.9], width: 4 },
+  snow: { line: [0.8, 0.84, 0.92], band: [0.93, 0.95, 0.98], width: 5 },
+  volcanic: { line: [0.7, 0.68, 0.7], band: [0.88, 0.87, 0.88], width: 3 },
+  sand: { line: [0.82, 0.78, 0.74], band: [0.95, 0.93, 0.9], width: 5 },
+  frosting: { line: [0.86, 0.78, 0.82], band: [0.95, 0.92, 0.94], width: 4 },
+  swamp: { line: [0.7, 0.72, 0.7], band: [0.88, 0.89, 0.86], width: 4 },
+};
+
+/** Rim codes packed above the rank by {@link groundEdgeAt}. */
+export const RIM_NONE = 0;
+export const RIM_LINE = 1;
+export const RIM_BAND = 2;
 
 /**
  * The level of a smooth field where a border runs: 0.5 plus a slow meander
@@ -270,17 +336,55 @@ export function borderLevel(wx: number, wy: number, salt = 0): number {
 }
 
 /**
- * The ground rank at world pixel (wx, wy) of a cell whose 3 x 3
- * neighbourhood holds the land ranks `ranks` (ascending, distinct).
+ * The ground at world pixel (wx, wy) of a cell whose 3 x 3 neighbourhood
+ * holds the land ranks `ranks` (ascending, distinct), and the rim it shows:
+ * `rank | rim << 4` (RIM_NONE, RIM_LINE or RIM_BAND).
  *
- * Border Marches change to the Pulp Wars spill: the distance is not to the
- * cell's edges but to the 0.5 contour of the smooth field of "ground of
- * this rank or higher" (`cellField`), so where grounds meet the border
- * rounds the corners of the cell staircase instead of following it; the
- * higher (darker) ground then runs a ragged strip of `spillReach` px past
- * that contour, with loose specks beyond, cut in 2 px blocks, exactly as the
- * Pulp Wars spill.
+ * The border runs along the 0.5 contour (plus a slow meander,
+ * `borderLevel`) of the smooth field of "ground of this rank or higher"
+ * (`cellField`), so it rounds the corners of the cell staircase. Bead
+ * bzc.138 replaced the Pulp Wars spill (a strip of summed sines in 2 px
+ * blocks) with the mask cut of the bzc.127 lab: the higher ground reaches
+ * EDGE.base px past that contour plus EDGE.amp times the baked brush
+ * (`mask`), per pixel, in hard steps; the lower ground under the cut gets a
+ * 1 px dark line and a dithered rim band of its own colour (RIM).
  */
+export function groundEdgeAt(
+  atLeast: readonly ArrayLike<number>[],
+  width: number,
+  height: number,
+  ranks: readonly number[],
+  wx: number,
+  wy: number,
+  mask?: EdgeMask,
+): number {
+  const px = wx + 0.5;
+  const py = wy + 0.5;
+  let depth = Infinity;
+  for (let k = ranks.length - 1; k >= 1; k -= 1) {
+    const rank = ranks[k] ?? 0;
+    const values = atLeast[rank];
+    if (values === undefined) continue;
+    const field = cellField(values, width, height, px, py);
+    const inside =
+      (field.f - borderLevel(px, py, rank)) /
+      Math.max(1e-4, Math.sqrt(field.gx * field.gx + field.gy * field.gy));
+    const d = inside + EDGE.base + EDGE.amp * edgeValue(mask, wx, wy, rank);
+    if (d > 0) return rank | (rimCode(depth, rank, wx, wy) << 4);
+    if (depth === Infinity && d > -EDGE.band) depth = -d;
+  }
+  const low = ranks[0] ?? 0;
+  return low | (rimCode(depth, low, wx, wy) << 4);
+}
+
+function rimCode(depth: number, rank: number, wx: number, wy: number): number {
+  if (depth === Infinity) return RIM_NONE;
+  if (depth < EDGE.line) return RIM_LINE;
+  const rim = RIM[GROUND_RANK[rank] ?? "grass"];
+  return depth + bayer(wx, wy) * 2 < rim.width ? RIM_BAND : RIM_NONE;
+}
+
+/** The ground rank alone at world pixel (wx, wy): see {@link groundEdgeAt}. */
 export function groundRankAt(
   atLeast: readonly ArrayLike<number>[],
   width: number,
@@ -288,27 +392,9 @@ export function groundRankAt(
   ranks: readonly number[],
   wx: number,
   wy: number,
+  mask?: EdgeMask,
 ): number {
-  const { block } = SPILL;
-  const bx = Math.floor(wx / block) * block + block / 2;
-  const by = Math.floor(wy / block) * block + block / 2;
-  for (let k = ranks.length - 1; k >= 1; k -= 1) {
-    const rank = ranks[k] ?? 0;
-    const values = atLeast[rank];
-    if (values === undefined) continue;
-    const field = cellField(values, width, height, bx, by);
-    const inside =
-      (field.f - borderLevel(bx, by, rank)) /
-      Math.max(1e-4, Math.hypot(field.gx, field.gy));
-    const reach = spillReach(bx, by);
-    if (inside > -reach) return rank;
-    if (
-      inside > -reach - SPILL.speckReach &&
-      hash4(bx, by, 5 + rank, 0x47) % 100 < SPILL.speckShare
-    )
-      return rank;
-  }
-  return ranks[0] ?? 0;
+  return groundEdgeAt(atLeast, width, height, ranks, wx, wy, mask) & 15;
 }
 
 /** COAST_SAND_V7. */
@@ -470,6 +556,105 @@ const FOREST_SHADE: Readonly<
 };
 
 /**
+ * The colour drift (bead bzc.138, the bzc.127 lab's experiment A at 0.6):
+ * the drift field (ground-noise.ts driftField, two scales of about six and
+ * one and a half cells) cut into three palettes, darker and cooler, the
+ * texture's own, lighter and warmer, with an ordered-dither edge. RGB
+ * multipliers per ground; `dither` is the Bayer threshold's weight.
+ */
+export const DRIFT = {
+  low: 0.44,
+  high: 0.56,
+  dither: 0.03,
+} as const;
+
+const DRIFT_TINT: Readonly<
+  Record<
+    GroundTerrain,
+    {
+      readonly low: readonly [number, number, number];
+      readonly high: readonly [number, number, number];
+    }
+  >
+> = {
+  grass: { low: [0.94, 0.97, 1.0], high: [1.03, 1.03, 0.94] },
+  steppe: { low: [0.95, 0.96, 0.96], high: [1.03, 1.02, 0.96] },
+  jungle: { low: [0.94, 0.96, 1.0], high: [1.03, 1.03, 0.95] },
+  badlands: { low: [0.94, 0.93, 0.94], high: [1.04, 1.02, 0.95] },
+  wasteland: { low: [0.96, 0.96, 0.97], high: [1.03, 1.02, 1.01] },
+  snow: { low: [0.97, 0.98, 1.0], high: [1.01, 1.01, 1.0] },
+  volcanic: { low: [0.95, 0.95, 0.97], high: [1.04, 1.03, 1.03] },
+  sand: { low: [0.97, 0.96, 0.94], high: [1.02, 1.02, 1.03] },
+  frosting: { low: [0.98, 0.97, 0.98], high: [1.01, 1.01, 1.01] },
+  swamp: { low: [0.95, 0.96, 0.95], high: [1.04, 1.04, 1.0] },
+};
+
+/**
+ * Trodden earth under a site (bead bzc.138, the lab's patches, Heroes III):
+ * an ellipse round the site's foot, its edge frayed by the brush, in which
+ * the ground's own texture is mixed `mix` of the way toward a packed-earth
+ * colour of that ground, so the patch keeps the ground's grain.
+ */
+const PATCH: Readonly<
+  Record<
+    GroundTerrain,
+    { readonly earth: readonly [number, number, number]; readonly mix: number }
+  >
+> = {
+  grass: { earth: [176, 156, 108], mix: 0.5 },
+  steppe: { earth: [196, 172, 124], mix: 0.45 },
+  jungle: { earth: [146, 128, 90], mix: 0.5 },
+  badlands: { earth: [170, 120, 88], mix: 0.4 },
+  wasteland: { earth: [134, 124, 114], mix: 0.4 },
+  snow: { earth: [198, 202, 210], mix: 0.4 },
+  volcanic: { earth: [104, 94, 92], mix: 0.4 },
+  sand: { earth: [206, 176, 124], mix: 0.4 },
+  frosting: { earth: [228, 190, 176], mix: 0.4 },
+  swamp: { earth: [108, 94, 66], mix: 0.5 },
+};
+
+/** A trodden patch: an ellipse (world px) and the cells it may reach. */
+export interface GroundPatch {
+  readonly cx: number;
+  readonly cy: number;
+  readonly rx: number;
+  readonly ry: number;
+}
+
+/** The object kinds that stand in a trodden patch: the buildings. */
+const PATCH_KINDS: ReadonlySet<MapObject["kind"]> = new Set([
+  "town",
+  "mine",
+  "dwelling",
+  "site",
+  "bank",
+  "teleport",
+]);
+
+/**
+ * The trodden patches under the map's buildings (`objects`: the map's
+ * objects as made, terrain-plan.ts terrainObjects, so a patch never moves
+ * in a game): centred on the footprint a little above its bottom edge,
+ * about half again as wide as it is deep.
+ */
+export function groundPatches(
+  objects: readonly MapObject[],
+): readonly GroundPatch[] {
+  const out: GroundPatch[] = [];
+  for (const obj of objects) {
+    if (!PATCH_KINDS.has(obj.kind)) continue;
+    const b = objectBounds(obj);
+    out.push({
+      cx: (b.x + b.w / 2) * CELL,
+      cy: (b.y + b.h) * CELL - 0.32 * b.h * CELL,
+      rx: 0.42 * b.w * CELL + 6,
+      ry: 0.24 * b.h * CELL + 6,
+    });
+  }
+  return out;
+}
+
+/**
  * A smooth field over the map: the bilinear interpolation of one value per
  * cell, placed at the cell centres, at world pixel (wx, wy), with its
  * gradient (per world pixel). Cells outside the map repeat the edge cells.
@@ -532,16 +717,22 @@ export interface GroundLayout {
   readonly land: Uint8Array;
   /** The forest canopy's facts (canopy.ts), for the tint under the trees. */
   readonly canopy?: CanopyField;
+  /** Trodden patches under the buildings (bead bzc.138). */
+  readonly patches: readonly GroundPatch[];
+  /** Per cell, the indices into `patches` that may reach it. */
+  readonly patchCells: readonly (readonly number[])[];
 }
 
 /**
  * Builds the layout. `roadEnds` are extra road nodes (object entrances next
- * to a road) where a road ends.
+ * to a road) where a road ends; `objects` are the objects whose buildings
+ * stand in trodden patches (the map's objects as made).
  */
 export function buildGroundLayout(
   map: GameMap,
   roadEnds: readonly (readonly [number, number])[] = [],
   featured: ReadonlySet<number> = new Set(),
+  objects: readonly MapObject[] = [],
 ): GroundLayout {
   const { width, height } = map;
   const n = width * height;
@@ -619,6 +810,18 @@ export function buildGroundLayout(
         if (j >= 0) roads[j]?.push(seg);
       }
   }
+  const patches = groundPatches(objects);
+  const patchCells: number[][] = Array.from({ length: n }, () => []);
+  patches.forEach((p, k) => {
+    // The frayed edge reaches 1 + range * patchFray radii at most.
+    const s = 1 + EDGE.range * EDGE.patchFray;
+    const xa = Math.max(0, Math.floor((p.cx - p.rx * s) / CELL));
+    const xb = Math.min(width - 1, Math.floor((p.cx + p.rx * s) / CELL));
+    const ya = Math.max(0, Math.floor((p.cy - p.ry * s) / CELL));
+    const yb = Math.min(height - 1, Math.floor((p.cy + p.ry * s) / CELL));
+    for (let y = ya; y <= yb; y += 1)
+      for (let x = xa; x <= xb; x += 1) patchCells[y * width + x]?.push(k);
+  });
   return {
     width,
     height,
@@ -633,6 +836,8 @@ export function buildGroundLayout(
     atLeast,
     land,
     canopy: buildCanopyField(map, featured),
+    patches,
+    patchCells,
   };
 }
 
@@ -678,6 +883,27 @@ export function paintGround(
     out[o + 2] = tex.data[s + 2] ?? 0;
     out[o + 3] = 255;
   };
+  const tint = (o: number, k: readonly number[]): void => {
+    out[o] = (out[o] ?? 0) * (k[0] ?? 1);
+    out[o + 1] = (out[o + 1] ?? 0) * (k[1] ?? 1);
+    out[o + 2] = (out[o + 2] ?? 0) * (k[2] ?? 1);
+  };
+  // The drift field, sampled on a world-aligned grid (ground-noise.ts).
+  const drift = driftGrid(x0, y0, w, h);
+  let patchList: readonly number[] = [];
+  const inPatch = (wx: number, wy: number): boolean => {
+    for (const k of patchList) {
+      const p = layout.patches[k];
+      if (p === undefined) continue;
+      const dx = (wx + 0.5 - p.cx) / p.rx;
+      const dy = (wy + 0.5 - p.cy) / p.ry;
+      const reach =
+        1 +
+        EDGE.patchFray * edgeValue(sources.edge, wx, wy, GROUND_RANK.length);
+      if (dx * dx + dy * dy < reach * reach) return true;
+    }
+    return false;
+  };
   for (let cy = cy0; cy <= cy1; cy += 1)
     for (let cx = cx0; cx <= cx1; cx += 1) {
       const i = cy * layout.width + cx;
@@ -693,6 +919,7 @@ export function paintGround(
       const wooded = layout.canopy?.near[i] === 1;
       const ranks = layout.ranks[i] ?? [];
       const links = layout.roads[i] ?? [];
+      patchList = layout.patchCells[i] ?? [];
       const water = kind === WATER;
       const deep = layout.deep[i] === 1;
       const v = (layout.variant[i] ?? 0) % 2;
@@ -762,33 +989,56 @@ export function paintGround(
             }
           } else {
             // The ground here: the cell's own, or where grounds meet (or a
-            // water cell's corner the shore takes) the ranked spill.
-            const rank =
+            // water cell's corner the shore takes) the mask cut.
+            const code =
               ranks.length > 1
-                ? groundRankAt(
+                ? groundEdgeAt(
                     layout.atLeast,
                     layout.width,
                     layout.height,
                     ranks,
                     wx,
                     wy,
+                    sources.edge,
                   )
                 : water
                   ? (ranks[0] ?? 0)
                   : kind;
-            const tex = textures[rank];
-            if (tex !== undefined) sample(o, tex, wx, wy);
-            const over = overlays[rank];
-            if (over !== undefined) {
-              const img = over.image;
-              const s =
-                modulo(wy, img.height) * img.width + modulo(wx, img.width);
-              if ((img.data[s * 4 + 3] ?? 0) > 0) {
-                out[o] = img.data[s * 4] ?? 0;
-                out[o + 1] = img.data[s * 4 + 1] ?? 0;
-                out[o + 2] = img.data[s * 4 + 2] ?? 0;
-                if (hot !== undefined) hot[o >> 2] = over.hot[s] ?? 0;
+            const rank = code & 15;
+            const ground = GROUND_RANK[rank] ?? "grass";
+            let lit = true;
+            if (patchList.length > 0 && inPatch(wx, wy)) {
+              // Trodden earth under a building.
+              const tex = textures[rank];
+              if (tex !== undefined) sample(o, tex, wx, wy);
+              blend(o, PATCH[ground].earth, PATCH[ground].mix);
+            } else {
+              const tex = textures[rank];
+              if (tex !== undefined) sample(o, tex, wx, wy);
+              const over = overlays[rank];
+              if (over !== undefined) {
+                const img = over.image;
+                const s =
+                  modulo(wy, img.height) * img.width + modulo(wx, img.width);
+                if ((img.data[s * 4 + 3] ?? 0) > 0) {
+                  out[o] = img.data[s * 4] ?? 0;
+                  out[o + 1] = img.data[s * 4 + 1] ?? 0;
+                  out[o + 2] = img.data[s * 4 + 2] ?? 0;
+                  if (hot !== undefined) hot[o >> 2] = over.hot[s] ?? 0;
+                  lit = false;
+                }
               }
+            }
+            const rim = code >> 4;
+            if (rim !== RIM_NONE) {
+              const r = RIM[ground];
+              tint(o, rim === RIM_LINE ? r.line : r.band);
+            }
+            if (lit) {
+              // The colour drift: three palettes with a dithered edge.
+              const v = driftAt(drift, wx, wy) + bayer(wx, wy) * DRIFT.dither;
+              if (v < DRIFT.low) tint(o, DRIFT_TINT[ground].low);
+              else if (v > DRIFT.high) tint(o, DRIFT_TINT[ground].high);
             }
             if (coastBits !== 0) {
               const k = coastAt(true, shore, wx + 0.5, wy + 0.5);

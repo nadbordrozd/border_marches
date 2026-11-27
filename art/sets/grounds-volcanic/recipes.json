@@ -144,27 +144,9 @@
   ],
   "outputs": [
     {
-      "path": "public/assets/terrain/grounds/volcanic.png",
-      "from": "base-b#0"
-    },
-    {
-      "path": "public/assets/terrain/grounds/volcanic-swatch.png",
-      "from": "base-b#0",
-      "width": 80,
-      "height": 80,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 160,
-          "y": 160,
-          "width": 80,
-          "height": 80
-        }
-      ]
-    },
-    {
       "path": "public/assets/terrain/grounds/volcanic-cracks.png",
       "from": "pixen-a#0"
     }
-  ]
+  ],
+  "_outputs": "Since bead bzc.138 the ground texture and swatch are baked by tools/art/ground-bake.mjs (art/bake/grounds.json), not derived here."
 }

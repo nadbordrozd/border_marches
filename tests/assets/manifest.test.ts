@@ -85,6 +85,23 @@ const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
   [...STUDIO_PUBLIC].filter(([path]) => path.startsWith("assets/")),
 );
 
+/**
+ * The baked grounds (bead bzc.138): every land ground's texture and swatch
+ * and the border brush, derived from studio masters by
+ * tools/art/ground-bake.mjs as art/bake/grounds.json records.
+ */
+const BAKED: ReadonlySet<string> = (() => {
+  const recipe = readJson<{
+    grounds: Record<string, { output: string; swatch: string }>;
+    edge: { output: string };
+  }>(join(ROOT, "art/bake/grounds.json"));
+  const paths = [
+    ...Object.values(recipe.grounds).flatMap((g) => [g.output, g.swatch]),
+    recipe.edge.output,
+  ];
+  return new Set(paths.map((path) => path.slice("public/".length)));
+})();
+
 /** Width and height from a PNG's IHDR chunk. */
 function pngSize(file: string): { w: number; h: number } {
   const head = readFileSync(file).subarray(0, 24);
@@ -130,9 +147,9 @@ describe("asset manifest", () => {
 
   it("matches the sha256 recorded in the provenance table (imported art)", () => {
     const recorded = provenance();
-    expect(recorded.size).toBe(ALL_ASSETS.length - STUDIO.size);
+    expect(recorded.size).toBe(ALL_ASSETS.length - STUDIO.size - BAKED.size);
     for (const asset of ALL_ASSETS) {
-      if (STUDIO.has(asset.path)) continue;
+      if (STUDIO.has(asset.path) || BAKED.has(asset.path)) continue;
       const sha = createHash("sha256")
         .update(readFileSync(join(PUBLIC, asset.path)))
         .digest("hex");
@@ -195,6 +212,35 @@ describe("asset manifest", () => {
     // About 1.5 s alone (mostly the validate child process), several times
     // that when parallel test runs share the machine.
   }, 60_000);
+
+  it("bakes every land ground from studio masters (bead bzc.138)", () => {
+    const listed = new Set(ALL_ASSETS.map((asset) => asset.path));
+    const imported = provenance();
+    for (const terrain of GROUND_TERRAINS)
+      expect(BAKED.has(GROUND_TEXTURES[terrain].path)).toBe(true);
+    for (const path of BAKED) {
+      expect({ path, listed: listed.has(path) }).toEqual({
+        path,
+        listed: true,
+      });
+      expect({
+        path,
+        studio: STUDIO.has(path),
+        imported: imported.has(path),
+      }).toEqual({ path, studio: false, imported: false });
+    }
+    // Pixel-exact re-derivation from the hash-checked masters.
+    expect(() =>
+      execFileSync(
+        process.execPath,
+        ["tools/art/ground-bake.mjs", "validate"],
+        {
+          cwd: ROOT,
+          stdio: "pipe",
+        },
+      ),
+    ).not.toThrow();
+  }, 120_000);
 
   it("links page icons from index.html to studio outputs at the public root", () => {
     const html = readFileSync(join(ROOT, "index.html"), "utf8");

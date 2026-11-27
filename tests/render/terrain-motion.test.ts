@@ -275,7 +275,8 @@ describe("magma", () => {
     expect(at(300, 5)).toBeGreaterThan(0);
     expect(out[(5 * w + 300) * 4]).toBe(255);
     expect(at(20, 5)).toBe(0);
-    expect(out[(5 * w + 20) * 4]).toBe(30);
+    // The grass, give or take the colour drift (bead bzc.138).
+    expect(Math.abs((out[(5 * w + 20) * 4] ?? 0) - 30)).toBeLessThanOrEqual(2);
   });
 });
 

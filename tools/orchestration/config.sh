@@ -21,8 +21,9 @@ CHECK_UNIT="npx vitest run"
 CHECK_BUILD="npm run build"
 # Focused tests: the test files named for a bead are appended to this command.
 FOCUSED_TEST_CMD="npx vitest run"
-# Asset hygiene: hash-checked masters and derived files (zero dependencies).
-CHECK_ART="node tools/art/studio-art.mjs validate"
+# Asset hygiene: hash-checked masters and derived files (zero dependencies),
+# then the ground bake's derivations (bead bzc.138, art/bake/grounds.json).
+CHECK_ART="node tools/art/studio-art.mjs validate && node tools/art/ground-bake.mjs validate"
 
 # What integrate.sh runs before publishing, in order (names of the checks above
 # plus "focused"). Add "unit" for risky work; the whole unit tier otherwise

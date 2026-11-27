@@ -11,12 +11,17 @@ import {
   edgeDistance,
   GROUND_RANK,
   paintGround,
-  spillReach,
-  SPILL,
+  EDGE,
+  RIM_BAND,
+  RIM_LINE,
+  edgeValue,
+  groundEdgeAt,
+  groundPatches,
 } from "../../src/render/map/ground.ts";
 import type { GroundSources, PixelImage } from "../../src/render/map/ground.ts";
 import { paintFog } from "../../src/render/map/fog.ts";
 import { createMap } from "../../src/core/map/types.ts";
+import type { MapObject } from "../../src/core/map/types.ts";
 import type { GroundTerrain } from "../../src/assets/manifest.ts";
 
 /** A flat 80 x 80 raster of one colour. */
@@ -57,13 +62,19 @@ describe("distance fields", () => {
     expect(edgeDistance(0, 10, 10)).toBe(Infinity);
   });
 
-  it("keeps the spill strip within its waves", () => {
-    const sum = SPILL.waves.reduce((a, b) => a + b, 0);
-    for (let i = 0; i < 500; i += 1) {
-      const r = spillReach(i * 7.3, i * 3.1);
-      expect(r).toBeGreaterThanOrEqual(SPILL.width - sum - 1e-9);
-      expect(r).toBeLessThanOrEqual(SPILL.width + sum + 1e-9);
-    }
+  it("reads the edge brush within its range, tiled, per ground", () => {
+    const mask = {
+      size: 4,
+      values: Uint8Array.from([
+        0, 64, 128, 255, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
+      ]),
+    };
+    expect(edgeValue(mask, 0, 0, 0)).toBeCloseTo(-EDGE.range);
+    expect(edgeValue(mask, 3, 0, 0)).toBeCloseTo(EDGE.range);
+    expect(edgeValue(mask, 7, 4, 0)).toBe(edgeValue(mask, 3, 0, 0));
+    expect(edgeValue(undefined, 5, 5, 2)).toBe(0);
+    // The lobes stay inside the 3 x 3 rank neighbourhood (bzc.127: <= 11).
+    expect(EDGE.amp).toBeLessThanOrEqual(11);
   });
 
   it("puts sand on the land side of the shore and surf on the water side", () => {
@@ -173,7 +184,12 @@ describe("mountain cells (xaj.29)", () => {
       [120, 120],
       [239, 17],
     ] as const)
-      expect(pixel(out, 240, x, y)).toEqual(COLOURS.wasteland);
+      // The wasteland, give or take the colour drift (bead bzc.138).
+      pixel(out, 240, x, y).forEach((v, c) =>
+        expect(Math.abs(v - (COLOURS.wasteland[c] ?? 0))).toBeLessThanOrEqual(
+          4,
+        ),
+      );
   });
 });
 
@@ -206,8 +222,8 @@ describe("calmed ground textures (bead xaj.27)", () => {
     return sum / (size * size);
   };
 
-  it("calms the steppe only", () => {
-    expect(Object.keys(GROUND_CALM)).toEqual(["steppe"]);
+  it("calms no ground since the textures are baked (bead bzc.138)", () => {
+    expect(Object.keys(GROUND_CALM)).toEqual([]);
   });
 
   it("keeps the size, alpha and mean colour", () => {
@@ -234,5 +250,91 @@ describe("calmed ground textures (bead xaj.27)", () => {
       Math.abs(red(img, size - 1, y) - red(img, 0, y));
     for (const y of [0, 17, 40])
       expect(step(calm, y)).toBeLessThanOrEqual(step(image, y) + 1);
+  });
+});
+
+describe("the ground rollout (bead bzc.138)", () => {
+  /** A brush of hard blots: bytes 0 and 255 in 24 px squares. */
+  const size = 96;
+  const mask = {
+    size,
+    values: Uint8Array.from({ length: size * size }, (_, p) =>
+      (Math.floor((p % size) / 24) + Math.floor(p / size / 24)) % 2 === 0
+        ? 0
+        : 255,
+    ),
+  };
+
+  it("cuts the border with the brush both ways and rims the lower ground", () => {
+    const map = createMap(4, 2, 1, "grass");
+    for (const i of [2, 3, 6, 7]) map.cells[i]!.terrain = "wasteland";
+    const layout = buildGroundLayout(map);
+    const ranks = layout.ranks[1]!;
+    const wasteland = GROUND_RANK.indexOf("wasteland");
+    let line = 0;
+    let band = 0;
+    const reach: number[] = [];
+    for (let y = 0; y < 160; y += 1) {
+      let first = -1;
+      for (let x = 100; x < 220; x += 1) {
+        const code = groundEdgeAt(layout.atLeast, 4, 2, ranks, x, y, mask);
+        if ((code & 15) === wasteland && first < 0) first = x;
+        if (code >> 4 === RIM_LINE) {
+          line += 1;
+          expect(code & 15).not.toBe(wasteland);
+        }
+        if (code >> 4 === RIM_BAND) band += 1;
+      }
+      reach.push(first);
+    }
+    // Lobes of the brush both ways of the cell edge (x = 160).
+    expect(Math.min(...reach)).toBeLessThan(160 - 8);
+    expect(Math.max(...reach)).toBeGreaterThan(160);
+    expect(line).toBeGreaterThan(100);
+    expect(band).toBeGreaterThan(100);
+  });
+
+  it("drifts the colour in flat palettes, never a gradient", () => {
+    const map = createMap(12, 12, 1, "grass");
+    const out = new Uint8ClampedArray(960 * 960 * 4);
+    paintGround(buildGroundLayout(map), SOURCES, 0, 0, 960, 960, out);
+    const greens = new Set<number>();
+    for (let p = 0; p < 960 * 960; p += 1) greens.add(out[p * 4 + 1] ?? 0);
+    // The texture's green, darker and lighter: three palettes.
+    expect(greens.size).toBe(3);
+  });
+
+  const site = (kind: MapObject["kind"], x: number, y: number): MapObject => ({
+    id: `${kind}-${x}`,
+    kind,
+    x,
+    y,
+    footprint: { w: 1, h: 1 },
+    blocked: [],
+    data: {},
+  });
+
+  it("lays trodden earth under buildings only", () => {
+    const objects = [site("mine", 1, 1), site("pickup", 3, 3)];
+    expect(groundPatches(objects)).toHaveLength(1);
+    const map = createMap(5, 5, 1, "grass");
+    map.objects = objects;
+    const plain = new Uint8ClampedArray(400 * 400 * 4);
+    const trodden = new Uint8ClampedArray(400 * 400 * 4);
+    paintGround(buildGroundLayout(map), SOURCES, 0, 0, 400, 400, plain);
+    paintGround(
+      buildGroundLayout(map, [], new Set(), objects),
+      SOURCES,
+      0,
+      0,
+      400,
+      400,
+      trodden,
+    );
+    // Under the mine: the earth; under the pickup: the grass as it was.
+    expect(pixel(trodden, 400, 120, 125)).not.toEqual(
+      pixel(plain, 400, 120, 125),
+    );
+    expect(pixel(trodden, 400, 280, 285)).toEqual(pixel(plain, 400, 280, 285));
   });
 });

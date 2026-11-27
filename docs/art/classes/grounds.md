@@ -1,15 +1,25 @@
 # Grounds asset contract
 
-Status: draft (bead `border_marches-bzc.83`; the five imported grounds follow
-[IMPORTED_FROM_PULP_WARS.md](../IMPORTED_FROM_PULP_WARS.md)). A richer
-look is proposed, not adopted: see
-[the texture experiment](#texture-experiment-bead-bzc127).
+Status: adopted (bead `border_marches-bzc.138`, the rollout of
+[the texture experiment](#texture-experiment-bead-bzc127)): every land
+ground is baked from PixelLab takes into one 12-cell texture, drawn under a
+colour drift, cut from its neighbours by a brush with a rim, and sites stand
+in trodden patches; see [the rollout](#rollout-bead-bzc138). The sections
+below it on the older single takes are history: those takes are now inputs
+of the bake.
 
 ## Inventory
 
+Since bead bzc.138 every land ground's `<ground>.png` and
+`<ground>-swatch.png` are baked (see [the rollout](#rollout-bead-bzc138)):
+960 x 960, a 12-cell period, but the frosting (its icing take at 400 x 400,
+5 cells). `edge-mask.png` (1200 x 1200) is the border brush. The table and
+notes below record what each ground was before; the volcanic cracks
+overlay is unchanged.
+
 | Ground | Files (public/assets/terrain/grounds/) | Period | Source |
 | --- | --- | --- | --- |
-| grass, jungle, steppe, badlands, wasteland | `<ground>.png`, `<ground>-swatch.png` | 8 cells (jungle 6) | Pulp Wars |
+| grass, jungle, steppe, badlands, wasteland | `<ground>.png`, `<ground>-swatch.png` | 8 cells (jungle 6) | Pulp Wars (until bzc.138) |
 | volcanic | `volcanic.png` (400 x 400), `volcanic-swatch.png` (80 x 80), `volcanic-cracks.png` (480 x 480) | 5 cells; cracks 6 cells | studio set `grounds-volcanic` |
 | snow | `snow.png` (400 x 400), `snow-swatch.png` (80 x 80) | 5 cells | studio set `grounds-snow` (bead bzc.87) |
 
@@ -99,14 +109,17 @@ rim) and gives each crack one of three glow groups, which pulse out of step.
 ## Geometry
 
 Seen from straight above, edge to edge, no centre, border or perspective;
-drawn at map pixel modulo the period (80 px cells). A base must tile: its
-wrap seam no worse than its own neighbour-to-neighbour noise.
+drawn at map pixel modulo the period (80 px cells, 12 cells since bead
+bzc.138). A baked texture tiles by construction (the bake works on a
+torus).
 
 ## Readability
 
-Calm: luma spread like the imported grounds (the volcanic base is quieter
-still), a few discrete details. The volcanic cracks cover under 1% of the
-ground; the rest is plain basalt so units and pieces stand out.
+Painterly but background (ART_DIRECTION, "Ground is background", bead
+bzc.138): fine 2-6 px detail in the ground's identity colour, luma spread
+about 5-16% (the snow and frosting at the low end), no single large
+feature; units, towns and sites read first. The volcanic cracks cover under
+1% of the ground; the rest is basalt so units and pieces stand out.
 
 ## Recipe
 
@@ -208,3 +221,95 @@ paints convincing ground but frames it (a rim, a plate, a lit corner):
 keep `view: high top-down` (without it pixen draws a clearing, a pit or a
 courtyard) and crop the interior. Ink blots on paper make a good edge
 mask; moss on stone drew a floor plan.
+
+## Rollout (bead bzc.138)
+
+The combo of the lab, in the game. The orchestrator approved the higher
+contrast (luma spread about 5-16%, was 2-6%) as an art-direction change the
+user may overrule (ART_DIRECTION section 2, "Ground is background").
+
+**Takes.** Set `grounds-pixen` (pixen 400 x 400, `view: high top-down`,
+lineless, highly detailed), plus the lab's accepted takes (set
+`ground-lab-pixen`) and two older single takes. Which take feeds which
+ground is in `art/bake/grounds.json`:
+| Ground | Takes (crop) | Colour, spread |
+| --- | --- | --- |
+| grass | `ground-lab-pixen` grass-q, grass-s, grass-p | `#8bb95e`, 8% |
+| steppe | `grounds-pixen` steppe-c, steppe-d (flatten 0.7) | `#ccb86f`, 7% |
+| jungle | `ground-lab-pixen/grass-p` and `grounds-pixen/swamp-a` (its moss clumps) | `#65a25a`, 10% |
+| badlands | `grounds-pixen/badlands-b`: calm earth with hairline cracks, the calmer red earth asked for | `#b36a45`, 9% |
+| wasteland | `grounds-pixen` wasteland-d (ash, charred twigs) and badlands-b (cracks), flatten 0.6 | `#79726b`, 8% |
+| snow | `grounds-pixen/sand-a` (its wind ripples read as drifted snow), flatten 0.6 | `#d5e2f5`, 3.5% |
+| volcanic | `grounds-pixen/badlands-b` and `ground-lab-pixen/dirt-s` (cracked rock); cracks overlay kept | `#42373f`, 7% |
+| sand | `grounds-pixen/sand-a`, `ground-lab-pixen/sand-p` | `#e4b962`, 5% |
+| frosting | `grounds-frosting/icing-a`, `mode: repeat` | `#fad5dd`, 4% |
+| swamp | `grounds-pixen/swamp-a` (wet mud ripples, moss clumps) | `#4f502d`, 10% |
+
+Pixen hit rate: 6 usable of 32 calls (US$0.35). The model frames its
+ground (a rim, a wall, a plate), and for snow, icing, ash and basalt it
+draws a scene (a snowy courtyard, cakes, flagstones); "looking straight
+down at ...: only ..., nothing else" did no better than "seen from straight
+above, ... running off every edge". Words that worked: grass, dry grass,
+rust earth, golden sand, swamp mud, ash with twigs. So the snow and the
+volcanic basalt borrow the ripples and cracks of other takes, moved to
+their own colours, and the frosting keeps its own tileable icing take.
+
+**The bake** (`node tools/art/ground-bake.mjs bake|validate|preview`,
+recipe `art/bake/grounds.json`): each take is cropped to its open interior
+(pixen frames its ground), its slow light and dark patches half pulled to
+its own mean (box radius 24 px), then moved to the ground's colour (the
+mean of its texture before bzc.138, so every ground keeps its identity
+colour) at the ground's luma spread. The takes are patch-bombed onto a
+960 px torus: warped Voronoi regions 96 px apart, each reading one take
+round its middle at its own offset, with a 6 px stippled seam between
+regions. A take that already tiles and has long strokes (the frosting's
+icing lines) is `mode: repeat`: recoloured only, at its own period. The
+swatch is the texture's first cell. `validate` re-derives every file from
+the hash-checked masters and compares pixels; `tests/assets/manifest.test.ts`
+runs it and `CHECK_ART` (tools/orchestration/config.sh) runs it with the
+studio validate.
+
+**The brush** (`edge-mask.png`, 1200 x 1200 grey, baked by the same tool
+from the ink-blot take `ground-lab-pixen/ink-p` bombed the same way, half
+weight, plus a slow periodic noise, 0.7): byte v is an edge value
+(v / 255 x 2 - 1) x 1.4.
+
+**At run time** (`src/render/map/ground.ts`, per pixel, cached in the
+640 px chunks):
+
+- *Borders* (`groundEdgeAt`, replacing the Pulp Wars spill): the higher
+  ground reaches 2 px past the smooth field's meandering contour plus 11 x
+  the brush (read at an offset per rank), so lobes, bites and droplets run
+  both ways, about +-13 px, in hard pixel steps. 11 keeps every lobe inside
+  the 3 x 3 rank neighbourhood (the lab clipped at 15). The lower ground
+  under the cut gets a 1 px dark line and a 3-5 px rim band dithered by a
+  Bayer threshold (`RIM`, per lower ground).
+- *Drift* (`ground-noise.ts` `driftField`): two scales of value noise
+  (about six and one and a half cells), rotated and warped, sampled every
+  8 world px and read bilinearly, cut at 0.44 and 0.56 with a 4 x 4 Bayer
+  threshold into three palettes per ground (`DRIFT_TINT`: darker and
+  cooler, the texture's own, lighter and warmer). The volcanic cracks are
+  not drifted.
+- *Trodden patches* (`groundPatches`): under every town, mine, dwelling,
+  site, bank and teleport of the map as made (terrain-plan.ts
+  `terrainObjects`, so a patch never moves in a game; tested with the
+  terrain-stability test), an ellipse about 0.84 x the footprint wide and
+  0.48 deep round its foot, its edge frayed by the brush, where the
+  ground's own texture is mixed toward a packed-earth colour of that ground
+  (`PATCH`).
+
+**Cost.** `paintGround` per 640 px chunk over every chunk of three generated M maps
+(seeds 11-13, 108 chunks, the second of two passes, Node, a loaded
+machine): about 1.17-1.27x the pre-bzc.138 painter (for example 66 ms
+against 78 ms), within the 1.3x budget; the textures are sampled as before,
+the brush is one table read per higher rank, the drift a bilinear read of
+a grid sampled every 8 px (about 6,500 noise evaluations a chunk), the
+patches an ellipse test in the few cells round buildings. Memory: a baked
+ground is 960 x 960 RGBA, 3.7 MB as read pixels (the frosting 0.6 MB), 34
+MB for the ten against about 10.7 MB before, plus the 1.4 MB brush table
+(one byte a pixel); the browser holds the decoded images as well.
+
+Battle and town screens that tile the ground textures get the new grounds
+as they are (no drift, no brush). The lab (tools/ground-lab) still compares
+its experiments against the pre-bzc.138 painter in its own models; its
+"lab painter equals the game's paintGround" check no longer holds.

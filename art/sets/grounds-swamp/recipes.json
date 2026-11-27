@@ -78,25 +78,6 @@
       "subject": "@mire"
     }
   ],
-  "outputs": [
-    {
-      "path": "public/assets/terrain/grounds/swamp.png",
-      "from": "mire-a#0"
-    },
-    {
-      "path": "public/assets/terrain/grounds/swamp-swatch.png",
-      "from": "mire-a#0",
-      "width": 80,
-      "height": 80,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 160,
-          "y": 160,
-          "width": 80,
-          "height": 80
-        }
-      ]
-    }
-  ]
+  "outputs": [],
+  "_outputs": "Since bead bzc.138 the ground texture and swatch are baked by tools/art/ground-bake.mjs (art/bake/grounds.json), not derived here."
 }

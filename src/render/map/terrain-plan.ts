@@ -128,7 +128,12 @@ export function planTerrain(map: GameMap): TerrainPlan {
   const featured = featuredCells(map, objects);
   const canopyField = buildCanopyField(map, featured);
   const peakField = buildPeakField(map, featured);
-  const base = buildGroundLayout(map, roadEnds(map, objects), featured);
+  const base = buildGroundLayout(
+    map,
+    roadEnds(map, objects),
+    featured,
+    objects,
+  );
   const layout = { ...base, canopy: canopyField };
   const canopy = placeCanopySet(canopyField, TREE_SPECIES);
   const peaks = placePeakSet(peakField, PEAK_SPRITES);

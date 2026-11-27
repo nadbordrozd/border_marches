@@ -1,0 +1,319 @@
+{
+  "_doc": "Ground bake (bead bzc.138): tools/art/ground-bake.mjs derives every land ground's texture and swatch, and the border brush, from these accepted takes. mean: the ground's colour before bzc.138 (its old texture's mean; the steppe as calmed in game). spread: the luma standard deviation over the mean luma. flatten: how much of each take's slow light and dark patches is pulled to its mean (box radius px). Crops keep each take's open interior (pixen frames its ground). Edit a value, run `bake`, review, commit the recipe and the files together.",
+  "grounds": {
+    "grass": {
+      "mean": "#8bb95e",
+      "spread": 0.08,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13801,
+      "takes": [
+        {
+          "take": "ground-lab-pixen/grass-q#0",
+          "crop": [
+            40,
+            70,
+            290,
+            240
+          ]
+        },
+        {
+          "take": "ground-lab-pixen/grass-s#0",
+          "crop": [
+            110,
+            30,
+            220,
+            270
+          ]
+        },
+        {
+          "take": "ground-lab-pixen/grass-p#0",
+          "crop": [
+            56,
+            48,
+            300,
+            300
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/grass.png",
+      "swatch": "public/assets/terrain/grounds/grass-swatch.png"
+    },
+    "steppe": {
+      "mean": "#ccb86f",
+      "spread": 0.07,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.7
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13802,
+      "takes": [
+        {
+          "take": "grounds-pixen/steppe-c#0",
+          "crop": [
+            40,
+            70,
+            260,
+            300
+          ]
+        },
+        {
+          "take": "grounds-pixen/steppe-d#0",
+          "crop": [
+            0,
+            0,
+            400,
+            400
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/steppe.png",
+      "swatch": "public/assets/terrain/grounds/steppe-swatch.png"
+    },
+    "jungle": {
+      "mean": "#65a25a",
+      "spread": 0.1,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13803,
+      "takes": [
+        {
+          "take": "ground-lab-pixen/grass-p#0",
+          "crop": [
+            56,
+            48,
+            300,
+            300
+          ]
+        },
+        {
+          "take": "grounds-pixen/swamp-a#0",
+          "crop": [
+            40,
+            40,
+            320,
+            300
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/jungle.png",
+      "swatch": "public/assets/terrain/grounds/jungle-swatch.png"
+    },
+    "badlands": {
+      "mean": "#b36a45",
+      "spread": 0.09,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13804,
+      "takes": [
+        {
+          "take": "grounds-pixen/badlands-b#0",
+          "crop": [
+            8,
+            8,
+            384,
+            384
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/badlands.png",
+      "swatch": "public/assets/terrain/grounds/badlands-swatch.png"
+    },
+    "wasteland": {
+      "mean": "#79726b",
+      "spread": 0.08,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.6
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13805,
+      "takes": [
+        {
+          "take": "grounds-pixen/wasteland-d#0",
+          "crop": [
+            30,
+            30,
+            340,
+            250
+          ]
+        },
+        {
+          "take": "grounds-pixen/badlands-b#0",
+          "crop": [
+            8,
+            8,
+            384,
+            384
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/wasteland.png",
+      "swatch": "public/assets/terrain/grounds/wasteland-swatch.png"
+    },
+    "snow": {
+      "mean": "#d5e2f5",
+      "spread": 0.035,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.6
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13806,
+      "takes": [
+        {
+          "take": "grounds-pixen/sand-a#0",
+          "crop": [
+            80,
+            120,
+            320,
+            280
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/snow.png",
+      "swatch": "public/assets/terrain/grounds/snow-swatch.png"
+    },
+    "volcanic": {
+      "mean": "#42373f",
+      "spread": 0.07,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13807,
+      "takes": [
+        {
+          "take": "grounds-pixen/badlands-b#0",
+          "crop": [
+            8,
+            8,
+            384,
+            384
+          ]
+        },
+        {
+          "take": "ground-lab-pixen/dirt-s#0",
+          "crop": [
+            100,
+            10,
+            240,
+            215
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/volcanic.png",
+      "swatch": "public/assets/terrain/grounds/volcanic-swatch.png"
+    },
+    "sand": {
+      "mean": "#e4b962",
+      "spread": 0.05,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13808,
+      "takes": [
+        {
+          "take": "grounds-pixen/sand-a#0",
+          "crop": [
+            80,
+            120,
+            320,
+            280
+          ]
+        },
+        {
+          "take": "ground-lab-pixen/sand-p#0",
+          "crop": [
+            80,
+            70,
+            250,
+            250
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/sand.png",
+      "swatch": "public/assets/terrain/grounds/sand-swatch.png"
+    },
+    "frosting": {
+      "mean": "#fad5dd",
+      "spread": 0.04,
+      "flatten": {
+        "radius": 24,
+        "amount": 0
+      },
+      "period": 400,
+      "salt": 13809,
+      "takes": [
+        {
+          "take": "grounds-frosting/icing-a#0",
+          "crop": [
+            0,
+            0,
+            400,
+            400
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/frosting.png",
+      "swatch": "public/assets/terrain/grounds/frosting-swatch.png",
+      "mode": "repeat"
+    },
+    "swamp": {
+      "mean": "#4f502d",
+      "spread": 0.1,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "period": 960,
+      "spacing": 96,
+      "salt": 13810,
+      "takes": [
+        {
+          "take": "grounds-pixen/swamp-a#0",
+          "crop": [
+            40,
+            40,
+            320,
+            300
+          ]
+        }
+      ],
+      "output": "public/assets/terrain/grounds/swamp.png",
+      "swatch": "public/assets/terrain/grounds/swamp-swatch.png"
+    }
+  },
+  "edge": {
+    "take": "ground-lab-pixen/ink-p#0",
+    "period": 1200,
+    "spacing": 100,
+    "slow": 50,
+    "brush": 0.8,
+    "noise": 0.6,
+    "range": 1.4,
+    "salt": 13899,
+    "output": "public/assets/terrain/grounds/edge-mask.png"
+  }
+}

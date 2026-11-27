@@ -1,0 +1,1154 @@
+{
+  "steppe-a": {
+    "id": "steppe-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f073e7e0-5f8c-4d32-8caa-9a25bb4b0d2e",
+    "submittedAt": "2026-11-27T10:25:14.004Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm dry steppe grassland seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short dry straw-yellow grass #ccb86f with many small dry tufts and blades in darker #a8944e and paler #e4d494, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138101,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm dry steppe grassland seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short dry straw-yellow grass #ccb86f with many small dry tufts and blades in darker #a8944e and paler #e4d494, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:25:14.015Z",
+    "usageUsd": 0.009833838277392919,
+    "candidates": [
+      {
+        "file": "steppe-a-0.png",
+        "sha256": "9977f801cf635217c8cd58593eea97749a9367c8eafe09dc487e4e497d5ab8c2",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "steppe-b": {
+    "id": "steppe-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9efc75dd-9695-4717-aaed-3bfbf5c9ed66",
+    "submittedAt": "2026-11-27T10:25:59.034Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm dry steppe grassland seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short dry straw-yellow grass #ccb86f with many small dry tufts and blades in darker #a8944e and paler #e4d494, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138102,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm dry steppe grassland seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short dry straw-yellow grass #ccb86f with many small dry tufts and blades in darker #a8944e and paler #e4d494, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:25:59.036Z",
+    "usageUsd": 0.009762848880555895,
+    "candidates": [
+      {
+        "file": "steppe-b-0.png",
+        "sha256": "8989a39e76e864897e32b52419b9fcf4c943f035bdfacb931e0923bc6665c1f5",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "jungle-a": {
+    "id": "jungle-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d82813fd-2c43-4555-a87b-6976426dd647",
+    "submittedAt": "2026-11-27T10:26:42.641Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a calm lush jungle floor seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Deep green #65a25a moss and low leafy ground plants, many small fern fronds and leaves in darker #457a40 and lighter #86c070, a few fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138201,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: a calm lush jungle floor seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Deep green #65a25a moss and low leafy ground plants, many small fern fronds and leaves in darker #457a40 and lighter #86c070, a few fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:26:42.644Z",
+    "usageUsd": 0.009719133800930448,
+    "candidates": [
+      {
+        "file": "jungle-a-0.png",
+        "sha256": "85e445b864d35df3582091e03b284da53bdcd2c214df7da6061f04dd21e2ada3",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "jungle-b": {
+    "id": "jungle-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-8ff4b47a-7865-426f-a368-3f9263f38e29",
+    "submittedAt": "2026-11-27T10:27:42.184Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a calm lush jungle floor seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Deep green #65a25a moss and low leafy ground plants, many small fern fronds and leaves in darker #457a40 and lighter #86c070, a few fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138202,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: a calm lush jungle floor seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Deep green #65a25a moss and low leafy ground plants, many small fern fronds and leaves in darker #457a40 and lighter #86c070, a few fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:27:42.186Z",
+    "usageUsd": 0.011356193727917142,
+    "candidates": [
+      {
+        "file": "jungle-b-0.png",
+        "sha256": "a845c2fd21843dcb13c39b3daee04dd48185f8ee3cbb574d7c39842e0bd72610",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-a": {
+    "id": "badlands-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a3473952-9c51-49be-a6d9-b8fa2c51554b",
+    "submittedAt": "2026-11-27T10:29:01.009Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138301,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:29:01.012Z",
+    "usageUsd": 0.013514691776699492,
+    "candidates": [
+      {
+        "file": "badlands-a-0.png",
+        "sha256": "554195f0035676a871321fff9a912cdf68260f5564dbea5c01e6e319880d64c1",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-b": {
+    "id": "badlands-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d3dc3004-ffca-4b74-a126-d25c91a9cedd",
+    "submittedAt": "2026-11-27T10:30:01.393Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138302,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:30:01.394Z",
+    "usageUsd": 0.011454265303081936,
+    "candidates": [
+      {
+        "file": "badlands-b-0.png",
+        "sha256": "0d349ea936702108e8e2cc90646bc5335b7575ea5d2ddae7ae559292c5940661",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-c": {
+    "id": "badlands-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-102d04d9-d7ea-4b89-817d-0337b77f4b10",
+    "submittedAt": "2026-11-27T10:31:13.580Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138303,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:31:13.582Z",
+    "usageUsd": 0.01272183510992262,
+    "candidates": [
+      {
+        "file": "badlands-c-0.png",
+        "sha256": "499cc8d600b71844b990778a761929473f3fbda61c08b2af24e25d2f4308589f",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "wasteland-a": {
+    "id": "wasteland-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-cfcd47a4-16e2-43c0-8abc-63cac3475534",
+    "submittedAt": "2026-11-27T10:32:47.041Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm burnt ash-grey ground after a wildfire seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 ash flecks, a few small charred twigs and pebbles, soft uneven patches of lighter and warmer ash. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138401,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm burnt ash-grey ground after a wildfire seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 ash flecks, a few small charred twigs and pebbles, soft uneven patches of lighter and warmer ash. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:32:47.043Z",
+    "usageUsd": 0.015142175383037991,
+    "candidates": [
+      {
+        "file": "wasteland-a-0.png",
+        "sha256": "e6d235069eed216685150efcf1263696830cc9c75cff1c1762ac7b45b42c5333",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "wasteland-b": {
+    "id": "wasteland-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f7c8cad8-e3f6-4668-80c6-d441ae97c940",
+    "submittedAt": "2026-11-27T10:33:47.143Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm burnt ash-grey ground after a wildfire seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 ash flecks, a few small charred twigs and pebbles, soft uneven patches of lighter and warmer ash. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138402,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm burnt ash-grey ground after a wildfire seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 ash flecks, a few small charred twigs and pebbles, soft uneven patches of lighter and warmer ash. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:33:47.144Z",
+    "usageUsd": 0.011422606335745919,
+    "candidates": [
+      {
+        "file": "wasteland-b-0.png",
+        "sha256": "c4dd4c99a362aaca1d8c24cb9f80ee49acc6c74d334be4720912d40075e56c57",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "snow-a": {
+    "id": "snow-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-113b4506-80cd-44c0-be2d-0b0822bda174",
+    "submittedAt": "2026-11-27T10:34:30.338Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm fresh snow seen from straight above, the snow running off every edge of the picture with no frame, no rim and no plate. Smooth snow #d5e2f5 with large soft wind drifts in slightly bluer #c2d2ec and whiter #eef4fc, faint thin curved wind lines, a few tiny glints. Evenly lit, very low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138501,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm fresh snow seen from straight above, the snow running off every edge of the picture with no frame, no rim and no plate. Smooth snow #d5e2f5 with large soft wind drifts in slightly bluer #c2d2ec and whiter #eef4fc, faint thin curved wind lines, a few tiny glints. Evenly lit, very low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, footprints, rock, stones, puddles, ice, dots."
+    },
+    "at": "2026-11-27T10:34:30.339Z",
+    "usageUsd": 0.009596873097949557,
+    "candidates": [
+      {
+        "file": "snow-a-0.png",
+        "sha256": "374f86e5248a7dd5bc404f4074d83cf1051a6de7eb98b8a4d43e012f146827da",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "snow-b": {
+    "id": "snow-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-2be4f1a7-8781-416a-b0dc-8a52c7f16afc",
+    "submittedAt": "2026-11-27T10:35:16.751Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm fresh snow seen from straight above, the snow running off every edge of the picture with no frame, no rim and no plate. Smooth snow #d5e2f5 with large soft wind drifts in slightly bluer #c2d2ec and whiter #eef4fc, faint thin curved wind lines, a few tiny glints. Evenly lit, very low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138502,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm fresh snow seen from straight above, the snow running off every edge of the picture with no frame, no rim and no plate. Smooth snow #d5e2f5 with large soft wind drifts in slightly bluer #c2d2ec and whiter #eef4fc, faint thin curved wind lines, a few tiny glints. Evenly lit, very low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, footprints, rock, stones, puddles, ice, dots."
+    },
+    "at": "2026-11-27T10:35:16.753Z",
+    "usageUsd": 0.009769169171651205,
+    "candidates": [
+      {
+        "file": "snow-b-0.png",
+        "sha256": "a8a5419dcfc0d7059092f402fb96694ee7a41148e3b900124195006f55343957",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "basalt-a": {
+    "id": "basalt-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-fac15620-67c6-4760-918e-3c4abb3070e5",
+    "submittedAt": "2026-11-27T10:36:08.001Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm dark basalt rock ground seen from straight above, the rock running off every edge of the picture with no frame, no rim and no plate. Dark purple-grey basalt #42373f with fine grain in darker #2f272d and lighter #55484f, small dark pebbles, soft patches of grey ash, a few faint thin dark cracks. No lava, no glow. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138601,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm dark basalt rock ground seen from straight above, the rock running off every edge of the picture with no frame, no rim and no plate. Dark purple-grey basalt #42373f with fine grain in darker #2f272d and lighter #55484f, small dark pebbles, soft patches of grey ash, a few faint thin dark cracks. No lava, no glow. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, volcano, lava, fire, glow."
+    },
+    "at": "2026-11-27T10:36:08.008Z",
+    "usageUsd": 0.010429855479134454,
+    "candidates": [
+      {
+        "file": "basalt-a-0.png",
+        "sha256": "70f161e9a0fb5bfb5e8227a5b80df6cc0344be5b949c3c548f84c4687cc6aa84",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "basalt-b": {
+    "id": "basalt-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c1f00f0b-2141-425c-8a85-8cc69d375c1b",
+    "submittedAt": "2026-11-27T10:36:50.811Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm dark basalt rock ground seen from straight above, the rock running off every edge of the picture with no frame, no rim and no plate. Dark purple-grey basalt #42373f with fine grain in darker #2f272d and lighter #55484f, small dark pebbles, soft patches of grey ash, a few faint thin dark cracks. No lava, no glow. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138602,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm dark basalt rock ground seen from straight above, the rock running off every edge of the picture with no frame, no rim and no plate. Dark purple-grey basalt #42373f with fine grain in darker #2f272d and lighter #55484f, small dark pebbles, soft patches of grey ash, a few faint thin dark cracks. No lava, no glow. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, volcano, lava, fire, glow."
+    },
+    "at": "2026-11-27T10:36:50.813Z",
+    "usageUsd": 0.009559192842907377,
+    "candidates": [
+      {
+        "file": "basalt-b-0.png",
+        "sha256": "7c88279d78408bd900ba5aa75950b02517bb03a4240d32d91dc3a6f5aa8216b6",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-a": {
+    "id": "sand-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-e4ea1047-8c30-4289-8e14-9e39d16c0378",
+    "submittedAt": "2026-11-27T10:37:33.477Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #e4b962 with many small soft wind ripples in lighter #f0cc84 and slightly darker #cfa452, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138701,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #e4b962 with many small soft wind ripples in lighter #f0cc84 and slightly darker #cfa452, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:37:33.479Z",
+    "usageUsd": 0.009535983377032809,
+    "candidates": [
+      {
+        "file": "sand-a-0.png",
+        "sha256": "2a0bb378fb07c06ccc2779f4e7a77f15c908552e9bf8cf0f05b8c33ea2119b16",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "frosting-a": {
+    "id": "frosting-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-8a152d9c-e2c4-42ef-b9f7-b710bdf583b2",
+    "submittedAt": "2026-11-27T10:38:16.939Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: smooth pale pink strawberry icing seen from straight above, the icing running off every edge of the picture with no frame, no rim and no plate. Soft pink icing #f6cbd6 with gentle wavy palette-knife strokes in slightly deeper #ebb2c2 and creamier #fde6ec, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138801,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: smooth pale pink strawberry icing seen from straight above, the icing running off every edge of the picture with no frame, no rim and no plate. Soft pink icing #f6cbd6 with gentle wavy palette-knife strokes in slightly deeper #ebb2c2 and creamier #fde6ec, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, cake, plate, candy, sprinkles, puddles, blobs, dots, spiral."
+    },
+    "at": "2026-11-27T10:38:16.941Z",
+    "usageUsd": 0.009659835974375407,
+    "candidates": [
+      {
+        "file": "frosting-a-0.png",
+        "sha256": "03bfdf9f26c397aceb84138918ca2af5682e480e3cb2df81db0d75d7e298edaf",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "frosting-b": {
+    "id": "frosting-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-49e5ab06-9a49-4440-be36-664ee8f60893",
+    "submittedAt": "2026-11-27T10:38:59.375Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: smooth pale pink strawberry icing seen from straight above, the icing running off every edge of the picture with no frame, no rim and no plate. Soft pink icing #f6cbd6 with gentle wavy palette-knife strokes in slightly deeper #ebb2c2 and creamier #fde6ec, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138802,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: smooth pale pink strawberry icing seen from straight above, the icing running off every edge of the picture with no frame, no rim and no plate. Soft pink icing #f6cbd6 with gentle wavy palette-knife strokes in slightly deeper #ebb2c2 and creamier #fde6ec, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, cake, plate, candy, sprinkles, puddles, blobs, dots, spiral."
+    },
+    "at": "2026-11-27T10:38:59.377Z",
+    "usageUsd": 0.009587884505589804,
+    "candidates": [
+      {
+        "file": "frosting-b-0.png",
+        "sha256": "85bf81896077e7be22c0e4f77273ad5afe1ec66974343114c0c579d035f3c85e",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "swamp-a": {
+    "id": "swamp-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-2da01895-59ec-46ee-b828-392967e6ec85",
+    "submittedAt": "2026-11-27T10:39:41.414Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm wet swamp mud seen from straight above, the mud running off every edge of the picture with no frame, no rim and no plate. Murky olive mud #4f502d with soft mossy green patches #5f6a34, many tiny short dark reed flecks #3a3b20, a few small faint wet sheens, soft uneven patches of greener and browner mud. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138901,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm wet swamp mud seen from straight above, the mud running off every edge of the picture with no frame, no rim and no plate. Murky olive mud #4f502d with soft mossy green patches #5f6a34, many tiny short dark reed flecks #3a3b20, a few small faint wet sheens, soft uneven patches of greener and browner mud. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, lakes, ponds, lily pads, flowers."
+    },
+    "at": "2026-11-27T10:39:41.416Z",
+    "usageUsd": 0.00953291662534078,
+    "candidates": [
+      {
+        "file": "swamp-a-0.png",
+        "sha256": "72913aded01a83e048ebe680a4efab5a711c116d238993bfa43fe8d87e48ff72",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "swamp-b": {
+    "id": "swamp-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-94b745bd-f1a3-41d3-876e-2ff90919d265",
+    "submittedAt": "2026-11-27T10:40:23.772Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm wet swamp mud seen from straight above, the mud running off every edge of the picture with no frame, no rim and no plate. Murky olive mud #4f502d with soft mossy green patches #5f6a34, many tiny short dark reed flecks #3a3b20, a few small faint wet sheens, soft uneven patches of greener and browner mud. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138902,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm wet swamp mud seen from straight above, the mud running off every edge of the picture with no frame, no rim and no plate. Murky olive mud #4f502d with soft mossy green patches #5f6a34, many tiny short dark reed flecks #3a3b20, a few small faint wet sheens, soft uneven patches of greener and browner mud. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, lakes, ponds, lily pads, flowers."
+    },
+    "at": "2026-11-27T10:40:23.773Z",
+    "usageUsd": 0.009537951999240452,
+    "candidates": [
+      {
+        "file": "swamp-b-0.png",
+        "sha256": "015944e225e69c6843c925e63e6a5c298e4d3d4f4a59108730fbd0be2042a5e4",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-d": {
+    "id": "badlands-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-741010cb-1200-4f9a-b2ef-f1c17b7d3b82",
+    "submittedAt": "2026-11-27T10:42:06.985Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at calm bare rust-red earth: only bare packed soil, nothing else, filling the whole picture edge to edge. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138311,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at calm bare rust-red earth: only bare packed soil, nothing else, filling the whole picture edge to edge. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:42:06.988Z",
+    "usageUsd": 0.015040549490186905,
+    "candidates": [
+      {
+        "file": "badlands-d-0.png",
+        "sha256": "d3d54a1244244474147224fd5dd2767a8d614a7d4fbb7ecf531a078d319aa697",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-e": {
+    "id": "badlands-e",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-02df3a3e-9202-41e3-9c57-d4a2aeb61a55",
+    "submittedAt": "2026-11-27T10:43:18.158Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at calm bare rust-red earth: only bare packed soil, nothing else, filling the whole picture edge to edge. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138312,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at calm bare rust-red earth: only bare packed soil, nothing else, filling the whole picture edge to edge. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:43:18.160Z",
+    "usageUsd": 0.012613886727227106,
+    "candidates": [
+      {
+        "file": "badlands-e-0.png",
+        "sha256": "a6dd7694f72e456bc86d9495bb3764d07aee9943e36315482a62431900f933b9",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "steppe-c": {
+    "id": "steppe-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-25dabd9f-8fa1-4e15-a466-3474a239f654",
+    "submittedAt": "2026-11-27T10:44:00.077Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a dry straw-yellow meadow: only short dry grass, nothing else, filling the whole picture edge to edge. Many small dry grass tufts and blades in straw #ccb86f with darker #a8944e shade between them and paler #e4d494 tips, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138111,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a dry straw-yellow meadow: only short dry grass, nothing else, filling the whole picture edge to edge. Many small dry grass tufts and blades in straw #ccb86f with darker #a8944e shade between them and paler #e4d494 tips, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:44:00.078Z",
+    "usageUsd": 0.009467427598105538,
+    "candidates": [
+      {
+        "file": "steppe-c-0.png",
+        "sha256": "1be30b4f5e5f6b3e265353a01d55858806f49f8c8b17e04b3470192325b6ca6f",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "steppe-d": {
+    "id": "steppe-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-365f22b2-87b6-46df-a981-733cb07bc3cc",
+    "submittedAt": "2026-11-27T10:44:45.870Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a dry straw-yellow meadow: only short dry grass, nothing else, filling the whole picture edge to edge. Many small dry grass tufts and blades in straw #ccb86f with darker #a8944e shade between them and paler #e4d494 tips, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138112,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a dry straw-yellow meadow: only short dry grass, nothing else, filling the whole picture edge to edge. Many small dry grass tufts and blades in straw #ccb86f with darker #a8944e shade between them and paler #e4d494 tips, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:44:45.872Z",
+    "usageUsd": 0.009824105474683974,
+    "candidates": [
+      {
+        "file": "steppe-d-0.png",
+        "sha256": "1b6b7c284deb73ca0d3604fe650b2bdd7cbd793d8f3c5b4df3adff36e3667e61",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "jungle-c": {
+    "id": "jungle-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f0ad8954-c4e7-4f70-aa1f-9ca4158f030e",
+    "submittedAt": "2026-11-27T10:45:46.224Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a lush mossy forest floor: only moss and tiny low leaves, nothing else, filling the whole picture edge to edge. Many small clumps of moss and clover-like leaves in deep green #65a25a with darker #457a40 shade between them and lighter #86c070 tips, a few tiny fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138211,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a lush mossy forest floor: only moss and tiny low leaves, nothing else, filling the whole picture edge to edge. Many small clumps of moss and clover-like leaves in deep green #65a25a with darker #457a40 shade between them and lighter #86c070 tips, a few tiny fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:45:46.225Z",
+    "usageUsd": 0.0113891658782959,
+    "candidates": [
+      {
+        "file": "jungle-c-0.png",
+        "sha256": "3fad56b5cabe5c192409633001877a0fdceba58023c849c154a88d2b21001de3",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "jungle-d": {
+    "id": "jungle-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a4aeba4f-d8bf-4b9b-b6ab-0e381c0dd296",
+    "submittedAt": "2026-11-27T10:46:33.454Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a lush mossy forest floor: only moss and tiny low leaves, nothing else, filling the whole picture edge to edge. Many small clumps of moss and clover-like leaves in deep green #65a25a with darker #457a40 shade between them and lighter #86c070 tips, a few tiny fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138212,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a lush mossy forest floor: only moss and tiny low leaves, nothing else, filling the whole picture edge to edge. Many small clumps of moss and clover-like leaves in deep green #65a25a with darker #457a40 shade between them and lighter #86c070 tips, a few tiny fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:46:33.456Z",
+    "usageUsd": 0.009967447095447116,
+    "candidates": [
+      {
+        "file": "jungle-d-0.png",
+        "sha256": "51105e38169015ba22bf51cb282f7dccc7b797df2815b4912e77a16485394665",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "wasteland-c": {
+    "id": "wasteland-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4c66193f-802b-4c03-a4f9-5aa830649dda",
+    "submittedAt": "2026-11-27T10:47:17.115Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at grey ash and cinders: only bare burnt ground, nothing else, filling the whole picture edge to edge. Soft grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 flecks, small charred twigs and grey pebbles, a few faint hairline cracks, soft uneven patches of lighter and warmer ash. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138411,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at grey ash and cinders: only bare burnt ground, nothing else, filling the whole picture edge to edge. Soft grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 flecks, small charred twigs and grey pebbles, a few faint hairline cracks, soft uneven patches of lighter and warmer ash. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:47:17.117Z",
+    "usageUsd": 0.009734391080008613,
+    "candidates": [
+      {
+        "file": "wasteland-c-0.png",
+        "sha256": "21cc8affe704ba5d2172188cebfd1d63d652d470f1102bcd1a907239070f20df",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "wasteland-d": {
+    "id": "wasteland-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3b6d6265-b1e8-46ab-8917-36e0a3a5c48a",
+    "submittedAt": "2026-11-27T10:47:57.868Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at grey ash and cinders: only bare burnt ground, nothing else, filling the whole picture edge to edge. Soft grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 flecks, small charred twigs and grey pebbles, a few faint hairline cracks, soft uneven patches of lighter and warmer ash. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138412,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at grey ash and cinders: only bare burnt ground, nothing else, filling the whole picture edge to edge. Soft grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 flecks, small charred twigs and grey pebbles, a few faint hairline cracks, soft uneven patches of lighter and warmer ash. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:47:57.870Z",
+    "usageUsd": 0.009435211684968737,
+    "candidates": [
+      {
+        "file": "wasteland-d-0.png",
+        "sha256": "580e71325a457e9f6604da564736dffbf718a2c31817888fbd270d3ea2663691",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "snow-c": {
+    "id": "snow-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-045e0c3c-8bb4-4c6c-8e6f-2da2e4be99c1",
+    "submittedAt": "2026-11-27T10:48:39.813Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at smooth fresh snow: only snow, nothing else, filling the whole picture edge to edge. Soft white snow #d5e2f5 with many small soft wind ripples and drifts in slightly bluer #bccde8 shade and whiter #f2f7fd crests, a few tiny glints, soft uneven patches of bluer and whiter snow. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138511,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at smooth fresh snow: only snow, nothing else, filling the whole picture edge to edge. Soft white snow #d5e2f5 with many small soft wind ripples and drifts in slightly bluer #bccde8 shade and whiter #f2f7fd crests, a few tiny glints, soft uneven patches of bluer and whiter snow. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, footprints, rock, stones, puddles, ice, dots."
+    },
+    "at": "2026-11-27T10:48:39.815Z",
+    "usageUsd": 0.009485450559192234,
+    "candidates": [
+      {
+        "file": "snow-c-0.png",
+        "sha256": "770a779c26d59bdd49ef0efbbba229f3725e02732771676daef5cbc050203149",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "snow-d": {
+    "id": "snow-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0d35913a-115a-4143-9d89-c0eadeeeb404",
+    "submittedAt": "2026-11-27T10:49:55.481Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at smooth fresh snow: only snow, nothing else, filling the whole picture edge to edge. Soft white snow #d5e2f5 with many small soft wind ripples and drifts in slightly bluer #bccde8 shade and whiter #f2f7fd crests, a few tiny glints, soft uneven patches of bluer and whiter snow. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138512,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at smooth fresh snow: only snow, nothing else, filling the whole picture edge to edge. Soft white snow #d5e2f5 with many small soft wind ripples and drifts in slightly bluer #bccde8 shade and whiter #f2f7fd crests, a few tiny glints, soft uneven patches of bluer and whiter snow. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, footprints, rock, stones, puddles, ice, dots."
+    },
+    "at": "2026-11-27T10:49:55.483Z",
+    "usageUsd": 0.01313067576620314,
+    "candidates": [
+      {
+        "file": "snow-d-0.png",
+        "sha256": "f3eda96192531e47c85bf12fe523e5250539744fb68b9e2c5745032f9e33cd25",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "frosting-c": {
+    "id": "frosting-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3a53ab36-3d19-401c-af94-5efcb34fdc8c",
+    "submittedAt": "2026-11-27T10:50:37.824Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a wide flat field of smooth pale pink icing: only icing, nothing else, filling the whole picture edge to edge, no cake and no plate. Soft pink icing #f6cbd6 with many small soft wavy ridges left by a spreading knife in slightly deeper #ebb2c2 shade and creamier #fde6ec crests, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138811,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a wide flat field of smooth pale pink icing: only icing, nothing else, filling the whole picture edge to edge, no cake and no plate. Soft pink icing #f6cbd6 with many small soft wavy ridges left by a spreading knife in slightly deeper #ebb2c2 shade and creamier #fde6ec crests, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, cake, plate, strawberry, fruit, candy, sprinkles, spiral, dots."
+    },
+    "at": "2026-11-27T10:50:37.827Z",
+    "usageUsd": 0.009594333940082127,
+    "candidates": [
+      {
+        "file": "frosting-c-0.png",
+        "sha256": "59465ebd3927b0c175a71cbe16ee464be15709055d4c89f92edc4a3e72c01723",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "frosting-d": {
+    "id": "frosting-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-de49040e-351e-4d2b-9824-53454ad8c4dc",
+    "submittedAt": "2026-11-27T10:51:20.837Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a wide flat field of smooth pale pink icing: only icing, nothing else, filling the whole picture edge to edge, no cake and no plate. Soft pink icing #f6cbd6 with many small soft wavy ridges left by a spreading knife in slightly deeper #ebb2c2 shade and creamier #fde6ec crests, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138812,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a wide flat field of smooth pale pink icing: only icing, nothing else, filling the whole picture edge to edge, no cake and no plate. Soft pink icing #f6cbd6 with many small soft wavy ridges left by a spreading knife in slightly deeper #ebb2c2 shade and creamier #fde6ec crests, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, cake, plate, strawberry, fruit, candy, sprinkles, spiral, dots."
+    },
+    "at": "2026-11-27T10:51:20.839Z",
+    "usageUsd": 0.009672854079140557,
+    "candidates": [
+      {
+        "file": "frosting-d-0.png",
+        "sha256": "d4065196a1e05619aba36216a610d7f26eaf653002269ead8ff9138deacd9a0a",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-f": {
+    "id": "badlands-f",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-72339e54-f3ed-4d99-8c61-647f1eeb3c9f",
+    "submittedAt": "2026-11-27T10:53:34.114Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138304,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:53:34.118Z",
+    "usageUsd": 0.01291468980577257,
+    "candidates": [
+      {
+        "file": "badlands-f-0.png",
+        "sha256": "f48fa24d1c78d0b28beb59d1e517eeedd2cd07139ebff82cbe8684822696d164",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "badlands-g": {
+    "id": "badlands-g",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-07738a91-0d86-4e78-97f0-4a74d82b868c",
+    "submittedAt": "2026-11-27T10:54:29.596Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 138305,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T10:54:29.598Z",
+    "usageUsd": 0.01094888703028361,
+    "candidates": [
+      {
+        "file": "badlands-g-0.png",
+        "sha256": "4b2ecc6ecf025fa89b67f52c6a1a12e50bda02affb0d4dbf133706f6080aae98",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

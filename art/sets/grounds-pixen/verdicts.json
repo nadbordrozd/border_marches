@@ -1,0 +1,162 @@
+{
+  "badlands-a#0": {
+    "verdict": "REJECTED",
+    "notes": "cracks laid out as brick courses inside a dark rim: reads as paving",
+    "at": "2026-11-27T10:37:39.279Z"
+  },
+  "badlands-c#0": {
+    "verdict": "REJECTED",
+    "notes": "pale pebble clusters on a regular spacing read as stamps; chunky dark cracks, busier than dirt-p",
+    "at": "2026-11-27T10:37:39.405Z"
+  },
+  "badlands-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm full-bleed rust earth with fine hairline cracks and a few pebbles: the calmer red earth the rollout asked for",
+    "at": "2026-11-27T10:37:39.580Z"
+  },
+  "jungle-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a clearing framed by ferns and a boulder, faceted triangle patches inside",
+    "at": "2026-11-27T10:37:39.712Z"
+  },
+  "jungle-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a checkerboard of moss squares framed by ferns: a grid",
+    "at": "2026-11-27T10:37:39.841Z"
+  },
+  "steppe-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a framed patch with three star-shaped tufts and a path: stamps",
+    "at": "2026-11-27T10:37:39.952Z"
+  },
+  "wasteland-a#0": {
+    "verdict": "REJECTED",
+    "notes": "cracked flagstone paving inside a wall with a tree and boulder",
+    "at": "2026-11-27T10:37:40.066Z"
+  },
+  "wasteland-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a cobblestone road between dark shrubs: a scene, and paving",
+    "at": "2026-11-27T10:37:40.165Z"
+  },
+  "snow-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a snowy island with trees and footprints on a dark tiled ground: a scene",
+    "at": "2026-11-27T10:37:40.267Z"
+  },
+  "snow-b#0": {
+    "verdict": "REJECTED",
+    "notes": "paved courtyard with trees, rocks and a frozen pond: a scene",
+    "at": "2026-11-27T10:37:46.227Z"
+  },
+  "steppe-a#0": {
+    "verdict": "REJECTED",
+    "notes": "dark tuft clusters on a regular lattice inside a dark rim: polka-dot motif",
+    "at": "2026-11-27T10:37:51.234Z"
+  },
+  "basalt-a#0": {
+    "verdict": "REJECTED",
+    "notes": "flagstone paving in a stone frame with green moss: a floor",
+    "at": "2026-11-27T10:38:19.285Z"
+  },
+  "basalt-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a dry-stone wall pattern in rows: bricks",
+    "at": "2026-11-27T10:38:19.379Z"
+  },
+  "sand-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft diagonal wind ripples over the whole middle; corner boulders cropped away in the bake",
+    "at": "2026-11-27T10:38:19.480Z"
+  },
+  "frosting-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a strawberry cake on flagstones: an object, not ground",
+    "at": "2026-11-27T10:39:36.575Z"
+  },
+  "frosting-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a spiral iced cake on a brick floor: an object, not ground",
+    "at": "2026-11-27T10:39:36.669Z"
+  },
+  "swamp-b#0": {
+    "verdict": "REJECTED",
+    "notes": "mud terraces cut by straight moss paths into a grid, rimmed pools: a plan, not ground",
+    "at": "2026-11-27T10:40:43.239Z"
+  },
+  "swamp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "murky olive mud with wet ripple lines, moss clumps and a few stones; the bake crops away the grass rim and corner rock",
+    "at": "2026-11-27T10:40:43.333Z"
+  },
+  "badlands-d#0": {
+    "verdict": "REJECTED",
+    "notes": "framed by a grass rim and cobbles, faint brick courses and orange L-shaped blotches",
+    "at": "2026-11-27T10:42:15.515Z"
+  },
+  "badlands-e#0": {
+    "verdict": "REJECTED",
+    "notes": "flagstone cracks under a radial lit spot and dark vignette: paving",
+    "at": "2026-11-27T10:43:35.653Z"
+  },
+  "steppe-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dense dry grass blades and seed stalks over the whole middle, too brown: the bake recolours it to the steppe's straw and crops the dark rim and two dark streaks",
+    "at": "2026-11-27T10:44:23.639Z"
+  },
+  "steppe-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "full-bleed dry grass stalks and straw tufts over olive blotches; the bake flattens the blotches and recolours to the steppe's straw",
+    "at": "2026-11-27T10:45:02.727Z"
+  },
+  "jungle-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a clearing framed by roots and boulders with a lit spot and mud stepping stones: a scene",
+    "at": "2026-11-27T10:46:48.598Z"
+  },
+  "jungle-d#0": {
+    "verdict": "REJECTED",
+    "notes": "moss clumps on a faint checker under roots and big leaves: a grid and a frame",
+    "at": "2026-11-27T10:46:48.669Z"
+  },
+  "wasteland-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a framed scene: a black crater, boulders, stacked stones and dead roots round a lit corner",
+    "at": "2026-11-27T10:48:20.428Z"
+  },
+  "wasteland-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "grey ash with charred twigs, pebbles and fine cracks; the bake crops the pebble rim and most of the warm corner patch",
+    "at": "2026-11-27T10:48:20.536Z"
+  },
+  "snow-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a courtyard under snowy firs with a gate and cobbles; the snow inside reads as flagstones",
+    "at": "2026-11-27T10:50:16.159Z"
+  },
+  "snow-d#0": {
+    "verdict": "REJECTED",
+    "notes": "a snowy path with a footprint trail between a stone wall and firs: a scene",
+    "at": "2026-11-27T10:50:16.243Z"
+  },
+  "frosting-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a frosted sheet cake on a paved floor with piped rosettes in a grid: an object",
+    "at": "2026-11-27T10:51:42.882Z"
+  },
+  "frosting-d#0": {
+    "verdict": "REJECTED",
+    "notes": "a brown swirl cake on tiles with a stone rim: an object and a grid",
+    "at": "2026-11-27T10:51:42.961Z"
+  },
+  "badlands-f#0": {
+    "verdict": "REJECTED",
+    "notes": "framed by a stone rim, busy pale pebbles and cracks: no calmer than dirt-p",
+    "at": "2026-11-27T10:54:46.679Z"
+  },
+  "badlands-g#0": {
+    "verdict": "REJECTED",
+    "notes": "full-bleed cracked plates but large orange blots that would read as stamps",
+    "at": "2026-11-27T10:54:46.767Z"
+  }
+}

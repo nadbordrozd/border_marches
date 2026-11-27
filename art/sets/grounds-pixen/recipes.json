@@ -1,0 +1,307 @@
+{
+  "set": "grounds-pixen",
+  "bead": "border_marches-bzc.138",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "Ground texture rollout (bead bzc.138, docs/art/classes/grounds.md): pixen takes at 400 x 400 with the high top-down view, cropped, recoloured to each ground's colour and baked by tools/art/ground-bake.mjs (art/grounds/bake.json) into one tileable 12-cell texture per ground. The grass and sand also read takes of set ground-lab-pixen. Never the words texture or tile (pixen draws paving); never 'volcanic' (a volcano). Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "opts": {
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down"
+    },
+    "steppe": "Subject: calm dry steppe grassland seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short dry straw-yellow grass #ccb86f with many small dry tufts and blades in darker #a8944e and paler #e4d494, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "jungle": "Subject: a calm lush jungle floor seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Deep green #65a25a moss and low leafy ground plants, many small fern fronds and leaves in darker #457a40 and lighter #86c070, a few fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "badlands": "Subject: calm flat bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a very few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, quiet, no deep cracks. Painterly 16-bit strategy-game map ground.",
+    "wasteland": "Subject: calm burnt ash-grey ground after a wildfire seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 ash flecks, a few small charred twigs and pebbles, soft uneven patches of lighter and warmer ash. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "snow": "Subject: calm fresh snow seen from straight above, the snow running off every edge of the picture with no frame, no rim and no plate. Smooth snow #d5e2f5 with large soft wind drifts in slightly bluer #c2d2ec and whiter #eef4fc, faint thin curved wind lines, a few tiny glints. Evenly lit, very low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "basalt": "Subject: calm dark basalt rock ground seen from straight above, the rock running off every edge of the picture with no frame, no rim and no plate. Dark purple-grey basalt #42373f with fine grain in darker #2f272d and lighter #55484f, small dark pebbles, soft patches of grey ash, a few faint thin dark cracks. No lava, no glow. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "sand": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #e4b962 with many small soft wind ripples in lighter #f0cc84 and slightly darker #cfa452, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground.",
+    "frosting": "Subject: smooth pale pink strawberry icing seen from straight above, the icing running off every edge of the picture with no frame, no rim and no plate. Soft pink icing #f6cbd6 with gentle wavy palette-knife strokes in slightly deeper #ebb2c2 and creamier #fde6ec, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "swamp": "Subject: calm wet swamp mud seen from straight above, the mud running off every edge of the picture with no frame, no rim and no plate. Murky olive mud #4f502d with soft mossy green patches #5f6a34, many tiny short dark reed flecks #3a3b20, a few small faint wet sheens, soft uneven patches of greener and browner mud. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "badlands2": "Subject: looking straight down at calm bare rust-red earth: only bare packed soil, nothing else, filling the whole picture edge to edge. Smooth packed soil #b36a45 with soft fine grain in slightly darker #9a5a3a and lighter #c98058, a few small tan pebbles, a few faint short hairline cracks, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "steppe2": "Subject: looking straight down at a dry straw-yellow meadow: only short dry grass, nothing else, filling the whole picture edge to edge. Many small dry grass tufts and blades in straw #ccb86f with darker #a8944e shade between them and paler #e4d494 tips, a few tiny seed heads, soft uneven patches of slightly more golden and slightly more olive straw. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "jungle2": "Subject: looking straight down at a lush mossy forest floor: only moss and tiny low leaves, nothing else, filling the whole picture edge to edge. Many small clumps of moss and clover-like leaves in deep green #65a25a with darker #457a40 shade between them and lighter #86c070 tips, a few tiny fallen leaves, soft uneven patches of slightly bluer and slightly yellower green. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "wasteland2": "Subject: looking straight down at grey ash and cinders: only bare burnt ground, nothing else, filling the whole picture edge to edge. Soft grey ash #79726b with fine darker #5a544f soot grain and lighter #948c84 flecks, small charred twigs and grey pebbles, a few faint hairline cracks, soft uneven patches of lighter and warmer ash. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "snow2": "Subject: looking straight down at smooth fresh snow: only snow, nothing else, filling the whole picture edge to edge. Soft white snow #d5e2f5 with many small soft wind ripples and drifts in slightly bluer #bccde8 shade and whiter #f2f7fd crests, a few tiny glints, soft uneven patches of bluer and whiter snow. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "frosting2": "Subject: looking straight down at a wide flat field of smooth pale pink icing: only icing, nothing else, filling the whole picture edge to edge, no cake and no plate. Soft pink icing #f6cbd6 with many small soft wavy ridges left by a spreading knife in slightly deeper #ebb2c2 shade and creamier #fde6ec crests, a few tiny white sugar crystals, soft uneven patches of pinker and creamier icing. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@opts",
+    "negative": "tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+  },
+  "recipes": [
+    {
+      "id": "steppe-a",
+      "concept": "STEPPE",
+      "width": 400,
+      "height": 400,
+      "seed": 138101,
+      "subject": "@steppe"
+    },
+    {
+      "id": "steppe-b",
+      "concept": "STEPPE",
+      "width": 400,
+      "height": 400,
+      "seed": 138102,
+      "subject": "@steppe"
+    },
+    {
+      "id": "jungle-a",
+      "concept": "JUNGLE FLOOR",
+      "width": 400,
+      "height": 400,
+      "seed": 138201,
+      "subject": "@jungle"
+    },
+    {
+      "id": "jungle-b",
+      "concept": "JUNGLE FLOOR",
+      "width": 400,
+      "height": 400,
+      "seed": 138202,
+      "subject": "@jungle"
+    },
+    {
+      "id": "badlands-a",
+      "concept": "CALM RED EARTH",
+      "width": 400,
+      "height": 400,
+      "seed": 138301,
+      "subject": "@badlands"
+    },
+    {
+      "id": "badlands-b",
+      "concept": "CALM RED EARTH",
+      "width": 400,
+      "height": 400,
+      "seed": 138302,
+      "subject": "@badlands"
+    },
+    {
+      "id": "badlands-c",
+      "concept": "CALM RED EARTH",
+      "width": 400,
+      "height": 400,
+      "seed": 138303,
+      "subject": "@badlands"
+    },
+    {
+      "id": "wasteland-a",
+      "concept": "ASH GROUND",
+      "width": 400,
+      "height": 400,
+      "seed": 138401,
+      "subject": "@wasteland"
+    },
+    {
+      "id": "wasteland-b",
+      "concept": "ASH GROUND",
+      "width": 400,
+      "height": 400,
+      "seed": 138402,
+      "subject": "@wasteland"
+    },
+    {
+      "id": "snow-a",
+      "concept": "SNOW",
+      "width": 400,
+      "height": 400,
+      "seed": 138501,
+      "subject": "@snow",
+      "negative": "tiles, tile grid, bricks, paving, path, road, footprints, object, character, animal, building, tree, rock, stones, water, puddles, ice, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "snow-b",
+      "concept": "SNOW",
+      "width": 400,
+      "height": 400,
+      "seed": 138502,
+      "subject": "@snow",
+      "negative": "tiles, tile grid, bricks, paving, path, road, footprints, object, character, animal, building, tree, rock, stones, water, puddles, ice, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "basalt-a",
+      "concept": "BASALT",
+      "width": 400,
+      "height": 400,
+      "seed": 138601,
+      "subject": "@basalt",
+      "negative": "volcano, lava, fire, glow, tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, building, tree, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, repeating motif"
+    },
+    {
+      "id": "basalt-b",
+      "concept": "BASALT",
+      "width": 400,
+      "height": 400,
+      "seed": 138602,
+      "subject": "@basalt",
+      "negative": "volcano, lava, fire, glow, tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, building, tree, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, repeating motif"
+    },
+    {
+      "id": "sand-a",
+      "concept": "SAND",
+      "width": 400,
+      "height": 400,
+      "seed": 138701,
+      "subject": "@sand"
+    },
+    {
+      "id": "frosting-a",
+      "concept": "ICING",
+      "width": 400,
+      "height": 400,
+      "seed": 138801,
+      "subject": "@frosting",
+      "negative": "cake, plate, candy, sprinkles, tiles, tile grid, bricks, paving, path, object, character, building, tree, water, puddles, blobs, frame, border, horizon, sky, perspective, text, circles, dots, stripes, spiral, repeating motif"
+    },
+    {
+      "id": "frosting-b",
+      "concept": "ICING",
+      "width": 400,
+      "height": 400,
+      "seed": 138802,
+      "subject": "@frosting",
+      "negative": "cake, plate, candy, sprinkles, tiles, tile grid, bricks, paving, path, object, character, building, tree, water, puddles, blobs, frame, border, horizon, sky, perspective, text, circles, dots, stripes, spiral, repeating motif"
+    },
+    {
+      "id": "swamp-a",
+      "concept": "SWAMP MUD",
+      "width": 400,
+      "height": 400,
+      "seed": 138901,
+      "subject": "@swamp",
+      "negative": "lakes, ponds, lily pads, flowers, tiles, tile grid, bricks, paving, path, road, object, character, animal, building, tree, big rock, frame, border, horizon, sky, perspective, text, circles, stripes, repeating motif"
+    },
+    {
+      "id": "swamp-b",
+      "concept": "SWAMP MUD",
+      "width": 400,
+      "height": 400,
+      "seed": 138902,
+      "subject": "@swamp",
+      "negative": "lakes, ponds, lily pads, flowers, tiles, tile grid, bricks, paving, path, road, object, character, animal, building, tree, big rock, frame, border, horizon, sky, perspective, text, circles, stripes, repeating motif"
+    },
+    {
+      "id": "badlands-d",
+      "concept": "CALM RED EARTH (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138311,
+      "subject": "@badlands2"
+    },
+    {
+      "id": "badlands-e",
+      "concept": "CALM RED EARTH (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138312,
+      "subject": "@badlands2"
+    },
+    {
+      "id": "steppe-c",
+      "concept": "STEPPE (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138111,
+      "subject": "@steppe2"
+    },
+    {
+      "id": "steppe-d",
+      "concept": "STEPPE (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138112,
+      "subject": "@steppe2"
+    },
+    {
+      "id": "jungle-c",
+      "concept": "MOSSY FLOOR (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138211,
+      "subject": "@jungle2"
+    },
+    {
+      "id": "jungle-d",
+      "concept": "MOSSY FLOOR (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138212,
+      "subject": "@jungle2"
+    },
+    {
+      "id": "wasteland-c",
+      "concept": "ASH (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138411,
+      "subject": "@wasteland2"
+    },
+    {
+      "id": "wasteland-d",
+      "concept": "ASH (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138412,
+      "subject": "@wasteland2"
+    },
+    {
+      "id": "snow-c",
+      "concept": "SNOW (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138511,
+      "subject": "@snow2",
+      "negative": "tiles, tile grid, bricks, paving, path, road, footprints, object, character, animal, building, tree, rock, stones, water, puddles, ice, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "snow-d",
+      "concept": "SNOW (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138512,
+      "subject": "@snow2",
+      "negative": "tiles, tile grid, bricks, paving, path, road, footprints, object, character, animal, building, tree, rock, stones, water, puddles, ice, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "frosting-c",
+      "concept": "ICING (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138811,
+      "subject": "@frosting2",
+      "negative": "cake, plate, strawberry, fruit, candy, sprinkles, spiral, tiles, tile grid, bricks, paving, path, object, character, building, tree, water, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "frosting-d",
+      "concept": "ICING (straight down)",
+      "width": 400,
+      "height": 400,
+      "seed": 138812,
+      "subject": "@frosting2",
+      "negative": "cake, plate, strawberry, fruit, candy, sprinkles, spiral, tiles, tile grid, bricks, paving, path, object, character, building, tree, water, frame, border, horizon, sky, perspective, text, circles, dots, stripes, repeating motif"
+    },
+    {
+      "id": "badlands-f",
+      "concept": "CALM RED EARTH",
+      "width": 400,
+      "height": 400,
+      "seed": 138304,
+      "subject": "@badlands"
+    },
+    {
+      "id": "badlands-g",
+      "concept": "CALM RED EARTH",
+      "width": 400,
+      "height": 400,
+      "seed": 138305,
+      "subject": "@badlands"
+    }
+  ],
+  "outputs": []
+}

@@ -48,7 +48,7 @@ The Pulp Wars TL;DR, condensed:
 | Outlines | Units: single-colour black. Towns and buildings: a thin outline in a darker tone of each colour. Terrain pieces: black outer silhouette, inner outlines softened. Ground: none. |
 | One light | Sun at the bottom left, stated in every prompt. **Never mirror a sprite** for a variant: it would be lit from the wrong side. |
 | Nothing under a piece | No pedestal, disc, slab or ground plate. PixelLab adds an isometric slab under buildings, trees and rocks: plan a "remove all ground" edit, and list plate words in the exclusions. |
-| Ground is calm | Few, discrete things on a quiet base; luma spread under about 3% (9% for grounds of separate tufts); tall tufts 16-24 px clear of the cell centre where pieces stand. |
+| Ground is background | Painterly but quiet: fine detail of 2-6 px (blades, grain, ripples, cracks) in the ground's own identity colour, luma spread about 5-16% (bead bzc.138; was under 3%), no single large feature, no visible period; units, towns and sites still read first. Tall tufts 16-24 px clear of the cell centre where pieces stand. |
 | Colours as hex | Give every faction colour as hex with a shadow tone; colour words drift. Faction fragments name era, materials, colours and motifs only, never figures or buildings. |
 | Faction readability | A light or saturated dominant material, one signature accent, a full value range; roles differ by body mass, mount, posture and headgear, never a thin prop. Silhouette test at the smallest zoom. |
 | Edits over re-rolls | Restyle an accepted sprite with `edit-image-pixen`; one named part per edit; edits cannot move or enlarge. |
@@ -61,7 +61,7 @@ The Pulp Wars TL;DR, condensed:
 | Class | Canvas (px, zoom 1) | Placement |
 | --- | --- | --- |
 | Map cell | 80 x 80 | Square grid; zoom steps 0.75, 1, 1.5, 2 |
-| Ground | 80 x 80 per cell, from a periodic texture of 6-8 cells | Drawn at map coordinates modulo the period |
+| Ground | 80 x 80 per cell, from a periodic texture of 12 cells (960 px) baked from PixelLab takes ([classes/grounds.md](classes/grounds.md)) | Drawn at map coordinates modulo the period, under a run-time colour drift |
 | Standard creature / hero | 56 x 80 | Bottom-centred |
 | Large (mounted hero, Triceratops) | up to 72 x 88 | Bottom-centred, at most 4 px side overflow |
 | Giant (T-Rex) | up to 88 x 104 | Bottom-centred, upward overflow allowed |
@@ -89,11 +89,12 @@ Goals (each is a review check on a captured map at zoom 0.75 and 1):
 1. **No visible grid.** No grid lines; cell outlines appear only for the
    hover cell and the planned path.
 2. **No straight terrain borders.** Every boundary between two grounds is
-   the ranked spill (an irregular strip about 10 px wide, blobs at corners,
-   loose specks), its width a sum of waves over world pixels with a period
-   of three cells, so no edge repeats along a long border. Rank, lowest
-   first: Grass, Steppe, Jungle, Badlands, Wasteland (darker runs into
-   lighter).
+   cut by a brush (bead bzc.138): the smooth field's meandering contour
+   plus a baked ink-blot mask and a slow noise, so the higher-ranked ground
+   interlocks with the lower in lobes, bites and droplets both ways (about
+   +-13 px), with a 1 px dark line and a 4-5 px dithered rim on the lower
+   ground; hard pixel steps only. Rank, lowest first: Grass, Steppe, Jungle,
+   Badlands, Wasteland, Snow, Volcanic, Sand, Frosting, Swamp (`GROUND_RANK`).
 3. **Every mountain range looks unique.** Ranges are composed from pieces two and
    three cells wide (the smallest mountain is 2x2), bricked row by row, low on the top row and tall under
    other mountains, with a ragged foot showing the cell's own ground. Beyond
@@ -111,15 +112,19 @@ Goals (each is a review check on a captured map at zoom 0.75 and 1):
    water; shallow against deep as a wandering edge plus a half-depth shelf.
 6. **Roads are dirt tracks drawn in code**, passing under trees and rocks;
    diagonal runs read as smooth curves, not staircases.
-7. **Large-scale variation.** Grounds use soft drifts (a smooth periodic
-   field, three palettes, single-pixel dithered edges) so a big region is
-   not one flat colour; decorations (flowers, bones, puddles, small rocks)
-   are strewn by a seeded roll and kept away from cell centres.
+7. **Large-scale variation.** Grounds use soft drifts (two scales of a
+   smooth noise field, about six and one and a half cells, cut into three
+   palettes with an ordered-dither edge; bead bzc.138) so a big region is
+   not one flat colour and the texture's period never shows; buildings
+   stand in a patch of trodden earth with a frayed edge; decorations
+   (flowers, bones, puddles, small rocks) are strewn by a seeded roll and
+   kept away from cell centres.
 8. **Deterministic and local.** Every choice is a hash of coordinates and
    the map seed; changing one cell re-picks at most its own block or run.
    Multi-cell art at the fog's edge is packed for the whole map and clipped
    to explored cells, so nothing changes shape as the player explores.
-9. **Draw order**: ground, spill, coast, road, then tall pieces and pieces
+9. **Draw order**: ground (texture, trodden patch, border rim, drift),
+   coast, road, then tall pieces and pieces
    row by row (the front row's overflow covers the feet of the row behind),
    then fog.
 
@@ -215,3 +220,4 @@ Rules for reuse:
 | 2026-11-26 | Map towns are cute, chunky, dense clusters round one tall central landmark (keep, cathedral, tin hall or hide tent, thatched longhouse) with a short thick front wall and a big centred gate, in the style of the liked map objects (the roadside inn is the style image); no more thin wall rings round empty yards. Every 3x2 town, the level towns (Lost World and goblin cities 1-3, the neutral village) and the sawmill redrawn (set `chunky-towns`, take `map-objects/sawmill-c`). Ground shadows: one model for every standing piece, a contact ellipse that never shows in front of the foot plus a fainter cast ellipse to the north-east (away from the sun), drawn with a stepped soft edge before any sprite so a shadow never darkens a neighbour | User request (bead `border_marches-bzc.97`): towns "primitive and not cute", sawmill "mediocre", "the drop shadows on many things miss the mark completely"; [classes/towns.md](classes/towns.md#map-town-direction-bzc97) |
 | 2026-11-26 | Town-screen buildings follow the chunky map towns: one fat, rounded toy building per 64 px tile, thick dark outline, one oversized signature feature, the faction's accepted chunky fort town as style image (its palette), filling the tile; hall and fort families drawn as one building growing (the bigger stage made with the smaller as reference). All 66 sprites redrawn (set `chunky-buildings`); ids, paths and the 64 x 64 canvas unchanged; backdrops kept | User request (bead `border_marches-bzc.98`): the castle buildings look "primitive and not cute"; [classes/towns.md](classes/towns.md#town-screen-buildings-bzc98) |
 | 2026-11-27 | Mountain ranges are laid from as few, as large forms as fit: a fourth peak tier, the massif (two or three joined summits, about two cells wide), stands wholly on the range and is tried first; its lower slopes are its own ground's colours with no outline at the foot, so a range rises out of its plain as in Heroes II; smaller tiers fill what is left; the grass family's older tiers are toned toward the meadow green; the underlay is the ground in shade | User request (bead `border_marches-xaj.32`): ranges "less like a pile of individual rocks", blending "with their native terrain the way they do in Homam2"; [classes/mountains.md](classes/mountains.md) |
+| 2026-11-27 | Richer grounds (orchestrator call, the user may overrule): every land ground is baked from 1-3 PixelLab pixen takes (high top-down, cropped, moved to the ground's own colour) into one tileable 12-cell texture; ground contrast rises to a luma spread of about 5-16% ("Ground is background", was "Ground is calm" under 3%); a two-scale colour drift in dithered palettes; borders between grounds cut by a baked ink-blot brush with a 1 px dark line and a dithered rim on the lower ground (replacing the Pulp Wars spill); trodden-earth patches under buildings. Units and sites still read first | User request (round 6): "The textures you drew for the existing biomes are nice but not as nice as the HoMaM 2 art ... generate on pixellab and use masks to transition between terrain types? ... experiment with it"; lab bead bzc.127, rollout bead `border_marches-bzc.138`, [classes/grounds.md](classes/grounds.md#rollout-bead-bzc138) |

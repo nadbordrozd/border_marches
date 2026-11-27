@@ -67,6 +67,7 @@ export type AssetCategory =
   | "ground"
   | "ground-swatch"
   | "ground-overlay"
+  | "ground-edge"
   | "water"
   | "mountain"
   | "mountain-extra"
@@ -605,18 +606,23 @@ export const GROUND_SOURCES: Readonly<Record<GroundTerrain, string>> = {
   swamp: "none: PixelLab set grounds-swamp (bead bzc.126)",
 };
 
-/** Texture period in cells (FACTION_GRASS_WORLDS_V7). */
+/**
+ * Texture period in cells: every land ground is baked to one 12-cell
+ * (960 px) tileable texture since bead bzc.138 (tools/art/ground-bake.mjs,
+ * art/bake/grounds.json), but the frosting: its icing take already tiles at
+ * 5 cells and its long cream strokes would break at the bake's seams.
+ */
 const GROUND_PERIODS: Readonly<Record<GroundTerrain, number>> = {
-  grass: 8,
-  jungle: 6,
-  steppe: 8,
-  badlands: 8,
-  wasteland: 8,
-  volcanic: 5,
-  snow: 5,
-  sand: 5,
+  grass: 12,
+  jungle: 12,
+  steppe: 12,
+  badlands: 12,
+  wasteland: 12,
+  volcanic: 12,
+  snow: 12,
+  sand: 12,
   frosting: 5,
-  swamp: 5,
+  swamp: 12,
 };
 
 export const GROUND_TEXTURES: Readonly<
@@ -678,6 +684,24 @@ export const GROUND_OVERLAYS: Readonly<
     category: "ground-overlay",
     terrain: "volcanic",
   },
+};
+
+/**
+ * The brush that cuts the borders between grounds and frays the trodden
+ * patches under sites (bead bzc.138): a tileable grey table baked by
+ * tools/art/ground-bake.mjs from the ink-blot take ground-lab-pixen/ink-p
+ * and a slow noise; read by render/map/ground.ts (EdgeMask).
+ */
+export interface GroundEdgeAsset extends ImageAsset {
+  readonly category: "ground-edge";
+}
+
+export const GROUND_EDGE_MASK: GroundEdgeAsset = {
+  key: "ground-edge-mask",
+  path: "assets/terrain/grounds/edge-mask.png",
+  w: 1200,
+  h: 1200,
+  category: "ground-edge",
 };
 
 // ------------------------------------------------------------------ water
@@ -1323,6 +1347,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...Object.values(GROUND_TEXTURES),
   ...Object.values(GROUND_SWATCHES),
   ...Object.values(GROUND_OVERLAYS).filter((a) => a !== undefined),
+  GROUND_EDGE_MASK,
   ...WATER_TILES,
   ...MOUNTAIN_PIECES,
   ...MOUNTAIN_EXTRAS,
