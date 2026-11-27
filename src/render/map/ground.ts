@@ -176,7 +176,8 @@ export interface GroundSources {
  * darkest, whose cracked rock runs out over every other ground; then the
  * desert sand (bead bzc.88), last so that the ranks (and the spill shapes)
  * of every older ground stay as they were: its drifting sand runs out over
- * the grounds round it.
+ * the grounds round it. The Candy Kingdom's frosting (bead bzc.115) comes
+ * after it for the same reason: its icing runs out over its neighbours.
  */
 export const GROUND_RANK: readonly GroundTerrain[] = [
   "grass",
@@ -187,6 +188,7 @@ export const GROUND_RANK: readonly GroundTerrain[] = [
   "snow",
   "volcanic",
   "sand",
+  "frosting",
 ];
 
 const WATER = GROUND_RANK.length;
@@ -460,6 +462,7 @@ const FOREST_SHADE: Readonly<
   volcanic: [26, 20, 20],
   snow: [60, 78, 96],
   sand: [120, 88, 44],
+  frosting: [150, 70, 110],
 };
 
 /**

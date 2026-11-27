@@ -19,6 +19,7 @@ Studio set `art/sets/trees`, derived files in
 | Badlands | pinyon (3.2), juniper (2), gnarled (0.8), mesquite (0.45) | `badlands-a`, `badlands-b` |
 | Wasteland | deadoak (3), pine (2), leafy (1.6), snag (0.6) | `wasteland-a`, `wasteland-b` |
 | Snow (bzc.87) | spruce (5), fir (2.4), larch (2, in drifts only), birch (0.9) | set `winter-trees`: `snow-conifer-a`, `snow-mixed-a` |
+| Frosting (bzc.115) | frosted (4: pink frosting crowns on gingerbread trunks), cotton (3.4: cotton candy), lollipop (2), gumdrop (1: low bushes), cane (1.4, in drifts only: candy canes) | set `candy-trees`: `fluff-a`, `cane-a` (34 of 50 takes, 2 calls) |
 
 The same trees stand alone on open ground through the doodad layer
 (`doodads.ts`, kind `tree`), at their native size, as common as their

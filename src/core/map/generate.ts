@@ -15,7 +15,8 @@
  * 3. water    coast and lakes (gen/water.ts)
  * 4. terrain  main terrain per zone with secondary patches; on some maps a
  *             wild zone turns volcanic, on some one turns to snow, on some
- *             a sand desert (gen/terrain.ts); each wild zone sets aside an
+ *             a sand desert (gen/terrain.ts), on some a candy zone of
+ *             frosting (gen/candy.ts); each wild zone sets aside an
  *             open plaza for its big sites (gen/fields.ts, bead bzc.96)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
@@ -51,6 +52,7 @@ import {
   resolvePockets,
   squareMountains,
 } from "./gen/clusters.ts";
+import { placeCandy } from "./gen/candy.ts";
 import { placeObjects, placeTowns } from "./gen/objects.ts";
 import { O, TERRAIN_OF, newState } from "./gen/state.ts";
 import type { Connection, GapInfo, PassInfo, ZoneInfo } from "./gen/state.ts";
@@ -171,6 +173,7 @@ export function generateMapWithInfo(
   placeVolcanic(st);
   placeWinter(st);
   placeDesert(st);
+  placeCandy(st);
   lap("zones+towns");
   placeWater(st);
   paintTerrain(st);

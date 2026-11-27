@@ -109,6 +109,11 @@ const NAMED_CONFIG: {
       ...DEFAULT_GEN_CONFIG.terrain.desert,
       chance: { S: 0, M: 0, L: 0 },
     },
+    // Nor the candy zones of bead bzc.115.
+    candy: {
+      ...DEFAULT_GEN_CONFIG.terrain.candy,
+      chance: { S: 0, M: 0, L: 0 },
+    },
   },
 };
 
@@ -164,6 +169,7 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
       volcanic: biome("volcanic"),
       winter: biome("winter"),
       desert: biome("desert"),
+      candy: biome("candy"),
     },
     objects: {
       ...NAMED_CONFIG.objects,

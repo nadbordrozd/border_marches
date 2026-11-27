@@ -137,6 +137,7 @@ carry over as the neutral meaning of each terrain here.
 | Wasteland | Undead ash after a wildfire: twigs, embers | Undead | `#716a64` | dead oaks, burnt pines, snags | 150 |
 | Volcanic | Calm dark basalt with sparse glowing lava cracks whose glow pulses ([classes/grounds.md](classes/grounds.md)) | none: studio set `grounds-volcanic` | `#3f343d` | the wasteland's (dead oaks, burnt pines, snags) | 150 |
 | Sand (desert) | Calm golden dunes with soft diagonal wind ripples ([classes/grounds.md](classes/grounds.md)) | none: studio set `grounds-sand` | `#dcb46c` | its own (bead bzc.88): date and fan palms, saguaros, column, prickly pear and barrel cacti; its peaks are golden sandstone mesas and spires | 125 |
+| Frosting (candy) | Calm pale strawberry icing with wavy cream palette-knife lines flecked with sugar; white sugar sparkles twinkle on it ([classes/grounds.md](classes/grounds.md)) | none: studio set `grounds-frosting` | `#f2c4d4` | its own (bead bzc.115): frosted trees on gingerbread trunks, cotton candy, lollipops, gumdrop bushes, candy canes in drifts; its peaks are strawberry gumdrop hills and rock-candy crags under poured icing | 125 (100 native) |
 | Shallow water | Flat light turquoise, a few ripples | Shallow water | about `#8fd3dc` | - | impassable |
 | Deep water | Same, deep blue | Deep water | about `#4277a5` | - | impassable |
 | Mountains | A crowd of front-view peaks, one family per ground ([classes/mountains.md](classes/mountains.md)) | New `peaks` set (the imported massif pieces only as battle rocks) | per ground | - | impassable |

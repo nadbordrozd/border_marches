@@ -21,9 +21,11 @@ import {
 // Bead bzc.102: the denser treasure clusters move the rare big sites
 // between seeds (a library on S seeds 21 and 25 of 1-30, was 6 and 21; an
 // academy on M seeds 12, 16 and 17, was six of 1-30), so S 21 and M 12.
+// Bead bzc.115: M 12 rolls a candy zone, which re-rolls its fill (no
+// academy since), so M 16.
 const SEEDS: Record<MapSize, readonly number[]> = {
   S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21],
-  M: [1, 2, 3, 4, 5, 6, 12],
+  M: [1, 2, 3, 4, 5, 6, 16],
   L: [1, 2, 3, 4],
 };
 

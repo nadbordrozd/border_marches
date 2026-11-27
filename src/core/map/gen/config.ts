@@ -151,6 +151,21 @@ export interface GenConfig {
       /** Secondary patches of a desert zone: one of these. */
       secondary: readonly Terrain[];
     };
+    /**
+     * The Candy Kingdom's frosting (bead bzc.115): on some maps a wild zone
+     * turns into a candy zone of frosting ground (gen/candy.ts placeCandy),
+     * the same way as the desert and from its own random stream.
+     */
+    candy: {
+      /** Chance per map size that the map has a candy zone at all. */
+      chance: Readonly<Record<MapSize, number>>;
+      /** Most candy zones per map size (each further one at half the chance). */
+      maxZones: Readonly<Record<MapSize, number>>;
+      /** Lowest tier (steps from the nearest start zone) of a candy zone. */
+      minTier: number;
+      /** Secondary patches of a candy zone: one of these. */
+      secondary: readonly Terrain[];
+    };
   };
 
   water: {
@@ -575,6 +590,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       minTier: 1,
       secondary: ["badlands", "steppe"],
     },
+    candy: {
+      chance: { S: 0.3, M: 0.4, L: 0.5 },
+      maxZones: { S: 1, M: 1, L: 1 },
+      minTier: 1,
+      secondary: ["grass", "steppe"],
+    },
   },
 
   water: {
@@ -603,6 +624,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       volcanic: 0.85,
       snow: 0.6,
       sand: 0.7,
+      // Candy groves as often as gumdrop hills (bead bzc.115).
+      frosting: 0.4,
       water: 0.5,
     },
     edgeDepth: 2.8,
@@ -643,6 +666,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       volcanic: 0.75,
       snow: 0.6,
       sand: 0.6,
+      frosting: 0.35,
       water: 0.5,
     },
     ridgeBias: 2.2,
@@ -664,6 +688,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         volcanic: 0.5,
         snow: 0.45,
         sand: 0.4,
+        frosting: 0.4,
         water: 0,
       },
       size: [22, 36],
@@ -781,6 +806,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       volcanic: 150,
       snow: 150,
       sand: 125,
+      frosting: 125,
     },
     road: 75,
     day: 1500,

@@ -207,11 +207,12 @@ describe("desert sand in the terrain plan (bead bzc.88)", () => {
     .map((c, i) => (c.terrain === "sand" ? i : -1))
     .filter((i) => i >= 0);
 
-  it("ranks the sand last, so the older grounds keep their ranks", () => {
+  it("ranks the sand after the older grounds, so they keep their ranks", () => {
     expect(sand.length).toBeGreaterThan(0);
     const layout = planTerrain(map).layout;
     const rank = GROUND_RANK.indexOf("sand");
-    expect(rank).toBe(GROUND_RANK.length - 1);
+    // Only the Candy Kingdom's frosting (bead bzc.115) ranks after it.
+    expect(rank).toBe(GROUND_RANK.indexOf("frosting") - 1);
     for (const i of sand) expect(layout.kind[i]).toBe(rank);
     const border = sand.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
     expect(border).toBeDefined();
@@ -236,5 +237,47 @@ describe("desert sand in the terrain plan (bead bzc.88)", () => {
       }
     }
     expect(woods + rock).toBeGreaterThan(0);
+  });
+});
+
+describe("frosting in the terrain plan (bead bzc.115)", () => {
+  // The first medium map that rolls a candy zone (M 3).
+  const map = [3, 6, 10]
+    .map((seed) => generateMap(seed, { size: "M", players: 2 }))
+    .find((m) => m.cells.some((c) => c.terrain === "frosting"))!;
+  const icing = map.cells
+    .map((c, i) => (c.terrain === "frosting" ? i : -1))
+    .filter((i) => i >= 0);
+
+  it("ranks the frosting last, so every older ground keeps its rank", () => {
+    expect(icing.length).toBeGreaterThan(0);
+    const layout = planTerrain(map).layout;
+    const rank = GROUND_RANK.indexOf("frosting");
+    expect(rank).toBe(GROUND_RANK.length - 1);
+    for (const i of icing) expect(layout.kind[i]).toBe(rank);
+    const border = icing.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
+    expect(border).toBeDefined();
+    expect(layout.ranks[border!]?.at(-1)).toBe(rank);
+  });
+
+  it("grows the candy groves and gumdrop peaks on frosting", () => {
+    const plan = planTerrain(map);
+    // GROUNDS index of the frosting family in canopy.ts and peaks.ts.
+    const candy = 7;
+    let woods = 0;
+    let rock = 0;
+    for (const i of icing) {
+      const cell = map.cells[i]!;
+      if (cell.obstacle === "forest") {
+        woods += 1;
+        expect(plan.canopyField.set[i]).toBe(candy);
+      }
+      if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1) {
+        rock += 1;
+        expect(plan.peakField.family[i]).toBe(candy);
+      }
+    }
+    expect(woods).toBeGreaterThan(0);
+    expect(rock).toBeGreaterThan(0);
   });
 });

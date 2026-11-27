@@ -1,0 +1,767 @@
+{
+  "set": "candy-peaks",
+  "bead": "border_marches-bzc.115",
+  "class": "mountains",
+  "exploration": false,
+  "_doc": "The Candy Kingdom frosting ground's mountains (bead bzc.115, docs/art/classes/mountains.md): gumdrop hills and rock-candy crags in strawberry pink under poured royal icing, the candy answer to the snow family's snow caps. generate-image-v2 at native display size (foothill 56 x 44, peak 80 x 64, summit 120 x 88), cropped to the opaque box plus 1 px. Never scaled, never mirrored. Layers: style, light, class-peak, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-peak"
+    ],
+    "noBackground": true,
+    "negative": "face, eyes, trees, lollipop, buildings, sky, plate, terraces, crater"
+  },
+  "recipes": [
+    {
+      "id": "low-a",
+      "concept": "CANDY FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 115301,
+      "subject": "Subject: one low candy hill, each image a different one of these: a fat round gumdrop hill with a sugar crust, a small lumpy mound of rock-candy crystals, a pair of round gumdrop hummocks side by side. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "mid-a",
+      "concept": "CANDY PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 115302,
+      "subject": "Subject: one candy mountain, each image a different one of these: a tall rounded gumdrop mountain with an icing cap, a jagged crag of big rock-candy crystals with icing on its tips, a lumpy peak of stacked gumdrops. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide."
+    },
+    {
+      "id": "big-a",
+      "concept": "CANDY SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 115303,
+      "subject": "Subject: one big candy mountain, each image a different one of these: a huge rounded gumdrop mountain with a thick dripping icing cap, a big jagged rock-candy massif with iced peaks, two joined gumdrop peaks with icing caps. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image."
+    },
+    {
+      "id": "mid-b",
+      "concept": "CANDY PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 115304,
+      "subject": "Subject: one candy mountain, each image a different one of these: a broad lumpy rock-candy mountain under an icing cap, a pointed gumdrop peak with a smaller gumdrop shoulder, a wide crag of sugar crystals with two tips. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide."
+    },
+    {
+      "id": "big-b",
+      "concept": "CANDY SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 115305,
+      "subject": "Subject: one big candy mountain, each image a different one of these: a wide mountain of three rounded gumdrop peaks under one icing cap, a tall rock-candy crag with a broad base and icing drips, a huge pointed gumdrop peak. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-1.png",
+      "from": "low-a#0",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-2.png",
+      "from": "low-a#1",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-3.png",
+      "from": "low-a#2",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-4.png",
+      "from": "low-a#3",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-5.png",
+      "from": "low-a#4",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-6.png",
+      "from": "low-a#5",
+      "width": 36,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 9,
+          "width": 36,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-7.png",
+      "from": "low-a#6",
+      "width": 36,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 10,
+          "width": 36,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-8.png",
+      "from": "low-a#7",
+      "width": 37,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 37,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-9.png",
+      "from": "low-a#8",
+      "width": 37,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 6,
+          "width": 37,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-10.png",
+      "from": "low-a#9",
+      "width": 39,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 10,
+          "width": 39,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-11.png",
+      "from": "low-a#10",
+      "width": 46,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 7,
+          "width": 46,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-12.png",
+      "from": "low-a#11",
+      "width": 46,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 46,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-13.png",
+      "from": "low-a#12",
+      "width": 46,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 46,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-14.png",
+      "from": "low-a#13",
+      "width": 46,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 12,
+          "width": 46,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-15.png",
+      "from": "low-a#14",
+      "width": 46,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 46,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-16.png",
+      "from": "low-a#15",
+      "width": 42,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 6,
+          "width": 42,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-17.png",
+      "from": "low-a#16",
+      "width": 42,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 42,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-18.png",
+      "from": "low-a#17",
+      "width": 42,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 6,
+          "width": 42,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-19.png",
+      "from": "low-a#18",
+      "width": 44,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 44,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-20.png",
+      "from": "low-a#19",
+      "width": 44,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 8,
+          "width": 44,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-21.png",
+      "from": "low-a#21",
+      "width": 44,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 7,
+          "width": 44,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-22.png",
+      "from": "low-a#22",
+      "width": 48,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 11,
+          "width": 48,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-23.png",
+      "from": "low-a#23",
+      "width": 48,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 48,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/foothill-24.png",
+      "from": "low-a#24",
+      "width": 44,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 44,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-1.png",
+      "from": "mid-a#0",
+      "width": 46,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 7,
+          "width": 46,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-2.png",
+      "from": "mid-a#1",
+      "width": 52,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 7,
+          "width": 52,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-3.png",
+      "from": "mid-a#2",
+      "width": 56,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 8,
+          "width": 56,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-4.png",
+      "from": "mid-a#3",
+      "width": 49,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 6,
+          "width": 49,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-5.png",
+      "from": "mid-a#4",
+      "width": 60,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 6,
+          "width": 60,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-6.png",
+      "from": "mid-a#5",
+      "width": 44,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 18,
+          "y": 6,
+          "width": 44,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-7.png",
+      "from": "mid-a#7",
+      "width": 60,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 60,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-8.png",
+      "from": "mid-a#8",
+      "width": 55,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 6,
+          "width": 55,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-9.png",
+      "from": "mid-b#0",
+      "width": 62,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 7,
+          "width": 62,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-10.png",
+      "from": "mid-b#2",
+      "width": 68,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 10,
+          "width": 68,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-11.png",
+      "from": "mid-b#3",
+      "width": 50,
+      "height": 45,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 11,
+          "width": 50,
+          "height": 45
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-12.png",
+      "from": "mid-b#4",
+      "width": 49,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 9,
+          "width": 49,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-13.png",
+      "from": "mid-b#5",
+      "width": 48,
+      "height": 44,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 12,
+          "width": 48,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-14.png",
+      "from": "mid-b#6",
+      "width": 66,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 7,
+          "width": 66,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-15.png",
+      "from": "mid-b#7",
+      "width": 66,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 11,
+          "width": 66,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/peak-16.png",
+      "from": "mid-b#8",
+      "width": 64,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 7,
+          "width": 64,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-1.png",
+      "from": "big-a#0",
+      "width": 86,
+      "height": 65,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 12,
+          "width": 86,
+          "height": 65
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-2.png",
+      "from": "big-a#1",
+      "width": 100,
+      "height": 66,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 11,
+          "width": 100,
+          "height": 66
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-3.png",
+      "from": "big-a#2",
+      "width": 88,
+      "height": 65,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 11,
+          "width": 88,
+          "height": 65
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-4.png",
+      "from": "big-b#0",
+      "width": 109,
+      "height": 66,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 13,
+          "width": 109,
+          "height": 66
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-5.png",
+      "from": "big-b#1",
+      "width": 98,
+      "height": 75,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 6,
+          "width": 98,
+          "height": 75
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-6.png",
+      "from": "big-b#2",
+      "width": 109,
+      "height": 75,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 109,
+          "height": 75
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/frosting/summit-7.png",
+      "from": "big-b#3",
+      "width": 109,
+      "height": 68,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 13,
+          "width": 109,
+          "height": 68
+        }
+      ]
+    }
+  ]
+}

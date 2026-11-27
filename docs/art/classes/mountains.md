@@ -32,6 +32,7 @@ Studio set `art/sets/peaks`, derived files in
 | Badlands | buttes | red-orange flat-topped strata, mesas and hoodoos |
 | Wasteland | basalt | dark jagged spires with thin ember cracks |
 | Snow (bzc.87) | alpine | blue-grey rock under snow caps and snowfields; set `winter-peaks` (10 foothills, 12 peaks, 7 summits; 6 calls) |
+| Frosting (bzc.115) | candy | strawberry gumdrop hills and rock-candy crags under poured royal icing (the snow caps' candy answer); set `candy-peaks` (24 foothills, 16 peaks, 7 summits; 5 calls) |
 
 Each family has three tiers: `foothill` (from 56 x 44 requests), `peak` (from
 80 x 64) and `summit` (from 120 x 88): 170 accepted sprites of 284 takes, 31
@@ -95,6 +96,11 @@ Prompt fragments that worked:
   snow #eef4fa, shadow #b4c4d8 on right faces"; summits with a negative of
   "terraces, steps, crater, flat top" (the first summits came back as
   banded cakes and a crater).
+- Frosting: "Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the
+  left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in
+  rounded drips"; a pile of many small gumdrops (speckle), thin crystal
+  needles and a terraced take were rejected. The description limit (2000
+  characters with the layers) leaves room for three subjects a call.
 
 ## Acceptance
 

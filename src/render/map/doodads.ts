@@ -86,6 +86,10 @@ const KIND_WEIGHTS: Readonly<
   // Desert sand (bead bzc.88): a few sandstone rocks, bones and lone palms
   // or cacti; the decorations (tumbleweed, scarab, skull) are the detail.
   sand: { rock: 1.6, boulder: 0.5, bones: 1, tree: 0.7 },
+  // Frosting (bead bzc.115): lone candy trees, a few rock-candy stones and
+  // sprinkle-coloured flowers; its decorations (gumdrops, sprinkles,
+  // cupcakes) are the detail. No bones, cracks or puddles on the icing.
+  frosting: { tree: 1.2, rock: 1, bush: 0.8, flowers: 1 },
 };
 
 const FLAT: ReadonlySet<string> = new Set(["flowers", "puddle", "crack"]);
@@ -103,6 +107,8 @@ export const DOODAD_DENSITY: Readonly<Record<GroundTerrain, number>> = {
   snow: 0.9,
   // Open dunes: sparse, so the ripples of the sand read.
   sand: 0.6,
+  // Smooth icing: sparse, so the frosting stays calm.
+  frosting: 0.6,
 };
 
 /** Share of each ground's doodads drawn from the code-drawn placeholders. */

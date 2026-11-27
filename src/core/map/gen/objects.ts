@@ -38,6 +38,7 @@ import {
 import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
 import type { ObjectTypeId } from "../../../data/objectTypes.ts";
 import { isPickup } from "../../game/site-state.ts";
+import { preferFrosting } from "./candy.ts";
 import { desertSites } from "./desert.ts";
 import { carveHoards, hoardRate } from "./hoards.ts";
 import { assignQuests } from "./quests.ts";
@@ -1037,6 +1038,9 @@ export function placeObjects(st: GenState): PlacementReport {
       } else requests.splice(at++, 0, req);
     }
   }
+
+  // Candy outposts stand on frosting while they can (bead bzc.115).
+  preferFrosting(st, requests);
 
   // 3. Placement: blocking footprints, roads, then single cells.
   const counters = new Map<string, number>();

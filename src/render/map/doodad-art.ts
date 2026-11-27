@@ -114,6 +114,18 @@ const PALETTE: Readonly<
     ],
     water: [110, 150, 160],
   },
+  // Frosting (bead bzc.115): rock-candy pink stones, mint bushes, petals in
+  // sprinkle colours.
+  frosting: {
+    rock: [208, 120, 160],
+    bush: [104, 184, 150],
+    petals: [
+      [127, 214, 181],
+      [244, 212, 108],
+      [255, 244, 236],
+    ],
+    water: [200, 150, 180],
+  },
 };
 
 const OUTLINE: Rgb = [28, 24, 22];

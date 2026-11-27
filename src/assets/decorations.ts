@@ -117,6 +117,23 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "buried-head": [[58, 60], [60, 49]],
   "fallen-pillar": [[127, 47]],
   "temple-ruin": [[128, 46]],
+  // The Candy Kingdom's frosting (bead bzc.115, set candy-decorations).
+  "gumdrops": [[30, 26], [30, 26]],
+  "cane-sprig": [[18, 28], [18, 28]],
+  "melting-cone": [[25, 30], [25, 30]],
+  "gummy-worm": [[29, 25], [28, 25]],
+  "sugar-mouse": [[25, 27], [25, 27]],
+  "sprinkles": [[24, 24], [24, 22]],
+  "marshmallows": [[32, 28], [28, 20]],
+  "licorice-knot": [[30, 15], [30, 17]],
+  "chocolate-drops": [[30, 23], [30, 24]],
+  "gingerbread-rabbit": [[20, 30], [23, 29]],
+  "giant-cupcake": [[52, 60], [46, 59]],
+  "gumdrop-boulder": [[62, 55], [50, 59]],
+  "rock-candy": [[63, 53], [58, 59]],
+  "fallen-cane": [[116, 52]],
+  "chocolate-bar": [[118, 47]],
+  "gingerbread-fence": [[118, 49]],
 };
 
 export const DECORATIONS: readonly DecorationDef[] = DECORATION_KINDS.map(

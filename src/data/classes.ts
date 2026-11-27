@@ -533,7 +533,8 @@ export const NUTCRACKER: HeroClassDef = {
   name: "Nutcracker",
   faction: "candy",
   leaning: "might",
-  nativeTerrain: "snow",
+  // Frosting, the Kingdom's own ground (bead bzc.115; was snow).
+  nativeTerrain: "frosting",
   stats: { attack: 2, defense: 2, power: 1, lore: 1 },
   pattern: [D, A, D, P, A, D, L, A, D, P],
   weights: weightsFromKinds(
@@ -584,7 +585,7 @@ export const CONFECTIONER: HeroClassDef = {
   name: "Confectioner",
   faction: "candy",
   leaning: "magic",
-  nativeTerrain: "snow",
+  nativeTerrain: "frosting",
   stats: { attack: 1, defense: 1, power: 2, lore: 2 },
   pattern: [L, P, L, D, P, L, A, P, L, D],
   weights: weightsFromKinds(

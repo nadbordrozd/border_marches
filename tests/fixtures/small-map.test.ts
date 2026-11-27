@@ -21,13 +21,12 @@ describe("small-map fixture", () => {
 
   it("uses every terrain and has deep and shallow water", () => {
     const terrains = new Set(map.cells.map((c) => c.terrain));
-    // Volcanic ground (bead bzc.83), snow (bzc.87) and sand (bzc.88) came
-    // after the fixture; their own tests are tests/core/map/volcanic.test.ts,
-    // winter.test.ts and desert.test.ts.
+    // Volcanic ground (bead bzc.83), snow (bzc.87), sand (bzc.88) and
+    // frosting (bzc.115) came after the fixture; their own tests are
+    // tests/core/map/volcanic.test.ts, winter, desert and candy.test.ts.
+    const later = ["volcanic", "snow", "sand", "frosting"];
     expect([...terrains].sort()).toEqual(
-      TERRAINS.filter(
-        (t) => t !== "volcanic" && t !== "snow" && t !== "sand",
-      ).sort(),
+      TERRAINS.filter((t) => !later.includes(t)).sort(),
     );
     const water = map.cells.filter((c) => c.terrain === "water");
     expect(water.some((c) => c.deep === true)).toBe(true);

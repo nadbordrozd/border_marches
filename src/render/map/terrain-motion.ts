@@ -12,7 +12,9 @@
  * - magma: the hot pixels of the volcanic texture fall into three groups (by
  *   crack) whose glow pulses out of step;
  * - living decorations: a small pose (offset and frame) per decoration and
- *   part, with a phase from a hash of the cell, so no two move in step.
+ *   part, with a phase from a hash of the cell, so no two move in step;
+ * - sugar sparkles (bead bzc.115): a few fixed slots per frosting cell
+ *   twinkle like the water's glints, a pixel and then a small cross.
  *
  * Nothing here moves when the terrain is still (reduced motion, the
  * "Animated terrain" setting off, a screen over the map): the view then
@@ -42,6 +44,19 @@ export const MOTION = {
     /** Glint colours: dim and bright (CSS). */
     dim: "rgba(226, 243, 255, 0.5)",
     bright: "rgba(255, 255, 255, 0.85)",
+  },
+  sparkle: {
+    /** One cycle of a sparkle slot, ms. */
+    periodMs: 2300,
+    /** Slots per frosting cell. */
+    slots: 3,
+    /** Share of slots lit in a cycle. */
+    lit: 0.4,
+    /** Kept this far (px) from the cell edge, clear of the ground's spill. */
+    inset: 10,
+    /** Sparkle colours: dim and bright (CSS). */
+    dim: "rgba(255, 246, 250, 0.7)",
+    bright: "rgba(255, 255, 255, 0.95)",
   },
   magma: {
     /** One pulse, ms. */
@@ -113,6 +128,66 @@ export function glintLevel(slot: GlintSlot, t: number): 0 | 1 | 2 {
   if (k < 0.4) return 2;
   if (k < 0.6) return 1;
   return 0;
+}
+
+// --------------------------------------------------------------- frosting
+
+/** A sparkle slot: one pixel of sugar that twinkles, world px. */
+export interface SparkleSlot {
+  readonly x: number;
+  readonly y: number;
+  /** Phase in [0, 1). */
+  readonly phase: number;
+  /** A per-slot salt for the cycle draws. */
+  readonly seed: number;
+}
+
+/** The sparkle slots of one frosting cell, before the body checks. */
+export function cellSparkleSlots(cx: number, cy: number): SparkleSlot[] {
+  const { slots, inset } = MOTION.sparkle;
+  const out: SparkleSlot[] = [];
+  for (let k = 0; k < slots; k += 1) {
+    const h = hash4(cx, cy, k, 0x5c4a);
+    const x =
+      cx * CELL +
+      inset +
+      Math.floor(hashUnit(cx * 5 + k, cy, 0x5c) * (CELL - 2 * inset));
+    const y =
+      cy * CELL +
+      inset +
+      Math.floor(hashUnit(cx, cy * 5 + k, 0x5d) * (CELL - 2 * inset));
+    out.push({ x, y, phase: ((h >>> 8) & 0xffff) / 65536, seed: h });
+  }
+  return out;
+}
+
+/**
+ * How bright a sparkle slot is at time `t` (ms): 0 off, 1 a pixel, 2 a
+ * small cross. Like a glint, each cycle the slot lights or stays dark by a
+ * hash of its cycle, so the sugar twinkles here and there, never in step.
+ */
+export function sparkleLevel(slot: SparkleSlot, t: number): 0 | 1 | 2 {
+  const { periodMs, lit } = MOTION.sparkle;
+  const u = t / periodMs + slot.phase;
+  const cycle = Math.floor(u);
+  if (hashUnit(slot.seed | 0, cycle, 0x5c5) >= lit) return 0;
+  const k = u - cycle;
+  if (k < 0.1) return 1;
+  if (k < 0.25) return 2;
+  if (k < 0.35) return 1;
+  return 0;
+}
+
+/** The pixels a sparkle may light: its own and the four round it. */
+export function sparklePixels(slot: SparkleSlot): [number, number][] {
+  const { x, y } = slot;
+  return [
+    [x, y],
+    [x - 1, y],
+    [x + 1, y],
+    [x, y - 1],
+    [x, y + 1],
+  ];
 }
 
 // ------------------------------------------------------------------ magma
@@ -261,6 +336,11 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   scarab: "creep",
   fennec: "breathe",
   "sand-snake": "twitch",
+  // The frosting (bead bzc.115): a gummy worm wriggles along, a sugar
+  // mouse twitches, the gingerbread rabbit breathes (it is alive).
+  "gummy-worm": "creep",
+  "sugar-mouse": "twitch",
+  "gingerbread-rabbit": "breathe",
 };
 
 /** The pose of a living decoration (or one of its parts) at a moment. */

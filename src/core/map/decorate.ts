@@ -88,6 +88,12 @@ export const DECORATE = {
    * decorations of other ground (bead bzc.88): a second pass over the sand.
    */
   sandBias: 2,
+  /**
+   * The Candy Kingdom's frosting (bead bzc.115): this many more passable
+   * decorations per open frosting cell (gumdrops, sprinkles, cupcakes),
+   * from their own random stream after everything else, like the snow's.
+   */
+  frostingExtraShare: 0.08,
 } as const;
 
 export interface DecorateOptions {
@@ -448,6 +454,34 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
         variant: rng.int(0, kind.looks - 1),
       });
       extra++;
+    }
+  }
+
+  // A second sprinkle on the frosting (bead bzc.115): its own stream, and
+  // only where there is frosting, so a map without it draws as before.
+  const frosted = range(n).filter(
+    (k) => cell(k)?.terrain === "frosting" && taken[k] === 0 && smallOk(k),
+  );
+  if (frosted.length > 0) {
+    const frng = createRng(deriveSeed(map.seed, "decorations-frosting"));
+    const kinds = decorationKindsFor("frosting", true);
+    // Rounded up: a crowded candy zone keeps few free cells, and still
+    // gets one of its own sweets.
+    const extra = Math.ceil(frosted.length * DECORATE.frostingExtraShare);
+    let added = 0;
+    for (const i of frng.shuffle(frosted)) {
+      if (added >= extra || kinds.length === 0) break;
+      if (seeds.some((s) => cheb(W, i, s) < 2)) continue;
+      seeds.push(i);
+      taken[i] = 1;
+      const kind = frng.pick(kinds);
+      placed.push({
+        id: kind.id,
+        x: i % W,
+        y: Math.floor(i / W),
+        variant: frng.int(0, kind.looks - 1),
+      });
+      added++;
     }
   }
 

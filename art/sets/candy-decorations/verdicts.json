@@ -1,0 +1,742 @@
+{
+  "small-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "gumdrops: two sugared gumdrops in the palette's pink and mint, small and low",
+    "at": "2026-11-27T00:57:21.578Z"
+  },
+  "small-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "gumdrops: two sugared gumdrops in the palette's pink and mint, small and low",
+    "at": "2026-11-27T00:57:21.627Z"
+  },
+  "small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.674Z"
+  },
+  "small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.722Z"
+  },
+  "small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.770Z"
+  },
+  "small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.818Z"
+  },
+  "small-a#6": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.867Z"
+  },
+  "small-a#7": {
+    "verdict": "REJECTED",
+    "notes": "gumdrops in loud primary or purple colours; the pink and mint pair (0, 1) fits the palette",
+    "at": "2026-11-27T00:57:21.917Z"
+  },
+  "small-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "a little candy cane stuck in the icing, red or pink stripes",
+    "at": "2026-11-27T00:57:21.966Z"
+  },
+  "small-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "a little candy cane stuck in the icing, red or pink stripes",
+    "at": "2026-11-27T00:57:22.017Z"
+  },
+  "small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.065Z"
+  },
+  "small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.114Z"
+  },
+  "small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.162Z"
+  },
+  "small-a#13": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.212Z"
+  },
+  "small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.263Z"
+  },
+  "small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cane, a green or orange stripe off the palette, or two canes",
+    "at": "2026-11-27T00:57:22.311Z"
+  },
+  "small-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "a dropped ice-cream cone melting into a puddle, strawberry or mint",
+    "at": "2026-11-27T00:57:22.361Z"
+  },
+  "small-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "a dropped ice-cream cone melting into a puddle, strawberry or mint",
+    "at": "2026-11-27T00:57:22.410Z"
+  },
+  "small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.460Z"
+  },
+  "small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.517Z"
+  },
+  "small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.571Z"
+  },
+  "small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.623Z"
+  },
+  "small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.674Z"
+  },
+  "small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cone; chocolate reads as mud, lemon and blue are off the palette, 23 has a face",
+    "at": "2026-11-27T00:57:22.725Z"
+  },
+  "small-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "a curled gummy worm, green or red and blue",
+    "at": "2026-11-27T00:57:22.775Z"
+  },
+  "small-a#27": {
+    "verdict": "ACCEPTED",
+    "notes": "a curled gummy worm, green or red and blue",
+    "at": "2026-11-27T00:57:22.826Z"
+  },
+  "small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:22.875Z"
+  },
+  "small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:22.926Z"
+  },
+  "small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:22.976Z"
+  },
+  "small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:23.026Z"
+  },
+  "small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:23.077Z"
+  },
+  "small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate worm; 31 is a flat swirl that reads as a coin",
+    "at": "2026-11-27T00:57:23.127Z"
+  },
+  "small-a#32": {
+    "verdict": "ACCEPTED",
+    "notes": "a little sugar mouse with a string tail, white or pink",
+    "at": "2026-11-27T00:57:23.179Z"
+  },
+  "small-a#34": {
+    "verdict": "ACCEPTED",
+    "notes": "a little sugar mouse with a string tail, white or pink",
+    "at": "2026-11-27T00:57:23.229Z"
+  },
+  "small-a#33": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.279Z"
+  },
+  "small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.330Z"
+  },
+  "small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.382Z"
+  },
+  "small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.435Z"
+  },
+  "small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.486Z"
+  },
+  "small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate mouse or off-palette yellow, blue and purple",
+    "at": "2026-11-27T00:57:23.537Z"
+  },
+  "small-a#40": {
+    "verdict": "ACCEPTED",
+    "notes": "a light scatter of rainbow sprinkles: the frosting's own detail, sparse enough to stay calm",
+    "at": "2026-11-27T00:57:23.589Z"
+  },
+  "small-a#41": {
+    "verdict": "ACCEPTED",
+    "notes": "a light scatter of rainbow sprinkles: the frosting's own detail, sparse enough to stay calm",
+    "at": "2026-11-27T00:57:23.641Z"
+  },
+  "small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.692Z"
+  },
+  "small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.743Z"
+  },
+  "small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.793Z"
+  },
+  "small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.844Z"
+  },
+  "small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.896Z"
+  },
+  "small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "denser or near duplicate sprinkle scatters",
+    "at": "2026-11-27T00:57:23.946Z"
+  },
+  "small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:23.997Z"
+  },
+  "small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.047Z"
+  },
+  "small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.100Z"
+  },
+  "small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.151Z"
+  },
+  "small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.202Z"
+  },
+  "small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.254Z"
+  },
+  "small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.304Z"
+  },
+  "small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans and loose gumdrops: near duplicates of the gumdrops",
+    "at": "2026-11-27T00:57:24.355Z"
+  },
+  "small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "round flat candies read as coins or loot",
+    "at": "2026-11-27T00:57:24.407Z"
+  },
+  "small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "round flat candies read as coins or loot",
+    "at": "2026-11-27T00:57:24.458Z"
+  },
+  "small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "round flat candies read as coins or loot",
+    "at": "2026-11-27T00:57:24.510Z"
+  },
+  "small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "two wrapped sweets read as pickups",
+    "at": "2026-11-27T00:57:24.561Z"
+  },
+  "small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "two wrapped sweets read as pickups",
+    "at": "2026-11-27T00:57:24.613Z"
+  },
+  "small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "two wrapped sweets read as pickups",
+    "at": "2026-11-27T00:57:24.663Z"
+  },
+  "small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "stars read as pickups or effects",
+    "at": "2026-11-27T00:57:24.715Z"
+  },
+  "small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "stars read as pickups or effects",
+    "at": "2026-11-27T00:57:24.766Z"
+  },
+  "small-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two plump marshmallows in icing white and pink",
+    "at": "2026-11-27T00:57:24.817Z"
+  },
+  "small-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "two plump marshmallows in icing white and pink",
+    "at": "2026-11-27T00:57:24.867Z"
+  },
+  "small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:24.919Z"
+  },
+  "small-b#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:24.971Z"
+  },
+  "small-b#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.026Z"
+  },
+  "small-b#4": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.076Z"
+  },
+  "small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.129Z"
+  },
+  "small-b#6": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.182Z"
+  },
+  "small-b#8": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.231Z"
+  },
+  "small-b#9": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.283Z"
+  },
+  "small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.337Z"
+  },
+  "small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.395Z"
+  },
+  "small-b#12": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.451Z"
+  },
+  "small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.506Z"
+  },
+  "small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.563Z"
+  },
+  "small-b#15": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate marshmallows; 14 is a flat smear",
+    "at": "2026-11-27T00:57:25.621Z"
+  },
+  "small-b#30": {
+    "verdict": "ACCEPTED",
+    "notes": "a knotted licorice twist: the one dark note, small",
+    "at": "2026-11-27T00:57:25.679Z"
+  },
+  "small-b#31": {
+    "verdict": "ACCEPTED",
+    "notes": "a knotted licorice twist: the one dark note, small",
+    "at": "2026-11-27T00:57:25.733Z"
+  },
+  "small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:25.784Z"
+  },
+  "small-b#17": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:25.837Z"
+  },
+  "small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:25.892Z"
+  },
+  "small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:25.944Z"
+  },
+  "small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:25.996Z"
+  },
+  "small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.046Z"
+  },
+  "small-b#22": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.096Z"
+  },
+  "small-b#23": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.145Z"
+  },
+  "small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.196Z"
+  },
+  "small-b#25": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.245Z"
+  },
+  "small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.295Z"
+  },
+  "small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.344Z"
+  },
+  "small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.395Z"
+  },
+  "small-b#29": {
+    "verdict": "REJECTED",
+    "notes": "licorice spirals read as holes, letters (X, N, A, n) or a stick",
+    "at": "2026-11-27T00:57:26.445Z"
+  },
+  "small-b#32": {
+    "verdict": "ACCEPTED",
+    "notes": "a few chocolate drops",
+    "at": "2026-11-27T00:57:26.497Z"
+  },
+  "small-b#37": {
+    "verdict": "ACCEPTED",
+    "notes": "a few chocolate drops",
+    "at": "2026-11-27T00:57:26.548Z"
+  },
+  "small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.601Z"
+  },
+  "small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.651Z"
+  },
+  "small-b#35": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.703Z"
+  },
+  "small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.755Z"
+  },
+  "small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.806Z"
+  },
+  "small-b#39": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate chocolate drops",
+    "at": "2026-11-27T00:57:26.857Z"
+  },
+  "small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:26.909Z"
+  },
+  "small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:26.960Z"
+  },
+  "small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.010Z"
+  },
+  "small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.060Z"
+  },
+  "small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.111Z"
+  },
+  "small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.163Z"
+  },
+  "small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.212Z"
+  },
+  "small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "a heap of bright jelly beans reads as a gem pile (loot look-alike)",
+    "at": "2026-11-27T00:57:27.265Z"
+  },
+  "small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.316Z"
+  },
+  "small-b#49": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.365Z"
+  },
+  "small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.415Z"
+  },
+  "small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.465Z"
+  },
+  "small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.517Z"
+  },
+  "small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.566Z"
+  },
+  "small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.616Z"
+  },
+  "small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "a small lollipop repeats the lollipop trees",
+    "at": "2026-11-27T00:57:27.667Z"
+  },
+  "small-b#57": {
+    "verdict": "ACCEPTED",
+    "notes": "a sitting gingerbread rabbit with icing piping",
+    "at": "2026-11-27T00:57:27.719Z"
+  },
+  "small-b#61": {
+    "verdict": "ACCEPTED",
+    "notes": "a sitting gingerbread rabbit with icing piping",
+    "at": "2026-11-27T00:57:27.772Z"
+  },
+  "small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:27.824Z"
+  },
+  "small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:27.874Z"
+  },
+  "small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:27.925Z"
+  },
+  "small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:27.978Z"
+  },
+  "small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:28.031Z"
+  },
+  "small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate rabbit; 60 holds a leaf",
+    "at": "2026-11-27T00:57:28.083Z"
+  },
+  "props-1x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "giant cupcake: pink swirl, sprinkles and a cherry in a striped cup; fills the cell",
+    "at": "2026-11-27T00:58:49.337Z"
+  },
+  "props-1x1-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "giant cupcake: pink swirl, sprinkles and a cherry in a striped cup; fills the cell",
+    "at": "2026-11-27T00:58:49.385Z"
+  },
+  "props-1x1-a#0": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cupcake (0 is plain, 2 has a cream cup that fades on the icing)",
+    "at": "2026-11-27T00:58:49.431Z"
+  },
+  "props-1x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate cupcake (0 is plain, 2 has a cream cup that fades on the icing)",
+    "at": "2026-11-27T00:58:49.478Z"
+  },
+  "props-1x1-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "mint gumdrop boulder with a sugar crust: the candy answer to a big boulder",
+    "at": "2026-11-27T00:58:49.528Z"
+  },
+  "props-1x1-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "mint gumdrop boulder with a sugar crust: the candy answer to a big boulder",
+    "at": "2026-11-27T00:58:49.576Z"
+  },
+  "props-1x1-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a plain sphere reads as a ball, a speckled egg as an egg",
+    "at": "2026-11-27T00:58:49.625Z"
+  },
+  "props-1x1-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a plain sphere reads as a ball, a speckled egg as an egg",
+    "at": "2026-11-27T00:58:49.674Z"
+  },
+  "props-1x1-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "a chunky cluster of pink and teal rock-candy crystals",
+    "at": "2026-11-27T00:58:49.724Z"
+  },
+  "props-1x1-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "a chunky cluster of pink and teal rock-candy crystals",
+    "at": "2026-11-27T00:58:49.773Z"
+  },
+  "props-1x1-a#8": {
+    "verdict": "REJECTED",
+    "notes": "thin crystal spikes turn to noise at 1x",
+    "at": "2026-11-27T00:58:49.823Z"
+  },
+  "props-1x1-a#10": {
+    "verdict": "REJECTED",
+    "notes": "thin crystal spikes turn to noise at 1x",
+    "at": "2026-11-27T00:58:49.875Z"
+  },
+  "props-1x1-a#12": {
+    "verdict": "REJECTED",
+    "notes": "a giant melting cone repeats the passable melting cone, which must not read as a wall",
+    "at": "2026-11-27T00:58:49.925Z"
+  },
+  "props-1x1-a#13": {
+    "verdict": "REJECTED",
+    "notes": "a giant melting cone repeats the passable melting cone, which must not read as a wall",
+    "at": "2026-11-27T00:58:49.975Z"
+  },
+  "props-1x1-a#14": {
+    "verdict": "REJECTED",
+    "notes": "a giant melting cone repeats the passable melting cone, which must not read as a wall",
+    "at": "2026-11-27T00:58:50.024Z"
+  },
+  "props-1x1-a#15": {
+    "verdict": "REJECTED",
+    "notes": "a giant melting cone repeats the passable melting cone, which must not read as a wall",
+    "at": "2026-11-27T00:58:50.073Z"
+  },
+  "props-2x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a giant striped candy cane fallen on its side, two cells long: the signature stripe",
+    "at": "2026-11-27T01:00:10.361Z"
+  },
+  "props-2x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a giant chocolate bar broken in two chunky pieces",
+    "at": "2026-11-27T01:00:10.413Z"
+  },
+  "props-2x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a row of gumdrops repeats the gumdrop boulder and the passable gumdrops",
+    "at": "2026-11-27T01:00:10.460Z"
+  },
+  "props-2x1-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a gingerbread fence with icing and gumdrop posts",
+    "at": "2026-11-27T01:00:10.509Z"
+  }
+}

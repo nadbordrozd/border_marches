@@ -118,6 +118,28 @@ cattle skull, cacti, rocks, the small crater, stumps, bones, ash, twigs):
 
 `?view=map&map=decorations` shows every look on each ground beside a hero.
 
+### The frosting (bead bzc.115)
+
+Studio set `art/sets/candy-decorations` (same recipes and crops as above;
+4 calls), frosting only, so every other ground decorates as before.
+Passable, two looks each: `gumdrops`, `cane-sprig` (Candy Cane),
+`melting-cone` (Melting Ice Cream: a dropped cone melting into a puddle),
+`gummy-worm`, `sugar-mouse`, `sprinkles`, `marshmallows`,
+`licorice-knot`, `chocolate-drops` and `gingerbread-rabbit`. Props:
+`giant-cupcake`, `gumdrop-boulder` and `rock-candy` (1x1, two looks),
+`fallen-cane` (Fallen Candy Cane), `chocolate-bar` and
+`gingerbread-fence` (2x1). Living ones move (`LIVING_MOTION`): the gummy
+worm creeps, the sugar mouse twitches, the gingerbread rabbit breathes.
+The frosting gets a second sprinkle of its own passable decorations
+(`DECORATE.frostingExtraShare`, its own random stream, rounded up so a
+crowded candy zone still gets one).
+
+Rejected on sight in this set: loose round candies, wrapped sweets and
+stars (coins and pickups), a heap of jelly beans (a gem pile), licorice
+shapes that read as letters, a small lollipop and a giant melting cone
+(repeats of the lollipop trees and of the passable cone), purple and
+primary colourways off the Kingdom's palette (FACTION_CANDY 10.1).
+
 ## Placement (bead bzc.72)
 
 The art-free kinds (id, name, line, grounds, passable, footprint, number of

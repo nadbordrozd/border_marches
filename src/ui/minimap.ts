@@ -50,6 +50,8 @@ export const TERRAIN_COLOURS: Readonly<Record<Terrain, Rgb>> = {
   snow: [0xd8, 0xe2, 0xee],
   // Golden dune sand, lighter and yellower than the steppe (bead bzc.88).
   sand: [0xe0, 0xb8, 0x62],
+  // Pale strawberry icing, apart from every other ground (bead bzc.115).
+  frosting: [0xf0, 0xb8, 0xcc],
   water: [0x2d, 0x5f, 0x9a],
 };
 const DEEP_WATER: Rgb = [0x1d, 0x3f, 0x72];

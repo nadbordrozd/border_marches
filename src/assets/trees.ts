@@ -205,6 +205,42 @@ const TREE_ROWS: readonly (readonly [
   ["sand", "barrel", 1, 26, 25],
   ["sand", "barrel", 2, 26, 26],
   ["sand", "barrel", 3, 26, 26],
+  // Candy groves (bead bzc.115, set candy-trees): frosted, cotton-candy and
+  // lollipop trees, gumdrop bushes and candy canes on the frosting.
+  ["frosting", "frosted", 1, 32, 34],
+  ["frosting", "frosted", 2, 34, 36],
+  ["frosting", "frosted", 3, 34, 38],
+  ["frosting", "frosted", 4, 32, 39],
+  ["frosting", "frosted", 5, 28, 30],
+  ["frosting", "frosted", 6, 38, 41],
+  ["frosting", "cotton", 1, 28, 39],
+  ["frosting", "cotton", 2, 26, 37],
+  ["frosting", "cotton", 3, 28, 40],
+  ["frosting", "cotton", 4, 26, 37],
+  ["frosting", "cotton", 5, 26, 37],
+  ["frosting", "cotton", 6, 28, 39],
+  ["frosting", "cotton", 7, 28, 40],
+  ["frosting", "cotton", 8, 39, 37],
+  ["frosting", "cotton", 9, 35, 42],
+  ["frosting", "cotton", 10, 28, 40],
+  ["frosting", "lollipop", 1, 26, 37],
+  ["frosting", "lollipop", 2, 26, 36],
+  ["frosting", "lollipop", 3, 26, 36],
+  ["frosting", "lollipop", 4, 28, 39],
+  ["frosting", "lollipop", 5, 29, 40],
+  ["frosting", "lollipop", 6, 22, 34],
+  ["frosting", "lollipop", 7, 22, 34],
+  ["frosting", "lollipop", 8, 22, 34],
+  ["frosting", "lollipop", 9, 22, 34],
+  ["frosting", "lollipop", 10, 22, 33],
+  ["frosting", "gumdrop", 1, 34, 35],
+  ["frosting", "gumdrop", 2, 36, 35],
+  ["frosting", "gumdrop", 3, 38, 28],
+  ["frosting", "gumdrop", 4, 34, 25],
+  ["frosting", "cane", 1, 18, 32],
+  ["frosting", "cane", 2, 18, 33],
+  ["frosting", "cane", 3, 18, 32],
+  ["frosting", "cane", 4, 36, 33],
 ];
 
 export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
@@ -236,6 +272,9 @@ const OWN_SPECIES_WEIGHTS: Readonly<
   // white, a few birches, golden larches in drifts.
   snow: { spruce: 5, fir: 2.4, birch: 0.9, larch: 2 },
   sand: { palm: 3.4, saguaro: 1.4, column: 0.8, pear: 0.8, barrel: 0.5 },
+  // Frosting (bead bzc.115): frosted and cotton-candy crowns are the calm
+  // base, lollipops and gumdrop bushes among them, candy canes in drifts.
+  frosting: { frosted: 4, cotton: 3.4, lollipop: 2, gumdrop: 1, cane: 1.4 },
 };
 
 /** The species mix of each ground's woods: its art family's. */
@@ -257,6 +296,7 @@ export const TREE_SPECIES_DRIFT: Readonly<
 > = {
   grass: { autumn: 0.57 },
   snow: { larch: 0.6 },
+  frosting: { cane: 0.6 },
 };
 
 /** The trees of one ground and species. */

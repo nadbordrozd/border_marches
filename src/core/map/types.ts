@@ -17,6 +17,7 @@ export type Terrain =
   | "volcanic"
   | "snow"
   | "sand"
+  | "frosting"
   | "water";
 
 /**
@@ -34,6 +35,7 @@ export const TERRAINS: readonly Terrain[] = [
   "volcanic",
   "snow",
   "sand",
+  "frosting",
   "water",
 ];
 

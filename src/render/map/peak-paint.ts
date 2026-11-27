@@ -29,6 +29,7 @@ export const PEAK_DARKEN: Readonly<Record<GroundTerrain, number>> = {
   volcanic: 0.06,
   snow: 0.06,
   sand: 0.14,
+  frosting: 0.12,
 };
 
 /** The outline colour of each family. */
@@ -43,6 +44,7 @@ export const PEAK_LINE: Readonly<
   volcanic: [34, 30, 38],
   snow: [44, 52, 66],
   sand: [92, 62, 32],
+  frosting: [96, 34, 66],
 };
 
 /** A toned copy of a peak image of `terrain`'s family. */

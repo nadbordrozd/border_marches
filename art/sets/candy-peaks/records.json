@@ -1,0 +1,503 @@
+{
+  "low-a": {
+    "id": "low-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "52870ef0-9f87-47ba-9588-2f2bc1d5289f",
+    "submittedAt": "2026-11-27T00:43:13.627Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one low candy hill, each image a different one of these: a fat round gumdrop hill with a sugar crust, a small lumpy mound of rock-candy crystals, a pair of round gumdrop hummocks side by side. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills the image width and about two thirds of its height."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 44
+      },
+      "no_background": true,
+      "seed": 115301,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one low candy hill, each image a different one of these: a fat round gumdrop hill with a sugar crust, a small lumpy mound of rock-candy crystals, a pair of round gumdrop hummocks side by side. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills the image width and about two thirds of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, lollipop, buildings, plate, terraces, crater."
+    },
+    "at": "2026-11-27T00:44:36.355Z",
+    "usageUsd": 0.08207154480616252,
+    "candidates": [
+      {
+        "file": "low-a-0.png",
+        "sha256": "726c1cfbe59552582e59d0732d15d8db8010034f1e946968788fa57d81c062a5",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-1.png",
+        "sha256": "fa1c2dc8a063a6484ba4fb2061dfe620bad694f2f9821eeddc85cfd862ef5783",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-2.png",
+        "sha256": "b2e03d5fe99ad5eadb0d77b7729ad3727e0bdb016427dee3141ab5efdec4b316",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-3.png",
+        "sha256": "a3f3a8f70b0d6360fbe6ac956bfb82b67154cbc81a52be767b53e6173a25d864",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-4.png",
+        "sha256": "6ba6b520df80d6896a6a6a71ffeb9d72357cc9ee5c454d6006255fe50c4e0711",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-5.png",
+        "sha256": "6101241abc063858752991b0b4d8547a937e405714c58c08fedc2814e8f01382",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-6.png",
+        "sha256": "5bb50521ab190fa4b8c98b3081a336b459b4a2276e7cc8645223ddebb6d380f8",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-7.png",
+        "sha256": "fc9f098cc6e648902acbdacb6a29362fbc59402ee4cea094e28c7eeb5748856e",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-8.png",
+        "sha256": "a2cb56c66f65c78649b9729052badbf39702aaf8d43558c7b1cda43796083049",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-9.png",
+        "sha256": "6ae7297c28a3e20b6c206654999518466326bc9366c17e4b788decf7f88ecabf",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-10.png",
+        "sha256": "b2a8927d7ce5312cb467b7d0084c6b5670d173641bd444a590c65120165efec1",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-11.png",
+        "sha256": "9487fd26424b4bb447f91b95fb9bcc137ea9d4d7c932209d51305ef13ff17725",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-12.png",
+        "sha256": "19d7c9d96e3fdfd2a6411cf3dc14f0909e1d4697e55a1c1a4698d3391af73da9",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-13.png",
+        "sha256": "f34bd2b63d641642fd575437dca267470f4bdb8d873b8e3789ae0b79bd7d9971",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-14.png",
+        "sha256": "2751f20468cdad9877c41b75d036136a017bebfc8fd6704bcc63f43b67356cf6",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-15.png",
+        "sha256": "4f4d54595f5915c8cc89361d881a73032dfdede028be9568d45cdbd62709d92f",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-16.png",
+        "sha256": "11dd15b35a53e6682b1d2762a2981c379b8da9c5dd041bf03e136e764b7e62c5",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-17.png",
+        "sha256": "580045b33660c023fd04bccf509c94a69c79a340da1495ec46a9aac1d7106630",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-18.png",
+        "sha256": "62f0345ef0b2962d18ac53b14f481429ba32ea48139e8018d09f087a0d6da8f1",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-19.png",
+        "sha256": "9ea326c1147669d2566c68d8b11ebb4560131121361182bc751c6727a12eba55",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-20.png",
+        "sha256": "cf6fc4bb96b798426679102a85cd2ad92d706f0ca2ad9adf0ac37e5ff438b2f6",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-21.png",
+        "sha256": "dc0cdc6a2ab519fe4e761379c75060e5dd47d0acb1e54f483c6d72f43fb97a51",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-22.png",
+        "sha256": "afa37084c85878b29ec79330c2c9811873df39ff7998a3bf0c75427dd0077eb2",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-23.png",
+        "sha256": "b8706e47f54bd35408d2755b5f77e32e70a2831fb9c78d25dd5b7a9defc10176",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-24.png",
+        "sha256": "ef4343acd66d38135e522251958c08401923fa4f96f430dfa46fe69ef0f04bd0",
+        "width": 56,
+        "height": 44
+      }
+    ]
+  },
+  "mid-a": {
+    "id": "mid-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "46c7ee81-224e-468f-abe1-d6a741b0bbe5",
+    "submittedAt": "2026-11-27T00:44:51.884Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy mountain, each image a different one of these: a tall rounded gumdrop mountain with an icing cap, a jagged crag of big rock-candy crystals with icing on its tips, a lumpy peak of stacked gumdrops. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 115302,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one candy mountain, each image a different one of these: a tall rounded gumdrop mountain with an icing cap, a jagged crag of big rock-candy crystals with icing on its tips, a lumpy peak of stacked gumdrops. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, lollipop, buildings, plate, terraces, crater."
+    },
+    "at": "2026-11-27T00:46:34.916Z",
+    "usageUsd": 0.11618570449617174,
+    "candidates": [
+      {
+        "file": "mid-a-0.png",
+        "sha256": "d4bea3cb5c89f212b7714c3a54c540ef4e1b6c7d80fd87aa3a8293998f612400",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-1.png",
+        "sha256": "6e78075805aca0ce75c83e5ea03cb0801eb85a35d164e25123554ddff2a5e5e4",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-2.png",
+        "sha256": "bfbf793ed70a2049e2fec97611e200ba192a50af806349f629e51c38c500fd6d",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-3.png",
+        "sha256": "0466b9db2930ef532fb2ef5933982c0874b72d65b3588d20fffecc3770dd1441",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-4.png",
+        "sha256": "b6392c304bb6b77dacd2d601829d43b99854d2ce993b8c0ec544e0f270e1c346",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-5.png",
+        "sha256": "224137d71f3f08a8d8b3237c09b00b4f3fb512d5ca80a6d0f9400699c26034e6",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-6.png",
+        "sha256": "26b733a606ff12df91602854bc65f89bed8b97ab747166e847779daa2c5e73e9",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-7.png",
+        "sha256": "5f3be3f10583b0f92c958d6a15199e6f6d45bbaea805660367895f634ce4dd51",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-8.png",
+        "sha256": "ac235b0c593dd682bc225a2c3069ffde7cfd5166e54b87973371b7897af9df1d",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "big-a": {
+    "id": "big-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "de41566a-5e96-40e5-b43c-08681dcb830d",
+    "submittedAt": "2026-11-27T00:46:35.432Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big candy mountain, each image a different one of these: a huge rounded gumdrop mountain with a thick dripping icing cap, a big jagged rock-candy massif with iced peaks, two joined gumdrop peaks with icing caps. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 115303,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big candy mountain, each image a different one of these: a huge rounded gumdrop mountain with a thick dripping icing cap, a big jagged rock-candy massif with iced peaks, two joined gumdrop peaks with icing caps. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, lollipop, buildings, plate, terraces, crater."
+    },
+    "at": "2026-11-27T00:48:12.825Z",
+    "usageUsd": 0.08219187055693733,
+    "candidates": [
+      {
+        "file": "big-a-0.png",
+        "sha256": "2982de7d1523689d4f15867ed4012e030c5c0f00aa0700995783bd0c1c67cc2b",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-1.png",
+        "sha256": "a3f665bc8855d869f31144deb2b337ccd68a906fb88fb9898ebdc3839691936b",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-2.png",
+        "sha256": "1e510ea58faac9c14cf8ea976df95f0f0fbeccebe36a77ebc2eaaa4a27b28ed0",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-3.png",
+        "sha256": "7ed2e2d0be7dbf78f80fe3a45242b421f987c8708635f6f177002cade6f5d1d1",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "mid-b": {
+    "id": "mid-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f728aad0-9e83-4ac9-8e48-405dffcdde47",
+    "submittedAt": "2026-11-27T00:48:40.911Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy mountain, each image a different one of these: a broad lumpy rock-candy mountain under an icing cap, a pointed gumdrop peak with a smaller gumdrop shoulder, a wide crag of sugar crystals with two tips. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 115304,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one candy mountain, each image a different one of these: a broad lumpy rock-candy mountain under an icing cap, a pointed gumdrop peak with a smaller gumdrop shoulder, a wide crag of sugar crystals with two tips. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Wide at the base, nearly the full image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, lollipop, buildings, plate, terraces, crater."
+    },
+    "at": "2026-11-27T00:49:58.336Z",
+    "usageUsd": 0.11687869244151645,
+    "candidates": [
+      {
+        "file": "mid-b-0.png",
+        "sha256": "28479904c6505e694ed09328b2a4ec64af94d412815dbb08961b4b8444c2524c",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-1.png",
+        "sha256": "64294495bed7e6dada22f33fc50640cde29607ec7c4a10e5d6341ca6ab09506f",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-2.png",
+        "sha256": "8844d19a0d58ad006b023581102ec99abd049bc3ca28d17025500f76d9e4a568",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-3.png",
+        "sha256": "f4976ae1ff9235655728a29ef0a93b4f597d49a87a96c2c79e30b3e5c269d307",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-4.png",
+        "sha256": "be2dcc8f5b6adfcda935a11804a3638f1e0d91b3ce577256dbbf93eec55507b3",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-5.png",
+        "sha256": "889de75bb0de7ef59b0d8d3f1cd82b858b8caf89c7411c77876e9aab92930a77",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-6.png",
+        "sha256": "caff76a420fdc4be07b43013ddc09375d32d0c745fecf7397ff7790cfa94aaa9",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-7.png",
+        "sha256": "89aad1d39e3b8afc62bbc40a3623b6fb108e0f3fb7d4559b6573c493a73c25eb",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-8.png",
+        "sha256": "bf552570411c8187c42061d76b9a880d00e0744592aee3978dbc3bf6af988d4a",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "big-b": {
+    "id": "big-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "01e6eff5-2e9f-46f8-ac20-9b91e6b31bcd",
+    "submittedAt": "2026-11-27T00:49:58.462Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big candy mountain, each image a different one of these: a wide mountain of three rounded gumdrop peaks under one icing cap, a tall rock-candy crag with a broad base and icing drips, a huge pointed gumdrop peak. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 115305,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big candy mountain, each image a different one of these: a wide mountain of three rounded gumdrop peaks under one icing cap, a tall rock-candy crag with a broad base and icing drips, a huge pointed gumdrop peak. Strawberry pink #d65a94, shadow #9c3468, lit #ee8cb8 on the left faces; white icing #fff4ec (shadow #e3cfc4) poured over the top in rounded drips. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, lollipop, buildings, plate, terraces, crater."
+    },
+    "at": "2026-11-27T00:51:30.556Z",
+    "usageUsd": 0.08103503468301561,
+    "candidates": [
+      {
+        "file": "big-b-0.png",
+        "sha256": "04bca0f19a3c33b0e0711c46ad8505461abb3d8f8cbde9c1e2e61407a08238b3",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-1.png",
+        "sha256": "37a1d79bd1b6b1c11a5adde35c7a1c6046f13e0ae8f17d4a88c7088c0ceb919d",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-2.png",
+        "sha256": "bddedb5bae4960522f36d7670c20eef012526e9d8e01c7e041047f85ac45d18a",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-3.png",
+        "sha256": "98ed3614ccfaefdc134764f9e140a015b993f70d05840404a906c4500ca34621",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  }
+}

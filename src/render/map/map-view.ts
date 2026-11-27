@@ -52,15 +52,18 @@ import {
   MOTION,
   cellGlintSlots,
   cellPhase,
+  cellSparkleSlots,
   frameDue,
   glintLevel,
   livingPose,
   magmaAlpha,
+  sparkleLevel,
+  sparklePixels,
   spriteParts,
   squashX,
   squashY,
 } from "./terrain-motion";
-import type { GlintSlot, LivingMotion } from "./terrain-motion";
+import type { GlintSlot, LivingMotion, SparkleSlot } from "./terrain-motion";
 import { hashUnit } from "./hash";
 import { doodadArt } from "./doodad-art";
 import { doodadSpecs } from "./doodads";
@@ -258,9 +261,11 @@ interface ChunkAnim {
   readonly glints: readonly GlintSlot[];
   /** Per magma pulse group, a half-size glow image (null: none). */
   readonly magma: readonly (Surface | null)[];
+  /** Sugar sparkle slots on bare frosting (bead bzc.115). */
+  readonly sparkles: readonly SparkleSlot[];
 }
 
-const NO_ANIM: ChunkAnim = { glints: [], magma: [] };
+const NO_ANIM: ChunkAnim = { glints: [], magma: [], sparkles: [] };
 
 interface GroundChunk extends Chunk {
   /** Its overlays; null when they must be worked out again (a patch). */
@@ -718,6 +723,20 @@ export function createMapView(
           if (ok) glints.push(slot);
         }
       }
+    // Sugar sparkles on frosting (bead bzc.115), only on bare ground.
+    const sparkles: SparkleSlot[] = [];
+    for (let cy = Math.floor(y0 / CELL); cy <= cy1; cy += 1)
+      for (let cx = Math.floor(x0 / CELL); cx <= cx1; cx += 1) {
+        if (map.cells[cy * map.width + cx]?.terrain !== "frosting") continue;
+        for (const slot of cellSparkleSlots(cx, cy))
+          if (
+            sparklePixels(slot).every(
+              ([x, y]) =>
+                x >= x0 && y >= y0 && x < x0 + w && y < y0 + h && bare(x, y),
+            )
+          )
+            sparkles.push(slot);
+      }
     const groups = MOTION.magma.groups;
     const hw = Math.ceil(w / 2);
     const hh = Math.ceil(h / 2);
@@ -764,7 +783,7 @@ export function createMapView(
       ctx.putImageData(image, 0, 0);
       return surface;
     });
-    return { glints, magma };
+    return { glints, magma, sparkles };
   };
 
   const buildChunk = (cx: number, cy: number): GroundChunk => {
@@ -1200,6 +1219,24 @@ export function createMapView(
     ctx.fill(dim);
     ctx.fillStyle = MOTION.glint.bright;
     ctx.fill(bright);
+    // Sugar sparkles on the frosting: a pixel, then a small cross.
+    const sugarDim = new Path2D();
+    const sugarBright = new Path2D();
+    for (const { anim } of anims)
+      for (const s of anim.sparkles) {
+        if (s.x > vx1 || s.x < vx0 || s.y > vy1 || s.y < vy0) continue;
+        any = true;
+        // Still (time 0): a few slots show a dim grain of sugar, as the
+        // water shows a few dim glints.
+        const level = t > 0 ? sparkleLevel(s, t) : s.phase < 0.25 ? 1 : 0;
+        if (level === 1) sugarDim.rect(s.x, s.y, 1, 1);
+        else if (level === 2)
+          for (const [x, y] of sparklePixels(s)) sugarBright.rect(x, y, 1, 1);
+      }
+    ctx.fillStyle = MOTION.sparkle.dim;
+    ctx.fill(sugarDim);
+    ctx.fillStyle = MOTION.sparkle.bright;
+    ctx.fill(sugarBright);
     // The magma glow, added over the cracks, its groups out of step.
     const glowing = anims.filter(({ anim }) => anim.magma.some((m) => m));
     if (glowing.length > 0) {

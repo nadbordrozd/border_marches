@@ -19,6 +19,10 @@ export const TERRAIN_MOVE_COST: Readonly<Record<Terrain, number | null>> = {
   // Desert sand (bead bzc.88): soft dunes, as slow as the badlands (150
   // pushed the start kit of a home next to a desert out of reach).
   sand: 125,
+  // The Candy Kingdom's frosting (bead bzc.115): soft icing that sticks to
+  // boots, as slow as the sand; 100 for Candy heroes, whose native
+  // terrain it is.
+  frosting: 125,
   water: null,
 };
 

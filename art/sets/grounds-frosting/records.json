@@ -1,0 +1,274 @@
+{
+  "icing-a": {
+    "id": "icing-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-97ad7611-2cef-4d74-9756-fb92f950b78b",
+    "submittedAt": "2026-11-27T00:32:24.626Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls and gentle spread ridges in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, like frosting smoothed over a huge cake with a palette knife, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115101,
+      "shading": "flat shading",
+      "description": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls and gentle spread ridges in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, like frosting smoothed over a huge cake with a palette knife, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:32:24.629Z",
+    "usageUsd": 0.008564614322450426,
+    "candidates": [
+      {
+        "file": "icing-a-0.png",
+        "sha256": "998efa6e228857e403b7e38c43d1c222673c8f770bd911454b36a10a4809e8f8",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "icing-b": {
+    "id": "icing-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-2100f4ca-4032-4970-bc00-a988b39708fa",
+    "submittedAt": "2026-11-27T00:32:50.134Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls and gentle spread ridges in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, like frosting smoothed over a huge cake with a palette knife, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115102,
+      "shading": "flat shading",
+      "description": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls and gentle spread ridges in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, like frosting smoothed over a huge cake with a palette knife, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:32:50.134Z",
+    "usageUsd": 0.007671186844507853,
+    "candidates": [
+      {
+        "file": "icing-b-0.png",
+        "sha256": "90bfbf910df97dda13cdc099926e155559aa5c028d35c0c2b27a2bf31e96916d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sprinkled-a": {
+    "id": "sprinkled-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-12d759b8-485b-4e7b-b3c3-46f726844275",
+    "submittedAt": "2026-11-27T00:33:15.567Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, and very few tiny short candy sprinkles scattered far apart, a few mint #7fd6b5, a few lemon #f4d46c, a few white, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115103,
+      "shading": "flat shading",
+      "description": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, and very few tiny short candy sprinkles scattered far apart, a few mint #7fd6b5, a few lemon #f4d46c, a few white, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:33:15.567Z",
+    "usageUsd": 0.007664891163508098,
+    "candidates": [
+      {
+        "file": "sprinkled-a-0.png",
+        "sha256": "dcd8d707585ffdcf4250e5db3dc3d0324f96ddcc85f74e5c1f3ccad7a9781453",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "spread-a": {
+    "id": "spread-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-288c252d-e32b-41d2-a2b5-44715a71773b",
+    "submittedAt": "2026-11-27T00:34:44.127Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: smooth soft pale pink strawberry icing spread flat, seen from straight above, filling the whole image edge to edge: even pale pink icing #f0c2d2 with many fine thin wavy palette-knife lines in slightly lighter cream pink #f9d8e2 and slightly darker #e6b0c4, the lines short, wavy and running in many slightly different directions, very calm and low in contrast, no single big swirl, no spiral, no light spot, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115104,
+      "shading": "flat shading",
+      "description": "Subject: smooth soft pale pink strawberry icing spread flat, seen from straight above, filling the whole image edge to edge: even pale pink icing #f0c2d2 with many fine thin wavy palette-knife lines in slightly lighter cream pink #f9d8e2 and slightly darker #e6b0c4, the lines short, wavy and running in many slightly different directions, very calm and low in contrast, no single big swirl, no spiral, no light spot, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:34:44.129Z",
+    "usageUsd": 0.008361898157331678,
+    "candidates": [
+      {
+        "file": "spread-a-0.png",
+        "sha256": "e8bd6e95f92b7d0f624a4690db7b358d54912d2b8e940293d8d8228258abf0dd",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "spread-b": {
+    "id": "spread-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d5fc727a-d2b5-4bc9-973e-2f258c861d8e",
+    "submittedAt": "2026-11-27T00:35:14.047Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: smooth soft pale pink strawberry icing spread flat, seen from straight above, filling the whole image edge to edge: even pale pink icing #f0c2d2 with many fine thin wavy palette-knife lines in slightly lighter cream pink #f9d8e2 and slightly darker #e6b0c4, the lines short, wavy and running in many slightly different directions, very calm and low in contrast, no single big swirl, no spiral, no light spot, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115105,
+      "shading": "flat shading",
+      "description": "Subject: smooth soft pale pink strawberry icing spread flat, seen from straight above, filling the whole image edge to edge: even pale pink icing #f0c2d2 with many fine thin wavy palette-knife lines in slightly lighter cream pink #f9d8e2 and slightly darker #e6b0c4, the lines short, wavy and running in many slightly different directions, very calm and low in contrast, no single big swirl, no spiral, no light spot, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:35:14.048Z",
+    "usageUsd": 0.00802895180384318,
+    "candidates": [
+      {
+        "file": "spread-b-0.png",
+        "sha256": "b9cdc6aa24849135701d7e628cde2a5aa780bf5ff924c836e3fd2a8d56c1b721",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "smooth-a": {
+    "id": "smooth-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-ae5455f1-b19d-43dd-82f2-26ce9362294c",
+    "submittedAt": "2026-11-27T00:36:22.720Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115106,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:36:22.722Z",
+    "usageUsd": 0.009903470754623413,
+    "candidates": [
+      {
+        "file": "smooth-a-0.png",
+        "sha256": "ccda6af070b9159c0d219c8e02179fb9b5c1c6406e74f0c56e995c803097767f",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "smooth-b": {
+    "id": "smooth-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-0b67cdeb-82c1-4aaa-9079-b98562cc16a5",
+    "submittedAt": "2026-11-27T00:37:11.312Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115107,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:37:11.313Z",
+    "usageUsd": 0.010218531264199152,
+    "candidates": [
+      {
+        "file": "smooth-b-0.png",
+        "sha256": "fcc3f4cfbaf4a9bf9edb95ed7dc5f5f33f085d375385c949d5b2e5e824e1e271",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "smooth-c": {
+    "id": "smooth-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-b40fd1c0-2018-4318-b59b-279ce6ca2567",
+    "submittedAt": "2026-11-27T00:37:41.194Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 115108,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T00:37:41.195Z",
+    "usageUsd": 0.008148998022079468,
+    "candidates": [
+      {
+        "file": "smooth-c-0.png",
+        "sha256": "4834b6c052d0e9ac1eb579edb83c05151686a62c0f937716780d75ca56c39eee",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

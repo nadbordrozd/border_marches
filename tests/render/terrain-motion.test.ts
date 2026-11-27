@@ -18,12 +18,15 @@ import {
   MOTION,
   cellGlintSlots,
   cellPhase,
+  cellSparkleSlots,
   crackOverlay,
   frameDue,
   glintLevel,
   isHot,
   livingPose,
   magmaAlpha,
+  sparkleLevel,
+  sparklePixels,
   spriteParts,
   squashX,
   squashY,
@@ -150,6 +153,42 @@ describe("water glints", () => {
     expect(near).toBeGreaterThanOrEqual(2 * CELL_PX);
     expect(firstOpen(MOTION.glint.shoreMargin)).toBeGreaterThanOrEqual(near);
     expect(firstOpen(40)).toBeGreaterThan(near + 20);
+  });
+});
+
+describe("sugar sparkles on frosting (bead bzc.115)", () => {
+  it("puts a few fixed slots inside each frosting cell, clear of its edge", () => {
+    const slots = cellSparkleSlots(3, 5);
+    expect(slots).toHaveLength(MOTION.sparkle.slots);
+    expect(cellSparkleSlots(3, 5)).toEqual(slots);
+    for (const s of slots)
+      for (const [x, y] of sparklePixels(s)) {
+        expect(x).toBeGreaterThanOrEqual(3 * 80 + MOTION.sparkle.inset - 1);
+        expect(x).toBeLessThan(4 * 80 - MOTION.sparkle.inset + 1);
+        expect(y).toBeGreaterThanOrEqual(5 * 80 + MOTION.sparkle.inset - 1);
+        expect(y).toBeLessThan(6 * 80 - MOTION.sparkle.inset + 1);
+      }
+  });
+
+  it("twinkles: a pixel, a cross, a pixel, then dark, never all in step", () => {
+    const slots = Array.from({ length: 20 }, (_, k) =>
+      cellSparkleSlots(k, 7),
+    ).flat();
+    const levels = new Set<number>();
+    let lit = 0;
+    let samples = 0;
+    for (let t = 0; t < 20_000; t += 100)
+      for (const s of slots) {
+        const level = sparkleLevel(s, t);
+        levels.add(level);
+        if (level > 0) lit += 1;
+        samples += 1;
+      }
+    expect([...levels].sort()).toEqual([0, 1, 2]);
+    // About lit share x 35% of the cycle: a few at a time.
+    expect(lit / samples).toBeGreaterThan(0.05);
+    expect(lit / samples).toBeLessThan(0.3);
+    expect(sparklePixels(slots[0]!)).toHaveLength(5);
   });
 });
 

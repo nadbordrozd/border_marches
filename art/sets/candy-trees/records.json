@@ -1,0 +1,380 @@
+{
+  "fluff-a": {
+    "id": "fluff-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5bb377e1-616c-45c2-a7c3-2475f79b0799",
+    "submittedAt": "2026-11-27T00:38:26.125Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small candy tree, chunky and cute, each image a different one of these: a cotton-candy tree with a big fluffy round crown of pink spun sugar #f08cb8 (shadow #c25a8c, light #ffc2dc on the left side) on a short striped stick, a cotton-candy tree with a fluffy mint crown #8fdcc0 (shadow #4fa58a), a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick, a tree of three stacked fluffy pink cotton-candy puffs. A short candy stick trunk. A full crown about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 115201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small candy tree, chunky and cute, each image a different one of these: a cotton-candy tree with a big fluffy round crown of pink spun sugar #f08cb8 (shadow #c25a8c, light #ffc2dc on the left side) on a short striped stick, a cotton-candy tree with a fluffy mint crown #8fdcc0 (shadow #4fa58a), a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick, a tree of three stacked fluffy pink cotton-candy puffs. A short candy stick trunk. A full crown about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper."
+    },
+    "at": "2026-11-27T00:39:59.063Z",
+    "usageUsd": 0.08325507884555393,
+    "candidates": [
+      {
+        "file": "fluff-a-0.png",
+        "sha256": "30bf385ff9e2dd1db85694ba622dbfa6307429a0c2580e94bb48a334d746d074",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-1.png",
+        "sha256": "3b46b88ac355cc98e95cb612ce797ed11e7c7f65297ae4d40f0a5a86259c3838",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-2.png",
+        "sha256": "4cff30fcc33258577e9554e54c329e4a10d1674a5035e36c6f36813faf0ac313",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-3.png",
+        "sha256": "38e5258ac2196211e4f4d68a92a2962ff49d1746beaddab025f78c8eeca30961",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-4.png",
+        "sha256": "d61ba8439799e4cce08abad37a0bcc9f23588af0914d86fe386d82142f526bc6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-5.png",
+        "sha256": "489d967f442ba18b52855bca9336c67ef801f54e48404d6f32b74453afb2bf3c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-6.png",
+        "sha256": "6ec1117d0ebdab2cad43522b7c3df16e8b225fe24ef13d6a62f9c1a3aa0c98b0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-7.png",
+        "sha256": "147630456a2bdc2f1b663e1d14bda1b82989ad46d90297bf1c236d20d82b27b1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-8.png",
+        "sha256": "66ec0b0f7840b6434639db4bb3ef719109b5db7278bc47f5f51fe85f67131f48",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-9.png",
+        "sha256": "6eb1a56b13722b109bf03d7dbf3000a2a702c7e6bf27ab598b4a5f650f4f89a8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-10.png",
+        "sha256": "47fc1f7503298fd526f6fee31bd26049ecedeeededfb24734cf071cf5a2de6ff",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-11.png",
+        "sha256": "20a41547909b11d510a85111e448334689e94000aca902545b0104151fc4ad29",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-12.png",
+        "sha256": "ba80d102a3bb99c959abbb45c9f83803e2bea19fb4d7c64f1887297b77fc83c5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-13.png",
+        "sha256": "3c1d8118e3906888914d8bd11cbe0318721596b29864b5629a1dcf10f079946a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-14.png",
+        "sha256": "123259b74677c1d5324a447e632405f354ff2c91649173758025a4f077b79f4c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-15.png",
+        "sha256": "ad526697848d917a3675e0c7adb7efc3026950426ee0687624fc3923ac8cb9e1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-16.png",
+        "sha256": "6908843110b4d395612b631d9749bd82b809a06733826415950b63a909cf6ca6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-17.png",
+        "sha256": "de98914650bdc4233f6b5060f1c42c047c25e4fb80d38c60c3e7310a44f7ba78",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-18.png",
+        "sha256": "dcb9b4a31d559be4c9a078bb49f81b93435181608b3b799a86956d711bdc70b5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-19.png",
+        "sha256": "dd9f95f1932a5e6f29f6c6c09431fb7cb7c7ca78eb8b67db75bcdf28448babdf",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-20.png",
+        "sha256": "d3cda36f702b7907a56944eb7d0a944382d759bc889cde80b1d5362b972cb9bb",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-21.png",
+        "sha256": "2bd8b04a8d5f5d2a7026c4675cdfd9b8e22732bf5149316a521c88046e67ab03",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-22.png",
+        "sha256": "3778c00836071ff38522ae4cd6c94067a4aa2c0126a0e530ddf92ccd4becf1ae",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-23.png",
+        "sha256": "c93488009dd2b0869ad0facaa727addb711e946697e2f95ef78c751f381882f7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "fluff-a-24.png",
+        "sha256": "6530dc02942c0cbf7d232b5bfc9442019b06aa6a2ba4f9766cbdee4c700a9250",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "cane-a": {
+    "id": "cane-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0cb45044-f666-488c-beff-0124e2c00f83",
+    "submittedAt": "2026-11-27T00:39:59.167Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small candy plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c, a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a peppermint swirl lollipop with a mint stripe on a thick stick. Chunky and solid, about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 115202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small candy plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c, a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a peppermint swirl lollipop with a mint stripe on a thick stick. Chunky and solid, about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T00:41:27.535Z",
+    "usageUsd": 0.0819066452715132,
+    "candidates": [
+      {
+        "file": "cane-a-0.png",
+        "sha256": "e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-1.png",
+        "sha256": "67b0e0496ed3708f8b1bf41532cc65b34198a92c0a81fbcf30f2accf7023797f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-2.png",
+        "sha256": "ecac608ec3796c9a09ebb5397a4c51d7babf074f4f1359166aa75aa177343080",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-3.png",
+        "sha256": "5a12a8a343454c7d304e7f55f5fe3d6bac646043f712f2a5851f68025613e1ce",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-4.png",
+        "sha256": "1f3ec36d3d8d2c5a2e28ca1a621e9e9623ef11093880e92587f94e3b56627105",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-5.png",
+        "sha256": "15003753051d2be23624ace7e44491d1ef2e36db63179d4f0213719e3b72ee6b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-6.png",
+        "sha256": "c276fd325446e35b932a6758227541dbc6d431fbfc5951d0cc6ccfd012d94d8f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-7.png",
+        "sha256": "dab60aa27e453ac5c12a2d75a6443294fbc812ffd601915d718ff0cdf71fddb5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-8.png",
+        "sha256": "50c6859d5301571349ca93532010e518cfc706adc0a786a5fde4015948c64f52",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-9.png",
+        "sha256": "33ce0749abfe9f304fd2475f08acf17b7f571257d43e4d93e6bc68da7282b933",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-10.png",
+        "sha256": "2c010323f281cae9ebe44567213f91a02f5356d1a486a24d5dd4e831d28ac541",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-11.png",
+        "sha256": "73d0364b7d518e5625a49b08bc8a4e2d01a500f84443e808b2269463f0b2f25c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-12.png",
+        "sha256": "6d76537acb9e9e69a17c21823c5fd9631abd136dee082b94b1e4f19abb2aecf4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-13.png",
+        "sha256": "0ec8952d12876723e770e26541836810802f73d2ea0dac1069ff39efc01e577b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-14.png",
+        "sha256": "9ec5fe23267f9122e345f0e3bd285b788e0154cc3ba6e4e66a4fec11b707b04b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-15.png",
+        "sha256": "27e7f0149b361419a41994df2670f5dae35939701e90c59cd034aa8b1675a09c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-16.png",
+        "sha256": "70cbf73d9a93fa3f3b8c02e6df806bc640c88f7c03371fd13c77ef02c90a2ac6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-17.png",
+        "sha256": "2c81ca4872f9b9eb8c8542eefa210666cd3d363e733d43d049aacb07d56e04c9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-18.png",
+        "sha256": "d11c76de4e3472d8b5d3efa0632eba5f2c89461c93d1513da1f3521b450acea6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-19.png",
+        "sha256": "129afe050d36cdefd6c9c9e46dbbee7520893d79ab19d2c9b4143a7466fc0684",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-20.png",
+        "sha256": "355fb15f635a7ef6da3c11ee13a22d043e3c92dcb06348846bd9209f84ef3943",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-21.png",
+        "sha256": "a389a509da68bc101546ea34df87c0ffefe11ee321eeded50f148b9e5c9f6d6e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-22.png",
+        "sha256": "0deec9ba45d286ac16de3d93231e57e697501b2dc418151004f2b2007ad32a2a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-23.png",
+        "sha256": "43c818b2444aa148530fb71ac65c3a2b55c580af9885c6daac2cae3f66b1a089",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cane-a-24.png",
+        "sha256": "aef4a533b6f5736d21cc7ffe49116809bfd9729bfe60ab0e8c1b7d9c1de6e5ba",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

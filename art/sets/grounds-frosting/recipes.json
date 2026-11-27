@@ -1,0 +1,110 @@
+{
+  "set": "grounds-frosting",
+  "bead": "border_marches-bzc.115",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "Frosting candy ground of the Candy Kingdom (bead bzc.115, docs/art/classes/grounds.md). Lessons of grounds-volcanic, -snow and -sand: no chibi style layer (it turns a field into a character), never the words texture or tile (pixflux draws a paving grid), a long-period base from pixflux at 400 x 400 (5 cells), no fragments at all. Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "flux": {
+      "shading": "flat shading"
+    },
+    "icing": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls and gentle spread ridges in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, like frosting smoothed over a huge cake with a palette knife, very calm, quiet and low in contrast, the same everywhere.",
+    "sprinkled": "Subject: a wide smooth field of soft pale pink strawberry icing seen from straight above, filling the whole image edge to edge: smooth pale pink icing #f2c4d4 with broad soft swirls in slightly lighter cream pink #fbdde6 and slightly darker #e4abc0, and very few tiny short candy sprinkles scattered far apart, a few mint #7fd6b5, a few lemon #f4d46c, a few white, very calm, quiet and low in contrast, the same everywhere.",
+    "spread": "Subject: smooth soft pale pink strawberry icing spread flat, seen from straight above, filling the whole image edge to edge: even pale pink icing #f0c2d2 with many fine thin wavy palette-knife lines in slightly lighter cream pink #f9d8e2 and slightly darker #e6b0c4, the lines short, wavy and running in many slightly different directions, very calm and low in contrast, no single big swirl, no spiral, no light spot, the same everywhere.",
+    "smooth": "Subject: a wide flat field of smooth fresh pink icing seen from directly above, filling the whole image edge to edge: soft pale pink #f2c8d6 with large soft, slightly deeper pink drifts #eab6c8 that blend gently into each other and a few faint thin curved cream lines #f8dce6, very calm, quiet and low in contrast, the same everywhere."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@flux",
+    "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, cake, plate, candy, object, character, building, plant, tree, rock, water, puddles, blobs, circles, dots pattern, stripes pattern, frame, border, horizon, sky, perspective, text"
+  },
+  "recipes": [
+    {
+      "id": "icing-a",
+      "concept": "FROSTING ICING (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 115101,
+      "subject": "@icing"
+    },
+    {
+      "id": "icing-b",
+      "concept": "FROSTING ICING (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 115102,
+      "subject": "@icing"
+    },
+    {
+      "id": "sprinkled-a",
+      "concept": "FROSTING WITH SPRINKLES (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 115103,
+      "subject": "@sprinkled"
+    },
+    {
+      "id": "spread-a",
+      "concept": "FROSTING SPREAD (pixflux 5-cell; icing-a had a light corner, icing-b a spiral)",
+      "width": 400,
+      "height": 400,
+      "seed": 115104,
+      "subject": "@spread"
+    },
+    {
+      "id": "spread-b",
+      "concept": "FROSTING SPREAD (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 115105,
+      "subject": "@spread"
+    },
+    {
+      "id": "smooth-a",
+      "concept": "FROSTING SMOOTH (pixflux 5-cell; the snow base-e phrasing)",
+      "width": 400,
+      "height": 400,
+      "seed": 115106,
+      "subject": "@smooth"
+    },
+    {
+      "id": "smooth-b",
+      "concept": "FROSTING SMOOTH (pixflux 5-cell; the snow base-e phrasing)",
+      "width": 400,
+      "height": 400,
+      "seed": 115107,
+      "subject": "@smooth"
+    },
+    {
+      "id": "smooth-c",
+      "concept": "FROSTING SMOOTH (pixflux 5-cell; the snow base-e phrasing)",
+      "width": 400,
+      "height": 400,
+      "seed": 115108,
+      "subject": "@smooth"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/grounds/frosting.png",
+      "from": "icing-a#0"
+    },
+    {
+      "path": "public/assets/terrain/grounds/frosting-swatch.png",
+      "from": "icing-a#0",
+      "width": 80,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 160,
+          "width": 80,
+          "height": 80
+        }
+      ]
+    }
+  ]
+}

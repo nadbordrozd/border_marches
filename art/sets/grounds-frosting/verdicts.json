@@ -1,0 +1,42 @@
+{
+  "icing-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm pale pink icing with organic wavy cream palette-knife lines speckled with sugar; no grid or motif; soft luma drift, wrap seam soft (about 2x the inner noise, like the sand)",
+    "at": "2026-11-27T00:38:07.594Z"
+  },
+  "icing-b#0": {
+    "verdict": "REJECTED",
+    "notes": "one big spiral swirl: a motif that repeats every 5 cells",
+    "at": "2026-11-27T00:38:07.641Z"
+  },
+  "sprinkled-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a radial light spot and loud red dots; hard wrap seam",
+    "at": "2026-11-27T00:38:07.688Z"
+  },
+  "spread-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a drawn frame round the edge and a top-to-bottom gradient",
+    "at": "2026-11-27T00:38:07.736Z"
+  },
+  "spread-b#0": {
+    "verdict": "REJECTED",
+    "notes": "straight diagonal hatching reads as paving; horizontal wrap seam",
+    "at": "2026-11-27T00:38:07.782Z"
+  },
+  "smooth-a#0": {
+    "verdict": "REJECTED",
+    "notes": "ornamental lace bands: a mirrored motif, not ground",
+    "at": "2026-11-27T00:38:07.830Z"
+  },
+  "smooth-b#0": {
+    "verdict": "REJECTED",
+    "notes": "rings and circles motif and a diagonal light gradient",
+    "at": "2026-11-27T00:38:07.879Z"
+  },
+  "smooth-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a regular wavy lattice of about 60 px cells reads as a grid against the 80 px map cells",
+    "at": "2026-11-27T00:38:07.930Z"
+  }
+}

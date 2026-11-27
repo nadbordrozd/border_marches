@@ -67,9 +67,16 @@ const NO_DESERT = {
   chance: { S: 0, M: 0, L: 0 },
 };
 
+/** Nor the candy zones (bead bzc.115), which also pick after the lava. */
+const NO_CANDY = {
+  ...DEFAULT_GEN_CONFIG.terrain.candy,
+  chance: { S: 0, M: 0, L: 0 },
+};
+
 const NONE = {
   terrain: {
     desert: NO_DESERT,
+    candy: NO_CANDY,
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
       chance: { S: 0, M: 0, L: 0 },
@@ -121,7 +128,7 @@ describe("volcanic zones in the generator", () => {
     const withLava = generateMapWithInfo(seed, {
       size,
       players,
-      config: { terrain: { desert: NO_DESERT } },
+      config: { terrain: { desert: NO_DESERT, candy: NO_CANDY } },
     }).info;
     const without = generateMapWithInfo(seed, {
       size,

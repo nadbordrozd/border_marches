@@ -34,7 +34,7 @@ Sextons will not go in.
 | Property       | Value                                                                                                                                                                                           |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Faction id     | `candy`                                                                                                                                                                                         |
-| Native terrain | Snow, read as icing sugar (100 per straight step instead of 150; section 11)                                                                                                                    |
+| Native terrain | Frosting, the Kingdom's own candy ground (100 per straight step instead of 125; section 11, bead bzc.115)                                                                                       |
 | Faction colour | `#e2589b` (strawberry pink)                                                                                                                                                                     |
 | Hero classes   | Nutcracker (might), Confectioner (magic)                                                                                                                                                        |
 | Remains, tags  | Every Candy creature leaves `sweets`, the first creatures that do (RULES_V2 1.5); none has an excluded condition                                                                                |
@@ -291,7 +291,7 @@ section 3.2, as in the other faction documents. Weights are 0 to 10
 | Stat pattern    | D, A, D, P, A, D, L, A, D, P                       | L, P, L, D, P, L, A, P, L, D                                                      |
 | Starting skills | Armour 1, Tactics 1                                | Clock 1, Parley 1; page: Appointment (the Clock tier 1 scheduled Harm, 24 + 12 P) |
 | Starting army   | 20 Gingerbread Men, 6 Peppermint Archers (FV 1788) | 14 Gingerbread Men, 5 Peppermint Archers, 2 Sugarplums (FV 1794)                  |
-| Native terrain  | Snow                                               | Snow                                                                              |
+| Native terrain  | Frosting                                           | Frosting                                                                          |
 | Command         | Crack!                                             | Come In, Dear                                                                     |
 | Mount (art)     | a candy-striped rocking horse                      | a marzipan pig                                                                    |
 
@@ -527,26 +527,41 @@ about 15-20 calls (US$1-1.5).
 
 ## 11. Terrain
 
-**No new ground is needed.** The Kingdom's native terrain is **Snow**,
-drawn on its backdrop and read as icing sugar: snow costs 150, so the
-discount to 100 is the largest any faction has, but snow lies only in the
-wild winter zone some maps have. Start zones take their terrain from the
+**Frosting** (bead bzc.115, the orchestrator's call to make the optional
+candy ground):
+the Kingdom's native terrain is its own candy ground, pale strawberry
+icing with sugar sparkles, its own art family (`GROUND_FAMILY`: frosted,
+cotton-candy and lollipop groves with gumdrop bushes and candy canes;
+strawberry gumdrop hills and rock-candy crags under poured icing as its
+peaks; ten candy decorations and five props). Frosting costs 125 a
+straight step, like the sand (soft icing sticks to the boots); Candy
+heroes pay 100 on it. Battles on frosting borrow the grass family's tree
+clumps.
+
+The map generator turns one wild zone into a **candy zone** on some maps
+(chance 0.3 / 0.4 / 0.5 on S / M / L, at most one; tier 1 or deeper;
+frosting with grass or steppe patches), from a random stream of its own
+after the volcanic, winter and desert zones (`gen/candy.ts`), so a map
+that rolls none is unchanged; a candy zone never is or borders a
+volcanic, winter or desert zone. Named maps get none unless they ask for
+it (`landscapes: { candy: 1 }`). Candy faction outposts stand on frosting
+while a frosting site is free, in their own zone or a candy zone (the
+object stage's `preferFrosting` hook; the integration bead put the
+Kingdom in the outpost pool). A map without a candy zone keeps its Candy
+outposts where they would stand, on any ground of their zone.
+
+The earlier plan, kept for the record: snow as icing sugar (snow costs
+150, so the discount to 100 would have been the largest any faction has,
+but snow lies only in the wild winter zone some maps have). Start zones
+take their terrain from the
 player's index, not the faction (`gen/config.ts`), so like every faction
 the Kingdom usually starts on grass, jungle, steppe or wasteland; a native
 terrain matters to a wandering hero, as for the Realm.
 
-A **candy ground** ("Frosting": pink-white icing with sprinkles, lollipop
-and candy-cane groves, gumdrop hills as its peaks, candy decorations, its
-own `GROUND_FAMILY`) would make Candy landfalls a place on the map, like the
-volcanic, winter and desert zones. It is optional and deferred: it is
-landscape, not faction play, it needs a ground, a tree set, a peak set,
-decorations and a map-generator zone rule, and it would replace snow as the
-native terrain. Section 14 lists it as an optional bead for the user to
-call.
-
 Faction outposts stand on their faction's native terrain
-(CONTENT_MAP_OBJECTS 3.2); snow being rare, Candy outposts on maps without a
-winter zone need the map bead's fallback (grass), recorded in bead 7.
+(CONTENT_MAP_OBJECTS 3.2); frosting lying only in the candy zone some maps
+have, a Candy outpost on a map without one stands on any ground of its
+zone (the last try of `preferFrosting`).
 
 ## 12. Neutrals, map and AI
 
@@ -650,36 +665,36 @@ and "cannot walk", round-end extra turns, the per-round melee flag) and 1b
 
 ## 15. Notable calls
 
-| Call                                                                              | Why                                                                                                                                                                                                     |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The faction is called the Candy Kingdom (orchestrator's call), id `candy`         | The user's words; the concept's "Sweetlands" sketch is superseded                                                                                                                                       |
-| The birthright is Sticky (melee makes Stuck), not the concept's Edible            | Stuck is a rule a spectator sees in one round, a thing other rules can move and burn, and the pull's partner; Edible spent creatures for good and needed a new verb                                     |
-| Stuck is a condition that stops walking only, never acting                        | It cannot lock a stack out of the battle, so it is not a Hold; a stuck stack always has someone in reach                                                                                                |
-| Clock 4, Accord 3, Hush 2, Bloom 1, Storm 0; guild cap 4                          | The widest empty arc of the wheel, midway between the Realm and the Restless; Storm is opposed to both main schools; tier 5 Double Time with Afters is too much to build                                |
-| The Kingdom pulls (Reel In, Come In, Dear) where the Horde pushes                 | One clear physical verb per faction; pushes and pulls meet at Cannonball (6.3)                                                                                                                          |
-| The tier 6 is a dragon whose bent rule is a round-end second turn                 | A Clock-shaped top tier that pays off holding enemies in place; a dragon for the Realm's Dragonslayer to meet                                                                                           |
-| The tier 5 is a tank (Chewy) rather than a second damage dealer                   | Someone has to stand beside the stuck enemy and take its blows                                                                                                                                          |
-| Candy creatures leave sweets; the Larder eats them                                | Law 6 at last has its sweets; the sinister note lives in a special building                                                                                                                             |
-| The Bakery grows creatures instead of paying income                               | A Heroes horde building gives the town its own economy; flagged for the balance bead                                                                                                                    |
-| Native terrain Snow (as icing), no new ground                                     | No new art or generator work is needed to play; a candy ground stays an optional bead                                                                                                                   |
-| Eight named heroes, not six                                                       | The other factions have eight; the hero pool and the portrait list keep one shape                                                                                                                       |
-| Appointment, not Late Bell, as the Confectioner's page                            | The battle AI casts damage better than set-up (BALANCE 7)                                                                                                                                               |
-| Flypaper Ribbon and the Pile On change are added outside the faction              | The admission rule needs makers and users of Stuck beyond the Kingdom                                                                                                                                   |
-| Reel In and Come In, Dear pull "re-aimed" (bead 1)                                | Tow's straight-line pull leaves a stack off the six lines short of contact; the pull now picks its direction again at each hex, still stopping before a blocker or stack                                |
-| The Larder and The Four O'Clock ride on natives as abilities (bead 1)             | As the Great Flinger gives Cannonball: the battle resolver adds `larder` and `the-four-oclock` to the owner's natives; no new side flags                                                                |
-| Battle-start abilities run after the armies' start rules (bead 1)                 | Hot from the Oven and The Four O'Clock use a new ability hook, run in field order before Morale and Luck                                                                                                |
-| The Bakery's +8 counts before any +50% growth (bead 1)                            | It raises the dwelling's base growth to 23, as the doc's "grows 23" reads; the Keystone's bonus then applies to 23                                                                                      |
-| Until bead 7 the Kingdom stays off maps, the pool and the gallery (bead 1)        | `available: false` now also keeps its named heroes out of the hero pool and its content out of the gallery; Candy outposts and the Flypaper Ribbon are held off generated maps, so no fingerprint moves |
-| Named-hero ids are the first distinctive word of each name (bead 1)               | `kernel`, `brittle`, `walnut`, `humbug`, `praline`, `treacle`, `fondant`, `gingersnap`, as the hero art bead registers them                                                                             |
-| Afters' second timeline slot is left to bead 7 (bead 1)                           | The engine exports `aftersDue(state)`, the stacks that will take it, for the timeline bar to draw                                                                                                       |
-| The AI reads three ability hints: `aiPull`, `aiMeleeMakes`, `aiWalkOnto` (bead 6) | Reel In, Sticky and the Larder tell the battle AI what they do without the AI naming Candy content; other factions' choices change only against Candy or Stuck                                          |
-| Bakery rank 22, Larder rank 45 in the build order (bead 6)                        | After the Town Hall and the Mint Range, before the fence; the Larder right after the Sugarplum Bower, before the Gummy Den. The balance bead may move both                                              |
-| Keystone halls are built for every faction, and the Keystone goes home (bead 6)   | The AI dug Keystones and never built a hall; The Four O'Clock needed it, and fixing it only for Candy would be a special case                                                                           |
-| Afters is drawn as a second tile at the end of the round's turns (bead 7)         | A dashed gold frame with a "+" in the turn queue, before the next round's divider; the Dragons' own tile carries it too while they take the Afters turn, and the status line says "Afters, no walking"  |
-| No outpost terrain fallback is needed (bead 7)                                    | The generator places Faction Outposts on any terrain (their catalogue row has no preferred terrain), so Candy outposts need no snow                                                                     |
-| The Hourglass Marches pins its two unpinned neutral towns' factions (bead 7)      | Adding Candy to the neutral towns moved Bangwhistle to Candy and Sexton's Rest to the Horde; the map's design is one neutral town per original faction, so their edits now name goblins and undead      |
-| The wheel wraps a long faction name and lowers the Lost World's box (bead 7)      | At 126 degrees the Kingdom's card meets the stage's right edge and the "Without magic" box; "The Candy Kingdom" takes two lines and the box moved 16 px down                                            |
-| The recruit sound is one glockenspiel strike (bead 7)                             | The first take (wrapper crinkles) was too peaky to play as loud as the other recruit sounds; victory is a music-box chord with bells, the town a cuckoo clock's ticking and chime                       |
+| Call                                                                              | Why                                                                                                                                                                                                                        |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The faction is called the Candy Kingdom (orchestrator's call), id `candy`         | The user's words; the concept's "Sweetlands" sketch is superseded                                                                                                                                                          |
+| The birthright is Sticky (melee makes Stuck), not the concept's Edible            | Stuck is a rule a spectator sees in one round, a thing other rules can move and burn, and the pull's partner; Edible spent creatures for good and needed a new verb                                                        |
+| Stuck is a condition that stops walking only, never acting                        | It cannot lock a stack out of the battle, so it is not a Hold; a stuck stack always has someone in reach                                                                                                                   |
+| Clock 4, Accord 3, Hush 2, Bloom 1, Storm 0; guild cap 4                          | The widest empty arc of the wheel, midway between the Realm and the Restless; Storm is opposed to both main schools; tier 5 Double Time with Afters is too much to build                                                   |
+| The Kingdom pulls (Reel In, Come In, Dear) where the Horde pushes                 | One clear physical verb per faction; pushes and pulls meet at Cannonball (6.3)                                                                                                                                             |
+| The tier 6 is a dragon whose bent rule is a round-end second turn                 | A Clock-shaped top tier that pays off holding enemies in place; a dragon for the Realm's Dragonslayer to meet                                                                                                              |
+| The tier 5 is a tank (Chewy) rather than a second damage dealer                   | Someone has to stand beside the stuck enemy and take its blows                                                                                                                                                             |
+| Candy creatures leave sweets; the Larder eats them                                | Law 6 at last has its sweets; the sinister note lives in a special building                                                                                                                                                |
+| The Bakery grows creatures instead of paying income                               | A Heroes horde building gives the town its own economy; flagged for the balance bead                                                                                                                                       |
+| Native terrain Frosting, a candy ground of its own (bead bzc.115)                 | The orchestrator called the optional bead; supersedes "Snow as icing, no new ground". Frosting costs 125 (as the sand), 100 for Candy natives                                                                              |
+| Eight named heroes, not six                                                       | The other factions have eight; the hero pool and the portrait list keep one shape                                                                                                                                          |
+| Appointment, not Late Bell, as the Confectioner's page                            | The battle AI casts damage better than set-up (BALANCE 7)                                                                                                                                                                  |
+| Flypaper Ribbon and the Pile On change are added outside the faction              | The admission rule needs makers and users of Stuck beyond the Kingdom                                                                                                                                                      |
+| Reel In and Come In, Dear pull "re-aimed" (bead 1)                                | Tow's straight-line pull leaves a stack off the six lines short of contact; the pull now picks its direction again at each hex, still stopping before a blocker or stack                                                   |
+| The Larder and The Four O'Clock ride on natives as abilities (bead 1)             | As the Great Flinger gives Cannonball: the battle resolver adds `larder` and `the-four-oclock` to the owner's natives; no new side flags                                                                                   |
+| Battle-start abilities run after the armies' start rules (bead 1)                 | Hot from the Oven and The Four O'Clock use a new ability hook, run in field order before Morale and Luck                                                                                                                   |
+| The Bakery's +8 counts before any +50% growth (bead 1)                            | It raises the dwelling's base growth to 23, as the doc's "grows 23" reads; the Keystone's bonus then applies to 23                                                                                                         |
+| Until bead 7 the Kingdom stays off maps, the pool and the gallery (bead 1)        | `available: false` now also keeps its named heroes out of the hero pool and its content out of the gallery; Candy outposts and the Flypaper Ribbon are held off generated maps, so no fingerprint moves                    |
+| Named-hero ids are the first distinctive word of each name (bead 1)               | `kernel`, `brittle`, `walnut`, `humbug`, `praline`, `treacle`, `fondant`, `gingersnap`, as the hero art bead registers them                                                                                                |
+| Afters' second timeline slot is left to bead 7 (bead 1)                           | The engine exports `aftersDue(state)`, the stacks that will take it, for the timeline bar to draw                                                                                                                          |
+| The AI reads three ability hints: `aiPull`, `aiMeleeMakes`, `aiWalkOnto` (bead 6) | Reel In, Sticky and the Larder tell the battle AI what they do without the AI naming Candy content; other factions' choices change only against Candy or Stuck                                                             |
+| Bakery rank 22, Larder rank 45 in the build order (bead 6)                        | After the Town Hall and the Mint Range, before the fence; the Larder right after the Sugarplum Bower, before the Gummy Den. The balance bead may move both                                                                 |
+| Keystone halls are built for every faction, and the Keystone goes home (bead 6)   | The AI dug Keystones and never built a hall; The Four O'Clock needed it, and fixing it only for Candy would be a special case                                                                                              |
+| Afters is drawn as a second tile at the end of the round's turns (bead 7)         | A dashed gold frame with a "+" in the turn queue, before the next round's divider; the Dragons' own tile carries it too while they take the Afters turn, and the status line says "Afters, no walking"                     |
+| No outpost terrain fallback is needed (bead 7)                                    | The generator places Faction Outposts on any terrain (their catalogue row has no preferred terrain), so Candy outposts need no snow; bead bzc.115 stands them on frosting while a frosting site is free (`preferFrosting`) |
+| The Hourglass Marches pins its two unpinned neutral towns' factions (bead 7)      | Adding Candy to the neutral towns moved Bangwhistle to Candy and Sexton's Rest to the Horde; the map's design is one neutral town per original faction, so their edits now name goblins and undead                         |
+| The wheel wraps a long faction name and lowers the Lost World's box (bead 7)      | At 126 degrees the Kingdom's card meets the stage's right edge and the "Without magic" box; "The Candy Kingdom" takes two lines and the box moved 16 px down                                                               |
+| The recruit sound is one glockenspiel strike (bead 7)                             | The first take (wrapper crinkles) was too peaky to play as loud as the other recruit sounds; victory is a music-box chord with bells, the town a cuckoo clock's ticking and chime                                          |
 
 **Engine asks** (no new noun or verb; the first two are the only new
 mechanics): a "cannot walk" modifier for the condition hook list (RULES_V2

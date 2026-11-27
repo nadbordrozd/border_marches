@@ -153,7 +153,8 @@ describe("peak placement", () => {
       const peaks = place(rangeMap(RANGE, terrain));
       expect(peaks.length).toBeGreaterThan(0);
       // Volcanic ground borrows the wasteland's basalt (bead bzc.83);
-      // the desert sand has its own sandstone (bead bzc.88).
+      // the desert sand has its own sandstone (bead bzc.88), the frosting
+      // its gumdrop hills (bead bzc.115).
       const family = GROUND_FAMILY[terrain];
       for (const peak of peaks)
         expect(peak.key.startsWith(`peak-${family}-`), peak.key).toBe(true);

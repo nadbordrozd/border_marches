@@ -1,0 +1,1046 @@
+{
+  "small-a": {
+    "id": "small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "01c40595-38b1-4d13-b256-fe195127542a",
+    "submittedAt": "2026-11-27T00:51:41.260Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny candy-land detail, each image a different one of these: two round sugar-crusted gumdrops, one pink #f08cb8 and one mint #8fdcc0; a small red and white striped candy cane #e03a3e #fff4ec stuck upright in the ground; a dropped ice-cream cone upside down, its pink scoop melting into a little puddle; a green gummy worm #8fd06a with an orange stripe, curled; a tiny white sugar mouse #fff4ec with a pink nose and a string tail; a little scatter of a few short rainbow sprinkles. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 115401,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny candy-land detail, each image a different one of these: two round sugar-crusted gumdrops, one pink #f08cb8 and one mint #8fdcc0; a small red and white striped candy cane #e03a3e #fff4ec stuck upright in the ground; a dropped ice-cream cone upside down, its pink scoop melting into a little puddle; a green gummy worm #8fd06a with an orange stripe, curled; a tiny white sugar mouse #fff4ec with a pink nose and a string tail; a little scatter of a few short rainbow sprinkles. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, ground patch, shadow, person, face on the candy, gold, coins, gem, chest, wrapper, plate."
+    },
+    "at": "2026-11-27T00:54:00.601Z",
+    "usageUsd": 0.08211218852467007,
+    "candidates": [
+      {
+        "file": "small-a-0.png",
+        "sha256": "d3e6f0f879671d4ec4a1eae45dbac274fbe35b1f43c9cf2a678ecc3e6baea843",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-1.png",
+        "sha256": "43a6781a91a2d97d52d56f14e9b9cdc61e13a43caf7c0f78f2b3e39280b942d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-2.png",
+        "sha256": "16acc339030763e57a9d57afb2ca1860aa037ca0c2d6acaaa0a2c769365386e4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-3.png",
+        "sha256": "1d3f22443a7a3f78935a6360f7ab1bcba83eb8897fd6fee573dbce935316fa24",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-4.png",
+        "sha256": "1cc86be4c46a40406237e1b7904602d9e5e1edb89e3117c4ceaa875b59931879",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-5.png",
+        "sha256": "f647d60f44bbfcdc3b86b6477ef0ea6811145386c354f8bbe28189f305295e18",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-6.png",
+        "sha256": "9ccabcd5efa5e90a33bc868c5b0c3e5f3857704176e3d48070d09866695e077d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-7.png",
+        "sha256": "50a31ef8a11fbaee473a1563e3dcfb4455014df7fb6b84fb7a65f26babe016a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-8.png",
+        "sha256": "438bf150be7794344065bbd7502dbbcc099b377ec15902b27c721af541f1209a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-9.png",
+        "sha256": "64a777352b8bd7672e24e023b66419fbceebba2a98de7674a59557aad4d84440",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-10.png",
+        "sha256": "69bd371d6844c9258ba92fb6a3769b90ba86d57f0c1a743e30a909afaeaf6143",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-11.png",
+        "sha256": "6a8881e5273b12aae7462faacafa4a1fb422b34fd5bba982c0edeb6ce7e0eee5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-12.png",
+        "sha256": "9378b4c42b833d8ef38489c79a25c87f6a96f2b654efceb7374ddd5e0513d1db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-13.png",
+        "sha256": "cf94603fd036069b054bd00f862a8899fbd6d582b02b9f38304e60960a99f18d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-14.png",
+        "sha256": "59f36d7209ea0bf6fcf25440539cdd3fa66df1ecff6ae7e90863a9ca4ef1e666",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-15.png",
+        "sha256": "0fd76e3122b764668e7070653043ff56015a19782cb30fa2afb16c3f21d1740d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-16.png",
+        "sha256": "b394cdd3ec1ed11f47ac9de178d93d4f8c088e8af1af636da421d1a90d79bf8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-17.png",
+        "sha256": "01e580e30a3a05104727d0bfb668ec462a6631124a678a71eda5e01dd83a3616",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-18.png",
+        "sha256": "797aa8b4d3dcf0a415480162221a73582808e3321a3903508c79d206ab9b0a78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-19.png",
+        "sha256": "f9b822be0ce2af38751b6dfc61989b76578ba185c5ad99cfe22a034530558312",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-20.png",
+        "sha256": "2f620d253f0b857cd250f779aefa2230462d20f1d301878f427f10b1d29358cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-21.png",
+        "sha256": "4de972e783a240269acb16414018a1c9da9c35e0f343ae6783ec0ca1ff5f551e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-22.png",
+        "sha256": "5f8ce169537981363bf0ce0236d6cee8f76bf4a1484f02bee6748550e12c0134",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-23.png",
+        "sha256": "223c7d98b61023f794cd24335d26d3d1fdb95d2f3e9d5f6d45b43c148d43a894",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-24.png",
+        "sha256": "16dd77889fd427ef8593b46dc57791dde1d27a479a6aff8e93cb49081b4f4a38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-25.png",
+        "sha256": "a8ef38532e738dd7929f84fff07924e85c68672df9601f0dc625aed94aa03961",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-26.png",
+        "sha256": "9246f337c7b0f31ccc1000dc8af3ca73f92e331db5e4cb1bb337cf2f961526c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-27.png",
+        "sha256": "5eb6bc35d1de4aac31922c4da68c672e34ebfb7f0a7eb4cbb559b500cd3ed916",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-28.png",
+        "sha256": "bda66095bd101f56bdf1bfe8323839c81c08a3d624d27041cdfbd148475fc841",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-29.png",
+        "sha256": "74e8648106160e89e61ddabdcdd892d1aa2ce79ca06e263a82ac93ae6d4c4f06",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-30.png",
+        "sha256": "be7eaab98f86f178fc2ad398703195ce2946e8712b9c618b3a0cffe03f8245f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-31.png",
+        "sha256": "e5a5af8ccad38d0fe552f04988754421f3a168c6f658f7f48c408a3b517cbe2c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-32.png",
+        "sha256": "ab44f035186611653de7165d82e1610bd3d05de7d089521ef492428bd109f721",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-33.png",
+        "sha256": "a8c6afc9f1566b79b43a7736b658c0c1d892b19af40b0d07762546c013773e3e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-34.png",
+        "sha256": "8e1f0e45d4b4a3e3cb68b0945da02fefb9b704618571c6097575e335f0bd8f9c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-35.png",
+        "sha256": "5a7825dfd08570b5b6c6dfcb4a97941fae1d26daf86b15a18d83e24e6517e9dc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-36.png",
+        "sha256": "0b261dd51959ef261109f01b3eba77b1b697083dc3cce07ad45691f78172f53d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-37.png",
+        "sha256": "cd038cf378a4fbbf40c69c0f4f1189e294980c929cfe2a8b6910d4890362c012",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-38.png",
+        "sha256": "c94daa18c58795600a6a7f4b60f2d005558d38fe4af53ecf3ad3308d0fa49d01",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-39.png",
+        "sha256": "13aa03f35a50736b67b90eeac305d96c9032f8ab77205eb021c8d582eb926e1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-40.png",
+        "sha256": "c53c649f27019c59ec0aaec1ef7a6bbe6e4de592451f9db4c558afa80c5d168f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-41.png",
+        "sha256": "8b75195258e1697b77f384befdb5516763c0b27a13b025dab6510d0a1246acb6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-42.png",
+        "sha256": "5684f59e06f16298c314eea0851ec62bc89514cf49be149e8b74c5a057cc7554",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-43.png",
+        "sha256": "1cf0fd9e4a8a8353f82bb2ef88d33be125b9169ce1be434ba5ff10c062a23ac8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-44.png",
+        "sha256": "78bde3a058390b38a7a0d8c9b2994f3409595620f78d2f4cf86fd10c2e0df9f1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-45.png",
+        "sha256": "85076405480743171f0015c93f50d50090b9b6172337fea3bc821499510979e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-46.png",
+        "sha256": "7c4bd7303403ce2fd468b47884a01293d97d6f3793b8344201b1ad75f02522b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-47.png",
+        "sha256": "7a01796aa4a1ecb16f7183896bc10f47d3cab3f0561a5716c2d918f93fe53e3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-48.png",
+        "sha256": "e077e2409502c8f3cb40de47cc3d6efcacda0e40e677a15b312a76948ac93bb3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-49.png",
+        "sha256": "32ea08b1968cf3604e28b413d1cc1c631f8ceab947c0ba6a9e4160e85778d764",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-50.png",
+        "sha256": "e0a8be5e6a9195ae8c706b391cf8a7dc0d57257b2a833d1ddf22b5bf7461f599",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-51.png",
+        "sha256": "a4c948935de0542fa1577e49e0aa92cf89760e23195f08dcc70887f6e1015ef8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-52.png",
+        "sha256": "a5509fcea018cf1c0ca6ff24f9cd29d5426116680564a9b3092c93d19d135681",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-53.png",
+        "sha256": "07b7bfde14e32c68498325ab899c9ec6dddd0ba87d7043321587d5c3b5734471",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-54.png",
+        "sha256": "b9e9850cebe11ef895c02ee7815ce4a34b55a47772003daef9f2370554177b74",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-55.png",
+        "sha256": "33bdabc23ffb2d65341a2745860f179ca9b8d90356e1d1761c2860a8c31fa86a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-56.png",
+        "sha256": "d59201fd5b53d48e0291c32a4c9db0342befa60ef07adf286eabf787feb3f5eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-57.png",
+        "sha256": "18e58cd5682f5b00ca09da3b9b03420833ee4a0631ac48aac4235351c0be5295",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-58.png",
+        "sha256": "bcbfc06d912dc4ab379463efce95e9974218cc55255eab921f11126b4c89ebe3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-59.png",
+        "sha256": "539793a4245d5829ee962017cc81835cba3914343ad6125fee54816ad9c694a4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-60.png",
+        "sha256": "d3eed3667ff1609f35069ce938058040af29fc43b94c8ca13ac8e848fbc389e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-61.png",
+        "sha256": "e7daee00c59162285e4d349e71f4dec938d7ff715d182b5e0297f183ef83a2d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-62.png",
+        "sha256": "82dfa82d625a80bf462042da59bf987fa294e76cca00a68e3bfdfa80fe50311b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-a-63.png",
+        "sha256": "a58539d4159a53b20502a80b3f61e1a5a05b24ecf0dab8a2c81da5bb5d8c1815",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "small-b": {
+    "id": "small-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1dd80044-d0a8-4792-b83f-c1e110268359",
+    "submittedAt": "2026-11-27T00:54:00.703Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny candy-land detail, each image a different one of these: two fat white and pink marshmallows #fff4ec #f6c2d4; a black licorice twist #2b2230; three brown chocolate drops #7a4a2c with pointed tops; a little heap of colourful jelly beans; a small peppermint-swirl lollipop #e03a3e stuck in the ground; a tiny gingerbread rabbit #b86b34 with white icing piping, sitting. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 115402,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny candy-land detail, each image a different one of these: two fat white and pink marshmallows #fff4ec #f6c2d4; a black licorice twist #2b2230; three brown chocolate drops #7a4a2c with pointed tops; a little heap of colourful jelly beans; a small peppermint-swirl lollipop #e03a3e stuck in the ground; a tiny gingerbread rabbit #b86b34 with white icing piping, sitting. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, ground patch, shadow, person, gold, coins, gem, chest, wrapper, plate."
+    },
+    "at": "2026-11-27T00:56:26.320Z",
+    "usageUsd": 0.08331384982003107,
+    "candidates": [
+      {
+        "file": "small-b-0.png",
+        "sha256": "edcbca95032cec9373023842debb104a9fe4b81a17219b9c93f4096ade1bd2ba",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-1.png",
+        "sha256": "aefc8891f86f43fb0f190fab19d7ebc36168532f2b12b290aaf25808e746aaec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-2.png",
+        "sha256": "23e598ce688b53404b6c769564cf531320034bdb893c361c0a80d3cc5cc5e056",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-3.png",
+        "sha256": "9abd27f1182f30e960aaabe3d54d5d902f0c48fc9d775259d457cd4e53f48ad4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-4.png",
+        "sha256": "78ccbc7612b14650cfc6976a9aef03e52bd2f7bc69f12dba590a47ef6e069725",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-5.png",
+        "sha256": "432f53e85f83af0f54ae4215758951440a2cc75a0f6d0a3bc91acfa2d50c48a2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-6.png",
+        "sha256": "7c6d0af6e72750fc2d0aa3eefe62b2599a2f525e2ca2695640f7e89160945e9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-7.png",
+        "sha256": "f6cc66d73b7ff42c49561f3d92fc18af9bc37ff7e868729d5888dd92369dd484",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-8.png",
+        "sha256": "890c2c3ceb3953497921766370273de7866017cb4165f8fa05fcdcad7ae11414",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-9.png",
+        "sha256": "1f7d743d51ea1c160dd0aa7ac3c2cc194988392ed21389cbd7043fefc7b207b3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-10.png",
+        "sha256": "692612623df3db9d08326691ecd4fd18f26c38f71da272464211da05655845f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-11.png",
+        "sha256": "27e6f7f9128a5069448c89dea23d86d24c79386f25275c5421bd3d3980a30121",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-12.png",
+        "sha256": "1e1a0c6d0acffd3180882720507395da43d982e1fe2582398a4d82016155ca7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-13.png",
+        "sha256": "e4f2fcf9d2373e732eb57deb0461c72b3b99c79ad6742a73ff3da40d89f3cc19",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-14.png",
+        "sha256": "3eb7ac4aa19f65dba7760e57bed914823d7f7916a7eab0259a96c7fbb331bf78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-15.png",
+        "sha256": "9e532bd2db4b49a787933c5f3be82931a717a35cca1d3d620bc11292332a1318",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-16.png",
+        "sha256": "618f2b00458d49c7ba2bbd8469001b42db092704b33c139fabe2aab585a573e2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-17.png",
+        "sha256": "3cf1e05597b59487e311c3b0e257e3de5bd75b6d0df94d1b1b013bbc7c0e2d2e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-18.png",
+        "sha256": "5ce1e7c991b6074214841ba20b5844c2f842f5d21f2187ff1fdb418ab487e39b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-19.png",
+        "sha256": "30314dbc65f245e60f64689882565b8acdf0805a50c2db252838f834fb0b24f5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-20.png",
+        "sha256": "4cab0b1605d9c5ba7f03b17ada9150f533d21995677fda05cce152fd2903ff83",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-21.png",
+        "sha256": "7074f84e73d89e64b6b59f9123fa34f266616fe424a8fee9593ed7cc1e771581",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-22.png",
+        "sha256": "a0bb578b006ab0011002fb30b89ee10ad05600f3201e7ed17959c88157c815ed",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-23.png",
+        "sha256": "9fd06731ad558f6e7582f7e4a1525853122376fcd8bf94ac5bc5ffa68d5056a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-24.png",
+        "sha256": "5f418fe70372435497463d23ea94debc742401fa2299dd072421b07af38eccfe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-25.png",
+        "sha256": "1a06146d9bb5e7fd98fdfc1c9bb1d746cc684e793d7351942cfb3c9a141dff28",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-26.png",
+        "sha256": "2e658a4140561e8e9acd8284e47b8d5d0489a33c984702e7517ca2eac7df8f2a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-27.png",
+        "sha256": "f76e2b799db47a3faa1ada06bce2bf2f92167f6064a45453fa6985846ee4de90",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-28.png",
+        "sha256": "ad5175c78e6c8eb704eeaec7f84df6b41a17bc7827bc773b6ada49c10003fb7b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-29.png",
+        "sha256": "70da6e0da0b086ea1eee4909e2c5aa12bb6093bb3e727904ded3c6176f8816f1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-30.png",
+        "sha256": "d25df0fcf9933cba59b6e11b2d180e3821a9489e945071b1dd9276726cc8e79d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-31.png",
+        "sha256": "d2772fa2c17516dc72ed347bf46b4c1ca123af35d9f0c4dd57ac588b28aeb253",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-32.png",
+        "sha256": "ef9c11fa31a7463ab8d66fe244b2b3913890bf28ff0bbb0d143ff992a1e66601",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-33.png",
+        "sha256": "c409b50d97a2f03d0b92e4f3279d1f0445ad87aadec3d7f8a920044b97703608",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-34.png",
+        "sha256": "c7366d1e79dadb78477d0578447dae3092573dee11c8976966034079b747b6cb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-35.png",
+        "sha256": "2a9ebd11ab8914c7aca86fe0a813df0142d6064d81a186a72b851b849e012871",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-36.png",
+        "sha256": "96ad1a0854375bd2875ac4dfd3425b92fee521465f5cc00be55bec10c6aa6368",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-37.png",
+        "sha256": "10844f291039b7941d32507c4240bdd2601dc834779ba874a8f26e02f78ed998",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-38.png",
+        "sha256": "e2f4ac2145a255abb73d02859b71d979b20a952f5d00a6d331ef4a4c9066296b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-39.png",
+        "sha256": "6bddaba997dd9828044fbfcbd270f109e22779a785358ca26a87b707fea73629",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-40.png",
+        "sha256": "f2bae4d82e7812229f5110f22c259d84d38e985bb059bb440f3b6c88d4ef2fcf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-41.png",
+        "sha256": "5d5f23f0b17bb4d558e9107dbcae146867a5070ca882c5755c6ebebdde7ebeff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-42.png",
+        "sha256": "589a5d4910a10c9f53806d4e1d883f986f0031f7afe2ffb75464f95fd7b8bcba",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-43.png",
+        "sha256": "c06a69986af9fcf886ea95ff380ba633393cee0174bc971caac087f28207f3c6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-44.png",
+        "sha256": "bb16a7e542070e9e2411e0dcc2ca974e0e69dccee8f713b2877377ae896bb4ed",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-45.png",
+        "sha256": "4d1ecdc6bdc94d4f7de34857841db1811c3f409ddf6453e977e84114900a1d8c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-46.png",
+        "sha256": "5beb558e7b0246855172d101236d921dc4c82ff5d43e0e3dec08cff219b3ba69",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-47.png",
+        "sha256": "cc39af7bca431121fda40a91024bb2acc63f25e6ba5861e6aec369ce26e89427",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-48.png",
+        "sha256": "61fb2bad0312e42a8dbc37f8a87f1724b808e5acc60984b4f9909e49f2a7a985",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-49.png",
+        "sha256": "38ba68142f5a7dccac2922953a269a8b8ae0171af004e153d971ffc96f2c53cb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-50.png",
+        "sha256": "b1965addcdb7e77748aa560478dabdcb3cc59cef6c719e3dfb02ee78c6a99a8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-51.png",
+        "sha256": "d595ed668c784a2a6b7e176f2c0efe8a58d3530cb62648e17630dfe18984d905",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-52.png",
+        "sha256": "c2dd556f237e57f02168e84e33236dfd544e4c9dfd97f226e2bcd93133940e7b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-53.png",
+        "sha256": "cb6d2af5e4330e6855cb79a9cf6ea256d500a88c20275ae8c8bdcbd77b79a4c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-54.png",
+        "sha256": "5585ba3ff3bdd244bb30d488999bb7fa6faf1132c852ac3c818e2b4a193c56fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-55.png",
+        "sha256": "6308648b0819917806a45dd428f2f155af3b0a76a57b2b31e6e1a498b7c829dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-56.png",
+        "sha256": "d457f71710c70153999cf19015b668bc42f76a3c8a3a28fb7ce8cec0058e74f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-57.png",
+        "sha256": "314d494632e8822fed667a01b76c7bbdd21d546e94e497881f4bf534219435a7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-58.png",
+        "sha256": "20e40a1fb68877b3fbef31624824e997dd6490568824ca3c0477a0c50b13305a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-59.png",
+        "sha256": "369b7d0af68a2496a57468a96d4cacd76ca077726e689fb41c3210776bc16293",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-60.png",
+        "sha256": "b6401e2069eb5bd1f50777ebcad608fb3486f5936c1e602779237ca4c1c44d8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-61.png",
+        "sha256": "4b8ba2157dd1aaf6e926a8d8f13446b758b26457c7188f9a3bf76dcdb26432fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-62.png",
+        "sha256": "721b307314da33d35758c4c45dd32ebfcc355f1db3452565513ffd2bb05777d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "small-b-63.png",
+        "sha256": "4c988c8878956b36f65f1733d726af656f028099c45c8504557ae68d3c1d19b0",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "props-1x1-a": {
+    "id": "props-1x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "336b9798-4cb4-4cfa-9ac2-cc4515474737",
+    "submittedAt": "2026-11-27T00:56:26.452Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking candy-land prop that fills one map cell, each image a different one of these: a giant cupcake #f08cb8 with a swirl of pink frosting, sprinkles and a red cherry on top in a striped paper cup #e2589b; a giant round gumdrop boulder #8fdcc0 with a sugar crust; a big cluster of pink and teal rock-candy crystals #d65a94 #8fe3e8; a giant scoop of strawberry ice cream on an upturned waffle cone, melting. About three quarters of the image wide and tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 115501,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking candy-land prop that fills one map cell, each image a different one of these: a giant cupcake #f08cb8 with a swirl of pink frosting, sprinkles and a red cherry on top in a striped paper cup #e2589b; a giant round gumdrop boulder #8fdcc0 with a sugar crust; a big cluster of pink and teal rock-candy crystals #d65a94 #8fe3e8; a giant scoop of strawberry ice cream on an upturned waffle cone, melting. About three quarters of the image wide and tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, ground patch, plate, person, face, flag, water."
+    },
+    "at": "2026-11-27T00:58:24.529Z",
+    "usageUsd": 0.08184624671936035,
+    "candidates": [
+      {
+        "file": "props-1x1-a-0.png",
+        "sha256": "4906c7858f08bd687774929baf7ac157be53a0c186926c8763996ce8cacdce12",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-1.png",
+        "sha256": "6b56d5c5f9af663663c0a929199d62899cf5e753eb861f961e40848f9176f77d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-2.png",
+        "sha256": "41e2515c8617799ffc1541e3f29ce5af5aa773eb11cc23d2a468f91094c81da0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-3.png",
+        "sha256": "73f573ac66564e18fb3d13f6ab16127f5d57de10ac6a75178a7f9a67347976e9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-4.png",
+        "sha256": "739f6655d9e505eed373f4cc37f7330072baa5c70c91e50a1e1c4aa07e607e01",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-5.png",
+        "sha256": "9e437b09ec545bba7debd6e130ecaa1382f4414c2e1d34d90b1cebabe10c99b5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-6.png",
+        "sha256": "fa388cb90ca86beb896cfd4fe172ae8ce7ad9adc1ca7ebf8754ad85397ad6f51",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-7.png",
+        "sha256": "7e9091bc75fdbaf9e8fe2bb65516a085c1ad13ed10039dc1d7d6c8b3239aad60",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-8.png",
+        "sha256": "79a7c7ee0a4e134f0ea838a6ce5c2b1e7cfa9adf89f923743eb393ecdbf97452",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-9.png",
+        "sha256": "104e81579bb9fb333fd62b19afc8bdbf0d3238d9567a4f48c4cfec0e4036c5a6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-10.png",
+        "sha256": "0da15188009ff21db6b093b9fd0ef2905f0406376ea9fd99b941af25c0d928a1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-11.png",
+        "sha256": "47ccda18fcb3d681b900a30b6fcd67e664b3bdd1241d3a942680970fa36ca435",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-12.png",
+        "sha256": "e4bbd13cf8848cf9a3d4f04526c8c72da73b91202f60e461d0aee3607f88f5cc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-13.png",
+        "sha256": "fb47420ec42efc4d171cf4c4642302cbcd74eebc999e1b6f635338c388fc80d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-14.png",
+        "sha256": "e734d3a31cb9464989c150ac4f125037eb376b60af59bb55cc94097e2a8c4c9a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-15.png",
+        "sha256": "d7fd9031daf708721344d441467a923f0cf509a1daad738f58439e92a8f4f91d",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "props-2x1-a": {
+    "id": "props-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "39e9d3a6-9ffa-4495-afa0-8767818eb01a",
+    "submittedAt": "2026-11-27T00:58:24.731Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long blocking candy-land prop across the image from left to right, each image a different one of these: a giant red and white striped candy cane #e03a3e #fff4ec lying fallen on its side; a huge broken bar of milk chocolate #7a4a2c with #4e2e1c shadows in two chunky pieces; a row of three big gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c; a gingerbread fence #b86b34 with icing and gumdrop posts. Nearly the full image wide and about two thirds of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 115502,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one long blocking candy-land prop across the image from left to right, each image a different one of these: a giant red and white striped candy cane #e03a3e #fff4ec lying fallen on its side; a huge broken bar of milk chocolate #7a4a2c with #4e2e1c shadows in two chunky pieces; a row of three big gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c; a gingerbread fence #b86b34 with icing and gumdrop posts. Nearly the full image wide and about two thirds of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, ground patch, plate, person, face, flag, water."
+    },
+    "at": "2026-11-27T00:59:47.147Z",
+    "usageUsd": 0.08121170433362325,
+    "candidates": [
+      {
+        "file": "props-2x1-a-0.png",
+        "sha256": "6fdb442a456f4b34e0a19cadeb65cd5cc07e550fe5e146ab1f3d4864b83826fb",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "props-2x1-a-1.png",
+        "sha256": "06b20a0c62b320b0c933be583b5416e2f7d7d4a37f1e57229a70ccef222d79e8",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "props-2x1-a-2.png",
+        "sha256": "55334b48d5a10ed57eb8ba1d8d27a5131b720c06d884ab519486c9ee88687e45",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "props-2x1-a-3.png",
+        "sha256": "badf45b1daa59f5c8736917bd295325f746bdad04a983bd842dc52a8f6493dd9",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  }
+}

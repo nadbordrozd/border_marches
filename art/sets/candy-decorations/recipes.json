@@ -1,0 +1,502 @@
+{
+  "set": "candy-decorations",
+  "bead": "border_marches-bzc.115",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "Candy Kingdom frosting decorations (bead bzc.115, docs/art/classes/decorations.md): passable small details at 32 x 32 with the doodad class layer, impassable props on 64 x 64 (one cell) or 128 x 64 (two cells side by side) with the prop class layer. generate-image-v2, no style image, like set decorations; one call returns many candidates of a mixed subject, the best distinct ones are accepted and cropped to their opaque box plus 1 px. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "small-a",
+      "concept": "CANDY SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 115401,
+      "subject": "Subject: one tiny candy-land detail, each image a different one of these: two round sugar-crusted gumdrops, one pink #f08cb8 and one mint #8fdcc0; a small red and white striped candy cane #e03a3e #fff4ec stuck upright in the ground; a dropped ice-cream cone upside down, its pink scoop melting into a little puddle; a green gummy worm #8fd06a with an orange stripe, curled; a tiny white sugar mouse #fff4ec with a pink nose and a string tail; a little scatter of a few short rainbow sprinkles. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, shadow, person, face on the candy, gold, coins, gem, chest, wrapper, plate"
+    },
+    {
+      "id": "small-b",
+      "concept": "CANDY SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 115402,
+      "subject": "Subject: one tiny candy-land detail, each image a different one of these: two fat white and pink marshmallows #fff4ec #f6c2d4; a black licorice twist #2b2230; three brown chocolate drops #7a4a2c with pointed tops; a little heap of colourful jelly beans; a small peppermint-swirl lollipop #e03a3e stuck in the ground; a tiny gingerbread rabbit #b86b34 with white icing piping, sitting. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, shadow, person, gold, coins, gem, chest, wrapper, plate"
+    },
+    {
+      "id": "props-1x1-a",
+      "concept": "CANDY PROPS 1x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 115501,
+      "subject": "Subject: one big blocking candy-land prop that fills one map cell, each image a different one of these: a giant cupcake #f08cb8 with a swirl of pink frosting, sprinkles and a red cherry on top in a striped paper cup #e2589b; a giant round gumdrop boulder #8fdcc0 with a sugar crust; a big cluster of pink and teal rock-candy crystals #d65a94 #8fe3e8; a giant scoop of strawberry ice cream on an upturned waffle cone, melting. About three quarters of the image wide and tall.",
+      "negative": "ground patch, platform, plate, person, face, flag, glow, water"
+    },
+    {
+      "id": "props-2x1-a",
+      "concept": "CANDY PROPS 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 115502,
+      "subject": "Subject: one long blocking candy-land prop across the image from left to right, each image a different one of these: a giant red and white striped candy cane #e03a3e #fff4ec lying fallen on its side; a huge broken bar of milk chocolate #7a4a2c with #4e2e1c shadows in two chunky pieces; a row of three big gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c; a gingerbread fence #b86b34 with icing and gumdrop posts. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "ground patch, platform, plate, person, face, flag, glow, water"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/gumdrops-1.png",
+      "from": "small-a#0",
+      "width": 30,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 4,
+          "width": 30,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gumdrops-2.png",
+      "from": "small-a#1",
+      "width": 30,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 4,
+          "width": 30,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cane-sprig-1.png",
+      "from": "small-a#8",
+      "width": 18,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 18,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cane-sprig-2.png",
+      "from": "small-a#12",
+      "width": 18,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 18,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/melting-cone-1.png",
+      "from": "small-a#16",
+      "width": 25,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 0,
+          "width": 25,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/melting-cone-2.png",
+      "from": "small-a#19",
+      "width": 25,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 0,
+          "width": 25,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gummy-worm-1.png",
+      "from": "small-a#24",
+      "width": 29,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 29,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gummy-worm-2.png",
+      "from": "small-a#27",
+      "width": 28,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 3,
+          "width": 28,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-mouse-1.png",
+      "from": "small-a#32",
+      "width": 25,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 1,
+          "width": 25,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-mouse-2.png",
+      "from": "small-a#34",
+      "width": 25,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 1,
+          "width": 25,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sprinkles-1.png",
+      "from": "small-a#40",
+      "width": 24,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sprinkles-2.png",
+      "from": "small-a#41",
+      "width": 24,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 24,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/marshmallows-1.png",
+      "from": "small-b#0",
+      "width": 32,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 1,
+          "width": 32,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/marshmallows-2.png",
+      "from": "small-b#7",
+      "width": 28,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 6,
+          "width": 28,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/licorice-knot-1.png",
+      "from": "small-b#30",
+      "width": 30,
+      "height": 15,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 12,
+          "width": 30,
+          "height": 15
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/licorice-knot-2.png",
+      "from": "small-b#31",
+      "width": 30,
+      "height": 17,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 9,
+          "width": 30,
+          "height": 17
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/chocolate-drops-1.png",
+      "from": "small-b#32",
+      "width": 30,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 6,
+          "width": 30,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/chocolate-drops-2.png",
+      "from": "small-b#37",
+      "width": 30,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 30,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gingerbread-rabbit-1.png",
+      "from": "small-b#57",
+      "width": 20,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 1,
+          "width": 20,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gingerbread-rabbit-2.png",
+      "from": "small-b#61",
+      "width": 23,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 23,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/giant-cupcake-1.png",
+      "from": "props-1x1-a#1",
+      "width": 52,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 52,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/giant-cupcake-2.png",
+      "from": "props-1x1-a#3",
+      "width": 46,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 2,
+          "width": 46,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gumdrop-boulder-1.png",
+      "from": "props-1x1-a#6",
+      "width": 62,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 6,
+          "width": 62,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gumdrop-boulder-2.png",
+      "from": "props-1x1-a#7",
+      "width": 50,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 50,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/rock-candy-1.png",
+      "from": "props-1x1-a#9",
+      "width": 63,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 63,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/rock-candy-2.png",
+      "from": "props-1x1-a#11",
+      "width": 58,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 58,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fallen-cane.png",
+      "from": "props-2x1-a#0",
+      "width": 116,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 116,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/chocolate-bar.png",
+      "from": "props-2x1-a#1",
+      "width": 118,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 11,
+          "width": 118,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gingerbread-fence.png",
+      "from": "props-2x1-a#3",
+      "width": 118,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 118,
+          "height": 49
+        }
+      ]
+    }
+  ]
+}

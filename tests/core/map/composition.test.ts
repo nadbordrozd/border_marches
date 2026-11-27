@@ -21,6 +21,21 @@ const SEEDS: Record<MapSize, readonly number[]> = {
   L: [1, 2],
 };
 
+/**
+ * Bead bzc.115: these maps without the candy zones, as bzc.102 measured
+ * them. A candy zone re-rolls L 2's terrain and obstacles, and the middle
+ * zones' cluster bound below sat exactly on 1.5 for these ten maps (20
+ * maps, S/M 1-8 and L 1-4: 1.34 a zone without candy, 1.28 with).
+ */
+const NO_CANDY = {
+  terrain: {
+    candy: {
+      ...DEFAULT_GEN_CONFIG.terrain.candy,
+      chance: { S: 0, M: 0, L: 0 },
+    },
+  },
+};
+
 const cache = new Map<string, { map: GameMap; info: GenerateInfo }>();
 function gen(
   seed: number,
@@ -29,7 +44,7 @@ function gen(
   const key = `${seed}${size}`;
   let out = cache.get(key);
   if (out === undefined) {
-    out = generateMapWithInfo(seed, { size });
+    out = generateMapWithInfo(seed, { size, config: NO_CANDY });
     cache.set(key, out);
   }
   return out;

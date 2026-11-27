@@ -41,10 +41,11 @@ const T: Readonly<Record<string, DecorationGround>> = {
   v: "volcanic",
   n: "snow",
   d: "sand",
+  f: "frosting",
 };
 
 /**
- * [id, name, terrains (letters g j s b w v n d), "p" passable or "x" prop, cols,
+ * [id, name, terrains (letters g j s b w v n d f), "p" passable or "x" prop, cols,
  * looks, text].
  */
 // prettier-ignore
@@ -127,6 +128,24 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["snowdrift", "Snowdrift", "n", "x", 1, 2, "A wall of wind-packed snow."],
   ["mammoth-skeleton", "Mammoth Skeleton", "n", "x", 2, 2, "The bones of a woolly mammoth, tusks and all."],
   ["frozen-log", "Frozen Log", "n", "x", 2, 2, "A huge trunk frozen to the ground, hung with icicles."],
+  // The Candy Kingdom's frosting (bead bzc.115, set candy-decorations):
+  // frosting only, so other grounds draw what they drew.
+  ["gumdrops", "Gumdrops", "f", "p", 1, 2, "Two sugared gumdrops, dropped by someone in a hurry."],
+  ["cane-sprig", "Candy Cane", "f", "p", 1, 2, "A little candy cane planted in the icing like a flower."],
+  ["melting-cone", "Melting Ice Cream", "f", "p", 1, 2, "A dropped ice-cream cone, melting into a sticky puddle."],
+  ["gummy-worm", "Gummy Worm", "f", "p", 1, 2, "A gummy worm, wriggling home through the icing."],
+  ["sugar-mouse", "Sugar Mouse", "f", "p", 1, 2, "A sugar mouse with a string tail. It squeaks, faintly."],
+  ["sprinkles", "Sprinkles", "f", "p", 1, 2, "Sprinkles, as if someone shook the sky."],
+  ["marshmallows", "Marshmallows", "f", "p", 1, 2, "Two plump marshmallows, soft as pillows."],
+  ["licorice-knot", "Licorice Knot", "f", "p", 1, 2, "A licorice twist tied in a knot nobody can undo."],
+  ["chocolate-drops", "Chocolate Drops", "f", "p", 1, 2, "Chocolate drops, going soft in the sun."],
+  ["gingerbread-rabbit", "Gingerbread Rabbit", "f", "p", 1, 2, "A gingerbread rabbit, sitting very still. Too still."],
+  ["giant-cupcake", "Giant Cupcake", "f", "x", 1, 2, "A cupcake the size of a cottage, cherry and all."],
+  ["gumdrop-boulder", "Gumdrop Boulder", "f", "x", 1, 2, "A boulder of mint gumdrop, far too sticky to climb."],
+  ["rock-candy", "Rock Candy", "f", "x", 1, 2, "Pink and teal sugar crystals taller than a rider."],
+  ["fallen-cane", "Fallen Candy Cane", "f", "x", 2, 1, "A candy cane as long as a house, fallen across the way."],
+  ["chocolate-bar", "Chocolate Bar", "f", "x", 2, 1, "A giant bar of chocolate, broken in two and left."],
+  ["gingerbread-fence", "Gingerbread Fence", "f", "x", 2, 1, "A gingerbread fence with gumdrop posts. Keep off."],
 ];
 
 export const DECORATION_KINDS: readonly DecorationKind[] = ROWS.map(

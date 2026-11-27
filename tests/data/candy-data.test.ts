@@ -257,12 +257,12 @@ describe("Classes, Commands and named heroes (sections 7, 8)", () => {
     const con = getHeroClass("confectioner");
     expect([nut.leaning, nut.nativeTerrain, nut.command]).toEqual([
       "might",
-      "snow",
+      "frosting",
       "crack",
     ]);
     expect([con.leaning, con.nativeTerrain, con.command]).toEqual([
       "magic",
-      "snow",
+      "frosting",
       "come-in-dear",
     ]);
     expect(nut.stats).toEqual({ attack: 2, defense: 2, power: 1, lore: 1 });

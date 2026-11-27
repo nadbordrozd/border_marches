@@ -147,6 +147,7 @@ once are offered one after another.
 | Badlands              |           125 |           177 |                                                  |
 | Wasteland             |           150 |           212 |                                                  |
 | Sand (desert)         |           125 |           177 | bead bzc.88: as slow as the badlands             |
+| Frosting (candy)      |           125 |           177 | bead bzc.115: 100 / 141 for Candy natives        |
 | Water (shallow, deep) |    impassable |               | no boats in the MVP                              |
 | Mountains             |    impassable |               |                                                  |
 | Forest                |    impassable |               |                                                  |

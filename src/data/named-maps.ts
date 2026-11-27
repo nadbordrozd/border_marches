@@ -45,7 +45,7 @@ export type MapEdit =
   | { op: "ground"; cells: readonly XY[]; obstacle: Obstacle; note: string };
 
 /** A landscape a named map can ask the generator for (bead bzc.89). */
-export type NamedLandscape = "volcanic" | "winter" | "desert";
+export type NamedLandscape = "volcanic" | "winter" | "desert" | "candy";
 
 /**
  * Generator options of a named map beyond seed, size and players (bead

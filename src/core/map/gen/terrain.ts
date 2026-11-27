@@ -37,8 +37,11 @@ export function placeWinter(st: GenState): number[] {
   return placeBiome(st, "snow", st.cfg.terrain.winter, lava, "frost");
 }
 
-/** One biome's zones (see placeVolcanic), avoiding the zones `avoid`. */
-function placeBiome(
+/**
+ * One biome's zones (see placeVolcanic), avoiding the zones `avoid`. Also
+ * the candy zones' (gen/candy.ts placeCandy, bead bzc.115).
+ */
+export function placeBiome(
   st: GenState,
   main: Terrain,
   cfg: GenState["cfg"]["terrain"]["volcanic"],
