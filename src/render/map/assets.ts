@@ -22,6 +22,7 @@ import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
 import { DECORATION_ASSETS } from "../../assets/decorations";
 import { FALLBACK_ICON_ASSETS, ICON_ASSETS } from "../../assets/icons";
 import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "../../assets/map-objects";
+import { OWNER_FLAG } from "../../assets/owner-flag";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, calmTexture } from "./ground";
@@ -102,6 +103,8 @@ export function mapAssetList(): ImageAsset[] {
     ...MAP_OBJECT_ASSETS,
     // Loose artifacts are drawn as their own icon on a cloth (bzc.105).
     ARTIFACT_CLOTH,
+    // The owner flag, recoloured per player when drawn (bead bzc.146).
+    OWNER_FLAG,
     ...ICON_ASSETS.filter((a) => a.kind === "artifact"),
     FALLBACK_ICON_ASSETS.artifact,
   ];

@@ -86,9 +86,17 @@ import {
   compareEntries,
   decorationEntries,
   objectEntries,
+  ownerFlagEntry,
   unitEntry,
 } from "./scene";
-import type { SceneEntry } from "./scene";
+import type { SceneEntry, SpriteOp } from "./scene";
+import { OWNER_FLAG } from "../../assets/owner-flag";
+import {
+  FLAG_FRAMES,
+  FLAG_FRAME_MS,
+  recolourFlag,
+  waveFrame,
+} from "./owner-flag";
 import { MapInput, WheelZoom, glideAt, glideMs } from "./input";
 import type { Glide } from "./input";
 import { pathMarkers } from "./path-markers";
@@ -119,12 +127,18 @@ export interface MapHero {
   readonly colour?: string;
 }
 
-/** An owner flag planted at a cell (town and mine entrances). */
+/**
+ * An owner flag (bead bzc.146) on the town, mine or dwelling whose
+ * entrance is cell (x, y): the flag sprite in the owner's colour planted
+ * at the building sprite's anchor.
+ */
 export interface MapFlag {
   readonly x: number;
   readonly y: number;
-  /** CSS colour. */
+  /** CSS colour (#rrggbb). */
   readonly colour: string;
+  /** The flagged object; else the object whose entrance is (x, y). */
+  readonly objectId?: string;
 }
 
 export interface PathStep {
@@ -176,7 +190,7 @@ export interface MapView {
    */
   setDecorations(decorations: readonly PlacedDecoration[]): void;
   setHeroes(heroes: readonly MapHero[]): void;
-  /** Owner flags (player colours) at object entrances. */
+  /** Owner flags (player colours) on towns, mines and dwellings. */
   setFlags(flags: readonly MapFlag[]): void;
   /**
    * The planned path's markers (path-markers.ts); `from` is the hero's
@@ -235,8 +249,13 @@ export interface MapView {
   ): Promise<void>;
   /** Pixel effects over the map (world pixels), drawn under the fog. */
   spawnFx(fn: (field: FxField, clock: FxClock) => void): void;
-  /** A flag at cell (x, y) rises up its pole (a capture). */
+  /** The owner flag of the object at cell (x, y) is hoisted (a capture). */
   raiseFlag(x: number, y: number): void;
+  /**
+   * World pixel of the cloth of the owner flag the object at cell (x, y)
+   * would fly, or null when it has no sprite (bead bzc.146).
+   */
+  flagPoint(x: number, y: number): { x: number; y: number } | null;
   /** Revealed fog fades out instead of vanishing (false: snaps). */
   setFogFade(on: boolean): void;
   /** World pixel of a cell's centre. */
@@ -476,6 +495,11 @@ export function createMapView(
   let heroes: readonly MapHero[] = [];
   let path: readonly PathMarker[] | null = null;
   let flags: readonly MapFlag[] = [];
+  let flagsSig = "";
+  /** Recoloured wave frames of the owner flag, by colour (bead bzc.146). */
+  const flagFrames = new Map<string, Surface[]>();
+  /** Whether the last frame drew an owner flag (its wave needs the clock). */
+  let flagInView = false;
   let selected: Cell | null = null;
   let hovered: Cell | null = null;
   let targets: readonly Cell[] | null = null;
@@ -602,10 +626,21 @@ export function createMapView(
   };
 
   const rebuildForeground = (): void => {
-    const entries: SceneEntry[] = [
-      ...terrainForeground,
-      ...objectEntries(objects),
-    ];
+    const built = objectEntries(objects);
+    const entries: SceneEntry[] = [...terrainForeground, ...built];
+    // Owner flags (bead bzc.146) right after their buildings.
+    for (const f of flags) {
+      const obj =
+        objects.find((o) => o.id === f.objectId) ??
+        objects.find((o) => o.x === f.x && o.y === f.y);
+      const building =
+        obj === undefined
+          ? undefined
+          : built.find((e) => e.objectId === obj.id);
+      if (building === undefined) continue;
+      const flag = ownerFlagEntry(building, f.colour, `${f.x},${f.y}`);
+      if (flag !== null) entries.push(flag);
+    }
     for (const hero of heroes) {
       const key = hero.unit ?? DEFAULT_HERO;
       const unit =
@@ -652,8 +687,79 @@ export function createMapView(
     }
   };
 
+  /** The owner flag's wave frames in a colour, made on first use. */
+  const flagFramesOf = (colour: string): Surface[] | null => {
+    const cached = flagFrames.get(colour);
+    if (cached !== undefined) return cached;
+    const image = images.get(OWNER_FLAG.key);
+    if (image === undefined) return null;
+    const { w, h } = OWNER_FLAG;
+    const read = createSurface(w, h);
+    const readCtx = context2d(read);
+    readCtx.drawImage(image, 0, 0);
+    const pixels = readCtx.getImageData(0, 0, w, h);
+    const tinted = recolourFlag(
+      { width: w, height: h, data: pixels.data },
+      colour,
+    );
+    const frames: Surface[] = [];
+    for (let k = 0; k < FLAG_FRAMES; k += 1) {
+      const frame = waveFrame(tinted, OWNER_FLAG.clothLeft, k);
+      const surface = createSurface(w, h);
+      context2d(surface).putImageData(
+        new ImageData(new Uint8ClampedArray(frame.data), w, h),
+        0,
+        0,
+      );
+      frames.push(surface);
+    }
+    flagFrames.set(colour, frames);
+    return frames;
+  };
+
+  /**
+   * An owner flag: its wave frame (frame 0 while terrain motion is off,
+   * reduced motion among the reasons) and, just after a capture, hoisted
+   * out of its roof.
+   */
+  const drawFlagOp = (
+    ctx: Context,
+    s: SpriteOp,
+    flag: NonNullable<SpriteOp["flag"]>,
+  ): void => {
+    const frames = flagFramesOf(flag.colour);
+    if (frames === null) return;
+    flagInView = true;
+    const t = motionOn ? performance.now() - motionEpoch : 0;
+    const frame = frames[Math.floor(t / FLAG_FRAME_MS) % FLAG_FRAMES];
+    if (frame === undefined) return;
+    const start = flagRaises.get(flag.cell);
+    const k =
+      start === undefined
+        ? 1
+        : Math.min(1, (performance.now() - start) / FLAG_RAISE_MS);
+    if (k >= 1 && start !== undefined) flagRaises.delete(flag.cell);
+    // Hoisting: the flag climbs out of its foot, the top showing first.
+    const shown = Math.max(1, Math.round(s.sh * k));
+    ctx.drawImage(
+      frame,
+      s.sx,
+      s.sy,
+      s.sw,
+      shown,
+      s.dx,
+      s.dy + s.sh - shown,
+      s.sw,
+      shown,
+    );
+  };
+
   const drawSprites = (ctx: Context, e: SceneEntry): void => {
     for (const s of e.sprites) {
+      if (s.flag !== undefined) {
+        drawFlagOp(ctx, s, s.flag);
+        continue;
+      }
       const image = images.get(s.key);
       if (image === undefined) continue;
       ctx.drawImage(
@@ -1093,31 +1199,8 @@ export function createMapView(
     ctx.stroke();
   };
 
+  /** The heroes' pennants (owner flags are sprites, bead bzc.146). */
   const drawFlags = (ctx: Context): void => {
-    const now = performance.now();
-    for (const f of flags) {
-      if (!isExplored(f.x, f.y)) continue;
-      // A capture: the pole grows and the pennant climbs it.
-      const start = flagRaises.get(`${f.x},${f.y}`);
-      const k =
-        start === undefined ? 1 : Math.min(1, (now - start) / FLAG_RAISE_MS);
-      if (k >= 1 && start !== undefined) flagRaises.delete(`${f.x},${f.y}`);
-      const pole = Math.round(30 * (k < 0.6 ? k / 0.6 : 1));
-      const px = f.x * CELL + 8;
-      const py = f.y * CELL + CELL - 10;
-      if (k < 1) {
-        ctx.fillStyle = "#2a1f14";
-        ctx.fillRect(px - 1, py - pole, 2, pole);
-        if (k > 0.45)
-          drawPennant(
-            ctx,
-            px,
-            py - Math.round((1 - k) * 18),
-            f.colour,
-            30 - Math.round((1 - k) * 18),
-          );
-      } else drawPennant(ctx, px, py, f.colour, 30);
-    }
     for (const h of heroes) {
       if (h.colour === undefined || !isExplored(h.x, h.y)) continue;
       const off = heroOffsets.get(h.id);
@@ -1138,6 +1221,9 @@ export function createMapView(
     const loop = (): void => {
       const now = performance.now();
       fx.prune(now);
+      // A hoist whose flag is off screen or under fog ends on time too.
+      for (const [cell, start] of flagRaises)
+        if (now - start > FLAG_RAISE_MS) flagRaises.delete(cell);
       const busy =
         fx.size > 0 ||
         flagRaises.size > 0 ||
@@ -1453,6 +1539,7 @@ export function createMapView(
         !(e.x1 < vx0 || e.x0 > vx1 || e.y1 < vy0 || e.y0 > vy1) &&
         visibleEntry(e),
     );
+    flagInView = false;
     for (const draw of [drawShadows, drawSprites])
       for (const e of shown) {
         const off =
@@ -1465,6 +1552,8 @@ export function createMapView(
         } else draw(ctx, e);
       }
     stat.drawnEntries += shown.length;
+    // A waving owner flag keeps the motion clock running (bead bzc.146).
+    animatedInView ||= flagInView;
     // Path markers above the units of their row: drawn after the whole
     // foreground so a tree top never hides the route (HoMaM does the same).
     drawFlags(ctx);
@@ -1738,7 +1827,13 @@ export function createMapView(
       requestRender();
     },
     setFlags(next) {
+      const sig = next
+        .map((f) => `${f.objectId ?? ""}@${f.x},${f.y}:${f.colour}`)
+        .join("|");
       flags = next;
+      if (sig === flagsSig) return;
+      flagsSig = sig;
+      rebuildForeground();
       requestRender();
     },
     setPathPreview(steps, from) {
@@ -1891,6 +1986,17 @@ export function createMapView(
     spawnFx(fn) {
       fn(fx, { now: performance.now() });
       animate();
+    },
+    flagPoint(x, y) {
+      const obj = objects.find((o) => o.x === x && o.y === y);
+      const building = obj === undefined ? undefined : objectEntries([obj])[0];
+      const flag =
+        building === undefined
+          ? null
+          : ownerFlagEntry(building, "#000000", `${x},${y}`);
+      const s = flag?.sprites[0];
+      if (s === undefined) return null;
+      return { x: s.dx + OWNER_FLAG.w / 2 + 2, y: s.dy + 10 };
     },
     raiseFlag(x, y) {
       flagRaises.set(`${x},${y}`, performance.now());

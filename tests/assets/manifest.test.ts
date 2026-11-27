@@ -287,7 +287,6 @@ describe("asset manifest", () => {
     }
     for (const town of TOWN_ASSETS) {
       expect(town.ground.contactY).toBeLessThanOrEqual(town.h);
-      if (town.flag !== null) expect(town.flag.x).toBeLessThan(town.w);
     }
   });
 

@@ -1,0 +1,626 @@
+{
+  "flag-a": {
+    "id": "flag-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a2c12493-235c-4eb4-925e-2544a927e447",
+    "submittedAt": "2026-11-27T11:31:19.617Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight thin dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 14601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight thin dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, coloured cloth, red, blue, emblem, cross, stripes, ground, grass, base, stand, person, hand, shadow."
+    },
+    "at": "2026-11-27T11:33:02.406Z",
+    "usageUsd": 0.08269284923871359,
+    "candidates": [
+      {
+        "file": "flag-a-0.png",
+        "sha256": "e89d1640fb2131d9a8693c926e26ecbedd99d9cb24ec47dab2153cd0f7de6754",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-1.png",
+        "sha256": "322e69df432f19d232310f2307f4f4b992f7d129530b05a5f2728c2c4eb3f046",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-2.png",
+        "sha256": "6bbd7db2abe8b0a5d4c217137f6bf4f00ed13f8e25d3ea6cab2dd79c9661488e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-3.png",
+        "sha256": "4973f6e08204d095319bf508421e3e91c416289b330d0b14b299e937710de1dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-4.png",
+        "sha256": "fb5b1787e891a1ca22d6e64f2a762fa12093456544dd41efac68eac41a82fb36",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-5.png",
+        "sha256": "afa17f07ad7fb1e546d2edaa8e8c25fbb5eecfec3f3a4f1a26c322277ee42cec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-6.png",
+        "sha256": "2452e8012805292a0746c5c7ad348a96cadb056fc148fd70a84d9dbdd0c35bff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-7.png",
+        "sha256": "73fc8b20c1b05a80fb95e943e64787156c9d8c5006a83ec24f740711a07ac015",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-8.png",
+        "sha256": "4cf84b10503a566ce4cacd1d4714082b1fe7faaabbfd17dfa377f1e96ed2b214",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-9.png",
+        "sha256": "58e10cdc2d79cc9095b01ba7fb9b49f3365dcb454bcfb663ba825e74062f98f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-10.png",
+        "sha256": "462baa008c2d0e7c2b8f69618c35c44d56ab698b472a4b8a5f7fe6227a05b145",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-11.png",
+        "sha256": "b0058b0ffbf0967711809fce4262edec93d388c539d68d4af1040949d5895dc7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-12.png",
+        "sha256": "3471699be3289dee01dfc81d9130832d752bc6a51e245096c113c22b1466e882",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-13.png",
+        "sha256": "08dfee4dc07b50b6607fa363e3f7ad31564c09f8d6467b9d12339300d2cb73e8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-14.png",
+        "sha256": "46c6d393a6a1e7ffc86267d8cef9236c69f7fdf19a45f0820598f1c03daf260e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-15.png",
+        "sha256": "ebaf2ccb1f713db7e35b44ea94c9a5040c4d0de2dfb652635cabf0a94d3db66a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-16.png",
+        "sha256": "a936ba5b9f4a0d250c630ba61983f7da202c196b736a4a99cd8abbb9abb965a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-17.png",
+        "sha256": "5ccb88f83d3ebeb035e22c518dbc9450abdaefbaf11dbbd2bb8483f6fe2aa83e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-18.png",
+        "sha256": "549a9c35eb0ba4bd43de13007b4d6d916f01802477d1c98ec15751436234e3fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-19.png",
+        "sha256": "cd075cdac959a9f0c2ba3f9604a971ae7b9f5a76888bcfd4378632e236ac8f40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-20.png",
+        "sha256": "d9174d1e7d88ef6830d86dc8f17b319d61bdd9f08b3c075bfce02a7b5b8e3268",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-21.png",
+        "sha256": "d50a0f5660c1be086c848d1815fe14608666b1729770c82c2d06cc087a0d8c5a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-22.png",
+        "sha256": "5710a5c4932db9455a35467a086566621ebd8c2937cb85c7f992e00981b2e086",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-23.png",
+        "sha256": "a90903a35e04fda023a6d39460edc6d1fa59f454f5526461fe07feb481bfcaac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-24.png",
+        "sha256": "634ca3ed75bbfb251b8ecf1ef0331f02449e5c650a3d47a743db27ec743b02e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-25.png",
+        "sha256": "71ce49ad5d74119d96985d319fbd24bf90fd2e136a6fdfbd1d8e4ac9f048ac73",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-26.png",
+        "sha256": "9466e9ee782b42fa1b93511763bcb678252825f7c040a6462a3219c229ac3882",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-27.png",
+        "sha256": "644bf81df26075e48a51da9541f404f669ff85e3a07c5536f9deedaff068ffe3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-28.png",
+        "sha256": "0a8644b5e16a551b49ee9f46a156f6c4fab45c42b204023c434d61390a2b7524",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-29.png",
+        "sha256": "c5d3b0680944de3b00b2723f7932f96a28ab210d963df97f1c8fe158d7e9c0dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-30.png",
+        "sha256": "9e2286328d6a211b5cacb9b0d0b19c4928321d7c17f4c5be7362b885c4f9a096",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-31.png",
+        "sha256": "16f94064c370baf4f4e37649674c55ed779ddc931c880387a9578680e36f5497",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-32.png",
+        "sha256": "e70655584dff71d27c46b8bd56cedc08805ad6749b7cffe4f2fb7cf53f8d29ed",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-33.png",
+        "sha256": "c8064a62a7a88d50e759c8c16d5b6a6cf741c701108c4533ba81f6990d47bd52",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-34.png",
+        "sha256": "1717093c92862fe12fc7047b34c213f68626bcb901262473090000701c31e8fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-35.png",
+        "sha256": "3fa964aef6720adc8009f424cbe3de684e0f5e0053f9b6f050c24c5eab708abf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-36.png",
+        "sha256": "811825cc68ac6c8dc6a013976753b465d1d6fcd52d56de0121a0b83774e18cf1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-37.png",
+        "sha256": "919f6ee900ed1409444dede955bde7fad3c08678c0dc0db42c939f0cd57d6d70",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-38.png",
+        "sha256": "5cc40d6435d5aa1a5501111ba7f91c0b4740e34bc4b6b4d177c7d92bea546546",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-39.png",
+        "sha256": "0574b0e9bd771c6aa466548361eaebc65581708c9f6bb4f59bcb140b358f12d9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-40.png",
+        "sha256": "f10f8c2946ef7a7663082f28fd17a352e3ab830b92aa28dc91da96406ae8d975",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-41.png",
+        "sha256": "40d34bb5dbd35022964e398822854c30282aedcfb3bdce22ac8961393d611327",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-42.png",
+        "sha256": "22ecdbe33adaa5a78f0694836b588f5c369072af5593d4b2680932d2feb85cd4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-43.png",
+        "sha256": "f5d67487f9e30cc0655ed4349aee1ba6fcbca7dc5c40556066140dd145e77e1c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-44.png",
+        "sha256": "a8d4bf4f89bf0391afd92a22765d1ec26eb6834608dc379272a04fe422185a02",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-45.png",
+        "sha256": "2de97abe202cd90ac93578ffbafb94ac45cf3bc3ff64a98ed529eed086cb1304",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-46.png",
+        "sha256": "1402863a35c87b968335e16fe7e06eaeba362d4a3677717adb3de1c6ae1acb07",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-47.png",
+        "sha256": "d131b54e4c4b872dfe7383edf46f7b6f70aa45474d2718df2d18dc4fe4a7ae12",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-48.png",
+        "sha256": "3be9474da1194ac78b03c0ef8511127a98dd1116c09ef2978e96b646b1b1c684",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-49.png",
+        "sha256": "58fdca183001047e7c0a3eb27eefe26ea59ad65a8d668ef4d96cdcd4e3cdca79",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-50.png",
+        "sha256": "1843a082f5b0f767f5dbf3f03a1755ef73cd561d9374f80ea86a674c9c21e79f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-51.png",
+        "sha256": "50590530730d7e281d9250ae8093ce613b7d9ac2a4087f996c41ad301c754d23",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-52.png",
+        "sha256": "bbb48d745d21476704bdd1ad2977dc493143851963434bceac09ac978b004b52",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-53.png",
+        "sha256": "7b5d3f53837514aea23278880ac277117f3e4731453b5dd6bb82e5ca473c0660",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-54.png",
+        "sha256": "ffd2614e000792bb7f99a65cbcb87f893c64d150f18643394281d2048adbcdf2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-55.png",
+        "sha256": "655c5f5f3bc9f848c650d42dec616439f08660cfdcc05f0aba42974ccd854b12",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-56.png",
+        "sha256": "79edae1cb639cf0b092cdae95792caac205315731c51ccf23826829f23b3f7f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-57.png",
+        "sha256": "e6db6d1b868c33706b9b8e401c8f94f3ac1a60aaaa5f709300831583f6febb34",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-58.png",
+        "sha256": "210ff5af1bdffc0f419c25a07f3924796ee1fc16809cfaa86a14e593fefb80b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-59.png",
+        "sha256": "2656540302247d5fcba9fb106ab0325a9c660140b8a4670bc21a1d9ad72136d2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-60.png",
+        "sha256": "c82280bcb9790cc43c7577b62efe44338792cbb41b721e0359609fa40426219f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-61.png",
+        "sha256": "f1ed952f11bfa6feb1e6656d9d91662c312f7854557d6cb7437bc5b7bcecbc78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-62.png",
+        "sha256": "b9fa4449dfadf45c4f394028fd528d7b04bc885fd408f431011731d0efd2fbfe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "flag-a-63.png",
+        "sha256": "48051c7d1b0602f73b9a892d4bed55525d89654945f4c7c925fad6df74c9b8c4",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "flag-b": {
+    "id": "flag-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c025a05e-d555-4f77-aa6a-8601ffa447b6",
+    "submittedAt": "2026-11-27T11:33:02.539Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 14602,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, coloured cloth, red, blue, emblem, cross, stripes, ground, grass, base, stand, person, hand, shadow."
+    },
+    "at": "2026-11-27T11:34:45.524Z",
+    "usageUsd": 0.08165606615278456,
+    "candidates": [
+      {
+        "file": "flag-b-0.png",
+        "sha256": "c71c65bee652725ab208b34f41bd6ea50e2e06c9c7c23c69e8a79442b378f8a8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-1.png",
+        "sha256": "d82f3b5c0ea27e4f77ff054c30916b74c562a19f5cc3f12576169dfa7fa62c01",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-2.png",
+        "sha256": "cf835ca494c526e4503decc93f3422665a89517692d185ed809c98fdcb330234",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-3.png",
+        "sha256": "10215bc83118ba171e3b3e63484e349d4ac43a627df2f7756b7ae7cf8d560fdc",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-4.png",
+        "sha256": "f0f6db29313873113c0794448a740b869546a71912a21f979ee85140b963d6e6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-5.png",
+        "sha256": "97f25fcd6c74b27132b0720f0fef664b1790500d6c123ca0eed9df7e4125f558",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-6.png",
+        "sha256": "8b6b52ffc87bfeb8f25f03536ae0239fbdb8f4e198568323392228605b413a82",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-7.png",
+        "sha256": "e5056a6501d9e50fa7c158f08f95a1cba27b9555e31c7b15ce9358553d075b44",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-8.png",
+        "sha256": "2aa679bb0291256edf0f1f8ffb5f580202b559ca00a83d7d1891a94de81c164f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-9.png",
+        "sha256": "3297c8a4326a53a2164f6e4ad52b01752586e5425cb0c8d3f9c62db6b653bb8f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-10.png",
+        "sha256": "48efc2ea32aa7ce329a68f6d5bdcec9a6580575722aec0d3b30396dcb40f828a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-11.png",
+        "sha256": "412a4920f444e2e673522531bc3d41de40043b55fde510f1e0c010802634fc20",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-12.png",
+        "sha256": "606f85030406e03e8e0df1ec9791f699e7d2f76429f10128bc265217ba85507e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-13.png",
+        "sha256": "702cdf5c5da04deba0ea649766601ea965c7e90e21b826e83734734cd1776fa4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-14.png",
+        "sha256": "4df34aed0fd34f4aeb68a84191b574d0eb45ac1d8cf791f2950f171d94d82bc0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-15.png",
+        "sha256": "d7a24d9f72dafbc8bb33937e37544df775f6928616c9dca4dd6c6084c7910648",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-16.png",
+        "sha256": "513444cb45df96f9e57dc8e46c05eecdf0b86bd1747a78c1d1c2751ae20a25d2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-17.png",
+        "sha256": "72cdd39cac3126334e2e68864e4d054cc42cd950f3841c39e261bc211926c911",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-18.png",
+        "sha256": "5bb88ac1d29cd7c964f6fdb11e2e07cd746fc3e19975890f3b9d5d2ae6a18626",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-19.png",
+        "sha256": "1bdad84d3f9f3b3f6be13395bd9e6e7ba962c6c93827a623feb7e4f75b841e13",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-20.png",
+        "sha256": "c58cbf97b6d660d729e799dc6e1a5ea984cc54746c5a68556aa9883dd2575f48",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-21.png",
+        "sha256": "2b00148a22c25abb4e7906d84dec17aad63f2589422a7662142e0e56c03c41b9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-22.png",
+        "sha256": "8305301ebb8bc7657512f22cee47752ef072721a97fdc6218f277ed06097e7ae",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-23.png",
+        "sha256": "888028b135e2b714554e9916b145005f392ef6e4874f3fec5f68fd6c15372742",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "flag-b-24.png",
+        "sha256": "09490eb1e6623962f2c8c0945334e8a5e97373f6d70efb87849af8206bf7602b",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

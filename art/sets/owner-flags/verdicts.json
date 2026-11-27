@@ -1,0 +1,447 @@
+{
+  "flag-a#62": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky rectangular flag in a gentle wave on a brown pole with a gold knob; clean black outline, plain white cloth with two clear grey fold bands, so the per-player recolour keeps its shading; reads at native size on light and dark",
+    "at": "2026-11-27T11:36:10.093Z"
+  },
+  "flag-a#9": {
+    "verdict": "REJECTED",
+    "notes": "crisp swallowtail but a flat cloth with no shade tone: recoloured it reads as a flat sticker",
+    "at": "2026-11-27T11:36:10.241Z"
+  },
+  "flag-a#4": {
+    "verdict": "REJECTED",
+    "notes": "good wave but noisy diagonal shading streaks that break up when recoloured",
+    "at": "2026-11-27T11:36:10.371Z"
+  },
+  "flag-a#38": {
+    "verdict": "REJECTED",
+    "notes": "close second; ragged lower edge reads as torn cloth",
+    "at": "2026-11-27T11:36:10.545Z"
+  },
+  "flag-a#47": {
+    "verdict": "REJECTED",
+    "notes": "deep swallowtail notch makes the flag look torn at small size",
+    "at": "2026-11-27T11:36:10.732Z"
+  },
+  "flag-a#2": {
+    "verdict": "REJECTED",
+    "notes": "stripy shading bands read as a pattern once recoloured",
+    "at": "2026-11-27T11:36:10.967Z"
+  },
+  "flag-b#0": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:14.941Z"
+  },
+  "flag-b#1": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.066Z"
+  },
+  "flag-b#2": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.203Z"
+  },
+  "flag-b#3": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.336Z"
+  },
+  "flag-b#4": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.467Z"
+  },
+  "flag-b#5": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.638Z"
+  },
+  "flag-b#6": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.767Z"
+  },
+  "flag-b#7": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:15.887Z"
+  },
+  "flag-b#8": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.014Z"
+  },
+  "flag-b#9": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.149Z"
+  },
+  "flag-b#10": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.269Z"
+  },
+  "flag-b#11": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.389Z"
+  },
+  "flag-b#12": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.524Z"
+  },
+  "flag-b#13": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.662Z"
+  },
+  "flag-b#14": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:16.848Z"
+  },
+  "flag-b#15": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.052Z"
+  },
+  "flag-b#16": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.181Z"
+  },
+  "flag-b#17": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.317Z"
+  },
+  "flag-b#18": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.441Z"
+  },
+  "flag-b#19": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.585Z"
+  },
+  "flag-b#20": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.709Z"
+  },
+  "flag-b#21": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:17.835Z"
+  },
+  "flag-b#22": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:18.001Z"
+  },
+  "flag-b#23": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:18.145Z"
+  },
+  "flag-b#24": {
+    "verdict": "REJECTED",
+    "notes": "48 px take: thinner pole and outline than the 32 px takes, less chunky than the map pieces; the 32 px take flag-a#62 is used",
+    "at": "2026-11-27T11:36:18.333Z"
+  },
+  "flag-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.172Z"
+  },
+  "flag-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.307Z"
+  },
+  "flag-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.447Z"
+  },
+  "flag-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.583Z"
+  },
+  "flag-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.739Z"
+  },
+  "flag-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:22.919Z"
+  },
+  "flag-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.053Z"
+  },
+  "flag-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.225Z"
+  },
+  "flag-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.414Z"
+  },
+  "flag-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.596Z"
+  },
+  "flag-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.736Z"
+  },
+  "flag-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:23.967Z"
+  },
+  "flag-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:24.100Z"
+  },
+  "flag-a#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:24.317Z"
+  },
+  "flag-a#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:24.472Z"
+  },
+  "flag-a#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:24.676Z"
+  },
+  "flag-a#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:24.854Z"
+  },
+  "flag-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.002Z"
+  },
+  "flag-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.149Z"
+  },
+  "flag-a#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.280Z"
+  },
+  "flag-a#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.405Z"
+  },
+  "flag-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.554Z"
+  },
+  "flag-a#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.734Z"
+  },
+  "flag-a#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.854Z"
+  },
+  "flag-a#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:25.989Z"
+  },
+  "flag-a#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:26.157Z"
+  },
+  "flag-a#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:26.426Z"
+  },
+  "flag-a#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:26.669Z"
+  },
+  "flag-a#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:26.963Z"
+  },
+  "flag-a#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:27.157Z"
+  },
+  "flag-a#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:27.379Z"
+  },
+  "flag-a#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:27.552Z"
+  },
+  "flag-a#35": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:27.731Z"
+  },
+  "flag-a#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:27.929Z"
+  },
+  "flag-a#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:28.074Z"
+  },
+  "flag-a#39": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:28.339Z"
+  },
+  "flag-a#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:28.535Z"
+  },
+  "flag-a#41": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:28.981Z"
+  },
+  "flag-a#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:29.358Z"
+  },
+  "flag-a#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:29.613Z"
+  },
+  "flag-a#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:29.961Z"
+  },
+  "flag-a#45": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:30.109Z"
+  },
+  "flag-a#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:30.327Z"
+  },
+  "flag-a#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:30.553Z"
+  },
+  "flag-a#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:30.702Z"
+  },
+  "flag-a#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:30.923Z"
+  },
+  "flag-a#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:31.132Z"
+  },
+  "flag-a#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:31.270Z"
+  },
+  "flag-a#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:31.428Z"
+  },
+  "flag-a#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:31.607Z"
+  },
+  "flag-a#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:31.939Z"
+  },
+  "flag-a#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.109Z"
+  },
+  "flag-a#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.238Z"
+  },
+  "flag-a#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.426Z"
+  },
+  "flag-a#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.678Z"
+  },
+  "flag-a#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.851Z"
+  },
+  "flag-a#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:32.994Z"
+  },
+  "flag-a#63": {
+    "verdict": "REJECTED",
+    "notes": "not picked: a flat or noisier cloth, a pennant or a near duplicate of the accepted flag-a#62",
+    "at": "2026-11-27T11:36:33.160Z"
+  }
+}

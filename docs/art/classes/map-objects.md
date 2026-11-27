@@ -210,6 +210,49 @@ the front right, over the entrance cell where the hero stands. The renderer
 with `artFor(mineType(obj))`: its recorded type, else the mine of its
 resource.
 
+## Owner flags
+
+Bead bzc.146 (user: the old flags were "a bit too small and too ugly";
+"generate a nice pixel sprite for it and programmatically change color";
+placing it must not be "jarring"). One sprite flies on every owned town,
+mine and flagged dwelling (faction outposts, stray huts, caretaker lodges,
+walrus rookeries); unowned buildings fly none.
+
+- **Sprite.** Set `owner-flags`, take `flag-a#62`: a chunky rectangular
+  flag in a gentle wave on a dark brown pole with a gold knob, thick black
+  outline, generated at native size (generate-image-v2, 32 x 32, style
+  image the sawmill) with a plain white cloth and grey folds; cropped to
+  28 x 31 (`public/assets/objects/map/owner-flag.png`). The 48 px takes
+  were thinner and less chunky than the map pieces.
+- **Recolour.** In code (`src/render/map/owner-flag.ts`): every light,
+  unsaturated pixel is cloth and maps onto a three-step ramp of the
+  player's colour (the fold grey onto a darker, slightly cooler shade, the
+  white onto the colour, the brightest onto a lighter tint); the outline,
+  pole and knob keep their pixels. Every player colour, and a neutral grey,
+  reads on every ground thanks to the black outline.
+- **Wave.** Four code-made frames: cloth columns shift by at most one pixel
+  in a sine travelling from the pole, 200 ms a frame, on the terrain-motion
+  clock; with terrain motion off (reduced motion among the reasons) frame
+  0 holds. A capture hoists the flag out of its roof over 520 ms with a
+  gold sparkle round the cloth (skipped under reduced motion).
+- **Placement.** Per-sprite anchors in `src/assets/owner-flag.ts`, chosen
+  by looking at each sprite: the pole stands on a high roof, turret, hut
+  top, totem, water tower or rock shoulder right of the building's centre,
+  2-8 rows of pole showing under the cloth, so the cloth flies right over
+  sky or roofs, the gate and a hero at the entrance stay clear, and the
+  town's own landmark stays the highest point where it can. One size for
+  every building, the way Heroes II flies one flag size on every mine and
+  castle.
+- **Depth.** The flag is a scene entry with its building's pass, row,
+  column and layer, made after it: drawn right over its building, under
+  anything in front (a hero at the gate) and over what stands behind.
+- **Review.** `tests/ui/owner-flag-check.mjs` (muted, hand-built
+  ownership on the map debug page): 1280 x 800 shots of each town, native
+  and 2x crops of towns and sites, four wave frames.
+- The faction outposts keep their baked faction flags (the undead's purple
+  pennant, the goblins' green flags, the candy pink one); the owner flag
+  stands apart on its own roof or tower.
+
 ## Acceptance
 
 - No ground plate, shadow, people or second object in the image. The

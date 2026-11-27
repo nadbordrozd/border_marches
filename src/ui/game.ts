@@ -1036,7 +1036,7 @@ class GameScreen {
     );
   }
 
-  /** Owner flags at town and mine entrances. */
+  /** Owner flags on towns, mines and flagged dwellings (bead bzc.146). */
   private flags(): MapFlag[] {
     const out: MapFlag[] = [];
     for (const obj of this.state.map.objects) {
@@ -1044,8 +1044,15 @@ class GameScreen {
       if (obj.kind === "town") owner = this.state.towns[obj.id]?.owner ?? null;
       else if (obj.kind === "mine")
         owner = this.state.mines[obj.id]?.owner ?? null;
+      else if (obj.kind === "dwelling")
+        owner = this.state.sites[obj.id]?.owner ?? null;
       if (owner === null) continue;
-      out.push({ x: obj.x, y: obj.y, colour: playerColour(owner).hex });
+      out.push({
+        x: obj.x,
+        y: obj.y,
+        colour: playerColour(owner).hex,
+        objectId: obj.id,
+      });
     }
     return out;
   }
@@ -2028,16 +2035,13 @@ class GameScreen {
     if (reducedMotion()) return;
     this.view.raiseFlag(obj.x, obj.y);
     const c = this.view.cellCentre(obj.x, obj.y);
+    // The sparkle bursts round the cloth of the flag being hoisted.
+    const at = this.view.flagPoint(obj.x, obj.y) ?? {
+      x: c.x - 24,
+      y: c.y - 30,
+    };
     this.view.spawnFx((field, clock) =>
-      fxSparkle(
-        field,
-        clock,
-        { x: c.x - 24, y: c.y - 30 },
-        "spark",
-        PALETTES.gold,
-        6,
-        12,
-      ),
+      fxSparkle(field, clock, at, "spark", PALETTES.gold, 6, 12),
     );
   }
 

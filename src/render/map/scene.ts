@@ -34,6 +34,7 @@ import type {
   UnitAsset,
 } from "../../assets/manifest";
 import { townArt } from "../../assets/town-art";
+import { OWNER_FLAG, ownerFlagAnchor } from "../../assets/owner-flag";
 import { artFor, placeArt, SEAT_PX } from "../../assets/object-art";
 import { iconFor } from "../../assets/icons";
 import { ARTIFACT_CLOTH } from "../../assets/map-objects";
@@ -125,6 +126,12 @@ export interface SpriteOp {
   /** ... unless a destination size is given (a scaled clump). */
   readonly dw?: number;
   readonly dh?: number;
+  /**
+   * An owner flag (bead bzc.146): `key` is the white flag sprite, drawn
+   * recoloured to `colour` at the current wave frame; `cell` keys its
+   * capture (raise) animation.
+   */
+  readonly flag?: { readonly colour: string; readonly cell: string };
 }
 
 /** A flat shadow ellipse, world pixels. */
@@ -875,4 +882,47 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
     }
   }
   return out;
+}
+
+/**
+ * The owner flag of a town, mine or dwelling (bead bzc.146), planted at its
+ * sprite's anchor (src/assets/owner-flag.ts). `building` is the object's
+ * own entry: the flag shares its pass, row, column and layer and comes
+ * after it, so it is drawn right over its building and under everything
+ * in front of it (a hero at the entrance among them). Null when the
+ * building has no sprite.
+ */
+export function ownerFlagEntry(
+  building: SceneEntry,
+  colour: string,
+  cell: string,
+): SceneEntry | null {
+  const sprite = building.sprites[0];
+  if (sprite === undefined) return null;
+  const anchor = ownerFlagAnchor({
+    key: sprite.key,
+    w: sprite.sw,
+    h: sprite.sh,
+  });
+  const rows = Math.min(OWNER_FLAG.h, OWNER_FLAG.clothBottom + 1 + anchor.pole);
+  return entry(
+    building.pass,
+    building.row,
+    building.col,
+    building.layer,
+    [
+      {
+        key: OWNER_FLAG.key,
+        sx: 0,
+        sy: 0,
+        sw: OWNER_FLAG.w,
+        sh: rows,
+        dx: sprite.dx + anchor.x - OWNER_FLAG.poleX,
+        dy: sprite.dy + anchor.y - rows + 1,
+        flag: { colour, cell },
+      },
+    ],
+    [],
+    building.cells === undefined ? {} : { cells: building.cells },
+  );
 }

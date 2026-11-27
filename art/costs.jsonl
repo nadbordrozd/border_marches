@@ -743,3 +743,5 @@
 {"at":"2026-11-27T10:29:35.033Z","set":"range-massifs","id":"volcanic-a","endpoint":"generate-image-v2","usd":0.11602018038431804}
 {"at":"2026-11-27T10:30:41.342Z","set":"range-massifs","id":"frosting-b","endpoint":"generate-image-v2","usd":0.11548669770028856}
 {"at":"2026-11-27T10:31:37.750Z","set":"range-massifs","id":"swamp-b","endpoint":"generate-image-v2","usd":0.11551189308696323}
+{"at":"2026-11-27T11:33:02.407Z","set":"owner-flags","id":"flag-a","endpoint":"generate-image-v2","usd":0.08269284923871359}
+{"at":"2026-11-27T11:34:45.525Z","set":"owner-flags","id":"flag-b","endpoint":"generate-image-v2","usd":0.08165606615278456}

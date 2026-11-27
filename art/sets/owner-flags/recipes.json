@@ -1,0 +1,55 @@
+{
+  "set": "owner-flags",
+  "bead": "border_marches-bzc.146",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The owner flag planted on owned towns, mines and dwellings of the adventure map (bead bzc.146, docs/art/classes/map-objects.md#owner-flags). One sprite, generated at native display size with the cloth in neutral white and light grey so the renderer recolours it per player (src/render/map/owner-flag.ts keeps the outline, the pole and the shading and maps the cloth's grey steps onto the player colour's ramp); its gentle wave is a code-made column shift of the cloth, not separate takes. generate-image-v2 like the other map objects (32 x 32 gives 64 candidates, 48 x 48 gives 25); the imported sawmill is the style image for outline, pixel size and viewing angle only. Layers: style, light-south-west, subject (the class-map-object layer describes buildings and forbids banners). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleSawmill": {
+      "file": "public/assets/objects/sawmill.png",
+      "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": ["style", "light-south-west"],
+    "noBackground": true,
+    "styleImage": "@styleSawmill",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "flag-a",
+      "concept": "OWNER FLAG (small, on towers and roofs)",
+      "width": 32,
+      "height": 32,
+      "seed": 14601,
+      "subject": "Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight thin dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height.",
+      "negative": "coloured cloth, red, blue, emblem, cross, stripes, text, letters, ground, grass, base, stand, person, hand, shadow"
+    },
+    {
+      "id": "flag-b",
+      "concept": "OWNER FLAG (larger take, to crop)",
+      "width": 48,
+      "height": 48,
+      "seed": 14602,
+      "subject": "Subject: one chunky little flag on a short pole, for a board-game map, seen from the front: a straight dark brown wooden pole #5a3a1e standing upright at the left side of the image from the top to the bottom, a small round gold knob #f2c230 on its top, and a wide plain cloth flying out to the right from the top of the pole in a gentle wave, one big simple shape with a thick black outline. The cloth is plain pure white #f4f4f4 with one light grey #b4b4b4 shadow tone in its folds, and no pattern, emblem, stripe or colour at all. Each image a different one of these cloth shapes: a rectangular flag; a swallowtail flag with a notch in its fly end; a long pointed pennant; a square banner. The cloth fills about two thirds of the image width and a third of its height; the pole is the full image height.",
+      "negative": "coloured cloth, red, blue, emblem, cross, stripes, text, letters, ground, grass, base, stand, person, hand, shadow"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/owner-flag.png",
+      "from": "flag-a#62",
+      "width": 28,
+      "height": 31,
+      "steps": [{ "op": "crop", "x": 3, "y": 1, "width": 28, "height": 31 }]
+    }
+  ]
+}

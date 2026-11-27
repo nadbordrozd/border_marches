@@ -16,8 +16,7 @@
  * - units and towns: the anchor (the master pixel placed on the owning
  *   cell's centre, from `chibiAnchorV7`), the measured feet of each unit
  *   (unit-shadow-measurements-v7.generated.ts) and the measured ground line
- *   and pennant pole of each town (settlement-shadow-measurements and
- *   DIRECTION_FLAG_ANCHORS_V7);
+ *   of each town (settlement-shadow-measurements);
  * - textured grounds: the period in cells of each periodic texture
  *   (FACTION_GRASS_WORLDS_V7);
  * - mountains: the massif set of chibi-massif-v7.ts (low and tall, single
@@ -42,6 +41,7 @@ import type { ResourceId, Terrain } from "../core/map/types";
 import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
 import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "./map-objects";
+import { OWNER_FLAG } from "./owner-flag";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
 import { BUILDING_ART_ASSETS, TOWN_BACKDROP_ASSETS } from "./town-buildings";
@@ -428,14 +428,6 @@ export const PORTRAIT_ASSETS: readonly PortraitAsset[] = [
 
 // ------------------------------------------------------------------ towns
 
-/** Pennant attachment: the top of the pole and the pole length drawn down. */
-export interface FlagAnchor {
-  readonly x: number;
-  readonly y: number;
-  /** 0 when the art has its own mast. */
-  readonly pole: number;
-}
-
 /**
  * Where a town sprite meets the ground, measured by Pulp Wars
  * (scripts/art/settlement-shadows/measure.ts): the contact line (one past
@@ -458,7 +450,6 @@ export interface TownAsset extends ImageAsset {
   /** City growth level 1-3; null for the village. */
   readonly level: 1 | 2 | 3 | null;
   readonly anchor: Point;
-  readonly flag: FlagAnchor | null;
   readonly ground: TownGround;
 }
 
@@ -469,7 +460,6 @@ function town(
   w: number,
   h: number,
   anchor: Point,
-  flag: FlagAnchor | null,
   ground: TownGround,
 ): TownAsset {
   return {
@@ -481,7 +471,6 @@ function town(
     faction,
     level,
     anchor,
-    flag,
     ground,
   };
 }
@@ -489,67 +478,125 @@ function town(
 /**
  * The level towns: Lost World camps, the goblin scrap camps (the neutral
  * Warlord's Hold) and a neutral village, redrawn cute and chunky by bead
- * bzc.97 (set chunky-towns). No flag is painted (owner colour is the
- * interface's); `ground` is measured from the bottom 14 opaque rows.
+ * bzc.97 (set chunky-towns). No flag is painted: the owner flag is a
+ * sprite of its own planted by the renderer (bead bzc.146,
+ * src/assets/owner-flag.ts); `ground` is measured from the bottom 14
+ * opaque rows.
  */
 export const TOWN_ASSETS: readonly TownAsset[] = [
-  town("dinosaur-city-1", "dinosaur", 1, 88, 96, { x: 44, y: 56 }, null, {
-    contactY: 94,
-    left: 0,
-    right: 80,
-    leftY: 83.5,
-    rightY: 83.5,
-    fullness: 0.58,
-  }),
-  town("dinosaur-city-2", "dinosaur", 2, 96, 100, { x: 48, y: 60 }, null, {
-    contactY: 87,
-    left: 7,
-    right: 89,
-    leftY: 81.5,
-    rightY: 81.5,
-    fullness: 0.65,
-  }),
-  town("dinosaur-city-3", "dinosaur", 3, 96, 104, { x: 48, y: 64 }, null, {
-    contactY: 101,
-    left: 5,
-    right: 91,
-    leftY: 89.5,
-    rightY: 89.5,
-    fullness: 0.54,
-  }),
+  town(
+    "dinosaur-city-1",
+    "dinosaur",
+    1,
+    88,
+    96,
+    { x: 44, y: 56 },
+    {
+      contactY: 94,
+      left: 0,
+      right: 80,
+      leftY: 83.5,
+      rightY: 83.5,
+      fullness: 0.58,
+    },
+  ),
+  town(
+    "dinosaur-city-2",
+    "dinosaur",
+    2,
+    96,
+    100,
+    { x: 48, y: 60 },
+    {
+      contactY: 87,
+      left: 7,
+      right: 89,
+      leftY: 81.5,
+      rightY: 81.5,
+      fullness: 0.65,
+    },
+  ),
+  town(
+    "dinosaur-city-3",
+    "dinosaur",
+    3,
+    96,
+    104,
+    { x: 48, y: 64 },
+    {
+      contactY: 101,
+      left: 5,
+      right: 91,
+      leftY: 89.5,
+      rightY: 89.5,
+      fullness: 0.54,
+    },
+  ),
   // The goblin camps repainted without the hazard yellow (bead bzc.123).
-  town("goblin-city-1", "goblin", 1, 88, 96, { x: 44, y: 56 }, null, {
-    contactY: 95,
-    left: 0,
-    right: 85,
-    leftY: 90.5,
-    rightY: 86.5,
-    fullness: 0.78,
-  }),
-  town("goblin-city-2", "goblin", 2, 96, 100, { x: 48, y: 60 }, null, {
-    contactY: 92,
-    left: 4,
-    right: 96,
-    leftY: 84.5,
-    rightY: 85.5,
-    fullness: 0.65,
-  }),
-  town("goblin-city-3", "goblin", 3, 96, 104, { x: 48, y: 64 }, null, {
-    contactY: 102,
-    left: 0,
-    right: 96,
-    leftY: 93.5,
-    rightY: 91.5,
-    fullness: 0.52,
-  }),
-  town("village", "neutral", null, 72, 72, { x: 36, y: 32 }, null, {
-    contactY: 72,
-    left: 6,
-    right: 66,
-    leftY: 61.5,
-    rightY: 65.5,
-    fullness: 0.66,
-  }),
+  town(
+    "goblin-city-1",
+    "goblin",
+    1,
+    88,
+    96,
+    { x: 44, y: 56 },
+    {
+      contactY: 95,
+      left: 0,
+      right: 85,
+      leftY: 90.5,
+      rightY: 86.5,
+      fullness: 0.78,
+    },
+  ),
+  town(
+    "goblin-city-2",
+    "goblin",
+    2,
+    96,
+    100,
+    { x: 48, y: 60 },
+    {
+      contactY: 92,
+      left: 4,
+      right: 96,
+      leftY: 84.5,
+      rightY: 85.5,
+      fullness: 0.65,
+    },
+  ),
+  town(
+    "goblin-city-3",
+    "goblin",
+    3,
+    96,
+    104,
+    { x: 48, y: 64 },
+    {
+      contactY: 102,
+      left: 0,
+      right: 96,
+      leftY: 93.5,
+      rightY: 91.5,
+      fullness: 0.52,
+    },
+  ),
+  town(
+    "village",
+    "neutral",
+    null,
+    72,
+    72,
+    { x: 36, y: 32 },
+    {
+      contactY: 72,
+      left: 6,
+      right: 66,
+      leftY: 61.5,
+      rightY: 65.5,
+      fullness: 0.66,
+    },
+  ),
 ];
 
 // ---------------------------------------------------------------- grounds
@@ -1364,6 +1411,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...PEAK_ASSETS,
   ...MAP_OBJECT_ASSETS,
   ARTIFACT_CLOTH,
+  OWNER_FLAG,
   ...BUILDING_ART_ASSETS,
   ...TOWN_BACKDROP_ASSETS,
   ...ALL_ICON_ASSETS,

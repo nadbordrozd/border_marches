@@ -297,7 +297,10 @@ role aliases.
   coffin, horned skull, starry cone) and the roofs carry the faction colour.
   Two buildings of one faction must not share a silhouette (the Wailing
   Tower is gabled so it does not read as the Magic Guild's cone).
-- No flags or banners anywhere: owner colour belongs to the interface.
+- No flags or banners painted into a town: the owner's flag is a sprite
+  of its own, recoloured per player and planted by the renderer on a
+  turret or roof right of the landmark (bead bzc.146,
+  [map-objects.md](map-objects.md#owner-flags)).
 
 ## Recipe
 
