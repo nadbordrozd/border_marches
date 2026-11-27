@@ -163,6 +163,22 @@ Flypaper Ribbon is a paper strip with grey flies, not taffy, so the two are
 not mistaken for one another. Rejected: bare boots without taffy (read as
 Movement), pink blobs without a boot (read as a gumdrop).
 
+## The Deepforge (bead `border_marches-bzc.131`)
+
+| Id | Kind | Frame | Icon (32 px / 16 px) |
+| --- | --- | --- | --- |
+| `steam` | condition (FACTION_DWARVES 3; added by game id in `icon-catalogue-build.mjs` until CONTENT_SPELLS 2.1 lists it) | Storm | a big white steam cloud from a brass elbow pipe (`conditions-h#16`) / the same at 16 px (`conditions-h-16#24`) |
+| `shell` | marker (the Mortars' lobbed shell on its hex and the battle timeline, FACTION_DWARVES 5; not catalogue content: `MARKER_ICONS` in `src/assets/icons.ts`, files under `markers/` and `markers-16/`) | none | a brass shell with dark fins landing nose down in a red and white target ring (`conditions-h#53`) / the ring with the shell coming down at an angle (`conditions-h-16#53`) |
+| `pocket-boiler` | artifact (Wonder, FACTION_DWARVES 5.2) | Wonder | a round copper boiler with brass bands, a glowing firebox door, a brass chimney with a white puff and a leather strap (`wonders-dwarves-a#9`): master accepted, catalogue entry and output wait for its data row (bead bzc.130), as the Flypaper Ribbon did |
+
+The Steam icon is a cloud from a pipe, the Pocket Boiler a whole boiler with
+its firebox, so the two are not mistaken for one another; the shell is a
+brass shell over a target ring, not the Horde's round black bomb. Rejected:
+whistles on a U pipe (a plumbing fitting), diagonal whistles (a horn at
+16 px), lone falling shells (a bullet, and a pencil at 16 px), upright shells
+in a ring at 16 px (a red potion flask), boilers with loop handles (a bucket)
+and boilers without steam (a barrel).
+
 ## Hero sheet stats (bead `border_marches-bzc.82`)
 
 The Heroes II style hero sheet shows every number as an icon. Recipe

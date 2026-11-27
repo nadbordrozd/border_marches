@@ -104,6 +104,11 @@ const addIdIfAbsent = (kind, id, ...rest) => {
 };
 addIdIfAbsent("condition", "stuck", "Stuck", "clock", { school: "clock", polarity: "bane" });
 addIdIfAbsent("artifact", "flypaper-ribbon", "Flypaper Ribbon", "wonder", { grade: "wonder", slot: "Pocket" });
+// Bead bzc.131: the Deepforge's Steam condition (FACTION_DWARVES 3: Storm,
+// boon), by its game id until CONTENT_SPELLS 2.1 lists it. The Pocket Boiler
+// (FACTION_DWARVES 5.2) joins here once its data row exists (bead bzc.130):
+// the catalogue-coverage test needs findArtifact to know it.
+addIdIfAbsent("condition", "steam", "Steam", "storm", { school: "storm", polarity: "boon" });
 
 // Bead bzc.82: the hero screen's other numbers, each an icon (HoMM2 style).
 for (const s of ["Attack", "Defense", "Power", "Lore", "Mana", "Movement", "Experience", "Level", "Sight", "Morale", "Luck", "Command", "Spellbook", "Scroll case"]) add("stat", s, null);

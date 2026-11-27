@@ -3,7 +3,7 @@
   "bead": "border_marches-bzc.14",
   "class": "units",
   "exploration": false,
-  "_doc": "The new v0.2 faction creatures that Pulp Wars has no sprite for (docs/design/FACTION_*.md section 10): Squire, Friar and Dragonslayer (the Realm), the Late King (the Restless) and the Boomshaman (the Goblin Horde). Layers follow Pulp Wars (LESSONS section 5.2) and the lost-world-hero set: style, camera, light, class, subject. No faction layer (the 2000-character cap); each subject carries the colours of the Pulp Wars sprites it stands beside: Realm crimson and gold-yellow heraldry with light steel (HERALDIC), Restless ivory bone, near-black cloth and one violet accent (BONE), Horde lime skin, sand-buff hide, tin and hazard yellow (LIME); the Candy Kingdom (bead border_marches-bzc.112, FACTION_CANDY.md 10.1) gingerbread #b86b34, royal icing #fff4ec, strawberry frosting #e2589b, candy-cane red #e03a3e, mint #7fd6b5 and sugar glass #8fe3e8, with Sugarplum purple on the Sugarplum only (CANDY); creatures that hold nothing (the Gummy Bear, the Rock Candy Dragon) take the strays' creature class layer (@creature). Faces south-east; never mirrored. A smaller unit is generated at a smaller request and padded bottom-centred into its class canvas. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "_doc": "The new v0.2 faction creatures that Pulp Wars has no sprite for (docs/design/FACTION_*.md section 10): Squire, Friar and Dragonslayer (the Realm), the Late King (the Restless) and the Boomshaman (the Goblin Horde). Layers follow Pulp Wars (LESSONS section 5.2) and the lost-world-hero set: style, camera, light, class, subject. No faction layer (the 2000-character cap); each subject carries the colours of the Pulp Wars sprites it stands beside: Realm crimson and gold-yellow heraldry with light steel (HERALDIC), Restless ivory bone, near-black cloth and one violet accent (BONE), Horde lime skin, sand-buff hide, tin and hazard yellow (LIME); the Candy Kingdom (bead border_marches-bzc.112, FACTION_CANDY.md 10.1) gingerbread #b86b34, royal icing #fff4ec, strawberry frosting #e2589b, candy-cane red #e03a3e, mint #7fd6b5 and sugar glass #8fe3e8, with Sugarplum purple on the Sugarplum only (CANDY); the Deepforge (bead border_marches-bzc.131, FACTION_DWARVES.md 10.1) polished brass #d9a634, copper #c7683a, verdigris #3aa38f, iron #4a4f57, steam white #f4f1ea and ginger or grey beards, white steam and never black smoke, machines with porthole-eye faces; machines without feet (the Gyrocopter, the Steam Tank, the Ironclad) drop the class layer and name the outline, as rock-candy-dragon-b; creatures that hold nothing (the Gummy Bear, the Rock Candy Dragon) take the strays' creature class layer (@creature). Faces south-east; never mirrored. A smaller unit is generated at a smaller request and padded bottom-centred into its class canvas. Recipes are never edited after generation: add a new id (new seed) instead.",
   "shared": {
     "piece": {
       "outline": "single color black outline",
@@ -249,6 +249,142 @@
       "subject": "Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes.",
       "negative": "grass block, ground tile, floating island, skull, ghost, witch hat, thin, slender",
       "notes": "Second seed of sugarplum-c."
+    },
+    {
+      "id": "tinker-a",
+      "concept": "TINKER",
+      "width": 48,
+      "height": 72,
+      "seed": 53101,
+      "options": "@piece",
+      "subject": "Subject: Tinker, a small stout chunky cute dwarf tinker woman with a huge round head about half of the figure's height: a rosy smiling face, big polished brass #d9a634 goggles pushed up on a small verdigris #3aa38f cap, a big ginger #c0562a braided beard tied with brass rings, a white #f4f1ea shirt under a brown leather apron, a tiny round copper #c7683a boiler strapped on her back puffing one small white steam cloud, an oversized brass wrench held over her shoulder in the right hand, short stubby legs with iron grey #4a4f57 boots; simple shapes and very few details.",
+      "negative": "gun, axe, sword, horned helmet, black smoke, fire",
+      "notes": "Bead border_marches-bzc.131: tier 1 of the Deepforge (Patch Up), generated small like the Gingerbread Man and padded into 56x80."
+    },
+    {
+      "id": "mortar-a",
+      "concept": "MORTAR",
+      "width": 56,
+      "height": 80,
+      "seed": 53401,
+      "options": "@piece",
+      "subject": "Subject: Mortar, a squat chunky cute clockwork mortar automaton standing on two short stubby iron #4a4f57 legs: a big round riveted polished brass #d9a634 body with #9a6f1c shading and verdigris #3aa38f trim bands, a friendly face on its front with two big round glass porthole eyes and a small grille mouth, a fat short copper #c7683a cannon barrel on its top pointing straight up at the sky with a little white #f4f1ea steam puff at its rim, a big brass wind-up key on its back; a machine, nobody rides it; simple shapes and very few details.",
+      "negative": "dwarf, person, rider, wheels, black smoke, fire, explosion",
+      "notes": "Bead border_marches-bzc.131: tier 4 of the Deepforge (Lob), a squat walking gun at the standard canvas."
+    },
+    {
+      "id": "steam-tank-a",
+      "concept": "STEAM TANK",
+      "width": 72,
+      "height": 88,
+      "seed": 53501,
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "options": "@piece",
+      "subject": "Subject: Steam Tank, one chunky cute little steam tank machine filling the whole width of the image, thick single-colour black outline, facing down and to the right: a chubby round riveted body of verdigris #3aa38f plates with #226b5d shading and polished brass #d9a634 trim and rivets, two big round glass porthole eyes and a smiling grille mouth on its front, a heavy brass battering-ram nose pointing to the bottom right, a tall copper #c7683a chimney on top puffing a big white #f4f1ea steam cloud, chunky iron #4a4f57 caterpillar tracks along both sides, the tracks the lowest thing in the image; a machine, nobody rides it; solid opaque colours; simple shapes.",
+      "negative": "gun, cannon, turret, person, rider, black smoke, fire, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "Bead border_marches-bzc.131: tier 5 (large) of the Deepforge (Ram). No class layer: a machine on tracks, not a figure with feet."
+    },
+    {
+      "id": "tinker-b",
+      "concept": "TINKER",
+      "width": 48,
+      "height": 72,
+      "seed": 53102,
+      "options": "@piece",
+      "subject": "Subject: Tinker, a small stout chunky cute dwarf tinker woman with a huge round head about half of the figure's height: a rosy smiling face, big brass #d9a634 goggles pushed up on a small verdigris #3aa38f cap, a big ginger #c0562a braided beard tied with brass rings, a white #f4f1ea shirt under a brown leather apron, a tiny copper #c7683a boiler on her back puffing a small white steam cloud, a huge shiny brass wrench as long as her body held diagonally across her front in both hands, short stubby legs with iron grey #4a4f57 boots; simple shapes and very few details.",
+      "negative": "gun, axe, sword, hammer, horned helmet, black smoke, fire",
+      "notes": "tinker-a reads well but its wrench is a small stub behind the shoulder: the signature tool asked for as long as her body, held across the front."
+    },
+    {
+      "id": "steam-tank-a-ram",
+      "concept": "STEAM TANK",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 72,
+      "height": 88,
+      "seed": 53502,
+      "edit": {
+        "take": "steam-tank-a#0"
+      },
+      "subject": "Replace the open cannon barrel at the front of the tank with a solid battering ram: a short thick closed brass log ending in a flat round brass ram head with a ring of rivets, no hole and no opening at its end. Keep everything else exactly the same: the green riveted body, the porthole eyes, the copper chimney and its white steam cloud, the tracks, the colours, the thick black outline and the art style.",
+      "notes": "steam-tank-a is right except its ram nose is an open gun barrel (reads as a cannon; the Steam Tank rams, it does not shoot): one-part edit."
+    },
+    {
+      "id": "rivet-gunner-a",
+      "concept": "RIVET GUNNER",
+      "width": 56,
+      "height": 80,
+      "seed": 53201,
+      "options": "@piece",
+      "subject": "Subject: Rivet Gunner, a chunky cute dwarf gunner with a huge round head about half of the figure's height: a cheerful face, a bushy grey #b8b2a6 beard braided with brass rings, a round verdigris #3aa38f helmet with a brass rim and brass #d9a634 goggles, a brown leather coat, a big chunky polished brass rivet gun with a fat drum held in both hands and pointing to the right, a thick iron grey hose from the gun to a round copper #c7683a tank on his back, short stubby legs with iron grey #4a4f57 boots; simple shapes and very few details.",
+      "negative": "musket, rifle, bow, sword, axe, horned helmet, black smoke, fire",
+      "notes": "Bead border_marches-bzc.131: tier 2 of the Deepforge (Hot Rivets), the shooter; grey beard and a verdigris helmet to tell him from the ginger Tinker."
+    },
+    {
+      "id": "gyrocopter-a",
+      "concept": "GYROCOPTER",
+      "width": 56,
+      "height": 80,
+      "seed": 53301,
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "options": "@piece",
+      "subject": "Subject: Gyrocopter, one chunky cute little round flying machine hovering in the air, filling the whole width of the image, thick single-colour black outline, facing down and to the right: a round polished brass #d9a634 pod with #9a6f1c shading and verdigris #3aa38f trim, a wide two-bladed iron #4a4f57 rotor on a short mast on top, two stubby little wings, a small tail fan, a cheerful dwarf pilot with brass goggles, a ginger #c0562a beard and a long white #f4f1ea scarf sitting in the open cockpit, a small white steam puff from an exhaust pipe; it hovers with nothing at all under it and its lowest part is the lowest thing in the image; solid opaque colours; simple shapes.",
+      "negative": "gun, bomb, black smoke, fire, grass block, floating island, ground tile, pedestal, platform, scenery, background, shadow on the ground",
+      "notes": "Bead border_marches-bzc.131: tier 3 of the Deepforge (Rotors, Spotter), the flier. At the standard canvas, like every Candy tier 1-4, so the sizes rise with tier (FACTION_DWARVES 10.2 had 72x88: orchestrator's size-by-tier rule)."
+    },
+    {
+      "id": "ironclad-a",
+      "concept": "IRONCLAD",
+      "width": 88,
+      "height": 104,
+      "seed": 53601,
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "options": "@piece",
+      "subject": "Subject: Ironclad, one very large chunky cute walking iron fortress machine, filling the whole width of the image, thick single-colour black outline, facing down and to the right: a squat round riveted hull of iron #4a4f57 with #2e3238 shading and big verdigris #3aa38f armour plates, polished brass #d9a634 trim and rivets, two big round glass porthole eyes on its front, a round brass gun turret on top with one short fat cannon barrel pointing to the bottom right, twin copper #c7683a smokestacks puffing white #f4f1ea steam, four short stubby iron legs, all four feet visible and lowest in the image; a machine, nobody rides it; solid opaque colours; simple shapes.",
+      "negative": "person, rider, tracks, wheels, black smoke, fire, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "Bead border_marches-bzc.131: tier 6 (giant) of the Deepforge (Turret)."
+    },
+    {
+      "id": "tinker-b-clean",
+      "concept": "TINKER",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 48,
+      "height": 72,
+      "seed": 53103,
+      "edit": {
+        "take": "tinker-b#0"
+      },
+      "subject": "Remove all ground: erase the square block of green grass and brown soil under the dwarf's feet, leaving that area transparent, so the dwarf stands on a transparent background with nothing at all under her boots. Keep the dwarf, her verdigris cap and goggles, ginger beard, apron, boiler and big brass wrench, her colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of tinker-b#0 (the wrench is right; it stands on a grass block)."
+    },
+    {
+      "id": "gyrocopter-b",
+      "concept": "GYROCOPTER",
+      "width": 56,
+      "height": 80,
+      "seed": 53302,
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "options": "@piece",
+      "subject": "Subject: Gyrocopter, one big chunky cute round flying machine hovering in the air, as wide as the image and filling most of its height, thick single-colour black outline, facing down and to the right: a big fat round polished brass #d9a634 pod with #9a6f1c shading and verdigris #3aa38f trim bands, a two-bladed iron #4a4f57 rotor as wide as the image on a short mast on top, two stubby wings, a small tail fan, a cheerful dwarf pilot with brass goggles, a ginger #c0562a beard and a long white #f4f1ea scarf in the open cockpit, a small white steam puff from an exhaust pipe; it hovers with nothing at all under it; solid opaque colours; simple shapes.",
+      "negative": "gun, bomb, skids, black smoke, fire, grass block, floating island, ground tile, pedestal, platform, scenery, background, shadow on the ground, thin, small",
+      "notes": "gyrocopter-a is right but small (about 44x40 in its 56x80 canvas): on the line-up it would read smaller than the tier 2 Rivet Gunner; the pod asked to fill the canvas."
     }
   ],
   "outputs": [
@@ -275,6 +411,18 @@
     { "path": "public/assets/units/candy-gummy-bear.png", "from": "gummy-bear-a#0", "width": 72, "height": 88 },
     { "path": "public/assets/portraits/candy-gummy-bear.png", "from": "gummy-bear-a#0", "steps": [{ "op": "crop", "x": 12, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
     { "path": "public/assets/units/candy-rock-candy-dragon.png", "from": "rock-candy-dragon-b#0", "width": 88, "height": 104 },
-    { "path": "public/assets/portraits/candy-rock-candy-dragon.png", "from": "rock-candy-dragon-b#0", "steps": [{ "op": "crop", "x": 36, "y": 8, "width": 48, "height": 48 }], "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/candy-rock-candy-dragon.png", "from": "rock-candy-dragon-b#0", "steps": [{ "op": "crop", "x": 36, "y": 8, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-tinker.png", "from": "tinker-b-clean#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/dwarves-tinker.png", "from": "tinker-b-clean#0", "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-rivet-gunner.png", "from": "rivet-gunner-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/dwarves-rivet-gunner.png", "from": "rivet-gunner-a#0", "steps": [{ "op": "crop", "x": 4, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-gyrocopter.png", "from": "gyrocopter-b#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/dwarves-gyrocopter.png", "from": "gyrocopter-b#0", "steps": [{ "op": "crop", "x": 8, "y": 22, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-mortar.png", "from": "mortar-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/dwarves-mortar.png", "from": "mortar-a#0", "steps": [{ "op": "crop", "x": 4, "y": 20, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-steam-tank.png", "from": "steam-tank-a-ram#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/dwarves-steam-tank.png", "from": "steam-tank-a-ram#0", "steps": [{ "op": "crop", "x": 16, "y": 22, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/dwarves-ironclad.png", "from": "ironclad-a#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/dwarves-ironclad.png", "from": "ironclad-a#0", "steps": [{ "op": "crop", "x": 34, "y": 16, "width": 48, "height": 48 }], "width": 48, "height": 48 }
   ]
 }

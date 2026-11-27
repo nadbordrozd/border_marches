@@ -4651,5 +4651,428 @@
         "height": 32
       }
     ]
+  },
+  "wonders-dwarves-a": {
+    "id": "wonders-dwarves-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "00180281-9c98-4d6a-91c2-52fa25906d5d",
+    "submittedAt": "2026-11-27T09:45:00.644Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a small round copper boiler barrel with brass bands and rivets, a tiny glowing orange firebox door, a short brass chimney with a small white steam puff and a brown leather carry strap; (2) a pocket-sized copper boiler tank on four tiny brass feet with a little glowing orange firebox door and a brass safety valve puffing a small white steam cloud."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17212,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a small round copper boiler barrel with brass bands and rivets, a tiny glowing orange firebox door, a short brass chimney with a small white steam puff and a brown leather carry strap; (2) a pocket-sized copper boiler tank on four tiny brass feet with a little glowing orange firebox door and a brass safety valve puffing a small white steam cloud. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-27T09:46:39.043Z",
+    "usageUsd": 0.08191135798560249,
+    "candidates": [
+      {
+        "file": "wonders-dwarves-a-0.png",
+        "sha256": "791000f0141ed99755fbc7ee0ba8e0b2601fcdfcad950b9c29df40f2ea87443f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-1.png",
+        "sha256": "2d6cce881106aef4a6734476f57d250976dd77bfef6e1de2095eb406d21398a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-2.png",
+        "sha256": "8dc80adfa997d72b390d6ca476601043afefc6cd313fa81ed100fd781f0d27b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-3.png",
+        "sha256": "d60f0fe56829f145d343705a4ed2b8fa83ec954defb6ab1d3d28ab89dc6d38a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-4.png",
+        "sha256": "77b7cec5ff5792cd1a65140dc40b7a9e8547c81eb1468aa8fc2ef33a2fa4f098",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-5.png",
+        "sha256": "3b0070489016dd14a8931078370686a91347084e335271f428576bfdb80a5e12",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-6.png",
+        "sha256": "92fcaa8f29a2480332f0a334aba292ba74b8a30489bab8d12dc1d96303a4a12a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-7.png",
+        "sha256": "361115d1cdc86e69ac550e3fc4dcba00b15e7ff7404c34b6138598d5411827c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-8.png",
+        "sha256": "2f759fd1e3725919933df53f276e47fc65434e81294ce88563a403a20b7a2a54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-9.png",
+        "sha256": "2f72fa6e87443199537e858d9efa95ef05d20dbb0f82130819081cf799a558e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-10.png",
+        "sha256": "3bd38bbfdc87b94a0fb532e42df9a74eda9894d89e2820f3f3e8f7cf5407a50e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-11.png",
+        "sha256": "e56f41ceb6d3bd49b7c4190e3df697f41771808702170046becb89196d88d9cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-12.png",
+        "sha256": "54f324d339a58ddf256e6daaf8b91b8e1cc82296303ad1708b82e00a4d36b94f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-13.png",
+        "sha256": "1612c02723eb51d9a8f896ffd117197d264e827f408e097c105c09029b503b41",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-14.png",
+        "sha256": "6369ae16e8aaf2b8ef36242f838f3effe0e19e7763a570e30fbd45ffb96a3564",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-15.png",
+        "sha256": "7a95f42540ea918bd5dbd245536a0aa6f9104c3ddde58f8c35e733bae707abec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-16.png",
+        "sha256": "d6dec131a4deffff1428079779635932abec39aee9b825f281415080de9e05de",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-17.png",
+        "sha256": "54d618c2e910347119cd09d9948067927dd3e13675e375d2643faec4c263ac1e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-18.png",
+        "sha256": "0adb30e7cb04e909f8d73da198b8a35931098be51c7a33d39a9a9b412abd7d82",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-19.png",
+        "sha256": "e830aca86aa9531448c87fa5608963826be077995f4c65998b16504acd58a4c1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-20.png",
+        "sha256": "815f5a8425e2f552ba6f02887a31b0c8e65aabebbe380fdb6d5414844a01e7ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-21.png",
+        "sha256": "7dc2cacd2534a3f911e95e928c6631685b075fc9c5e746af6f9e15377cc7474c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-22.png",
+        "sha256": "7546ff82a9f63d1492e3081d1ecb14e9ec480297809404ed634ba636a9a3cc21",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-23.png",
+        "sha256": "4adb049107f0f2a2204f7a0e31051b0519494f9f1aecfcc24222f89fa91391f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-24.png",
+        "sha256": "4226d5e02909760325d171fe75a366fab3bea7d35535f1abae503a989194ca4a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-25.png",
+        "sha256": "31db984232bd5a1c8a3c8f8dcea2581f6c905be1197192a5ce16d6bcb9d27d6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-26.png",
+        "sha256": "0ffed9fc04ee14b7266843ef8ac1feaec22a51d7458ec35b4233eb3462adf771",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-27.png",
+        "sha256": "a81f40e4affdf605f23e807a93e2a623d72803a4fcdfbb436f44ebe0b2566d84",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-28.png",
+        "sha256": "d76a2b09183c08034fcde48a272162ffcdcd56eb197b2be32e364ea336a09441",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-29.png",
+        "sha256": "403694220d1ad2996ca2595b47f27e87b3969761bcd96febde6e79411c95debf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-30.png",
+        "sha256": "355b190d749382ffcf1d8f66fff17725c395d4b94ce99ef2f939ffea1852387e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-31.png",
+        "sha256": "2e1c5f9f0cbf079fcacf61e707b3853c07904887704f160a98ae5a747851325c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-32.png",
+        "sha256": "d3af1d0007787ff3fbd8821416e6f4a47c829b77258acef20648993611a83ffb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-33.png",
+        "sha256": "8c77006fb47c1e2e4e7499cc02b6e05016003caef890d0194db8b7aa0d60b075",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-34.png",
+        "sha256": "642fe2af9a83b23b06641f7493c8aad1fed96f5c6e0cc7bc7fb8a2ca2f664414",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-35.png",
+        "sha256": "e02b1e22aa98df11ed9b10af36e96051cb9870c997cb297d4811bafae06e062c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-36.png",
+        "sha256": "9ca55987e8dd2b5211afe3c5a9b16fd0fca225aefc8aee93cedbceeab9593bec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-37.png",
+        "sha256": "db08a98e21b3fe66aa7d2bc3efc9d5bcbb940f61ea9ae09cbbf6c84006ef7b05",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-38.png",
+        "sha256": "cbb1d0d1df4544523abc5044f757f24dfdb7ddee2e1b0f0c5467f12abd61fe32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-39.png",
+        "sha256": "83129178499a1478cfaad0c49966e4110e23302718f6f1ebdcdf89f39238c449",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-40.png",
+        "sha256": "c50d176f3624fdddf0453ea6c4912b294e2d1c7c0809ca9f607dd67f257d1391",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-41.png",
+        "sha256": "6084fe56394af4ae74d562217f176dd5b5ff5a198a08ba5437bcba56bb65af73",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-42.png",
+        "sha256": "19769050837b312842ff87dc3dde6507f4ce74cba81beb95d66fd4ea306d5ec7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-43.png",
+        "sha256": "d7c36f09ba8664fdac3f4d320f3daccbc19a647b8bf1931dc7959a93054480db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-44.png",
+        "sha256": "74b9826debbb844447428b26fae2ebe61aed024be897341430255667eb185d35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-45.png",
+        "sha256": "7b647512308d573c9263a0f6306788958f3370ba268062ac82f2e8f82348e73c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-46.png",
+        "sha256": "4657da7bcf8b8e2e0f78da8accb09b50089c1045b8b6cdb19f2d156ff06125e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-47.png",
+        "sha256": "8e16b811f20e0240a2472d5f9b523eaaf8d709575e8c54e3b3028c5d923c0515",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-48.png",
+        "sha256": "2bf28be83f26046588c3fbcc8c040506d095e04321954676e0e96751a246ff08",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-49.png",
+        "sha256": "c4caaf2dc5ff8e75843f6867e3a6aaf99e9cf28297994508ed4627af95387d11",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-50.png",
+        "sha256": "dd3403fa94c5633c48aac873407518ab8365da435561db5654aab95bef25f959",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-51.png",
+        "sha256": "b92b86f25b9003d293a619c0eabb040fb6133ef30e63bdd7b3eee47af5f82c8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-52.png",
+        "sha256": "948c257886f265a52a4b682819bc03f4b09061a263d2844456949b3684a86bf6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-53.png",
+        "sha256": "b0e058ba6b8f58dc8f9be0b97b8807753eccf0c49a03cd6487a0da100e73084c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-54.png",
+        "sha256": "8d1fa97ff07d6909036e10d0b5b6416445e2d19da2107dd4579b6c3b1440fc29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-55.png",
+        "sha256": "55fabd06abb4f1ccb608c0ebea88277acd5ee9e185498ec36121d08c0042a24c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-56.png",
+        "sha256": "6c9fbbf067fa114ab1964d24c00c40634ff54ce00be6056ee5baf9dd99ca9567",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-57.png",
+        "sha256": "d6598efba9ab956dceaa77902e0c296321438f052ad727da27852046861cf55b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-58.png",
+        "sha256": "69d4d9e3109db9422aca99ba2bdb4e892d28ab3f890ede86e134e0f31a2578dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-59.png",
+        "sha256": "03356ec911448bc54d6ce1c8846a253313cda47eba1ad977c92b0792fd71a8d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-60.png",
+        "sha256": "77bac3a87e04a88fe19c8dd95a7a229c63edd4dec528995b50b4724976b49f38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-61.png",
+        "sha256": "b953c259574c460ee16dce78be05d4becbe8543f34bed9ff8d4a3f0bdb92e62a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-62.png",
+        "sha256": "8768f66bf758e638aa8f10e24c009358c786cdbb07b5a38861bba02dfaaa2bc5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-dwarves-a-63.png",
+        "sha256": "8d477d2e05db1876633079f15cea8467da864eb38545014d8e26c94cc96e5b36",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

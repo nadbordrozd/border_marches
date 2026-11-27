@@ -10,6 +10,7 @@ import {
   ICON_MISSING,
   iconFor,
   iconIds,
+  MARKER_ICONS,
   SMALL_ICON_ASSETS,
 } from "../../src/assets/icons";
 import { ALL_ASSETS } from "../../src/assets/manifest";
@@ -42,7 +43,7 @@ describe("content icons", () => {
     expect(counts).toEqual({
       spell: 60,
       artifact: 86,
-      condition: 29,
+      condition: 30,
       ground: 8,
       skill: 24,
       feat: 28,
@@ -160,8 +161,30 @@ describe("content icons", () => {
     ]);
   });
 
+  it("draws the Deepforge's Steam and the Mortars' shell marker", () => {
+    // bead border_marches-bzc.131 (FACTION_DWARVES 3 and 5)
+    const steam = iconFor("condition", "Steam");
+    expect([steam.id, steam.fallback, steam.frame]).toEqual([
+      "steam",
+      false,
+      ICON_FRAMES.storm,
+    ]);
+    const badge = iconFor("condition", "steam", 16);
+    expect([badge.asset.w, badge.fallback]).toEqual([16, false]);
+    const shell = MARKER_ICONS.shell;
+    expect([shell[32].path, shell[32].w]).toEqual([
+      "assets/icons/markers/shell.png",
+      32,
+    ]);
+    expect([shell[16].path, shell[16].w]).toEqual([
+      "assets/icons/markers-16/shell.png",
+      16,
+    ]);
+    expect(ALL_ICON_ASSETS).toContain(shell[16]);
+  });
+
   it("has 16 px overlays for conditions and 32 px elsewhere", () => {
-    expect(SMALL_ICON_ASSETS).toHaveLength(29);
+    expect(SMALL_ICON_ASSETS).toHaveLength(30);
     const small = iconFor("condition", "Burning", 16);
     expect([small.asset.w, small.fallback]).toEqual([16, false]);
     expect(iconFor("skill", "banner", 16).asset.w).toBe(32);

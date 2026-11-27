@@ -1065,6 +1065,12 @@
       "frame": "clock",
       "school": "clock",
       "polarity": "bane"
+    },
+    "steam": {
+      "name": "Steam",
+      "frame": "storm",
+      "school": "storm",
+      "polarity": "boon"
     }
   },
   "ground": {

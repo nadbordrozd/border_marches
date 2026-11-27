@@ -377,6 +377,31 @@ export const PICKS = {
       },
       notes: Object.fromEntries([23, 27, 30, 37, 41, 42, 43].map((n) => [n, "a pink blob without the boot: reads as a gumdrop, not a held foot"])),
     },
+    // bead border_marches-bzc.131: Steam (a condition) and the shell marker
+    // (kind "marker": public/assets/icons/markers and markers-16, MARKER_ICONS
+    // in src/assets/icons.ts; not a catalogue content kind).
+    "conditions-h": {
+      picks: {
+        steam: [16, "a big white steam cloud from a brass elbow pipe: steam at a glance on light and dark, the same idea as the 16 px badge, white and brass clear of the red Storm frame"],
+        "marker:shell": [53, "a brass shell with dark fins landing nose down in a red and white target ring: 'a shell lands here', plainly not the Horde's round black bomb"],
+      },
+      notes: Object.fromEntries([
+        ...[0, 1, 2, 3, 8, 9, 10, 11].map((n) => [n, "a brass whistle on a U pipe: reads as a plumbing fitting before steam (spare)"]),
+        ...[4, 5, 6, 7, 12, 13, 14, 15].map((n) => [n, "a diagonal brass whistle blowing a puff: clear, but at 16 px the same idea reads as a horn, so the badge and icon use the cloud-from-pipe instead (spare)"]),
+        ...[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47].map((n) => [n, "a falling brass shell alone: reads as a bullet, and at 16 px as a pencil; the target ring says where it lands (spare)"]),
+      ]),
+    },
+    "conditions-h-16": {
+      picks: {
+        steam: [24, "a white steam cloud over a brass elbow pipe: the one 16 px Steam that reads as steam rather than a horn"],
+        "marker-16:shell": [53, "target ring with a brass shell coming down at an angle: reads as a hit marker; the upright-shell rings look like a red potion flask"],
+      },
+      notes: Object.fromEntries([
+        ...[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((n) => [n, "a brass whistle with a puff: at 16 px reads as a horn or a bird, not steam"]),
+        ...[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47].map((n) => [n, "a lone brass shell: reads as a bullet or a pencil at 16 px"]),
+        ...[48, 49, 50, 51, 54, 56, 57, 58, 59, 60, 61, 62, 63].map((n) => [n, "a red ring with an upright shell (or none): reads as a red potion flask at 16 px"]),
+      ]),
+    },
   },
   "icons-heroes": {
     "emblems-a": {
@@ -535,6 +560,8 @@ const KIND_FOLDER = {
   school: "schools",
   fallback: "fallback",
   "condition-16": "conditions-16",
+  marker: "markers",
+  "marker-16": "markers-16",
 };
 
 function kindOf(set, recipeId, contentKey) {
@@ -563,7 +590,7 @@ for (const [set, recipes] of Object.entries(PICKS)) {
     const accepted = new Map(Object.values(picks).map(([n, reason]) => [n, reason]));
     for (const [contentKey, [n]] of Object.entries(picks)) {
       const [kind, id] = kindOf(set, recipeId, contentKey);
-      const size = kind === "condition-16" ? 16 : 32;
+      const size = kind.endsWith("-16") ? 16 : 32;
       outputs.push({ path: `public/assets/icons/${KIND_FOLDER[kind]}/${id}.png`, from: `${recipeId}#${n}`, width: size, height: size });
     }
     let verdicts = fs.existsSync(verdictsFile) ? JSON.parse(fs.readFileSync(verdictsFile, "utf8")) : {};

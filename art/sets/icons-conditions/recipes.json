@@ -253,6 +253,41 @@
         "class-symbol-16"
       ],
       "notes": "Bead border_marches-bzc.112: the 16 px battle badge of Stuck, made at 16 px (never a downscale)."
+    },
+    {
+      "id": "conditions-h",
+      "concept": "steam steam shell shell",
+      "width": 32,
+      "height": 32,
+      "seed": 17308,
+      "covers": [
+        "steam",
+        "steam",
+        "shell",
+        "shell"
+      ],
+      "subject": "Subject: each image shows exactly one of these 4 things, each thing about equally often: (1) a polished brass steam whistle on a short copper pipe blowing a big round puff of white steam; (2) a big fluffy round cloud of white steam puffing up out of a short brass pipe with a small copper valve wheel; (3) a fat polished brass artillery shell with a pointed copper nose and three dark iron tail fins, falling nose down; (4) a red and white round target ring with a brass artillery shell falling nose down onto its centre.",
+      "notes": "Bead border_marches-bzc.131: Steam, the Deepforge's Storm boon (FACTION_DWARVES 3), white steam and brass on the red Storm frame; and the marker of a lobbed shell on its hex and the battle timeline (FACTION_DWARVES 5, 10.2), a brass shell, not the Horde's round black bomb."
+    },
+    {
+      "id": "conditions-h-16",
+      "concept": "steam steam shell shell",
+      "width": 16,
+      "height": 16,
+      "seed": 17317,
+      "covers": [
+        "steam",
+        "steam",
+        "shell",
+        "shell"
+      ],
+      "subject": "Subject: each image shows exactly one of these 4 things, each thing about equally often: (1) a brass whistle blowing a big puff of white steam; (2) a big white steam cloud rising from a short brass pipe; (3) a brass artillery shell with a copper nose falling nose down; (4) a red and white target ring with a brass shell above it.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ],
+      "notes": "Bead border_marches-bzc.131: the 16 px badge of Steam and the 16 px shell marker, made at 16 px (never a downscale)."
     }
   ],
   "outputs": [
@@ -649,6 +684,30 @@
     {
       "path": "public/assets/icons/conditions-16/stuck.png",
       "from": "conditions-g-16#61",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions/steam.png",
+      "from": "conditions-h#16",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/markers/shell.png",
+      "from": "conditions-h#53",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions-16/steam.png",
+      "from": "conditions-h-16#24",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/markers-16/shell.png",
+      "from": "conditions-h-16#53",
       "width": 16,
       "height": 16
     }

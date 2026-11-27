@@ -75,6 +75,51 @@ canvas). The Candy outpost is `map-objects/outpost-candy-a#2` (a
 gingerbread watchtower behind a candy-cane wall, 113x115), registered as
 the `candy` variant of `faction-outpost` in `src/assets/map-objects.ts`.
 
+## The Deepforge (bead `border_marches-bzc.131`)
+
+Six new creatures in the set `faction-units`, from
+[FACTION_DWARVES.md section 10](../design/FACTION_DWARVES.md#10-art), made
+as the Candy Kingdom's were: same endpoint and `@piece` options, the section
+10.1 palette (brass, copper, verdigris, iron, steam white, ginger and grey
+beards) written into each subject, white steam and never black smoke,
+facing south-east, a 1:1 crop as the 48x48 portrait (the Tinker's take is
+48 px wide, so hers is head and body). The two dwarves take the unit class
+layer; the Mortar too (a walking gun with feet); the Gyrocopter, Steam Tank
+and Ironclad drop it and name the outline, as `rock-candy-dragon-b`.
+Registered with the art faction `dwarves` (`src/assets/manifest.ts`), feet
+measured by `art/review/measure-units.mjs`, opaque tops in
+`src/assets/unit-tops.ts`.
+
+| Id | Sprite key | Take | Canvas |
+| --- | --- | --- | --- |
+| `tinker` | `dwarves-tinker` | `tinker-b-clean#0` (ground-plate edit), generated at 48x72, padded | 56x80 |
+| `rivet-gunner` | `dwarves-rivet-gunner` | `rivet-gunner-a#0` | 56x80 |
+| `gyrocopter` | `dwarves-gyrocopter` | `gyrocopter-b#0` | 56x80 |
+| `mortar` | `dwarves-mortar` | `mortar-a#0` | 56x80 |
+| `steam-tank` | `dwarves-steam-tank` | `steam-tank-a-ram#0` (ram edit) | 72x88 |
+| `ironclad` | `dwarves-ironclad` | `ironclad-a#0` | 88x104 |
+
+Canvases follow the Candy tiers (1-4 standard, 5 large, 6 giant) so the
+sizes rise with tier; FACTION_DWARVES 10.2 had first drawn the Gyrocopter
+large (72x88), which would have stood it above the tier 4 Mortar.
+Rejected, each with its reason in `verdicts.json`: a Tinker whose wrench
+was a stub behind her shoulder (`tinker-a`; the re-roll holds it across her
+front), a grass block under that re-roll (removed by an edit), a Steam Tank
+whose ram nose was an open gun barrel (`steam-tank-a`; the edit
+`steam-tank-a-ram` closes it into a riveted ram head: the Tank rams, it does
+not shoot) and a Gyrocopter half the size of its canvas (`gyrocopter-a`,
+smaller than the tier 2 Rivet Gunner on the line-up). The Gyrocopter's pilot
+came back white-bearded, not ginger (accepted). The Deepforge outpost is
+`map-objects/outpost-dwarves-b#3` (a tall copper boiler house under a
+verdigris roof, a stone workshop, brass chimneys and white steam, a round
+brass vault door in a cog frame at the front centre, 109x104), registered as
+the `dwarves` variant of `faction-outpost`; the first outpost take
+(`outpost-dwarves-a#1`) ringed an empty yard and was replaced. Review sheets
+(not in git) are in the bead's worktree under `.orchestration/screens/bzc131/`:
+`lineup-volcanic.png` (beside the Candy Kingdom on the native ground),
+`lineup-grass.png` (beside the Realm, the Horde and the stray Pulp Wars
+dwarves), `portraits.png`, `outposts-*.png` and `takes-*.png`.
+
 ## Hero classes
 
 Every hero rides, as on a Heroes map, on a mount of its own so a hero never

@@ -419,6 +419,26 @@
       "subject": "Subject: a Candy Kingdom fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky gingerbread #b86b34 guardhouse with #7d4420 shadows, white royal icing #fff4ec piping on its edges and a strawberry pink #e2589b frosted roof dripping white icing, a low wall of fat red #e03a3e and white striped candy canes around it, the gate at the front an arch of two crossed candy canes, round gumdrops in mint #7fd6b5 and pink along the wall, a pink #e2589b pennant flag on a lollipop pole. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
       "negative": "person, soldier, character, snow, ground, grass",
       "notes": "Bead border_marches-bzc.112: the Candy Kingdom's faction outpost, after outpost-a (the Realm, Restless and Horde outposts) and FACTION_CANDY 10.1."
+    },
+    {
+      "id": "outpost-dwarves-a",
+      "concept": "FACTION OUTPOST dwarves (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 16205,
+      "subject": "Subject: a Deepforge dwarf fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky copper #c7683a boiler house with #8a4325 shadows under a verdigris #3aa38f roof with #226b5d shadows, one tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a low wall of riveted iron #4a4f57 plates around it, the gate at the front a big round brass vault door set in a cog-wheel frame, a small brass gear on the gatehouse. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, soldier, character, black smoke, fire, lava, snow, ground, grass",
+      "notes": "Bead border_marches-bzc.131: the Deepforge's faction outpost, after outpost-a and outpost-candy-a and FACTION_DWARVES 10.1 (verdigris roofs, never yellow; white steam only)."
+    },
+    {
+      "id": "outpost-dwarves-b",
+      "concept": "FACTION OUTPOST dwarves (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 16206,
+      "subject": "Subject: a Deepforge dwarf recruiting outpost, one chunky dense cluster, no empty yard: a fat round copper #c7683a boiler house under a verdigris #3aa38f roof in the middle, a tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a squat stone workshop with a verdigris roof packed beside it, a short thick wall of riveted iron #4a4f57 plates hugging them at the front, its gate a big round brass vault door in a cog-wheel frame at the front centre. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, soldier, character, black smoke, fire, lava, snow, ground, grass, empty courtyard",
+      "notes": "outpost-dwarves-a#1 is right but its wall rings an empty yard (the thin-ring look the chunky towns retired, bzc.97): one dense cluster asked for."
     }
   ],
   "outputs": [
@@ -16814,6 +16834,21 @@
           "y": 2,
           "width": 113,
           "height": 115
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/faction-outpost-dwarves.png",
+      "from": "outpost-dwarves-b#3",
+      "width": 109,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 109,
+          "height": 104
         }
       ]
     }

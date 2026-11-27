@@ -113,5 +113,65 @@
     "verdict": "REJECTED",
     "notes": "same visual mass as sugarplum-b (1870 opaque px against 1839), but the dense white sugar dots are noise at 1x; sugarplum-b keeps the cleaner silhouette",
     "at": "2026-11-27T00:16:30.018Z"
+  },
+  "tinker-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a good dwarf but the signature wrench is a small stub behind the shoulder; re-rolled as tinker-b with the wrench across the front",
+    "at": "2026-11-27T09:45:30.806Z"
+  },
+  "tinker-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the big brass wrench is right but it stands on a grass and soil block; ground removed by the edit tinker-b-clean",
+    "at": "2026-11-27T09:45:31.300Z"
+  },
+  "tinker-b-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stout ginger-bearded dwarf in a verdigris cap and brass goggles, apron, back boiler with a steam puff, a big brass wrench across her front; nothing under the boots; reads on light and dark",
+    "at": "2026-11-27T09:45:31.637Z"
+  },
+  "tinker-b-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to take 0 (spare)",
+    "at": "2026-11-27T09:45:32.059Z"
+  },
+  "mortar-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "round riveted brass-copper automaton on stubby iron legs, porthole eyes, a fat barrel up to the right with a steam puff, wind-up key; a cute walking gun that fills the standard canvas",
+    "at": "2026-11-27T09:45:32.360Z"
+  },
+  "steam-tank-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the ram nose is an open cannon barrel and reads as a gun (the Steam Tank rams, it does not shoot); fixed by the edit steam-tank-a-ram",
+    "at": "2026-11-27T09:45:32.819Z"
+  },
+  "steam-tank-a-ram#0": {
+    "verdict": "ACCEPTED",
+    "notes": "chubby verdigris tank on iron tracks, porthole eyes, copper chimney and a big white steam cloud, a closed riveted brass ram head on a log instead of the barrel",
+    "at": "2026-11-27T09:45:33.226Z"
+  },
+  "steam-tank-a-ram#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to take 0 with fewer rivets on the ram head (spare)",
+    "at": "2026-11-27T09:45:33.833Z"
+  },
+  "rivet-gunner-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "grey-bearded dwarf in a verdigris helmet and goggles, a chunky brass rivet gun fed by a hose from a copper back tank; tells apart from the ginger Tinker",
+    "at": "2026-11-27T09:45:34.245Z"
+  },
+  "gyrocopter-a#0": {
+    "verdict": "REJECTED",
+    "notes": "right design but small (about 44x40 in 56x80): would read smaller than the tier 2 Rivet Gunner; re-rolled to fill the canvas",
+    "at": "2026-11-27T09:45:34.701Z"
+  },
+  "gyrocopter-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "big round brass pod with a wide iron rotor, stubby wings, a goggled dwarf pilot (white beard, not ginger: accepted) and an exhaust steam puff; fills the canvas, hovers with nothing under it",
+    "at": "2026-11-27T09:45:34.956Z"
+  },
+  "ironclad-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a walking iron-and-verdigris fortress with brass trim, porthole eyes, a brass turret cannon pointing bottom right, twin smokestacks with white steam, stubby feet; the biggest of the six",
+    "at": "2026-11-27T09:45:35.470Z"
   }
 }

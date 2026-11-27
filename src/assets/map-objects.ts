@@ -316,6 +316,7 @@ const ART_ROWS: readonly (readonly [
   ["faction-outpost", "undead", 100, 90, "outpost-a#1"],
   ["faction-outpost", "goblins", 101, 93, "outpost-a#2"],
   ["faction-outpost", "candy", 113, 115, "outpost-candy-a#2"],
+  ["faction-outpost", "dwarves", 109, 104, "outpost-dwarves-b#3"],
   ["stray-hut", "", 60, 51, "sites-d#0"],
   ["caretaker-lodge", "", 117, 104, "lodge-a#1"],
   ["stat-shrine", "attack", 46, 63, "shrines-a#10"],

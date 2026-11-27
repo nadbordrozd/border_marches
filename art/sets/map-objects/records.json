@@ -3887,5 +3887,151 @@
         "height": 128
       }
     ]
+  },
+  "outpost-dwarves-a": {
+    "id": "outpost-dwarves-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a4941054-3aae-4d93-825e-eca47794d059",
+    "submittedAt": "2026-11-27T09:40:36.926Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a Deepforge dwarf fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky copper #c7683a boiler house with #8a4325 shadows under a verdigris #3aa38f roof with #226b5d shadows, one tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a low wall of riveted iron #4a4f57 plates around it, the gate at the front a big round brass vault door set in a cog-wheel frame, a small brass gear on the gatehouse. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 16205,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a Deepforge dwarf fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky copper #c7683a boiler house with #8a4325 shadows under a verdigris #3aa38f roof with #226b5d shadows, one tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a low wall of riveted iron #4a4f57 plates around it, the gate at the front a big round brass vault door set in a cog-wheel frame, a small brass gear on the gatehouse. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, soldier, black smoke, fire, lava, snow, ground, grass."
+    },
+    "at": "2026-11-27T09:41:43.833Z",
+    "usageUsd": 0.08083436560630798,
+    "candidates": [
+      {
+        "file": "outpost-dwarves-a-0.png",
+        "sha256": "de98120cba1f5f3be32cc60720e987b3cad18617aa387952656f47d76ef64c45",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-a-1.png",
+        "sha256": "75e86ae1cb1b710e8ee5864b2c68cf03153098f1ef8df3dd41a3e64c20457b05",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-a-2.png",
+        "sha256": "40f1aa09780e46d5651ed8ea77ca01e1db6a4ca7d95dba5bde572970f586026e",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-a-3.png",
+        "sha256": "57b558c8fa0252ec7d6376178f9d1ea92eb38238cd58c8acceb2efc2846486bf",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "outpost-dwarves-b": {
+    "id": "outpost-dwarves-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "da298e36-a315-451d-9773-c7dd9f1563b4",
+    "submittedAt": "2026-11-27T09:54:41.541Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a Deepforge dwarf recruiting outpost, one chunky dense cluster, no empty yard: a fat round copper #c7683a boiler house under a verdigris #3aa38f roof in the middle, a tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a squat stone workshop with a verdigris roof packed beside it, a short thick wall of riveted iron #4a4f57 plates hugging them at the front, its gate a big round brass vault door in a cog-wheel frame at the front centre. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 16206,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a Deepforge dwarf recruiting outpost, one chunky dense cluster, no empty yard: a fat round copper #c7683a boiler house under a verdigris #3aa38f roof in the middle, a tall polished brass #d9a634 smokestack puffing a round white #f4f1ea steam cloud, a squat stone workshop with a verdigris roof packed beside it, a short thick wall of riveted iron #4a4f57 plates hugging them at the front, its gate a big round brass vault door in a cog-wheel frame at the front centre. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, soldier, black smoke, fire, lava, snow, ground, grass, empty courtyard."
+    },
+    "at": "2026-11-27T09:55:54.110Z",
+    "usageUsd": 0.08052990290853712,
+    "candidates": [
+      {
+        "file": "outpost-dwarves-b-0.png",
+        "sha256": "03c2ee3f51c328f07cb123d0aae5705f5c029d04bcd24397cc1a92f13d16cc54",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-b-1.png",
+        "sha256": "4b044a8442ebb2e21383bab75350639ae08ba5b2dd8ea035b854e07520c2e3c7",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-b-2.png",
+        "sha256": "97808d4eb05e55790301250809d299556e209d21f9ea7899d0dddc27f84b9b84",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-dwarves-b-3.png",
+        "sha256": "9fe825afff6cdbbb2609d47f9100d568763320f1472465f34385767c1debaadc",
+        "width": 128,
+        "height": 128
+      }
+    ]
   }
 }

@@ -52,6 +52,13 @@ export const CREATURE_ART: Readonly<Record<string, string>> = {
   sugarplum: "candy-sugarplum",
   "gummy-bear": "candy-gummy-bear",
   "rock-candy-dragon": "candy-rock-candy-dragon",
+  // The Deepforge (FACTION_DWARVES.md section 10.2).
+  tinker: "dwarves-tinker",
+  "rivet-gunner": "dwarves-rivet-gunner",
+  gyrocopter: "dwarves-gyrocopter",
+  mortar: "dwarves-mortar",
+  "steam-tank": "dwarves-steam-tank",
+  ironclad: "dwarves-ironclad",
   // The MVP neutrals that are not faction units (src/data/neutrals.ts).
   "orc-brute": "goblin-orc-brute",
   troll: "goblin-troll",

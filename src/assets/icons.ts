@@ -114,7 +114,7 @@ export function contentId(name: string): string {
 
 export interface IconAsset extends ImageAsset {
   readonly category: "icon";
-  readonly kind: IconKind | "fallback";
+  readonly kind: IconKind | "fallback" | "marker";
   /** Content id (or, for a fallback, the kind it stands in for). */
   readonly id: string;
 }
@@ -149,7 +149,7 @@ const FOLDER: Readonly<Record<IconKind, string>> = {
 };
 
 function iconAsset(
-  kind: IconKind | "fallback",
+  kind: IconAsset["kind"],
   id: string,
   folder: string,
   size: number,
@@ -179,6 +179,23 @@ export const SMALL_ICON_ASSETS: readonly IconAsset[] = [
   ),
 ];
 
+/** A battle marker that is not catalogue content (see {@link MARKER_ICONS}). */
+export type MarkerId = "shell";
+
+/**
+ * Battle markers outside the content catalogue (bead bzc.131): the shell a
+ * stack of Mortars lobs (FACTION_DWARVES 5, Lob), drawn on its target hex
+ * and as its tile on the battle timeline; 32 px and a 16 px take of its own.
+ */
+export const MARKER_ICONS: Readonly<
+  Record<MarkerId, Readonly<Record<16 | 32, IconAsset>>>
+> = {
+  shell: {
+    32: iconAsset("marker", "shell", "markers", 32),
+    16: iconAsset("marker", "shell", "markers-16", 16),
+  },
+};
+
 /** One fallback per kind, for ids without an icon of their own. */
 export const FALLBACK_ICON_ASSETS: Readonly<Record<IconKind, IconAsset>> =
   Object.fromEntries(
@@ -192,6 +209,7 @@ export const FALLBACK_ICON_ASSETS: Readonly<Record<IconKind, IconAsset>> =
 export const ALL_ICON_ASSETS: readonly IconAsset[] = [
   ...ICON_ASSETS,
   ...SMALL_ICON_ASSETS,
+  ...Object.values(MARKER_ICONS).flatMap((m) => [m[32], m[16]]),
   ...Object.values(FALLBACK_ICON_ASSETS),
 ];
 

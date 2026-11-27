@@ -502,7 +502,7 @@ from the green player colour (`#3fa34a`).
 | -------------- | ---------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tinker`       | `dwarves-tinker`       | 56 x 80          | a stout little dwarf in brass goggles and a leather apron, a ginger braided beard, an oversized wrench, a tiny boiler on her back puffing steam |
 | `rivet-gunner` | `dwarves-rivet-gunner` | 56 x 80          | a dwarf in a verdigris helmet with a big brass rivet gun fed by a hose from a copper tank on his back                                           |
-| `gyrocopter`   | `dwarves-gyrocopter`   | 72 x 88 (large)  | a round brass gyrocopter with a big rotor and stubby wings, a goggled dwarf pilot with a scarf, hovering                                        |
+| `gyrocopter`   | `dwarves-gyrocopter`   | 56 x 80          | a round brass gyrocopter with a big rotor and stubby wings, a goggled dwarf pilot with a scarf, hovering                                        |
 | `mortar`       | `dwarves-mortar`       | 56 x 80          | a squat clockwork mortar automaton on stubby iron legs, a fat copper barrel pointing up, porthole eyes, a wind-up key on its back               |
 | `steam-tank`   | `dwarves-steam-tank`   | 72 x 88 (large)  | a chubby riveted tank on caterpillar tracks with a tall chimney, a battering-ram nose and porthole eyes, puffing steam                          |
 | `ironclad`     | `dwarves-ironclad`     | 88 x 104 (giant) | a walking iron fortress: a squat riveted hull on four stubby legs, a brass gun turret on top, twin smokestacks, verdigris plates                |

@@ -65,6 +65,13 @@ const FACTION_CREATURES = [
   "sugarplum",
   "gummy-bear",
   "rock-candy-dragon",
+  // FACTION_DWARVES.md section 4 (art: bead bzc.131)
+  "tinker",
+  "rivet-gunner",
+  "gyrocopter",
+  "mortar",
+  "steam-tank",
+  "ironclad",
 ];
 /** The MVP neutrals that are not faction units (src/data/neutrals.ts). */
 const MVP_NEUTRALS = ["orc-brute", "troll"];

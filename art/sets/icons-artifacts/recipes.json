@@ -217,6 +217,19 @@
       ],
       "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a long curly strip of sticky golden yellow flypaper ribbon hanging down from a small red cap, two small grey flies with white wings stuck on it; (2) a spiral of golden yellow flypaper tape unrolling from a short red cardboard tube, a few small grey flies stuck on it.",
       "notes": "Bead border_marches-bzc.112: the Flypaper Ribbon, a Wonder that makes Stuck (FACTION_CANDY 5.2). Grey flies, not black, so they show on a dark panel; a paper strip, not taffy, so it is not mistaken for the Stuck icon."
+    },
+    {
+      "id": "wonders-dwarves-a",
+      "concept": "pocket-boiler pocket-boiler",
+      "width": 32,
+      "height": 32,
+      "seed": 17212,
+      "covers": [
+        "pocket-boiler",
+        "pocket-boiler"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a small round copper boiler barrel with brass bands and rivets, a tiny glowing orange firebox door, a short brass chimney with a small white steam puff and a brown leather carry strap; (2) a pocket-sized copper boiler tank on four tiny brass feet with a little glowing orange firebox door and a brass safety valve puffing a small white steam cloud.",
+      "notes": "Bead border_marches-bzc.131: the Pocket Boiler, a Wonder that gives Stoke to any army (FACTION_DWARVES 5.2). A whole little copper boiler with its firebox, so it is not mistaken for the Steam icon (a whistle or a cloud)."
     }
   ],
   "outputs": [

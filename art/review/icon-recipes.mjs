@@ -633,6 +633,46 @@ const RECIPES = [
     ],
     { notes: "Bead border_marches-bzc.112: the Flypaper Ribbon, a Wonder that makes Stuck (FACTION_CANDY 5.2). Grey flies, not black, so they show on a dark panel; a paper strip, not taffy, so it is not mistaken for the Stuck icon." },
   ],
+  // ------------------- bead border_marches-bzc.131: the Deepforge's Steam, the Mortars' shell marker and the Pocket Boiler
+  [
+    "icons-conditions",
+    "conditions-h",
+    17308,
+    [
+      ["steam", "a polished brass steam whistle on a short copper pipe blowing a big round puff of white steam"],
+      ["steam", "a big fluffy round cloud of white steam puffing up out of a short brass pipe with a small copper valve wheel"],
+      ["shell", "a fat polished brass artillery shell with a pointed copper nose and three dark iron tail fins, falling nose down"],
+      ["shell", "a red and white round target ring with a brass artillery shell falling nose down onto its centre"],
+    ],
+    { notes: "Bead border_marches-bzc.131: Steam, the Deepforge's Storm boon (FACTION_DWARVES 3), white steam and brass on the red Storm frame; and the marker of a lobbed shell on its hex and the battle timeline (FACTION_DWARVES 5, 10.2), a brass shell, not the Horde's round black bomb." },
+  ],
+  [
+    "icons-conditions",
+    "conditions-h-16",
+    17317,
+    [
+      ["steam", "a brass whistle blowing a big puff of white steam"],
+      ["steam", "a big white steam cloud rising from a short brass pipe"],
+      ["shell", "a brass artillery shell with a copper nose falling nose down"],
+      ["shell", "a red and white target ring with a brass shell above it"],
+    ],
+    {
+      fragments: ["style", "light-bottom-left", "class-symbol-16"],
+      width: 16,
+      height: 16,
+      notes: "Bead border_marches-bzc.131: the 16 px badge of Steam and the 16 px shell marker, made at 16 px (never a downscale).",
+    },
+  ],
+  [
+    "icons-artifacts",
+    "wonders-dwarves-a",
+    17212,
+    [
+      ["pocket-boiler", "a small round copper boiler barrel with brass bands and rivets, a tiny glowing orange firebox door, a short brass chimney with a small white steam puff and a brown leather carry strap"],
+      ["pocket-boiler", "a pocket-sized copper boiler tank on four tiny brass feet with a little glowing orange firebox door and a brass safety valve puffing a small white steam cloud"],
+    ],
+    { notes: "Bead border_marches-bzc.131: the Pocket Boiler, a Wonder that gives Stoke to any army (FACTION_DWARVES 5.2). A whole little copper boiler with its firebox, so it is not mistaken for the Steam icon (a whistle or a cloud)." },
+  ],
 ];
 
 const byId = new Map();

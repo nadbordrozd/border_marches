@@ -88,6 +88,14 @@ const UNIT_ROWS: readonly Row[] = [
   ["candy-sugarplum", "candy", 56, 80, [68, 21, 36, 18, 39]],
   ["candy-gummy-bear", "candy", 72, 88, [80, 22, 46, 17, 50]],
   ["candy-rock-candy-dragon", "candy", 88, 104, [95, 32, 63, 17, 69]],
+  // The Deepforge: new (set faction-units, bead bzc.131). The Tinker is a
+  // small take padded into 56x80; the Gyrocopter hovers.
+  ["dwarves-tinker", "dwarves", 56, 80, [69, 17, 25, 11, 39]],
+  ["dwarves-rivet-gunner", "dwarves", 56, 80, [76, 16, 28, 5, 45]],
+  ["dwarves-gyrocopter", "dwarves", 56, 80, [68, 18, 29, 10, 45]],
+  ["dwarves-mortar", "dwarves", 56, 80, [77, 30, 38, 7, 47]],
+  ["dwarves-steam-tank", "dwarves", 72, 88, [87, 18, 37, 6, 67]],
+  ["dwarves-ironclad", "dwarves", 88, 104, [91, 29, 44, 13, 72]],
   // Strays and caretakers: imports from other Pulp Wars rosters.
   ["cult-imp", "neutral", 56, 80, [76, 22, 40, 10, 46]],
   ["cult-tentacle", "neutral", 56, 80, [76, 11, 44, 2, 53]],

@@ -1483,5 +1483,45 @@
     "verdict": "REJECTED",
     "notes": "good gingerbread house in a cane fence, but a cottage like the Candy camp town; #2's tower reads as a fort",
     "at": "2026-11-27T00:05:36.813Z"
+  },
+  "outpost-dwarves-a#1": {
+    "verdict": "REJECTED",
+    "notes": "right subject and front-facing, but its iron wall rings an empty yard (the thin-ring look the chunky towns retired, bzc.97); replaced by the dense outpost-dwarves-b#3",
+    "at": "2026-11-27T09:56:18.049Z"
+  },
+  "outpost-dwarves-a#0": {
+    "verdict": "REJECTED",
+    "notes": "seen from a corner (isometric), not front-on like the other outposts; the gate is on the side",
+    "at": "2026-11-27T09:45:36.118Z"
+  },
+  "outpost-dwarves-a#2": {
+    "verdict": "REJECTED",
+    "notes": "seen from a corner; no steam; the vault door sits on a side annex, not a front gate",
+    "at": "2026-11-27T09:45:36.635Z"
+  },
+  "outpost-dwarves-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a round wall from a corner with an open gap for a gate and loose cogs; no vault door, no steam",
+    "at": "2026-11-27T09:45:37.004Z"
+  },
+  "outpost-dwarves-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "one dense chunky cluster: a tall copper boiler house under a verdigris roof with brass chimneys and white steam, a stone workshop with a verdigris roof, a short riveted iron wall and a big round brass vault door in a cog frame at the front centre; no empty yard",
+    "at": "2026-11-27T09:56:17.946Z"
+  },
+  "outpost-dwarves-b#0": {
+    "verdict": "REJECTED",
+    "notes": "seen from a corner; the vault door sits at the wall's lower left corner, not the front centre",
+    "at": "2026-11-27T09:56:18.156Z"
+  },
+  "outpost-dwarves-b#1": {
+    "verdict": "REJECTED",
+    "notes": "good runner-up (verdigris boiler house, steam), but the gate is off-centre to the left",
+    "at": "2026-11-27T09:56:18.261Z"
+  },
+  "outpost-dwarves-b#2": {
+    "verdict": "REJECTED",
+    "notes": "the boiler is an open roofless copper pot: reads as a jar or a cauldron",
+    "at": "2026-11-27T09:56:18.364Z"
   }
 }
