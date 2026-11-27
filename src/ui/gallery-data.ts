@@ -38,6 +38,7 @@ import { FEAT_LIST, HELD_FEATS } from "../data/feats.ts";
 import { NEUTRAL_CREATURE_IDS } from "../data/neutrals.ts";
 import { OBJECT_TYPES, OBJECT_TYPE_IDS } from "../data/objectTypes.ts";
 import { SKILLS, type SkillDef } from "../data/skills.ts";
+import { SEA_CREATURE_IDS } from "../data/sea.ts";
 import { STRAY_CREATURE_IDS } from "../data/strays.ts";
 import type { CreatureDef, FactionId } from "../data/types.ts";
 import { SPELL_ICON_ALIASES, iconFor, type IconKind } from "../assets/icons.ts";
@@ -296,6 +297,7 @@ function creatureSections(): GallerySection[] {
   for (const f of playableFactions())
     out.push(...section(f.name, take(rosterOf(f.id))));
   out.push(...section("Strays and caretakers", take(defs(STRAY_CREATURE_IDS))));
+  out.push(...section("Sea guardians", take(defs(SEA_CREATURE_IDS))));
   const summoned = Object.values(SUMMONED_CREATURES)
     .filter((c) => !shown.has(c.id))
     .map((c): GalleryEntry => {

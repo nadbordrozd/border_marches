@@ -65,6 +65,7 @@ export {
   groundAt,
   makeCondition,
   shootsPointBlank,
+  swims,
   sideOf,
   stackTotalHp,
   timelineClass,

@@ -94,6 +94,21 @@ const NEUTRALS = [
   "seedling",
   "shade",
 ];
+/**
+ * The sea guardians and the Hermit Crab (NAVAL.md 4, bead bzc.152): data
+ * before art (bead 9a registers their sea-<id> sprites).
+ */
+const AWAITING_ART: readonly string[] = [
+  "jellyfish",
+  "drowned-sailor",
+  "giant-crab",
+  "corsair",
+  "siren",
+  "hammerhead",
+  "sea-serpent",
+  "kraken",
+  "hermit-crab",
+];
 const HERO_CLASSES = [
   "knight-errant",
   "enchanter",
@@ -149,6 +164,7 @@ describe("unit art lookups", () => {
     // bead border_marches-9is: Orc Brute and Troll drew the placeholder on
     // screens that used unitArt alone.
     for (const def of Object.values(CREATURES)) {
+      if (AWAITING_ART.includes(def.id)) continue;
       expect({ id: def.id, own: hasUnitArt(def.id) }).toEqual({
         id: def.id,
         own: true,
@@ -158,8 +174,22 @@ describe("unit art lookups", () => {
         key: def.sprite,
       });
     }
-    for (const id of Object.keys(SUMMONED_CREATURES))
+    for (const id of Object.keys(SUMMONED_CREATURES)) {
+      if (AWAITING_ART.includes(id)) continue;
       expect({ id, own: hasUnitArt(id) }).toEqual({ id, own: true });
+    }
+  });
+
+  it("draws the sea guardians as their sea-<id> sprite or the placeholder", () => {
+    // NAVAL.md 10.2: their art is bead 9a's; until it is registered they
+    // fall back to the placeholder, then to the data's sprite key.
+    for (const id of AWAITING_ART) {
+      const sprite = Object.hasOwn(CREATURES, id)
+        ? CREATURES[id as keyof typeof CREATURES].sprite
+        : `sea-${id}`;
+      expect(sprite).toBe(`sea-${id}`);
+      expect(unitArt(id).key).toBe(hasUnitArt(id) ? sprite : PLACEHOLDER_UNIT);
+    }
   });
 
   it("uses a different sprite for every creature", () => {

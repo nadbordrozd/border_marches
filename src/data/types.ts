@@ -81,6 +81,35 @@ export type StrayCreatureId =
   | "prize-pumpkin"
   | "beanstalk-giant";
 
+/**
+ * Sea guardians (src/data/sea.ts, NAVAL.md section 4): neutral swimmers and
+ * pirates that guard only sea cells.
+ */
+export type SeaCreatureId =
+  | "jellyfish"
+  | "drowned-sailor"
+  | "giant-crab"
+  | "corsair"
+  | "siren"
+  | "hammerhead"
+  | "sea-serpent"
+  | "kraken";
+
+/**
+ * Sea guardian abilities and the Swimmer flag (NAVAL.md 3.1 and 4.2),
+ * registered with the battle grammar in src/core/battle/sea-abilities.ts.
+ */
+export type SeaAbilityId =
+  | "swimmer"
+  | "stinging-bell"
+  | "dead-weight"
+  | "carapace"
+  | "swing-across"
+  | "siren-song"
+  | "blood-in-the-water"
+  | "coil"
+  | "many-arms";
+
 /** Stray abilities, registered with the battle grammar (bead bzc.13). */
 export type StrayAbilityId =
   | "carry"
@@ -148,7 +177,8 @@ export type CreatureId =
   | GoblinCreatureId
   | CandyCreatureId
   | DwarvesCreatureId
-  | StrayCreatureId;
+  | StrayCreatureId
+  | SeaCreatureId;
 
 /**
  * One creature type. Every stat is per creature; damage is a single fixed

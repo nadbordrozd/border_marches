@@ -24,6 +24,7 @@ import {
 import { buildingDef, townTree } from "../data/factions.ts";
 import { FACTIONS } from "../data/factions.ts";
 import { spellName, findMapSpell } from "../data/map-spells.ts";
+import { SEA_ABILITY_TEXT } from "../data/sea.ts";
 import { STRAY_ABILITY_TEXT } from "../data/strays.ts";
 import type { BuildingId, FactionId } from "../data/types.ts";
 import type { TownState } from "../core/game/index.ts";
@@ -60,6 +61,11 @@ export function abilityText(id: string): { name: string; text: string } {
       )[id] ??
       (
         STRAY_ABILITY_TEXT as Readonly<
+          Record<string, { name: string; text: string }>
+        >
+      )[id] ??
+      (
+        SEA_ABILITY_TEXT as Readonly<
           Record<string, { name: string; text: string }>
         >
       )[id];

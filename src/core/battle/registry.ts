@@ -443,6 +443,12 @@ export interface AbilityDef {
    * is halved for a shooter in melee (Turret, bends GAME_DESIGN 9.3).
    */
   readonly pointBlank?: boolean;
+  /**
+   * The owner is a Swimmer (NAVAL.md 3.1): it may walk into, through and
+   * stand on sea hexes. A flag the naval battlefield reads; on a land field
+   * it changes nothing.
+   */
+  readonly swimmer?: boolean;
   /** The owner may walk again after its melee attack (Hit and Run). */
   readonly walkAfterAttack?: number;
   /**

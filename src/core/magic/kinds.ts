@@ -416,8 +416,27 @@ export const SHADE: BattleCreatureStats = {
   tags: { remains: "nothing", cannotBear: ["heartened", "shaken"] },
 };
 
+/**
+ * The Hermit Crab (NAVAL.md 4.3): summoned by the Conch of the Deep, a
+ * Swimmer with the Giant Crab's Carapace (src/core/battle/sea-abilities.ts).
+ * FV 72 by GAME_DESIGN 8.2; a summon has no remains, no XP and is gone when
+ * the battle ends.
+ */
+export const HERMIT_CRAB: BattleCreatureStats = {
+  id: "hermit-crab",
+  name: "Hermit Crab",
+  tier: 1,
+  hp: 10,
+  attack: 4,
+  defense: 8,
+  damage: 2,
+  speed: 4,
+  abilities: ["carapace", "swimmer"],
+  tags: { remains: "nothing", cannotBear: [] },
+};
+
 export const SUMMONED_CREATURES: Readonly<Record<string, BattleCreatureStats>> =
-  { seedling: SEEDLING, shade: SHADE };
+  { seedling: SEEDLING, shade: SHADE, "hermit-crab": HERMIT_CRAB };
 
 /** Registers the kinds and the summoned creatures' abilities once. */
 export function registerMagicKinds(): void {

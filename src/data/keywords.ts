@@ -232,6 +232,13 @@ export const KEYWORDS: readonly KeywordDef[] = [
     icon: { kind: "ground", id: "mist" },
   },
   {
+    id: "swimmer",
+    term: "Swimmer",
+    forms: ["Swimmers?"],
+    text: "A creature that may walk into, through and stand on sea hexes, which block every other stack. On land it walks like any other.",
+    tag: "Creature trait",
+  },
+  {
     id: "seedling",
     term: "Seedling",
     forms: ["Seedlings?"],

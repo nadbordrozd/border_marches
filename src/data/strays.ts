@@ -8,9 +8,12 @@
  *
  * Stats are CONTENT_CREATURES section 1; abilities (section 2) are battle
  * rules registered in src/core/battle/stray-abilities.ts under the ids in
- * {@link STRAY_ABILITY_IDS}; where they live is section 3.
+ * {@link STRAY_ABILITY_IDS}; where they live is section 3. Three of them
+ * also swim and guard seas (NAVAL.md 4.4, src/data/sea.ts); the sea
+ * guardians are not in this roster, so the land fill never places them.
  */
 import type { Terrain } from "../core/map/types.ts";
+import { SWIMMING_STRAYS } from "./sea.ts";
 import type {
   CreatureDef,
   StrayAbilityId,
@@ -131,7 +134,11 @@ export const STRAY_CREATURES: Readonly<Record<StrayCreatureId, CreatureDef>> =
           speed,
           shots,
           ability: null,
-          abilities: [ability],
+          // The Bog Leech, Deep-Sea Diver and Lagoon Lurker swim (NAVAL.md
+          // 3.1); their sea homes are SEA_HOMES (src/data/sea.ts).
+          abilities: SWIMMING_STRAYS.includes(id)
+            ? [ability, "swimmer"]
+            : [ability],
           ...(id === "sexton"
             ? {
                 caster: {

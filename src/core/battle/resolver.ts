@@ -29,6 +29,7 @@ import type {
 import type { HeroBattleProfile } from "../game/battle-profile.ts";
 import { runAutoBattle } from "./auto.ts";
 import "./stray-abilities.ts";
+import "./sea-abilities.ts";
 import type { AutoBattleOptions, BattleResult } from "./auto.ts";
 import type { AiMode } from "./ai.ts";
 import {

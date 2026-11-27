@@ -70,8 +70,13 @@ describe("gallery tabs match the registries", () => {
       for (const a of c.abilities) {
         const t = abilityText(a);
         expect(t.name, a).not.toBe(a);
-        expect(t.text, a).toMatch(/^When it dies, \w+/);
+        expect(t.text, a).not.toBe("");
+        if (a === "gone-to-seed" || a === "fade")
+          expect(t.text, a).toMatch(/^When it dies, \w+/);
       }
+    // The Hermit Crab's (NAVAL.md 4.3) come from the sea data.
+    expect(abilityText("carapace").name).toBe("Carapace");
+    expect(abilityText("swimmer").name).toBe("Swimmer");
     registerSpells();
     expect(abilityText("gone-to-seed")).toEqual({
       name: "Gone to Seed",
@@ -207,7 +212,7 @@ describe("gallery filters", () => {
     const undead4 = only("creatures", { faction: ["undead"], tier: ["4"] });
     expect(undead4.map((e) => e.id)).toEqual(["gravecaller"]);
     expect(only("creatures", { faction: ["summon"] }).map((e) => e.id)).toEqual(
-      ["seedling", "shade"],
+      ["seedling", "shade", "hermit-crab"],
     );
   });
 

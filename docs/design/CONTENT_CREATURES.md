@@ -109,6 +109,12 @@ Guards are picked from the creatures of the cell's terrain and ring, by
 the count rule of GAME_DESIGN 8.3 (a count between about 5 and 50). A
 caretaker guards its own school's sites wherever they stand.
 
+**Sea.** The Bog Leech, the Deep-Sea Diver and the Lagoon Lurker are
+**Swimmers** (NAVAL.md 3.1) and also guard the cells of a sea, in the
+rings above (NAVAL.md 4.4). The eight sea guardians (Jellyfish to Kraken)
+are in [NAVAL.md](NAVAL.md) section 4 and `src/data/sea.ts`, not in this
+roster: the land fill never draws them, only the sea fill of a naval map.
+
 ## 4. Summoned creatures
 
 Made only by spells and abilities. They are `summoned`: they leave no
@@ -120,7 +126,8 @@ remains, give no XP and vanish when the battle ends (RULES_V2 1.7).
 | **Shade**    | Raised (Hush)    | 8   | 5   | 3   | 3   | 6     | 69  | Heartened, Shaken | **Fade**: When it dies its hex receives mist, clock 2.                       |
 
 Seedlings come from Sprout; Shades from Second Shift, Everybody Up and
-the Sexton.
+the Sexton. The Hermit Crab (Conch of the Deep, a Swimmer with Carapace)
+is NAVAL.md 4.3's.
 
 ## 5. Decisions made here
 

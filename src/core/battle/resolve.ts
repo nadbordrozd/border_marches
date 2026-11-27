@@ -353,6 +353,13 @@ export function shootsPointBlank(creature: BattleCreatureStats): boolean {
 }
 
 /**
+ * The creature is a Swimmer (NAVAL.md 3.1): a sea hex does not block it.
+ */
+export function swims(creature: BattleCreatureStats): boolean {
+  return creature.abilities.some((a) => ability(a).swimmer === true);
+}
+
+/**
  * Hero rules that cancel a retaliation: Peace Dividend (Strikes by the
  * side against a Mollified stack) and Gag Rule (Hushed enemy stacks).
  */

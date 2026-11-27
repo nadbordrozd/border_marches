@@ -4,6 +4,7 @@
  */
 import { FACTION_CREATURES } from "./factionCreatures.ts";
 import { NEUTRAL_CREATURES } from "./neutrals.ts";
+import { SEA_CREATURES } from "./sea.ts";
 import { STRAY_CREATURES } from "./strays.ts";
 import type { CreatureDef, CreatureId, LostWorldCreatureId } from "./types.ts";
 
@@ -136,11 +137,20 @@ export const CREATURES: Readonly<Record<CreatureId, CreatureDef>> = {
   ...NEUTRAL_CREATURES,
   ...(FACTION_CREATURES as Record<string, CreatureDef>),
   ...STRAY_CREATURES,
+  ...SEA_CREATURES,
 } as Readonly<Record<CreatureId, CreatureDef>>;
 
 /** A creature's battle ability ids (its `abilities`, or its MVP ability). */
 export function creatureAbilities(def: CreatureDef): readonly string[] {
   return def.abilities ?? (def.ability === null ? [] : [def.ability]);
+}
+
+/**
+ * Whether the creature is a Swimmer (NAVAL.md 3.1): it may walk into,
+ * through and stand on sea hexes.
+ */
+export function isSwimmer(def: CreatureDef): boolean {
+  return creatureAbilities(def).includes("swimmer");
 }
 
 export function isCreatureId(id: unknown): id is CreatureId {
