@@ -212,9 +212,13 @@ describe(
       expect(bags).toBeLessThan(loose);
     });
 
-    it("are not on the named maps (their edits name artifacts by id)", () => {
+    it("are not on the older named maps (their edits name artifacts by id)", () => {
+      // Bead bzc.129: a map drawn on today's generator (gen.current) has
+      // them, as a random map does.
       for (const def of NAMED_MAPS) {
-        expect(buildNamedMap(def).objects.some(isMystery), def.id).toBe(false);
+        const bags = buildNamedMap(def).objects.filter(isMystery).length;
+        if (def.gen?.current === true) expect(bags, def.id).toBeGreaterThan(3);
+        else expect(bags, def.id).toBe(0);
       }
     });
   },

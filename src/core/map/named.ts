@@ -167,6 +167,48 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
   };
   const base = DEFAULT_GEN_CONFIG.objects;
   const towns = gen.neutralTowns;
+  const terrain = {
+    volcanic: biome("volcanic"),
+    winter: biome("winter"),
+    desert: biome("desert"),
+    candy: biome("candy"),
+    swamp: biome("swamp"),
+  };
+  if (gen.current === true) {
+    // Bead bzc.129: a map authored on today's generator keeps all of it
+    // (its plazas, rare sites first, ways round buildings, Mystery Bags and
+    // every landscape's sites); only its landscapes and zones are its own.
+    const middle = gen.middleZones;
+    return {
+      ...(towns !== undefined
+        ? { neutralTowns: { S: towns, M: towns, L: towns } }
+        : {}),
+      ...(middle !== undefined
+        ? {
+            middleZones: {
+              ...DEFAULT_GEN_CONFIG.middleZones,
+              [def.size]: {
+                2: [middle, middle],
+                3: [middle, middle],
+                4: [middle, middle],
+              },
+            },
+          }
+        : {}),
+      ...(gen.townsBesideStarts === true
+        ? { zones: { townsBesideStarts: true } }
+        : {}),
+      terrain: {
+        ...terrain,
+        ...(gen.secondaryShare !== undefined
+          ? { secondaryShare: gen.secondaryShare }
+          : {}),
+      },
+      ...(gen.density !== undefined
+        ? { objects: { density: { ...base.density, ...gen.density } } }
+        : {}),
+    };
+  }
   return {
     ...(towns !== undefined
       ? { neutralTowns: { S: towns, M: towns, L: towns } }
@@ -190,13 +232,7 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
           clearings: NAMED_CONFIG.clearings,
           fields: NAMED_CONFIG.fields,
         }),
-    terrain: {
-      volcanic: biome("volcanic"),
-      winter: biome("winter"),
-      desert: biome("desert"),
-      candy: biome("candy"),
-      swamp: biome("swamp"),
-    },
+    terrain,
     objects: {
       ...NAMED_CONFIG.objects,
       density: { ...NAMED_CONFIG.objects.density, ...gen.density },

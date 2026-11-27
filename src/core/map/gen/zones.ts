@@ -570,13 +570,35 @@ function assignTiers(st: GenState): void {
 
 /**
  * Neutral towns go into middle zones, preferring those farther from the
- * starts (later objectives), one town per zone.
+ * starts (later objectives), one town per zone. With
+ * `zones.townsBesideStarts` (bead bzc.129) each start first gets one in
+ * the largest middle zone connected to it.
  */
 function chooseTownZones(st: GenState): void {
   const rng = stageRng(st, "town-zones");
-  const want = rng.int(...st.cfg.neutralTowns[st.size]);
+  let want = rng.int(...st.cfg.neutralTowns[st.size]);
   const pool = rng
     .shuffle(st.zones.filter((z) => z.role === "middle"))
     .sort((a, b) => b.tier - a.tier || b.area - a.area);
-  for (const z of pool.slice(0, want)) z.role = "town";
+  if (st.cfg.zones.townsBesideStarts) {
+    for (const s of st.zones.filter((z) => z.role === "start")) {
+      if (want <= 0) break;
+      const beside = pool
+        .filter(
+          (z) =>
+            z.role === "middle" &&
+            st.connections.some(
+              (c) =>
+                (c.a === s.id && c.b === z.id) ||
+                (c.b === s.id && c.a === z.id),
+            ),
+        )
+        .sort((a, b) => b.area - a.area)[0];
+      if (beside === undefined) continue;
+      beside.role = "town";
+      want--;
+    }
+  }
+  for (const z of pool.filter((p) => p.role === "middle").slice(0, want))
+    z.role = "town";
 }

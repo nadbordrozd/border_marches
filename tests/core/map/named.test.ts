@@ -32,11 +32,17 @@ import type { NamedMapDef } from "../../../src/core/map/named.ts";
 import type { GameMap, MapObject } from "../../../src/core/map/types.ts";
 import {
   DIRECTIONS_8,
+  TERRAINS,
   cellAt,
   inBounds,
   validateMap,
 } from "../../../src/core/map/types.ts";
 import { generateMapWithInfo } from "../../../src/core/map/generate.ts";
+import { isMystery } from "../../../src/core/map/mystery.ts";
+import { CANDY_SITES } from "../../../src/core/map/gen/candy.ts";
+import { WINTER_SITES } from "../../../src/core/map/gen/objects.ts";
+import { SWAMP_SITES } from "../../../src/core/map/gen/swamp.ts";
+import { VOLCANIC_SITES } from "../../../src/core/map/gen/volcanic.ts";
 import { moveCosts, walkable } from "./map-helpers.ts";
 
 const built = new Map<string, GameMap>();
@@ -201,6 +207,20 @@ const SNAPSHOT: Record<
       ["town-7", 44, 39, "Warlord's Hold"],
     ],
   },
+  // Bead bzc.129: the terrain showcase, drawn on today's generator.
+  "cartographers-folly": {
+    base: "966d8802",
+    built: "1c7cee6c",
+    objects: 766,
+    towns: [
+      ["town-1", 59, 8, null],
+      ["town-2", 9, 54, null],
+      ["town-3", 8, 15, "Treacle Hollow"],
+      ["town-4", 57, 24, "Margin's End"],
+      ["town-5", 21, 38, "Compass Rose"],
+      ["town-6", 34, 35, "Warlord's Hold"],
+    ],
+  },
 };
 
 /** Each map's puzzles: the gated vault valley and the Marvel cleft. */
@@ -240,11 +260,12 @@ const PUZZLES: Record<
 };
 
 describe("named maps", { timeout: HEAVY_TIMEOUT }, () => {
-  it("ships a two-player map and two three-player Realm, Restless, Horde maps", () => {
+  it("ships two two-player maps and two three-player Realm, Restless, Horde maps", () => {
     expect(NAMED_MAPS.map((m) => [m.id, m.players, m.size])).toEqual([
       ["keepers-toll", 2, "M"],
       ["hourglass-marches", 3, "L"],
       ["ninefold-landfall", 3, "L"],
+      ["cartographers-folly", 2, "L"],
     ]);
     for (const id of ["hourglass-marches", "ninefold-landfall"]) {
       expect(def(id).factions).toEqual(["humans", "undead", "goblins"]);
@@ -791,6 +812,190 @@ describe("The Ninefold Landfall", { timeout: HEAVY_TIMEOUT }, () => {
   it("lets every start reach every object and all open ground", () => {
     // The generator's many-seed rules (tests/core/map/generate.test.ts):
     // every object entrance and every walkable cell is reachable.
+    const map = mapOf(ID);
+    const walk = walkable(map);
+    for (const t of startTownsOf(map)) {
+      const cost = moveCosts(map, t.x, t.y);
+      for (const o of map.objects) {
+        expect(Number.isFinite(cost[o.y * map.width + o.x]), o.id).toBe(true);
+      }
+      for (let y = 0; y < map.height; y++) {
+        for (let x = 0; x < map.width; x++) {
+          if (!walk(x, y)) continue;
+          expect(
+            Number.isFinite(cost[y * map.width + x]),
+            `pocket at (${x},${y}) from ${t.id}`,
+          ).toBe(true);
+        }
+      }
+    }
+  });
+});
+
+/**
+ * The terrain showcase (bead bzc.129, the user: "add another map to
+ * showcase all the terrain types"): every ground in a region of its own,
+ * every landscape's sites on its own ground, drawn on today's generator
+ * (its composition, Mystery Bags and ways round buildings).
+ */
+describe("The Cartographer's Folly", { timeout: HEAVY_TIMEOUT }, () => {
+  const ID = "cartographers-folly";
+  const ofType = (map: GameMap, type: string): MapObject[] =>
+    map.objects.filter((o) => o.data["type"] === type);
+  const generated = (): ReturnType<typeof generateMapWithInfo> => {
+    const m = def(ID);
+    return generateMapWithInfo(m.seed, {
+      size: m.size,
+      players: m.players,
+      activePlayers: m.players,
+      decorations: false,
+      config: namedConfig(m),
+    });
+  };
+
+  it("asks today's generator for one zone of every landscape and a town beside each start", () => {
+    const m = def(ID);
+    expect(m.gen?.current).toBe(true);
+    expect(m.gen?.landscapes).toEqual({
+      volcanic: 1,
+      winter: 1,
+      desert: 1,
+      candy: 1,
+      swamp: 1,
+    });
+    const cfg = namedConfig(m);
+    // The generator's own composition and sites, not the older maps'.
+    expect(cfg.objects?.mystery).toBeUndefined();
+    expect(cfg.objects?.swampSites).toBeUndefined();
+    expect(cfg.clusters).toBeUndefined();
+    expect(cfg.zones?.townsBesideStarts).toBe(true);
+    const { info } = generated();
+    for (const main of ["volcanic", "snow", "sand", "frosting", "swamp"]) {
+      expect(
+        info.zones.filter((z) => z.main === main),
+        main,
+      ).toHaveLength(1);
+    }
+  });
+
+  it("shows every ground in a region of its own, with its decorations", () => {
+    const map = mapOf(ID);
+    const W = map.width;
+    const cells: Record<string, number> = {};
+    for (const c of map.cells) cells[c.terrain] = (cells[c.terrain] ?? 0) + 1;
+    for (const t of TERRAINS) {
+      expect(cells[t] ?? 0, t).toBeGreaterThanOrEqual(150);
+    }
+    // Each landscape is one region: its largest 4-connected piece.
+    const largest = (t: string): number => {
+      const seen = new Uint8Array(map.cells.length);
+      let best = 0;
+      map.cells.forEach((c, s) => {
+        if (seen[s] === 1 || c.terrain !== t) return;
+        seen[s] = 1;
+        const stack = [s];
+        let n = 0;
+        while (stack.length > 0) {
+          const i = stack.pop() as number;
+          n++;
+          const x = i % W;
+          const y = (i - x) / W;
+          for (const [dx, dy] of [
+            [1, 0],
+            [-1, 0],
+            [0, 1],
+            [0, -1],
+          ] as const) {
+            const j = (y + dy) * W + x + dx;
+            if (!inBounds(map, x + dx, y + dy) || seen[j] === 1) continue;
+            if (map.cells[j]?.terrain !== t) continue;
+            seen[j] = 1;
+            stack.push(j);
+          }
+        }
+        best = Math.max(best, n);
+      });
+      return best;
+    };
+    for (const t of ["volcanic", "snow", "sand", "frosting", "swamp"]) {
+      expect(cells[t] ?? 0, t).toBeGreaterThanOrEqual(200);
+      expect(largest(t), t).toBeGreaterThanOrEqual(180);
+    }
+    // Water: a sea along an edge and lakes inland.
+    const edge = map.cells.some(
+      (c, i) =>
+        c.terrain === "water" &&
+        (i % W === 0 || i % W === W - 1 || i < W || i >= W * (W - 1)),
+    );
+    expect(edge).toBe(true);
+    expect(generated().info.fields.ponds).toBeGreaterThanOrEqual(1);
+    const decorated = new Set(
+      (map.decorations ?? []).map((d) => cellAt(map, d.x, d.y)?.terrain),
+    );
+    for (const t of TERRAINS) {
+      if (t !== "water") expect(decorated.has(t), t).toBe(true);
+    }
+  });
+
+  it("has every landscape's own sites, on its own ground", () => {
+    const map = mapOf(ID);
+    const ground = (o: MapObject): string | undefined =>
+      cellAt(map, o.x, o.y)?.terrain;
+    const lands: Array<[string, readonly string[]]> = [
+      ["snow", WINTER_SITES],
+      ["volcanic", VOLCANIC_SITES],
+      ["frosting", CANDY_SITES],
+      ["swamp", SWAMP_SITES],
+      ["sand", ["pyramid", "sphinx", "sun-temple", "sunken-tomb"]],
+    ];
+    for (const [land, types] of lands) {
+      for (const type of types) {
+        const sites = ofType(map, type);
+        expect(sites.length, type).toBeGreaterThanOrEqual(1);
+        expect(
+          sites.some((o) => ground(o) === land),
+          type,
+        ).toBe(true);
+      }
+    }
+    expect(ofType(map, "oasis").length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("is composed: guarded treasure clusters, clearings, ponds, banks, artifacts and Mystery Bags", () => {
+    const { map, info } = generated();
+    expect(info.hoards.length).toBeGreaterThanOrEqual(15);
+    expect(info.clearings.length).toBeGreaterThanOrEqual(2);
+    const W = map.width;
+    const starts = startTownsOf(map);
+    const own = info.hoards.filter((h) =>
+      starts.some((t) => info.zoneOf[h.guard] === info.zoneOf[t.y * W + t.x]),
+    );
+    expect(own).toHaveLength(starts.length);
+    const built = mapOf(ID);
+    const count = (test: (o: MapObject) => boolean): number =>
+      built.objects.filter(test).length;
+    expect(count(isMystery)).toBeGreaterThanOrEqual(4);
+    expect(count((o) => o.kind === "artifact")).toBeGreaterThanOrEqual(25);
+    expect(count((o) => o.kind === "bank")).toBeGreaterThanOrEqual(25);
+    expect(count((o) => o.kind === "monster")).toBeGreaterThanOrEqual(150);
+  });
+
+  it("has three neutral towns of the factions the starts are not, the Candy Kingdom's among them", () => {
+    const towns = mapOf(ID).objects.filter(
+      (o) =>
+        o.kind === "town" &&
+        o.data["hold"] === false &&
+        typeof o.data["start"] !== "number",
+    );
+    expect(towns.map((t) => [t.data["name"], t.data["faction"]])).toEqual([
+      ["Treacle Hollow", "candy"],
+      ["Margin's End", "undead"],
+      ["Compass Rose", "humans"],
+    ]);
+    expect(def(ID).factions).toEqual(["humans", "goblins"]);
+  });
+
+  it("lets every start reach every object and all open ground", () => {
     const map = mapOf(ID);
     const walk = walkable(map);
     for (const t of startTownsOf(map)) {

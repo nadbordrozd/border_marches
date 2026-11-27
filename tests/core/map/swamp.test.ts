@@ -189,10 +189,17 @@ describe("swamp zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
     });
   });
 
-  it("keeps swamps off the named maps", () => {
+  it("keeps swamps off the named maps unless they ask for one", () => {
     for (const def of NAMED_MAPS) {
       const cfg = namedConfig(def);
-      expect(cfg.terrain?.swamp?.chance, def.id).toEqual({ S: 0, M: 0, L: 0 });
+      // Bead bzc.129: the Cartographer's Folly asks for one (chance 1).
+      const n = def.gen?.landscapes?.swamp ?? 0;
+      const chance = n > 0 ? 2 ** (n - 1) : 0;
+      expect(cfg.terrain?.swamp?.chance, def.id).toEqual({
+        S: chance,
+        M: chance,
+        L: chance,
+      });
     }
   });
 });

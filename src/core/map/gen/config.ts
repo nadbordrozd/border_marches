@@ -62,6 +62,13 @@ export interface GenConfig {
     startWeight: number;
     /** Size factor of the Hold's zone. */
     holdWeight: number;
+    /**
+     * Bead bzc.129: each start first gets a neutral town in a middle zone
+     * connected to it (the largest such zone), the rest of the towns going
+     * to the deep zones as before. Off on random maps; on a two-player large
+     * map the deep zones are four or more days from either start.
+     */
+    townsBesideStarts: boolean;
   };
 
   /**
@@ -607,6 +614,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     minConnectBorder: 5,
     startWeight: 1.18,
     holdWeight: 0.95,
+    townsBesideStarts: false,
   },
 
   rooms: {

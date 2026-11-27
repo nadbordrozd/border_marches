@@ -287,6 +287,52 @@ the repair runs about 20, 47 and 60 ms). Their fairness stays inside the
 named-map test's bounds (the Ninefold: sites ratio 0.76, fights 0.86,
 start-to-start 1.18).
 
+## 8. Bead bzc.129: the Cartographer's Folly, a terrain showcase
+
+The user: "add another map to showcase all the terrain types". The
+Cartographer's Folly (`cartographers-folly`, Large 72x72, two players: the
+Realm in the north-eastern jungle, the Goblin Horde in the south-western
+meadows) shows every ground: grass, steppe, jungle, badlands, wasteland,
+snow, volcanic, sand, frosting, swamp and water (a sea on the northern
+shore, the desert's twin oasis lakes and ponds), each landscape one region
+of 200 cells or more with its own decorations and sites.
+
+**Today's generator** (`gen.current`). The older named maps keep the
+configuration they were authored on (`NAMED_CONFIG`: legacy clusters, no
+plazas, no Mystery Bags, no lava, candy or swamp sites). This map is drawn on
+the generator's defaults: larger masses, plazas, rare sites first, a way
+round every building, Mystery Bags and every landscape's sites, with one zone
+of each landscape forced (`landscapes`) and only these on top:
+
+- `middleZones: 13`: five landscapes never border each other (sand beside
+  snow reads as a mistake), so they need many wild zones; on the default 8-9
+  of a two-player Large map no seed of 1500 placed all five.
+- `townsBesideStarts` (the generator's new `zones.townsBesideStarts`, off on
+  random maps, which draw as before): each start first gets a neutral town in
+  the largest middle zone connected to it. The generator puts towns in the
+  deepest zones, four or more days from either start on a two-player Large
+  map, where the named-map fairness test wants one within two days.
+- `secondaryShare: [0.14, 0.2]` (was 0.22-0.34): each landscape keeps more of
+  its own ground (snow 211 to 236 cells, sand 219 to 255, lava 212 to 259).
+
+Seed 2853 was picked from about 1200 that place all five landscapes, for its
+spread (a ring of landscapes round the badlands and the Hold, the sea in the
+north) and fairness. Its edits name the neutral towns (Treacle Hollow of the
+Candy Kingdom by the sugar meadow, Margin's End of the Restless beside the
+Realm, Compass Rose of the Realm beside the Horde), put a guarded Mystery Bag
+in the sugar meadow's bare middle, an event beside each start's road and a
+guarded one at the Hold, seven signs (each start's road and each wild land's
+way in), and a guarded Umbrella of State for the Horde's start (it reached
+71200 fight value within two days against 58800 for the Realm's).
+
+Fairness (`startFairness`; the named-map test's bounds in brackets): nearest
+neutral town 1.05 and 1.27 days (< 2, spread 0.21 < 0.75); mine spreads wood
+0.38, ore 0.11, gold 0.43, essence 0.01 (< 0.75); free loot ratio 0.95
+(> 0.85); free mines 2 and 2; sites ratio 0.97 (> 0.75); fights ratio 0.89
+(> 0.85); start to start 6.4 days. 19 treasure clusters (each start's own
+alike), 7 clearings, 2 ponds, 9 Mystery Bags, 34 artifacts, 38 banks, 188
+guards, 74 object types.
+
 [rmg]: https://vcmi.eu/developers/RMG_Description/
 [tpl]: https://vcmi.eu/modders/Random_Map_Template
 [tp]: https://sources.debian.org/src/vcmi/1.6.5%2Bdfsg-2/lib/rmg/modificators/TreasurePlacer.cpp

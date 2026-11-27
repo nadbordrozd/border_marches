@@ -139,6 +139,7 @@ describe(
         "keepers-toll": 1,
         "hourglass-marches": 2,
         "ninefold-landfall": 1,
+        "cartographers-folly": 1,
       };
       for (const { label, map } of all()) {
         const want = pieces[label];

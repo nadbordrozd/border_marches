@@ -124,10 +124,13 @@ describe("candy sites in the generator", { timeout: 120_000 }, () => {
     expect(onFrosting / placed).toBeGreaterThan(0.8);
   });
 
-  it("is switched by objects.candySites: on by default, off on the named maps", () => {
+  it("is switched by objects.candySites: on by default, off on the older named maps", () => {
     expect(DEFAULT_GEN_CONFIG.objects.candySites).toBe(true);
+    // Bead bzc.129: a map drawn on today's generator keeps the default.
     for (const def of NAMED_MAPS)
-      expect(namedConfig(def).objects?.candySites, def.id).toBe(false);
+      expect(namedConfig(def).objects?.candySites, def.id).toBe(
+        def.gen?.current === true ? undefined : false,
+      );
     const [seed, size, players] = WITH[0]!;
     const { map, info } = generateMapWithInfo(seed, {
       size,

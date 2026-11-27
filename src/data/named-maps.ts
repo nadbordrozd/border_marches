@@ -75,6 +75,29 @@ export interface NamedMapGen {
    * named maps.
    */
   composition?: boolean;
+  /**
+   * Bead bzc.129: generated on the generator's current defaults (a map
+   * authored after the biomes): the map composition with its larger masses
+   * and plazas, rare sites first, a way round every building, Mystery Bags
+   * and every landscape's own sites (lava, candy and swamp sites too). Only
+   * `landscapes`, `neutralTowns`, `middleZones`, `townsBesideStarts`,
+   * `secondaryShare` and `density` apply on top; `composition` and the
+   * pocket options are ignored.
+   */
+  current?: boolean;
+  /** Middle zones (neutral towns' included), on a `current` map only. */
+  middleZones?: number;
+  /**
+   * A neutral town beside each start first (the generator's
+   * `zones.townsBesideStarts`), on a `current` map only.
+   */
+  townsBesideStarts?: boolean;
+  /**
+   * Share of each zone in its secondary ground (the generator's
+   * `terrain.secondaryShare`), on a `current` map only: lower keeps each
+   * landscape in one piece.
+   */
+  secondaryShare?: readonly [number, number];
 }
 
 export interface NamedMapDef {
@@ -1733,8 +1756,208 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
   ],
 };
 
+/**
+ * Bead bzc.129, the user: "add another map to showcase all the terrain
+ * types". Two players on a large map generated on today's generator, every
+ * ground in a region of its own.
+ */
+const CARTOGRAPHERS_FOLLY: NamedMapDef = {
+  id: "cartographers-folly",
+  name: "The Cartographer's Folly",
+  intro:
+    "The Royal Cartographer was told to draw every land of the world on one sheet. Short of vellum and of time, he drew them all side by side, and the world, not daring to contradict a royal map, moved to match. The Realm wakes in the north-eastern jungle and the Goblin Horde in the south-western meadows, with every land between them: steppe and red badlands, the grey waste, a frozen west, a desert round twin oasis lakes, a field of lava, the Candy Kingdom's sugar meadow on the northern shore, a swamp in the south, and the sea. Each land keeps its own wonders: the Pyramid and the Sphinx, the Frost Giant's Barrow and the Aurora Spire, the Infernal Forge and the Brimstone Pit, the Gingerbread Cottage and the Sugar Fountain, the Drowned Temple and the Witch's Hut. Three neutral towns of the Restless, the Realm and the Candy Kingdom wait to be taken, and the Warlord's Hold sits where the ink was spilled. Victory: be the last court standing.",
+  size: "L",
+  players: 2,
+  seed: 2853,
+  gen: {
+    current: true,
+    landscapes: { volcanic: 1, winter: 1, desert: 1, candy: 1, swamp: 1 },
+    neutralTowns: [3, 3],
+    middleZones: 13,
+    townsBesideStarts: true,
+    secondaryShare: [0.14, 0.2],
+  },
+  factions: ["humans", "goblins"],
+  setup:
+    "You as The Realm in the north-east, The Goblin Horde (computer) in the south-west; pick any faction and the computer takes the other.",
+  edits: [
+    // Names: one neutral town of each faction the starts are not.
+    {
+      op: "set",
+      id: "town-3",
+      at: [8, 15],
+      data: { faction: "candy", name: "Treacle Hollow" },
+      note: "Name the north-western neutral town, past the snow and below the sugar meadow; a Candy Kingdom town.",
+    },
+    {
+      op: "set",
+      id: "town-4",
+      at: [57, 24],
+      data: { faction: "undead", name: "Margin's End" },
+      note: "Name the neutral town beside the Realm's start, between the jungle and the desert; a Restless town (never the faction of the start beside it).",
+    },
+    {
+      op: "set",
+      id: "town-5",
+      at: [21, 38],
+      data: { faction: "humans", name: "Compass Rose" },
+      note: "Name the neutral town beside the Horde's start, under the snow; a Realm town.",
+    },
+    // The sugar meadow's open middle: a guarded bag.
+    {
+      op: "add",
+      id: "mystery-bag-candy",
+      type: "mystery-bag",
+      at: [22, 7],
+      data: { grade: "wonder", value: 5000 },
+      note: "A Mystery Bag holding a Wonder in the open middle of the sugar meadow, which the generator left bare.",
+    },
+    {
+      op: "guard",
+      id: "monster-candy-bag",
+      at: [22, 8],
+      creature: "gummy-bear",
+      count: 4,
+      value: 5000,
+      guards: ["mystery-bag-candy"],
+      note: "Four gummy bears sit on it (fight value 3428, 69% of 5000): the Candy Kingdom's own guard.",
+    },
+    // A find beside each start's road, the same for both.
+    {
+      op: "add",
+      id: "event-tile-northeast",
+      type: "event-tile",
+      at: [57, 12],
+      data: {
+        text: "A page torn from the Cartographer's atlas lies by the road, pinned under a purse. On it every land in the world is drawn side by side.",
+        prize: { gold: 750, wood: 5 },
+        value: 1250,
+      },
+      note: "First-week find beside the north-eastern road, 0.3 days out.",
+    },
+    {
+      op: "add",
+      id: "event-tile-southwest",
+      type: "event-tile",
+      at: [12, 52],
+      data: {
+        text: "A page torn from the Cartographer's atlas lies by the road, pinned under a purse. On it every land in the world is drawn side by side.",
+        prize: { gold: 750, wood: 5 },
+        value: 1250,
+      },
+      note: "The same find beside the south-western road, 0.3 days out.",
+    },
+    // The contested middle.
+    {
+      op: "add",
+      id: "event-tile-hold",
+      type: "event-tile",
+      at: [34, 37],
+      data: {
+        text: "The Cartographer's last surveyor still measures the Warlord's Hold and will not be interrupted. His clockwork chainmen see to that.",
+        prize: { gold: 2000, xp: 1500 },
+        guard: [{ creature: "winder", count: 14 }],
+        value: 3950,
+      },
+      note: "A guarded event below the Hold: 14 winders (2870) for 2000 gold and 1500 experience.",
+    },
+    // Signs: one on each start's road, one at each wild land's way in.
+    {
+      op: "add",
+      id: "sign-northeast",
+      type: "sign",
+      at: [58, 18],
+      data: {
+        text: "South-west: the desert and its twin oasis lakes, the Sphinx and the Pyramid. South, past the steppe: the lava fields and the Infernal Forge.",
+      },
+      note: "A signpost on the north-eastern road.",
+    },
+    {
+      op: "add",
+      id: "sign-southwest",
+      type: "sign",
+      at: [12, 55],
+      data: {
+        text: "North: Compass Rose, and past it the snow. East: the swamp, where the Witch keeps a hut and the Hag a cauldron.",
+      },
+      note: "A signpost on the south-western road.",
+    },
+    {
+      op: "add",
+      id: "sign-snow",
+      type: "sign",
+      at: [6, 43],
+      data: {
+        text: "THE FROZEN WEST. The Frost Giant's Barrow, the Aurora Spire and the walruses' rookery. Wrap up.",
+      },
+      note: "A sign on the road north into the snow.",
+    },
+    {
+      op: "add",
+      id: "sign-desert",
+      type: "sign",
+      at: [46, 26],
+      data: {
+        text: "THE DESERT. Two lakes, one oasis, one Sphinx with one riddle, and a Pyramid whose king does not take visitors.",
+      },
+      note: "A sign where the road enters the desert.",
+    },
+    {
+      op: "add",
+      id: "sign-swamp",
+      type: "sign",
+      at: [15, 64],
+      data: {
+        text: "THE SWAMP. Mind the leeches. The Drowned Temple is deeper in, and the Witch's Hut is on stilts for a reason.",
+      },
+      note: "A sign where the road enters the swamp.",
+    },
+    {
+      op: "add",
+      id: "sign-candy",
+      type: "sign",
+      at: [17, 16],
+      data: {
+        text: "North: the sugar meadow of the Candy Kingdom, its Gingerbread Cottage, its Sugar Fountain and its Sweet Shop. Do not lick the hills.",
+      },
+      note: "A sign on the road north towards the candy meadow.",
+    },
+    {
+      op: "add",
+      id: "sign-hold",
+      type: "sign",
+      at: [37, 33],
+      data: {
+        text: "The Warlord's Hold: the middle of the Cartographer's sheet, where he spilled the ink.",
+      },
+      note: "A sign beside the Hold.",
+    },
+    // Fair starts: the Realm's start reached more guarded things within two
+    // days (71200 fight value against 58800).
+    {
+      op: "add",
+      id: "loose-artifact-umbrella",
+      type: "loose-artifact",
+      at: [23, 42],
+      data: { artifact: "umbrella-of-state", value: 6000 },
+      note: "An Umbrella of State on the steppe east of Compass Rose, 1.5 days from the Horde's start.",
+    },
+    {
+      op: "guard",
+      id: "monster-umbrella",
+      at: [23, 41],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["loose-artifact-umbrella"],
+      note: "Its guard: 11 sextons (4422).",
+    },
+  ],
+};
+
 export const NAMED_MAPS: readonly NamedMapDef[] = [
   KEEPERS_TOLL,
   HOURGLASS_MARCHES,
   NINEFOLD_LANDFALL,
+  CARTOGRAPHERS_FOLLY,
 ];
