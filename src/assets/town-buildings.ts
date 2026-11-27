@@ -1,5 +1,6 @@
 /**
- * Town-screen art of the three v0.2 factions (bead border_marches-bzc.15,
+ * Town-screen art of the v0.2 factions and the Candy Kingdom (beads
+ * border_marches-bzc.15 and bzc.114,
  * docs/art/classes/towns.md): one 64 x 64 building sprite per building of
  * each faction's tree and one 256 x 224 backdrop per faction. Studio sets
  * `chunky-buildings` (redrawn in the chunky map-town style, bead bzc.98)
@@ -15,12 +16,13 @@
 import type { ImageAsset } from "./manifest";
 
 /** The factions with town-screen art, by their FactionId. */
-export type TownArtFaction = "humans" | "undead" | "goblins";
+export type TownArtFaction = "humans" | "undead" | "goblins" | "candy";
 
 export const TOWN_ART_FACTIONS: readonly TownArtFaction[] = [
   "humans",
   "undead",
   "goblins",
+  "candy",
 ];
 
 /** Side of a building sprite; the building stands bottom-centred, 2 px up. */
@@ -118,6 +120,30 @@ export const TOWN_BUILDING_IDS: Readonly<
     "launch-ramp",
     "great-flinger",
   ],
+  candy: [
+    "village-hall",
+    "town-hall",
+    "city-hall",
+    "candy-cane-fence",
+    "gingerbread-wall",
+    "sugar-glass-keep",
+    "marketplace",
+    "resource-silo",
+    "magic-guild",
+    "tavern",
+    "gingerbread-house",
+    "mint-range",
+    "taffy-ranch",
+    "sugarplum-bower",
+    "gummy-den",
+    "rock-candy-grotto",
+    "bread-oven",
+    "mint-press",
+    "pulling-hooks",
+    "bakery",
+    "larder",
+    "the-four-oclock",
+  ],
 };
 
 /** The fort buildings of each faction, fort level 1 to 3. */
@@ -127,6 +153,7 @@ export const FORT_BUILDINGS: Readonly<
   humans: ["palisade", "keep", "royal-castle"],
   undead: ["iron-railings", "lych-wall", "black-gate"],
   goblins: ["stakes", "scrap-wall", "skull-tower"],
+  candy: ["candy-cane-fence", "gingerbread-wall", "sugar-glass-keep"],
 };
 
 /** The Keystone Hall of each faction. */
@@ -134,6 +161,7 @@ export const KEYSTONE_BUILDINGS: Readonly<Record<TownArtFaction, string>> = {
   humans: "round-table",
   undead: "hall-of-ancestors",
   goblins: "great-flinger",
+  candy: "the-four-oclock",
 };
 
 /**

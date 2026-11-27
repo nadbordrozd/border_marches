@@ -1034,5 +1034,115 @@
         "height": 72
       }
     ]
+  },
+  "candy-fort-s1": {
+    "id": "candy-fort-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "13c76086-dd72-449b-a7cd-0ea165e010d4",
+    "submittedAt": "2026-11-26T23:53:25.792Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute confectionery town filling the whole image width: at the back centre a tall fat tiered-cake palace of gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec drips on every tier, strawberry pink #e2589b roofs with #a8336c shadows and a cuckoo-clock tower on top showing four o'clock, two plump sugar-glass turrets #8fe3e8, crowded round it gingerbread cottages with pink icing roofs and mint #7fd6b5 shutters; across the front a short thick gingerbread wall with icing battlements, in the exact middle a big gate arch of two crossed red and white candy canes #e03a3e between two lollipop towers."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 114101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a cute confectionery town filling the whole image width: at the back centre a tall fat tiered-cake palace of gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec drips on every tier, strawberry pink #e2589b roofs with #a8336c shadows and a cuckoo-clock tower on top showing four o'clock, two plump sugar-glass turrets #8fe3e8, crowded round it gingerbread cottages with pink icing roofs and mint #7fd6b5 shutters; across the front a short thick gingerbread wall with icing battlements, in the exact middle a big gate arch of two crossed red and white candy canes #e03a3e between two lollipop towers. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, purple, violet, gore."
+    },
+    "at": "2026-11-26T23:54:53.031Z",
+    "usageUsd": 0.08037885244687398,
+    "candidates": [
+      {
+        "file": "candy-fort-s1-0.png",
+        "sha256": "a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "candy-camp-a": {
+    "id": "candy-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0e09d6e0-8cf9-4b25-9952-d8fbde268dbf",
+    "submittedAt": "2026-11-26T23:54:53.122Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cosy little sweet hamlet, smaller than a town, about two thirds of the image wide and lower than a palace: at the back centre a fat gingerbread cottage #b86b34 with #7d4420 shadows under a strawberry pink #e2589b roof with #a8336c shadows dripping white royal icing #fff4ec and a round gumdrop chimney, crowded round it little sweet-shop cottages of gingerbread with pink and mint #7fd6b5 icing roofs, gumdrops and a lollipop; across the front a low fence of red and white striped candy canes #e03a3e with a gate arch of two crossed candy canes in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 114111,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a cosy little sweet hamlet, smaller than a town, about two thirds of the image wide and lower than a palace: at the back centre a fat gingerbread cottage #b86b34 with #7d4420 shadows under a strawberry pink #e2589b roof with #a8336c shadows dripping white royal icing #fff4ec and a round gumdrop chimney, crowded round it little sweet-shop cottages of gingerbread with pink and mint #7fd6b5 icing roofs, gumdrops and a lollipop; across the front a low fence of red and white striped candy canes #e03a3e with a gate arch of two crossed candy canes in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, purple, violet, gore, palace, clock, tower, cake, stone wall."
+    },
+    "at": "2026-11-26T23:55:44.515Z",
+    "usageUsd": 0.08036058439148797,
+    "candidates": [
+      {
+        "file": "candy-camp-a-0.png",
+        "sha256": "5bae9079f85d70164cf823ece517cea3bcb1d118e509aa77ca818ec465b742b4",
+        "width": 232,
+        "height": 176
+      }
+    ]
   }
 }

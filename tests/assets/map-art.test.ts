@@ -73,6 +73,8 @@ describe("3x2 towns (xaj.14)", () => {
     expect(
       TOWN_3X2_ASSETS.map((t) => `${t.faction}/${t.stage}`).sort(),
     ).toEqual([
+      "candy/camp",
+      "candy/fort",
       "dinosaur/fort",
       "goblin/camp",
       "goblin/fort",

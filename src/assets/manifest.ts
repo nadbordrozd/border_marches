@@ -1072,8 +1072,8 @@ export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
  */
 export interface Town3x2Asset extends ImageAsset {
   readonly category: "town-3x2";
-  /** Art family: dinosaur (Lost World), goblin (Horde), humans, undead. */
-  readonly faction: "dinosaur" | "goblin" | "humans" | "undead";
+  /** Art family: dinosaur (Lost World), goblin (Horde), humans, undead, candy. */
+  readonly faction: "dinosaur" | "goblin" | "humans" | "undead" | "candy";
   /** "camp" for fort levels 0-1 (a light wall), "fort" for 2-3. */
   readonly stage: "camp" | "fort";
   readonly cols: 3;
@@ -1113,7 +1113,8 @@ function town3x2(
 /**
  * The Lost World town, the goblin Warlord's Hold (also the Horde town's fort
  * stage) and the v0.2 faction towns at 3x2, redrawn as cute, chunky clusters
- * round a central landmark by bead bzc.97 (set chunky-towns).
+ * round a central landmark by bead bzc.97 (set chunky-towns); the Candy
+ * Kingdom's hamlet and palace in the same style (bead bzc.114).
  */
 export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
   town3x2(
@@ -1164,6 +1165,20 @@ export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
     "fort",
     [54, 22, 133, 158],
     "chunky-towns/restless-fort-s1#0",
+  ),
+  town3x2(
+    "candy-hamlet-3x2",
+    "candy",
+    "camp",
+    [24, 35, 194, 145],
+    "chunky-towns/candy-camp-a#0",
+  ),
+  town3x2(
+    "candy-palace-3x2",
+    "candy",
+    "fort",
+    [30, 20, 182, 160],
+    "chunky-towns/candy-fort-s1#0",
   ),
 ];
 

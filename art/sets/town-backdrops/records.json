@@ -163,5 +163,60 @@
         "height": 232
       }
     ]
+  },
+  "candy-backdrop-a": {
+    "id": "candy-backdrop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c5dd2f08-6f1e-4211-8e61-b489ceb1cc1d",
+    "submittedAt": "2026-11-26T23:57:40.785Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-town-backdrop.txt",
+          "text": "Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a sweet fairy-tale candy land after a snowfall of icing sugar. Sky pale strawberry pink #f6c6dc fading to pale mint #cdeee0 at the horizon with two chunky white clouds; on the horizon soft round gumdrop hills in pink #e2589b and mint #7fd6b5 and a tiny far-off sugar-glass castle #8fe3e8; the open ground is calm smooth white royal icing #fff4ec with faint pink #f1d9e2 shadows and a few tiny coloured sprinkles; a pale pink frosting path #f0b8cf comes in from the bottom centre and stops in the middle; at the far left and right edges round swirl lollipop trees and giant red and white candy canes #e03a3e frame the scene."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 256,
+        "height": 232
+      },
+      "no_background": false,
+      "seed": 114201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges. Subject: a sweet fairy-tale candy land after a snowfall of icing sugar. Sky pale strawberry pink #f6c6dc fading to pale mint #cdeee0 at the horizon with two chunky white clouds; on the horizon soft round gumdrop hills in pink #e2589b and mint #7fd6b5 and a tiny far-off sugar-glass castle #8fe3e8; the open ground is calm smooth white royal icing #fff4ec with faint pink #f1d9e2 shadows and a few tiny coloured sprinkles; a pale pink frosting path #f0b8cf comes in from the bottom centre and stops in the middle; at the far left and right edges round swirl lollipop trees and giant red and white candy canes #e03a3e frame the scene. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, town, castle, house, building in the middle, people, character, creature, flag, border, transparent background."
+    },
+    "at": "2026-11-26T23:58:22.510Z",
+    "usageUsd": 0.08,
+    "candidates": [
+      {
+        "file": "candy-backdrop-a-0.png",
+        "sha256": "823e446e2cee738e06bffb0b853058b4017e7124547708ca4886cecdaa459f9f",
+        "width": 256,
+        "height": 232
+      }
+    ]
   }
 }

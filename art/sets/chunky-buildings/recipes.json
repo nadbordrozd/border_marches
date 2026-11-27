@@ -26,6 +26,10 @@
     "inn": {
       "file": "art/masters/map-objects/inn-a-0.png",
       "usage": "copy the palette, the thick dark outline, the pixel size, the warm lit windows and the chunky toy-like shapes; not the layout: draw only the one building described"
+    },
+    "candy": {
+      "file": "art/masters/chunky-towns/candy-fort-s1-0.png",
+      "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
     }
   },
   "defaults": {
@@ -204,6 +208,75 @@
       "seed": 98121,
       "styleImage": "@inn",
       "subject": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Tavern (cosy crooked half-timbered inn with a chimney, warm lit windows and a hanging tankard sign); Village Hall (plump little half-timbered hall with a small bell turret and warm lit windows); Stables (fat half-timbered stable with a hay-loft door, hay bales and a gold horseshoe over the doors); Tithe Barn (big plump half-timbered barn with wheat sheaves and a heap of gold). Colours: cream plaster with dark brown timbers, warm red roof tiles, golden lit windows."
+    },
+    {
+      "id": "candy-s1",
+      "concept": "CANDY sample: village hall, gingerbread house, magic guild, tavern",
+      "bead": "border_marches-bzc.114",
+      "seed": 114301,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Village Hall (a small round iced layer-cake hall, two tiers, a pink frosting roof and a little door); Gingerbread House (the classic gingerbread cottage with an icing-dripped pink roof, studded with gumdrops and a candy-cane door frame); Magic Guild (a tall spire of stacked pastel macarons with a round clock face near the top); Tavern (a cosy gingerbread tea room with a giant pink teapot sign over the door). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b roofs with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-halls-a",
+      "concept": "CANDY: Town Hall, City Hall",
+      "bead": "border_marches-bzc.114",
+      "seed": 114311,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Town Hall (the same layer-cake hall grown: three iced tiers, a pink frosting roof and a cuckoo-clock gable on the front with the clock at four); City Hall (the same hall grown grand: a tall wide tiered cake palace of four iced tiers under a big pink frosting dome with a cherry, and the cuckoo clock). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8.",
+      "negative": "purple, violet, gore",
+      "references": [
+        {
+          "take": "candy-s1#0",
+          "usage": "the same layer-cake village hall: keep its shape, icing, colours and outline, and draw it grown as described"
+        }
+      ]
+    },
+    {
+      "id": "candy-forts-a",
+      "concept": "CANDY: Candy-Cane Fence, Gingerbread Wall, Sugar-Glass Keep",
+      "bead": "border_marches-bzc.114",
+      "seed": 114312,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Candy-Cane Fence (a short curved row of fat red and white candy canes with an arch gate of two crossed candy canes in the middle); Gingerbread Wall (a thick curved gingerbread wall with white icing battlements, gumdrops and a candy-cane arch gate); Sugar-Glass Keep (a fat round pale blue sugar-glass keep inside a short gingerbread wall with icing battlements, a lollipop tower beside it). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-dwell-a",
+      "concept": "CANDY: Mint Range, Taffy Ranch, Sugarplum Bower, Gummy Den",
+      "bead": "border_marches-bzc.114",
+      "seed": 114313,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Mint Range (a gingerbread shed with a mint roof and a big round archery target painted as a red and white peppermint swirl); Taffy Ranch (a chunky pink barn with a big wheel pulling stretchy pink taffy); Sugarplum Bower (a round plump pink plum-shaped bower with a leafy stalk on top and spun-sugar windows); Gummy Den (a wobbly round mound of shiny red jelly with a dark cave mouth). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-dwell-b",
+      "concept": "CANDY: Rock Candy Grotto, Bread Oven, Mint Press, Pulling Hooks",
+      "bead": "border_marches-bzc.114",
+      "seed": 114314,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Rock Candy Grotto (a chunky cave mound of big pink and pale blue sugar crystals with a dark cave mouth); Bread Oven (a fat domed red brick oven with a gingerbread chimney and a warm glowing orange oven door); Mint Press (a squat mint-green press machine with a big crank wheel and a stack of round mints); Pulling Hooks (two big gingerbread posts with brass hooks and a fat loop of stretchy pink taffy between them). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-civic-a",
+      "concept": "CANDY: Marketplace, Resource Silo, Bakery, Larder, The Four O'Clock",
+      "bead": "border_marches-bzc.114",
+      "seed": 114315,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these 5 cute candy kingdom buildings, three takes of each in this order: Marketplace (a gingerbread sweet stall with a pink and white striped awning and big jars of sweets); Resource Silo (a giant glass sugar jar with a cork lid beside a woodpile and an ore cart); Bakery (a gingerbread bakery with a pink roof and a giant pretzel sign); Larder (a tall pink pantry cupboard bursting with jars, its door ajar); The Four O'Clock (a tall gingerbread cuckoo clock tower stopped at four with a teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-reroll-a",
+      "concept": "CANDY re-roll: Candy-Cane Fence, Bread Oven, Mint Press, The Four O'Clock",
+      "bead": "border_marches-bzc.114",
+      "seed": 114316,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Candy-Cane Fence (a chunky round ring of fat red and white candy canes round a small gingerbread gate hut with a pink roof and an arch of two crossed candy canes); Bread Oven (a fat domed red brick oven standing on its own round brick foot, a gingerbread chimney and a glowing orange door); Mint Press (a squat mint-green press with a big crank wheel on top and a stack of round mints in its mouth); The Four O'Clock (a fat stout gingerbread cuckoo-clock tower, a big clock face at four, a pink roof and a giant teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5.",
+      "negative": "purple, violet, gore, slab"
     }
   ],
   "outputs": [
@@ -2058,6 +2131,600 @@
         {
           "op": "pad",
           "width": 37,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/village-hall.png",
+      "from": "candy-s1#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 45,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 45,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/town-hall.png",
+      "from": "candy-halls-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 0,
+          "width": 52,
+          "height": 64
+        },
+        {
+          "op": "pad",
+          "width": 52,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/city-hall.png",
+      "from": "candy-halls-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 2,
+          "width": 60,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/candy-cane-fence.png",
+      "from": "candy-reroll-a#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 62,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/gingerbread-wall.png",
+      "from": "candy-forts-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 0,
+          "width": 62,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/sugar-glass-keep.png",
+      "from": "candy-forts-a#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/marketplace.png",
+      "from": "candy-civic-a#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 2,
+          "width": 61,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/resource-silo.png",
+      "from": "candy-civic-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 60,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/magic-guild.png",
+      "from": "candy-s1#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 1,
+          "width": 32,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 32,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/tavern.png",
+      "from": "candy-s1#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 3,
+          "width": 63,
+          "height": 57
+        },
+        {
+          "op": "pad",
+          "width": 63,
+          "height": 59,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/gingerbread-house.png",
+      "from": "candy-s1#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 58,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/mint-range.png",
+      "from": "candy-dwell-a#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/taffy-ranch.png",
+      "from": "candy-dwell-a#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 63,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 63,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/sugarplum-bower.png",
+      "from": "candy-dwell-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 1,
+          "width": 52,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 52,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/gummy-den.png",
+      "from": "candy-dwell-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 9,
+          "width": 64,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/rock-candy-grotto.png",
+      "from": "candy-dwell-b#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 7,
+          "width": 62,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/bread-oven.png",
+      "from": "candy-reroll-a#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 58,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/mint-press.png",
+      "from": "candy-reroll-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 1,
+          "width": 53,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/pulling-hooks.png",
+      "from": "candy-dwell-b#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 4,
+          "width": 62,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/bakery.png",
+      "from": "candy-civic-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 0,
+          "width": 61,
+          "height": 64
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/larder.png",
+      "from": "candy-civic-a#11",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 1,
+          "width": 54,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 54,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/the-four-oclock.png",
+      "from": "candy-reroll-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 1,
+          "width": 48,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 48,
           "height": 64,
           "anchor": "top"
         },

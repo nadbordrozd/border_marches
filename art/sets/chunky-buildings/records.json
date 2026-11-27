@@ -2916,5 +2916,1026 @@
         "height": 64
       }
     ]
+  },
+  "candy-s1": {
+    "id": "candy-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7a119f1a-5c41-4c86-93f2-e62655eba57a",
+    "submittedAt": "2026-11-26T23:58:22.804Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Village Hall (a small round iced layer-cake hall, two tiers, a pink frosting roof and a little door); Gingerbread House (the classic gingerbread cottage with an icing-dripped pink roof, studded with gumdrops and a candy-cane door frame); Magic Guild (a tall spire of stacked pastel macarons with a round clock face near the top); Tavern (a cosy gingerbread tea room with a giant pink teapot sign over the door). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b roofs with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Village Hall (a small round iced layer-cake hall, two tiers, a pink frosting roof and a little door); Gingerbread House (the classic gingerbread cottage with an icing-dripped pink roof, studded with gumdrops and a candy-cane door frame); Magic Guild (a tall spire of stacked pastel macarons with a round clock face near the top); Tavern (a cosy gingerbread tea room with a giant pink teapot sign over the door). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b roofs with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:00:11.442Z",
+    "usageUsd": 0.0817444729010264,
+    "candidates": [
+      {
+        "file": "candy-s1-0.png",
+        "sha256": "4dadd6fdeb272590a859baa3e6fe6a2631bf06e1eba361a50f527b7f1d5e5bde",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-1.png",
+        "sha256": "a7a30e6131da1cc13881d1b5d80bd4dcbb8425e5e1bea3a158573df9414d5d04",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-2.png",
+        "sha256": "5e2da0d988330e380dddc41871c8946af11bb537285825afea835062b1335b7a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-3.png",
+        "sha256": "c92ca836261320f584dd8b9471f3cf4372d31d8e9d51435ccdcc4bb73de4f790",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-4.png",
+        "sha256": "9d95e11ff036fbe3bb6c47ba0b09b942ccc42c9b14fb85883b5e34031b339dff",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-5.png",
+        "sha256": "4e5f4927ee3b508bb475ad9a5441ee2227d9df3d41d3e302de54506a88a78de1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-6.png",
+        "sha256": "27815420b8f33167efc161e3b1a09df0e973bc05901cc0cfafb38c5c8c180f57",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-7.png",
+        "sha256": "5c6e8a1e022ede6744d176e69fcab5072549f60ea018e82e0ad10651076683f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-8.png",
+        "sha256": "6a8e25d7448a0d5e311529d609ef54e90cade4c28aff5810108f556153a864fe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-9.png",
+        "sha256": "1b4ee20f959083154f4d6750f495db617d181b2ef9dadd45aab6c3fbd650ff7d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-10.png",
+        "sha256": "3414b6530829c84ecbc691063c4d0452ba297d768de987bb2098d0306496e5dd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-11.png",
+        "sha256": "ce932c7391bafd253ca1f8816741a97c35eda5b8bbfdd6ad74fb720c00cd95d0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-12.png",
+        "sha256": "6787dd1cb0ca1a76be0ab99d304ffbd6e30bec3234a7eea3e6eb62e62c8201b2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-13.png",
+        "sha256": "d34321e1d88321acbac73b28ee7ec76711998210bf900dbc65964a79ef0db13f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-14.png",
+        "sha256": "4aa0223c89350bfccc82c3d5322f2752bccd61d917a5e7e33b15f2894e5bcbbb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-s1-15.png",
+        "sha256": "85ad7f42c841cab347ef976ffca21ab8eb0bf2253ca617fdf04360b584c29972",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-halls-a": {
+    "id": "candy-halls-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9c923310-f61d-45e1-93ec-bd818ef0faac",
+    "submittedAt": "2026-11-27T00:01:30.877Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Town Hall (the same layer-cake hall grown: three iced tiers, a pink frosting roof and a cuckoo-clock gable on the front with the clock at four); City Hall (the same hall grown grand: a tall wide tiered cake palace of four iced tiers under a big pink frosting dome with a cherry, and the cuckoo clock). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "reference_images": [
+        {
+          "source": "take chunky-buildings/candy-s1#0 sha256 4dadd6fdeb272590a859baa3e6fe6a2631bf06e1eba361a50f527b7f1d5e5bde",
+          "usage": "the same layer-cake village hall: keep its shape, icing, colours and outline, and draw it grown as described"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114311,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Town Hall (the same layer-cake hall grown: three iced tiers, a pink frosting roof and a cuckoo-clock gable on the front with the clock at four); City Hall (the same hall grown grand: a tall wide tiered cake palace of four iced tiers under a big pink frosting dome with a cherry, and the cuckoo clock). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:03:17.909Z",
+    "usageUsd": 0.08187968715031942,
+    "candidates": [
+      {
+        "file": "candy-halls-a-0.png",
+        "sha256": "68bdcb7a81ef9a843732af80bdbc4c45d8e05120e3d705f7a736015f2c2f5693",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-1.png",
+        "sha256": "3366ab1ae854a8788b2a73bd205b345186c301472570cc727aadf9197ed549c8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-2.png",
+        "sha256": "4cf92d19720b062bbf5f7ee259ca75e22a6d028fc64923dbb87aee9596311601",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-3.png",
+        "sha256": "afc2492ab7da328c83a182c81dfbde49b18b1282c25d73e11b0549d8db702d21",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-4.png",
+        "sha256": "1a72498186078ba52ac58f16684a53bc9e18a2b618eeb00057d468fa60305eeb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-5.png",
+        "sha256": "72831c85459ca95c23e8955c7bce4445bc48ab4c3077eb2b86fd55793e31c5fc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-6.png",
+        "sha256": "241a989d2d7204b8dab29ff27e4375b5c0c06c895f7ca154e57f5f9545b86fef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-7.png",
+        "sha256": "b46794e90730b377ccd79489e1cbd05c22fcec3de7ce082f980f7cffaa8b2d61",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-8.png",
+        "sha256": "313a6ee3070c85df5c40f4395af33af37c4dbb8e9f3156f7dc5dae1d9ee3dec4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-9.png",
+        "sha256": "a5f1c02f5312ec2a229d3b2a92b24061be05d7d098846dc9593044255513ba21",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-10.png",
+        "sha256": "bc4acec74d1c7aeb12575d471c2101b2d23217e5f9f92e9a5909bb6f30e83b11",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-11.png",
+        "sha256": "3853ee6d4454d773ff75c3edb247989b96b9f147c666f9fd8fb60697205b194b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-12.png",
+        "sha256": "9775dc8e9237e39e8dffb42aa8aa90f884458953ba1791719204521eaaddcc7f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-13.png",
+        "sha256": "f08e7e1c594b3abb686f723229b5bd8edf76994a3b65b95e75ea500fd5262b86",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-14.png",
+        "sha256": "fa8a3faee0eca31a0b1eca7045dcd5b9d1373232945e0e0bb54efe2b0b7c2681",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-halls-a-15.png",
+        "sha256": "00a0005c71a13b48f5b8f16fe035de22384b2bbcd5c40fc40600eb090a6bd7bd",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-forts-a": {
+    "id": "candy-forts-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "bbb73b32-d405-467f-9770-37353f5d1957",
+    "submittedAt": "2026-11-27T00:03:18.101Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Candy-Cane Fence (a short curved row of fat red and white candy canes with an arch gate of two crossed candy canes in the middle); Gingerbread Wall (a thick curved gingerbread wall with white icing battlements, gumdrops and a candy-cane arch gate); Sugar-Glass Keep (a fat round pale blue sugar-glass keep inside a short gingerbread wall with icing battlements, a lollipop tower beside it). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114312,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Candy-Cane Fence (a short curved row of fat red and white candy canes with an arch gate of two crossed candy canes in the middle); Gingerbread Wall (a thick curved gingerbread wall with white icing battlements, gumdrops and a candy-cane arch gate); Sugar-Glass Keep (a fat round pale blue sugar-glass keep inside a short gingerbread wall with icing battlements, a lollipop tower beside it). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e and white stripes, mint #7fd6b5, sugar glass #8fe3e8. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:05:06.311Z",
+    "usageUsd": 0.0824016678598192,
+    "candidates": [
+      {
+        "file": "candy-forts-a-0.png",
+        "sha256": "0ab561d769134691a5b88999a1b837f2dceb4375dc39848a2362eedbdb319603",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-1.png",
+        "sha256": "4e7193debeee1168e4aac05edde6d7c989b14f3f810134167cf4956736c1f228",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-2.png",
+        "sha256": "2203a94d3a9877c815dcb102cdfe8443aaef6ba9ce063a90f2def2732164bd69",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-3.png",
+        "sha256": "2e9094daffdc80bd291bfa18ed64a06aa6d75525220b4a55c47717744859d3e1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-4.png",
+        "sha256": "d906063e9e1df2d3b8fdc54c0254d9f9b6e64af71b206c1359cb776bda8abf7c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-5.png",
+        "sha256": "e3975b0b9aaf5ac631069e9692122938fc7e678b726aab93e9c0e6b9b7b16c47",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-6.png",
+        "sha256": "0c3c92916a54e27cc1cafaf39507a555bc71dec0797b8f2b17c7641695650b3f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-7.png",
+        "sha256": "1bbffa2d2ac8d075cb4cfade3a8379a3879b7e8c5e00a215a1f19805d0110af3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-8.png",
+        "sha256": "884f3749822f69e4a48100446fc17e77181421ace0aeb921b3c3ed27a0974347",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-9.png",
+        "sha256": "dd68fea3a20b05f405230e1c38f2165a6f8a98f84ecf0c2f48bdc022b1effe95",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-10.png",
+        "sha256": "7faa8db98fb234df9944d22b908801dbe3d378140743821e43f777270731d7b8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-11.png",
+        "sha256": "e9fd78bd2fced33fe5048b686b5d77d154da491707078998c23048d5038965ca",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-12.png",
+        "sha256": "7d8542e8b8d4ac9e21941f05cf41e287029700fc51ca36fee3209ccdc8b23b91",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-13.png",
+        "sha256": "e1536c232eba56da4b81a0652eddb01b2a9b48b608b86c7bdb08e6eb657e264b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-14.png",
+        "sha256": "e860ef3be350329cf340b9c4e141f7d691c7753d090a532f8412a10abe0114b7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-forts-a-15.png",
+        "sha256": "885a04cff283ca2388b581f1b503e35b0fff509273c20bfc075265129445a970",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-dwell-a": {
+    "id": "candy-dwell-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a08c0a96-5ed5-4dac-938c-60397a5beb69",
+    "submittedAt": "2026-11-27T00:05:06.460Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Mint Range (a gingerbread shed with a mint roof and a big round archery target painted as a red and white peppermint swirl); Taffy Ranch (a chunky pink barn with a big wheel pulling stretchy pink taffy); Sugarplum Bower (a round plump pink plum-shaped bower with a leafy stalk on top and spun-sugar windows); Gummy Den (a wobbly round mound of shiny red jelly with a dark cave mouth). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114313,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Mint Range (a gingerbread shed with a mint roof and a big round archery target painted as a red and white peppermint swirl); Taffy Ranch (a chunky pink barn with a big wheel pulling stretchy pink taffy); Sugarplum Bower (a round plump pink plum-shaped bower with a leafy stalk on top and spun-sugar windows); Gummy Den (a wobbly round mound of shiny red jelly with a dark cave mouth). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b with #a8336c shadows, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:07:51.904Z",
+    "usageUsd": 0.08188019323349,
+    "candidates": [
+      {
+        "file": "candy-dwell-a-0.png",
+        "sha256": "3ead636475343e65c6a7cd2783d9c5726fbc887481749fd7ff5e971332ca0d29",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-1.png",
+        "sha256": "445d71a03251790c306926244fe171aa24151e3d872a6958fbbec68d714f7c79",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-2.png",
+        "sha256": "a5a6039e68a8e01561aa616374b10485efb8a396f1bc2b03fe7e1ffa8c0ab5d9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-3.png",
+        "sha256": "c6734a5fe394dd5cff9b9f984440e283e91834c10d2a16356a3d259d5c93073e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-4.png",
+        "sha256": "c1cbd10e385d84475c4bd4a607b0c524145d3734362a0fc282d300716c1c2e6c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-5.png",
+        "sha256": "45239fe886a8a63729429fdd6082cb1cf2d1404af10f20bc74ce3edd106f4721",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-6.png",
+        "sha256": "7565c7d5f27ebef463880f392434d8491316421a3f62347b39ebbd41b022ecf9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-7.png",
+        "sha256": "3fcf3e0ee96160177bfb0b7cf8af37201c36dd8d2ff7817604511a87b805bd5a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-8.png",
+        "sha256": "5e2aa64c32f6b2391c9fa6245eb0a2201c4d8d197948d01e9e124c5e1d1739df",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-9.png",
+        "sha256": "2b9aa732a46267ff2527a35ea44d57104afa6070760972adbf8bd218be3de45c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-10.png",
+        "sha256": "0f09c9f1fedb97a7d281a69187df1bd463aa48c2d49d1435b28d0e09a7dee6b5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-11.png",
+        "sha256": "23860aa29c206e672cd9a93b10aa044e539dee866a1a3df958bdc58e52fa40d1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-12.png",
+        "sha256": "8ad94275ddc3d2a3a34d06f8e0466a941f6af9293bbe005257fe6fe499ff96b6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-13.png",
+        "sha256": "4147cd683d26d839b48036c1eead8aedb7efe4607df2a2b6d137eb1ce9553b24",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-14.png",
+        "sha256": "e650094592b90f74d2936b696deb1dbd82e67f0a69cc8a155e4b798103138074",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-a-15.png",
+        "sha256": "918a22b4517a2749b222b2450e77fa9941f26369a2af508b8b421513d59b7fde",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-dwell-b": {
+    "id": "candy-dwell-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f785733f-2dc9-48cb-8df7-d6a2b61f569e",
+    "submittedAt": "2026-11-27T00:07:52.064Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Rock Candy Grotto (a chunky cave mound of big pink and pale blue sugar crystals with a dark cave mouth); Bread Oven (a fat domed red brick oven with a gingerbread chimney and a warm glowing orange oven door); Mint Press (a squat mint-green press machine with a big crank wheel and a stack of round mints); Pulling Hooks (two big gingerbread posts with brass hooks and a fat loop of stretchy pink taffy between them). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114314,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Rock Candy Grotto (a chunky cave mound of big pink and pale blue sugar crystals with a dark cave mouth); Bread Oven (a fat domed red brick oven with a gingerbread chimney and a warm glowing orange oven door); Mint Press (a squat mint-green press machine with a big crank wheel and a stack of round mints); Pulling Hooks (two big gingerbread posts with brass hooks and a fat loop of stretchy pink taffy between them). Colours: gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, sugar glass #8fe3e8. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:09:40.621Z",
+    "usageUsd": 0.08217128600014581,
+    "candidates": [
+      {
+        "file": "candy-dwell-b-0.png",
+        "sha256": "22ed280f359d6e6c46c7693124a01363f9fdc320a447c221683d8dd9f9b443ef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-1.png",
+        "sha256": "bc3c6ca1a1755f785515673660bc323b44186874c4cfe71a9562861bbcf71335",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-2.png",
+        "sha256": "fb12c56017d560c5c2a57bfd09af1275b90d28244fc2d7bba7a7e01392722949",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-3.png",
+        "sha256": "33e813f2a937306956182ce9bc3967e65501bf8f95d1dc0b845144b8873911ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-4.png",
+        "sha256": "4d5b3d2743f13c9bb2731fbb5aa7607d855cf3e656bbe0b2a2cf7c181da12691",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-5.png",
+        "sha256": "82ecb74f829a56d69ef2155ee7bdc3cf92e72a713f4e93ce752ccf2b354c0b4c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-6.png",
+        "sha256": "17de775141af2444215f911f929a4987851648d26709886a585ecff9bf786bf0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-7.png",
+        "sha256": "cb97ca755e459f46e20a34a6e8c0bd20157561af4008609000376d2dfae5b570",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-8.png",
+        "sha256": "007834ee827348e56805b853539c555faa067d2535d52a9c5280f66bf585cb7d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-9.png",
+        "sha256": "015a4ed06ee391d9833ade065b9457a4faf60f9cae2473253613d90cb5b947a4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-10.png",
+        "sha256": "29a43145584ac594fe8fd7a6a4b2cf21b36158eff08dcc4a3f9e9b1b134792d7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-11.png",
+        "sha256": "fe1f3bb710aabcd61a2951e95e612cb4b5da90fb1dc78402f8dfffd9935e5882",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-12.png",
+        "sha256": "de19751fce3208990564d4cb95edf45db55286df4474b65fe34c1383f682b175",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-13.png",
+        "sha256": "cf9867089cba04255e4c83e387e4a32749dea87a86f2335f7b9d929cb806d759",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-14.png",
+        "sha256": "39c25884e51a6b44560935c631ad4952585fbe2e3c89a8bddc523a9147dd5aa8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-dwell-b-15.png",
+        "sha256": "723702f579f21d83ff7d6ac2c6989d4c37b91f7156fc6e7165db5dfa4a40eaa9",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-civic-a": {
+    "id": "candy-civic-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "94d92b68-0dd0-4251-8026-e5c2ff7bd95a",
+    "submittedAt": "2026-11-27T00:09:40.771Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 5 cute candy kingdom buildings, three takes of each in this order: Marketplace (a gingerbread sweet stall with a pink and white striped awning and big jars of sweets); Resource Silo (a giant glass sugar jar with a cork lid beside a woodpile and an ore cart); Bakery (a gingerbread bakery with a pink roof and a giant pretzel sign); Larder (a tall pink pantry cupboard bursting with jars, its door ajar); The Four O'Clock (a tall gingerbread cuckoo clock tower stopped at four with a teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114315,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 5 cute candy kingdom buildings, three takes of each in this order: Marketplace (a gingerbread sweet stall with a pink and white striped awning and big jars of sweets); Resource Silo (a giant glass sugar jar with a cork lid beside a woodpile and an ore cart); Bakery (a gingerbread bakery with a pink roof and a giant pretzel sign); Larder (a tall pink pantry cupboard bursting with jars, its door ajar); The Four O'Clock (a tall gingerbread cuckoo clock tower stopped at four with a teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore."
+    },
+    "at": "2026-11-27T00:11:08.812Z",
+    "usageUsd": 0.08167212202813891,
+    "candidates": [
+      {
+        "file": "candy-civic-a-0.png",
+        "sha256": "e9071d2518024cca4aa2b21928971b44d16fd77f2c607cd16e556251c020239f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-1.png",
+        "sha256": "b5fcc2e9769327065d6933832585c203e62a2a736e875e18d3926fcd48cd336f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-2.png",
+        "sha256": "fa1511bd6c1bbb11f91c445aed3415fccef7d83defcaaeac6a899133ad21f644",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-3.png",
+        "sha256": "0975f78f7626dc9601268c836d3d106824aeef075f733b40f6747ae28fbf1bd0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-4.png",
+        "sha256": "276ffe2b54111dc7558b55a5c960caf5a7a2acf3582a2f86ad5d33c73172385f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-5.png",
+        "sha256": "c651bed30ee711411f190ab23e86a0e56b0cf7a26232abb1c98126422872403d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-6.png",
+        "sha256": "12883f5be7d5189544c5e1f1b390f0ea4bcde2fa32769f905125cc6f08928f86",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-7.png",
+        "sha256": "00176007b116af609413fce47228c13f900383744d0ee9ba6b58db53402c615b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-8.png",
+        "sha256": "c97b6c0ad4017eea2a3842c1a6ba32fd0b99eb62078dd39cdf8d4d74cee77420",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-9.png",
+        "sha256": "0c4b817706ae54eaea585630c5b1d7b139c3f40f43a0c4b60b6e54cb8850cc77",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-10.png",
+        "sha256": "92e3106b87520561e090e7432e73ed2bfbf310fd2a18d406a45fcaaa7f3c6e82",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-11.png",
+        "sha256": "13a959f36590feedd0ab1abe5e8453a850243859bfb86a9eedb41a169d657cff",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-12.png",
+        "sha256": "79c0f551882cf89e4bf6281bb972ef9b3c388dac13be7b5c89f0c5e7a8ec08b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-13.png",
+        "sha256": "fdd620c91aeac0a80633224e05ab724e1816968b323e3962d86ff3cca71eec02",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-14.png",
+        "sha256": "148871940ef57520e1ed2913e5b9ec5aaac01f19bee9eac43fef617ffe57346a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-civic-a-15.png",
+        "sha256": "9f4a77be1b8ac511f092b6618457ef2155e11536ff1b02eb0311c0d46df9a221",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "candy-reroll-a": {
+    "id": "candy-reroll-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c6e7eb53-405e-4e2e-896b-d338f4e79833",
+    "submittedAt": "2026-11-27T00:12:13.791Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Candy-Cane Fence (a chunky round ring of fat red and white candy canes round a small gingerbread gate hut with a pink roof and an arch of two crossed candy canes); Bread Oven (a fat domed red brick oven standing on its own round brick foot, a gingerbread chimney and a glowing orange door); Mint Press (a squat mint-green press with a big crank wheel on top and a stack of round mints in its mouth); The Four O'Clock (a fat stout gingerbread cuckoo-clock tower, a big clock face at four, a pink roof and a giant teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 114316,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute candy kingdom buildings, four takes of each in this order: Candy-Cane Fence (a chunky round ring of fat red and white candy canes round a small gingerbread gate hut with a pink roof and an arch of two crossed candy canes); Bread Oven (a fat domed red brick oven standing on its own round brick foot, a gingerbread chimney and a glowing orange door); Mint Press (a squat mint-green press with a big crank wheel on top and a stack of round mints in its mouth); The Four O'Clock (a fat stout gingerbread cuckoo-clock tower, a big clock face at four, a pink roof and a giant teacup on top). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore, slab."
+    },
+    "at": "2026-11-27T00:13:51.446Z",
+    "usageUsd": 0.08197909394900005,
+    "candidates": [
+      {
+        "file": "candy-reroll-a-0.png",
+        "sha256": "71005a467a8c4731b8b28ae62ed7c30955f58674dd235bea320f52a36745c27e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-1.png",
+        "sha256": "2a366a364a9d09036410a20b897cbb196d72b1a7bc46c2a0e67d449c1772fd06",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-2.png",
+        "sha256": "0ee130d76ef05a8bf1904fe48a0f2b86ca99c4a7cc33a5125abd4baa31575496",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-3.png",
+        "sha256": "73fa15ed95af9882d88a4dd850a3588f52491356bfb92f424d333d8de2f45822",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-4.png",
+        "sha256": "99de4a129e507fcab758aec40f6df118cde117e11dcb2f8bbe0615f0f6cde88e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-5.png",
+        "sha256": "176cca4c322ffc93e56ddff03635112af799af80bcc01cc9e4e16631874426ed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-6.png",
+        "sha256": "13c5081143809fe5cd300bce190589f0f4d6aad919f9007fdac92efc6bba6643",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-7.png",
+        "sha256": "3412056150279d719df02cd924452a544a70f5ed519f5499c6056047da66a4a7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-8.png",
+        "sha256": "20b9af4f724132e90fa1930dadc70556bc0b3d7983a51a8bb98d29e6a44cac78",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-9.png",
+        "sha256": "fa394c5b8230b53cab688ae59db0b88e54b7ca88b47a8b4b9ed5ace36bd8cedd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-10.png",
+        "sha256": "fa6ec099f42fbca3f3b5c965ceaed974276ef9b7569878382df918e03ebbbd65",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-11.png",
+        "sha256": "ec47315b9f864df5773442168ab35e868391f2f997b7484a9a9ee05589370dc6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-12.png",
+        "sha256": "59156b8d007e184154dc3d2a0f143d5c00661f56573a5162a90330091da63125",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-13.png",
+        "sha256": "de94cad2dc399b727fe6545ebcb169b8d72e53214595d5a7f164d4f28368982d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-14.png",
+        "sha256": "102548840978af4e5ffc1752a9abe288dd82279c06a62050adfc5f5d60ebf7b2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "candy-reroll-a-15.png",
+        "sha256": "0d685ae77b75e065f41c10f71fc6e3359a08e53371fb8755f8ec42314c158753",
+        "width": 64,
+        "height": 64
+      }
+    ]
   }
 }

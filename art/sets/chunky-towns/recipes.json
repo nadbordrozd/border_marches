@@ -197,6 +197,20 @@
       "styleImage": "@styleRealm",
       "subject": "Subject: a tiny cosy neutral hamlet filling most of the image: three plump cottages with golden straw thatch roofs and cream plaster walls huddled round a little stone well, a stacked woodpile and a small barn with a warm red-brown roof #a8492f at the back centre; a dark doorway at the bottom centre.",
       "negative": "castle, wall, keep, tower"
+    },
+    {
+      "id": "candy-fort-s1",
+      "concept": "CANDY CONFECTIONERY (fort 2-3) sample",
+      "seed": 114101,
+      "subject": "Subject: a cute confectionery town filling the whole image width: at the back centre a tall fat tiered-cake palace of gingerbread #b86b34 with #7d4420 shadows, white royal icing #fff4ec drips on every tier, strawberry pink #e2589b roofs with #a8336c shadows and a cuckoo-clock tower on top showing four o'clock, two plump sugar-glass turrets #8fe3e8, crowded round it gingerbread cottages with pink icing roofs and mint #7fd6b5 shutters; across the front a short thick gingerbread wall with icing battlements, in the exact middle a big gate arch of two crossed red and white candy canes #e03a3e between two lollipop towers.",
+      "negative": "purple, violet, gore"
+    },
+    {
+      "id": "candy-camp-a",
+      "concept": "CANDY SWEET HAMLET (fort 0-1)",
+      "seed": 114111,
+      "subject": "Subject: a cosy little sweet hamlet, smaller than a town, about two thirds of the image wide and lower than a palace: at the back centre a fat gingerbread cottage #b86b34 with #7d4420 shadows under a strawberry pink #e2589b roof with #a8336c shadows dripping white royal icing #fff4ec and a round gumdrop chimney, crowded round it little sweet-shop cottages of gingerbread with pink and mint #7fd6b5 icing roofs, gumdrops and a lollipop; across the front a low fence of red and white striped candy canes #e03a3e with a gate arch of two crossed candy canes in the exact middle.",
+      "negative": "purple, violet, gore, palace, clock, tower, cake, stone wall"
     }
   ],
   "outputs": [
@@ -430,6 +444,60 @@
       "from": "village-a#3",
       "width": 72,
       "height": 72
+    },
+    {
+      "path": "public/assets/towns/candy-hamlet-3x2.png",
+      "from": "candy-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 14,
+          "width": 232,
+          "height": 145
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 149,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/candy-palace-3x2.png",
+      "from": "candy-fort-s1#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 232,
+          "height": 160
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 164,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
     }
   ]
 }

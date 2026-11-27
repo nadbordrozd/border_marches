@@ -4,7 +4,9 @@ Status: draft (2026-11-24, bead `border_marches-bzc.15`; orchestrator call).
 Map towns redrawn cute and chunky on 2026-11-26 (bead `border_marches-bzc.97`,
 see [Map town direction](#map-town-direction-bzc97)); town-screen buildings
 redrawn in the same style on 2026-11-26 (bead `border_marches-bzc.98`, see
-[Town-screen buildings](#town-screen-buildings-bzc98)). Specialises
+[Town-screen buildings](#town-screen-buildings-bzc98)); the Candy Kingdom's
+town art added in the same style on 2026-11-27 (bead `border_marches-bzc.114`,
+see [Candy Kingdom town art](#candy-kingdom-town-art-bzc114)). Specialises
 [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction towns: their
 map sprites and their town-screen art (building sprites and backdrops).
 
@@ -83,15 +85,58 @@ history and masters but no longer derives game files. The backdrops
 (`town-backdrops`) already match the style (thick outlines, flat colours)
 and are kept.
 
+## Candy Kingdom town art (bzc.114)
+
+The fourth faction ([FACTION_CANDY.md](../../design/FACTION_CANDY.md#10-art))
+follows the two sections above with no new rule; its calls:
+
+- **Map towns.** Fort stage (`candy-palace-3x2`): a tall iced tiered-cake
+  palace with a pink-roofed cuckoo-clock tower and two sugar-glass turrets,
+  gingerbread cottages with pink roofs and mint shutters packed round it, a
+  thick gingerbread wall with icing battlements and the gate of two crossed
+  candy canes between two lollipops. Camp stage (`candy-hamlet-3x2`): a fat
+  gingerbread cottage with an icing-dripped pink roof and a gumdrop chimney
+  among pink- and mint-roofed sweet-shop cottages behind a candy-cane fence
+  with the crossed-cane gate; no clock, no palace (written out with the
+  negatives `palace, clock, tower, cake, stone wall`). Both first takes, style
+  image the roadside inn as for the other towns.
+- **Backdrop.** The native snow drawn as icing: a pale pink sky fading to
+  mint, pink and mint gumdrop hills and a tiny sugar-glass castle on the
+  horizon, icing-white ground with faint pink shadows and sprinkles, a pink
+  frosting path, lollipop trees, candy canes and iced gingerbread mounds at
+  the edges; style image the accepted Candy fort town.
+- **Buildings.** Style image the Candy fort town (`@candy`). The halls are
+  one gingerbread layer cake growing (two tiers; three tiers with a
+  cuckoo-clock gable; three wide tiers under a pink frosting dome with a
+  cherry), the grown stages with the village hall as reference image. A
+  pink-and-cream cake village hall (`candy-s1#0`) was accepted first and then
+  replaced by the gingerbread one (`candy-s1#1`) because the grown halls came
+  out in gingerbread. The fort family grows from a candy-cane fence to a
+  crenellated gingerbread wall to a sugar-glass keep inside that wall.
+  Re-rolled once (`candy-reroll-a`, negative `slab`): the first fence takes
+  were a thin zigzag of canes (asked again as a ring of canes with the
+  crossed-cane arch), every first oven and press stood on a gingerbread
+  slab, and the first Four O'Clock was a thin grandfather clock. A gummy
+  den with teeth was rejected: nothing in the art eats anyone.
+  Two buildings must not share a silhouette: cakes (halls), a cottage
+  (Gingerbread House), a macaron spire (Magic Guild), a clock tower (the Four
+  O'Clock). Negatives `purple, violet`: sugarplum purple stays on the
+  creature, so the town never reads as the Restless.
+- **Lookups.** The faction id `candy` (and the name `candy-kingdom`) is
+  registered in `townArt`, `buildingArt` and `townBackdrop`; its building
+  ids are FACTION_CANDY.md section 9 in kebab case, `the-four-oclock` the
+  Keystone Hall, `candy-cane-fence`, `gingerbread-wall` and
+  `sugar-glass-keep` fort 1-3.
+
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
 | --- | --- | --- | --- | --- |
-| Map town, camp stage (fort 0-1) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp}-3x2.png` | `townArt(faction, fortLevel)` |
-| Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, camp stage (fort 0-1) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp,candy-hamlet}-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard,candy-palace}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
 | Lost World town, 3x2 | 240 x 184 | `chunky-towns` | `public/assets/towns/dinosaur-town-3x2.png` | `town3x2Asset(obj)` |
 | Level towns (Lost World, goblin; levels 1-3), neutral village | 88 x 96, 96 x 100, 96 x 104; 72 x 72 | `chunky-towns` | `public/assets/towns/{dinosaur,goblin}-city-{1,2,3}.png`, `village.png` | `townAsset(obj)`, the Lost World town screen |
-| Building sprite, one per building of each tree (22 x 3) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
+| Building sprite, one per building of each tree (22 x 4) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
 | Town-screen backdrop, one per faction | 256 x 224 (shown x2) | `town-backdrops` | `public/assets/towns/backdrops/<faction>.png` | `townBackdrop(faction)` |
 
 The lookups are in `src/assets/town-art.ts`; the data lists (building ids per
@@ -112,6 +157,7 @@ role aliases.
 | Realm (`humans`) | cream limestone `#e6d8b4` / `#b3a07a`, white plaster with dark timbers, tabard blue `#2f6fd0` / `#1f4a8f` and red-brown `#a8492f` roofs | a white chapel with a blue steeple among packed red-roofed cottages behind a plank fence and a little blue-roofed gate / a fat blue-coned keep among packed timber houses behind a thick crenellated wall with a twin-towered gatehouse |
 | Restless (`undead`) | slate `#5b5866` / `#3a3842`, shroud violet `#7a4fb5` / `#4e2f7a` roofs, bone white `#d8d0bc`, black iron; spooky-cute, never gory | a little violet-roofed chapel among crypts, a gravedigger's cottage and tombstones behind iron railings / a tall crooked slate cathedral with a manor and a bone-white domed mausoleum behind a slate wall with a black iron gate |
 | Horde (`goblins`) | riveted tin `#b8bcc0` / `#7d8288`, hazard yellow `#f2c230` roofs, sharpened logs `#b8733a`, tawny spotted hide | a big spotted hide tent among yellow-roofed tin shacks behind a stake fence with a horned-skull gate / the Warlord's Hold: a tall tin boss hall and a lookout tower behind a stake wall |
+| Candy Kingdom (`candy`) | gingerbread `#b86b34` / `#7d4420`, royal icing `#fff4ec`, strawberry pink `#e2589b` / `#a8336c` roofs, candy-cane red `#e03a3e` and white stripes, mint `#7fd6b5`, sugar glass `#8fe3e8`; no purple | a fat gingerbread cottage with an icing-dripped pink roof among sweet-shop cottages behind a candy-cane fence with a crossed-cane gate / a tiered-cake palace with a cuckoo-clock tower and sugar-glass turrets behind a gingerbread wall with the crossed-cane gate between lollipops |
 | Lost World (`lost-world`) | tawny thatch, tawny hide with dark brown spots, cream bone, red-orange paint, basalt | one 3x2 stage: a huge thatched longhouse among plump huts behind a log fence with a dinosaur-skull gate; levels 1-3 grow from three huts round a totem |
 
 ## Geometry
@@ -137,7 +183,8 @@ role aliases.
   provider framed two of them with white rows) to 256 x 224, drawn at x2
   (512 x 448) behind the town
   picture; the sky and horizon fill the top quarter, the native ground
-  (grass, wasteland, badlands) the rest, with scenery only at the edges.
+  (grass, wasteland, badlands, icing snow) the rest, with scenery only at
+  the edges.
 
 ## Readability
 

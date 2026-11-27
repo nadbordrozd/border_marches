@@ -1598,5 +1598,240 @@
     "verdict": "REJECTED",
     "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
     "at": "2026-11-26T22:12:19.987Z"
+  },
+  "candy-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: cute pink-and-cream cake, but superseded by #1 so the hall family reads as one building: the grown Town and City Hall came out in gingerbread tiers",
+    "at": "2026-11-27T00:04:56.263Z"
+  },
+  "candy-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "gingerbread-house: the classic gingerbread cottage under an icing-dripped pink roof studded with gumdrops, candy-cane corner posts and door frame; a cottage, apart from the cake halls",
+    "at": "2026-11-27T00:01:01.451Z"
+  },
+  "candy-s1#10": {
+    "verdict": "ACCEPTED",
+    "notes": "magic-guild: a spire of stacked pink, cream and mint macarons with a clock face and three star wands on top; unlike the cakes and the cottage",
+    "at": "2026-11-27T00:01:01.502Z"
+  },
+  "candy-s1#14": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern: a twin-gabled gingerbread tea room under a pink roof with a giant pink teapot sign on top, peppermint round windows and warm lit windows; nothing under it",
+    "at": "2026-11-27T00:01:01.552Z"
+  },
+  "candy-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "Tavern: grey ground plate under the building",
+    "at": "2026-11-27T00:01:01.601Z"
+  },
+  "candy-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: detached sparkle specks round the spire",
+    "at": "2026-11-27T00:01:01.650Z"
+  },
+  "candy-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: thin macaron pillar, less chunky than #10",
+    "at": "2026-11-27T00:01:01.699Z"
+  },
+  "candy-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "Gingerbread House: brown roof, no pink frosting; reads plain",
+    "at": "2026-11-27T00:01:01.752Z"
+  },
+  "candy-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: cream swirl cake, no pink frosting roof",
+    "at": "2026-11-27T00:01:01.802Z"
+  },
+  "candy-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall: a small two-tier gingerbread layer cake with white icing drips, a strawberry-iced top and a candy-cane door; the start of the hall family (Town and City Hall grow from it)",
+    "at": "2026-11-27T00:05:02.219Z"
+  },
+  "candy-halls-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall: the same gingerbread cake hall grown to three iced tiers with mint gumdrops, a candy-cane door and a pink-roofed cuckoo-clock gable on top; one building with the village hall",
+    "at": "2026-11-27T00:05:02.271Z"
+  },
+  "candy-halls-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall: the hall grown grand: three wide gingerbread tiers under a big strawberry frosting dome with a cherry, the cuckoo clock and candy-cane pillars; dome apart from the town hall's gable",
+    "at": "2026-11-27T00:05:02.326Z"
+  },
+  "candy-halls-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: red piping lines on the base tier read as stray lines",
+    "at": "2026-11-27T00:05:02.380Z"
+  },
+  "candy-halls-a#8": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: the dome sits low and lopsided, clock squeezed under it",
+    "at": "2026-11-27T00:05:02.431Z"
+  },
+  "candy-forts-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "gingerbread-wall: a thick curved gingerbread wall with icing-capped battlements, piping swirls and gumdrops and a candy-cane arch gate; chunky, the middle of the fort family",
+    "at": "2026-11-27T00:06:09.685Z"
+  },
+  "candy-forts-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "sugar-glass-keep: a fat pale-blue sugar-glass domed keep inside a short iced gingerbread wall, a pink candy-cane arch gate and a swirl lollipop tower; the wall grown into a keep",
+    "at": "2026-11-27T00:06:09.787Z"
+  },
+  "candy-forts-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Candy-Cane Fence: a thin diagonal zigzag of canes with no clear gate; spindly at 64 px (all five fence takes alike), re-rolled as a ring round a gate hut",
+    "at": "2026-11-27T00:06:09.890Z"
+  },
+  "candy-forts-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Sugar-Glass Keep: the square wall sits like a plate under the keep",
+    "at": "2026-11-27T00:06:09.996Z"
+  },
+  "candy-forts-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Gingerbread Wall: plain slab, less character than #7",
+    "at": "2026-11-27T00:06:10.102Z"
+  },
+  "candy-dwell-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "mint-range: a gingerbread shed under an icing-dripped mint roof with a big red and white peppermint-swirl archery target on a post; chunky, reads at 64 px",
+    "at": "2026-11-27T00:11:55.887Z"
+  },
+  "candy-dwell-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "taffy-ranch: a pink barn with an iced gingerbread roof, a big wheel pulling a pink taffy ribbon; chunky and cute",
+    "at": "2026-11-27T00:11:55.938Z"
+  },
+  "candy-dwell-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "sugarplum-bower: a round plump pink plum with green leaves and a stalk on top, round windows and a little door; no purple, apart from the cakes",
+    "at": "2026-11-27T00:11:55.987Z"
+  },
+  "candy-dwell-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "gummy-den: a wobbly glossy red jelly mound with a dark cave mouth; friendly, no teeth",
+    "at": "2026-11-27T00:11:56.039Z"
+  },
+  "candy-dwell-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "rock-candy-grotto: a mound of big pink and pale blue sugar crystals round a dark cave mouth; crystals unlike the jelly den",
+    "at": "2026-11-27T00:11:56.091Z"
+  },
+  "candy-dwell-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "pulling-hooks: two iced gingerbread posts with brass hooks and a fat drooping loop of pink taffy between them",
+    "at": "2026-11-27T00:11:56.145Z"
+  },
+  "candy-civic-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace: a gingerbread sweet stall under a pink and white striped awning, shelves and jars of sweets and a till; chunky",
+    "at": "2026-11-27T00:11:56.199Z"
+  },
+  "candy-civic-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo: a giant glass sugar jar with a cork lid beside a log pile and a cart of ore; reads at 64 px",
+    "at": "2026-11-27T00:11:56.254Z"
+  },
+  "candy-civic-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "bakery: a two-storey gingerbread bakery under pink icing roofs with giant golden pretzel signs; apart from the Gingerbread House cottage",
+    "at": "2026-11-27T00:11:56.309Z"
+  },
+  "candy-civic-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "larder: a tall strawberry-pink pantry cupboard, its doors flung open on shelves of jars",
+    "at": "2026-11-27T00:11:56.367Z"
+  },
+  "candy-dwell-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Gummy Den: a mouth of teeth reads as eating; the Kingdom's sinister side stays out of the art",
+    "at": "2026-11-27T00:11:56.423Z"
+  },
+  "candy-dwell-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Gummy Den: detached jelly drips at the foot (parts of 15-19 px)",
+    "at": "2026-11-27T00:11:56.479Z"
+  },
+  "candy-dwell-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Mint Range: the target is a round window, not an archery butt; #1 clearer",
+    "at": "2026-11-27T00:11:56.535Z"
+  },
+  "candy-dwell-b#4": {
+    "verdict": "REJECTED",
+    "notes": "Bread Oven: stands on a gingerbread slab (all four oven takes do); re-rolled",
+    "at": "2026-11-27T00:11:56.590Z"
+  },
+  "candy-dwell-b#9": {
+    "verdict": "REJECTED",
+    "notes": "Mint Press: scattered mints round its foot read as ground clutter (detached 58 px pile); re-rolled",
+    "at": "2026-11-27T00:11:56.646Z"
+  },
+  "candy-dwell-b#10": {
+    "verdict": "REJECTED",
+    "notes": "Mint Press: stands on a gingerbread slab",
+    "at": "2026-11-27T00:11:56.704Z"
+  },
+  "candy-dwell-b#3": {
+    "verdict": "REJECTED",
+    "notes": "Rock Candy Grotto: brown mound, the crystals are small; #1 clearer",
+    "at": "2026-11-27T00:11:56.761Z"
+  },
+  "candy-civic-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Bakery: a gingerbread cottage like the Gingerbread House; silhouettes would clash",
+    "at": "2026-11-27T00:11:56.823Z"
+  },
+  "candy-civic-a#13": {
+    "verdict": "REJECTED",
+    "notes": "The Four O'Clock: a thin grandfather clock, not a stout tower for the Keystone Hall; re-rolled",
+    "at": "2026-11-27T00:11:56.880Z"
+  },
+  "candy-civic-a#12": {
+    "verdict": "REJECTED",
+    "notes": "The Four O'Clock: no teacup on top",
+    "at": "2026-11-27T00:11:56.941Z"
+  },
+  "candy-reroll-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "candy-cane-fence: a ring of fat red and white candy canes on a low iced gingerbread kerb with an arch of two crossed candy canes at the front; the lightest stage of the fort family, apart from the wall",
+    "at": "2026-11-27T00:14:15.600Z"
+  },
+  "candy-reroll-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "bread-oven: a fat domed red brick oven with icing seams on its own round brick foot, a chimney and a glowing orange door; the foot is the oven's own brickwork, no slab",
+    "at": "2026-11-27T00:14:15.655Z"
+  },
+  "candy-reroll-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "mint-press: a squat mint-green press with a big crank wheel on top, a gear on its side and a stack of round mints coming out of its mouth; no slab",
+    "at": "2026-11-27T00:14:15.712Z"
+  },
+  "candy-reroll-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "the-four-oclock: a stout gingerbread cuckoo-clock tower under a pink roof, a big clock face at four and a giant pink teacup on top; taller and narrower than the halls, unlike the cake and cottage silhouettes",
+    "at": "2026-11-27T00:14:15.770Z"
+  },
+  "candy-reroll-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Candy-Cane Fence: the ring is an iced gingerbread wall with canes on top, too close to the Gingerbread Wall stage",
+    "at": "2026-11-27T00:14:15.829Z"
+  },
+  "candy-reroll-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Candy-Cane Fence: a plain gingerbread ring, no candy canes",
+    "at": "2026-11-27T00:14:15.886Z"
+  },
+  "candy-reroll-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Bread Oven: plain brown dome, reads as a pudding not an oven (no door glow)",
+    "at": "2026-11-27T00:14:15.945Z"
+  },
+  "candy-reroll-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Mint Press: brown-red front, off the mint colour",
+    "at": "2026-11-27T00:14:16.004Z"
   }
 }

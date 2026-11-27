@@ -13,5 +13,10 @@
     "verdict": "ACCEPTED",
     "notes": "Horde backdrop: hazy orange sky, red mesas and smoke plumes, calm red regolith with straw tufts, a dusty track, junk heaps, skulls and a signpost at the edges; the white rows at the top and bottom are cropped away (rows 4-227 kept)",
     "at": "2026-11-24T23:17:10.066Z"
+  },
+  "candy-backdrop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Candy backdrop: pale pink sky fading to mint with chunky clouds, pink and mint gumdrop hills and a tiny sugar-glass castle on the horizon, calm icing-white ground with faint pink shadows and a few sprinkles, a pink frosting path from the bottom, lollipop trees, candy canes and iced gingerbread mounds only at the edges; no provider frame (cropped to rows 4-227 like the others)",
+    "at": "2026-11-27T00:01:01.353Z"
   }
 }

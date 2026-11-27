@@ -43,7 +43,7 @@ describe("town building art coverage", () => {
         ]),
       );
     }
-    expect(BUILDING_ART_ASSETS).toHaveLength(66);
+    expect(BUILDING_ART_ASSETS).toHaveLength(88);
     for (const asset of [...BUILDING_ART_ASSETS, ...TOWN_BACKDROP_ASSETS]) {
       expect(existsSync(join(ROOT, "public", asset.path))).toBe(true);
       expect(assetByKey(asset.key)).toBe(asset);
@@ -73,6 +73,12 @@ describe("townArt", () => {
       "horde-warcamp-3x2",
       "goblin-hold-3x2",
       "goblin-hold-3x2",
+    ]);
+    expect([0, 1, 2, 3].map((f) => key("candy", f))).toEqual([
+      "candy-hamlet-3x2",
+      "candy-hamlet-3x2",
+      "candy-palace-3x2",
+      "candy-palace-3x2",
     ]);
   });
 
@@ -117,6 +123,13 @@ describe("buildingArt", () => {
     expect(buildingArt("goblins", "keystone-hall")?.building).toBe(
       "great-flinger",
     );
+    expect(buildingArt("candy", "fort-3")?.building).toBe("sugar-glass-keep");
+    expect(buildingArt("candy", "The Four O'Clock")?.building).toBe(
+      "the-four-oclock",
+    );
+    expect(buildingArt("candy", "keystone-hall")?.building).toBe(
+      "the-four-oclock",
+    );
   });
 
   it("returns null without art instead of throwing", () => {
@@ -133,6 +146,7 @@ describe("townBackdrop", () => {
     expect(townBackdrop("humans")?.key).toBe("town-backdrop-humans");
     expect(townBackdrop("Restless")?.key).toBe("town-backdrop-undead");
     expect(townBackdrop("goblins")?.key).toBe("town-backdrop-goblins");
+    expect(townBackdrop("candy")?.key).toBe("town-backdrop-candy");
     expect(townBackdrop("lost-world")).toBeNull();
     expect(townArtFaction("lost-world")).toBeUndefined();
   });

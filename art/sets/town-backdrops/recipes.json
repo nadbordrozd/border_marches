@@ -42,6 +42,17 @@
         "usage": "copy the palette, outline thickness, shading and pixel size only"
       },
       "subject": "Subject: a hot scrappy goblin badlands. Sky warm hazy yellow-orange #f2c48a with a few chunky dust clouds; on the horizon flat-topped red sandstone mesas #a85a3a and two thin smoke plumes; the open ground is calm red-orange regolith #b56c46 with #93553a shadows, a few small rocks and dry straw tufts #d3c176; a dusty track #c98a5e comes in from the bottom centre and stops in the middle; at the far left and right edges heaps of junk, old tin sheets, cattle skulls and a leaning wooden signpost frame the scene."
+    },
+    {
+      "id": "candy-backdrop-a",
+      "concept": "CANDY BACKDROP (snow as icing sugar)",
+      "bead": "border_marches-bzc.114",
+      "seed": 114201,
+      "styleImage": {
+        "file": "art/masters/chunky-towns/candy-fort-s1-0.png",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "subject": "Subject: a sweet fairy-tale candy land after a snowfall of icing sugar. Sky pale strawberry pink #f6c6dc fading to pale mint #cdeee0 at the horizon with two chunky white clouds; on the horizon soft round gumdrop hills in pink #e2589b and mint #7fd6b5 and a tiny far-off sugar-glass castle #8fe3e8; the open ground is calm smooth white royal icing #fff4ec with faint pink #f1d9e2 shadows and a few tiny coloured sprinkles; a pale pink frosting path #f0b8cf comes in from the bottom centre and stops in the middle; at the far left and right edges round swirl lollipop trees and giant red and white candy canes #e03a3e frame the scene."
     }
   ],
   "outputs": [
@@ -62,6 +73,13 @@
     {
       "path": "public/assets/towns/backdrops/goblins.png",
       "from": "horde-backdrop-a#0",
+      "width": 256,
+      "height": 224,
+      "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]
+    },
+    {
+      "path": "public/assets/towns/backdrops/candy.png",
+      "from": "candy-backdrop-a#0",
       "width": 256,
       "height": 224,
       "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]

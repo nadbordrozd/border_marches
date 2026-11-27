@@ -109,8 +109,8 @@ describe("v0.2 faction data", () => {
     expect(FACTIONS.find((f) => f.id === "lost-world")?.available).toBe(false);
   });
 
-  it("every building of the three trees has town-screen art", () => {
-    for (const faction of ["humans", "undead", "goblins"]) {
+  it("every building of the four trees has town-screen art", () => {
+    for (const faction of ["humans", "undead", "goblins", "candy"]) {
       for (const id of townTree(faction)!.order)
         expect(buildingArt(faction, id), `${faction} ${id}`).not.toBeNull();
     }
