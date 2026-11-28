@@ -15,6 +15,18 @@ const SPARE = "spare take: its subject is covered by a clearer accepted take of 
 /** set -> recipe -> { picks: { id: [candidate, reason] }, notes: { candidate: reason } } */
 export const PICKS = {
   "icons-spells": {
+    // bead border_marches-bzc.159: the naval spells and Seafaring (NAVAL 7)
+    "naval-a": {
+      picks: {
+        "call-the-boat": [2, "a tan rowing boat with a blue sail and a brass hand bell over it; the bell says it is being called"],
+        "scuttle": [11, "a light wooden boat going down nose up with a hole and bubbles; the pale wood stays visible on a dark panel"],
+        "lily-road": [27, "bright lily pads with a pink water lily, crisp on light and dark"],
+        "fair-wind": [32, "a full white sail with a blue swirl behind it: wind in a sail, not Gust's cloud"],
+        "tidal-wave": [44, "a big curling blue wave with a white crest"],
+        "skill:seafaring": [57, "a golden-brown ship's wheel whose spokes show on dark; not the Trailcraft compass"],
+      },
+      notes: { 54: "dark wheel sinks on a dark panel", 56: "dark wheel sinks on a dark panel", 58: "dark wheel sinks on a dark panel", 63: "dark wheel sinks on a dark panel" },
+    },
     "bloom-a": {
       picks: {
         poultice: [0, "rolled bandage with a herb leaf, clear at 1x"],
@@ -102,6 +114,26 @@ export const PICKS = {
     },
   },
   "icons-artifacts": {
+    // bead border_marches-bzc.159: the eight sea artifacts (NAVAL 7.4)
+    "sea-a": {
+      picks: {
+        "captains-tricorne": [5, "navy tricorne with gold braid and a tall white feather, readable on dark"],
+        "brass-sextant": [14, "bright brass arc frame with its little scope; unlike the Spyglass tube"],
+        "mermaids-comb": [16, "pink shell comb with a pearl"],
+        "ship-in-a-bottle": [20, "a corked bottle on its side with a white-sailed ship inside"],
+        "ships-anchor": [37, "chunky blue-grey anchor wound with rope, thick enough to read on dark"],
+        "conch-of-the-deep": [44, "spiral conch with a glossy pink mouth"],
+        "the-drowned-mans-locket": [61, "silver oval locket wrapped in pale seaweed; not the gold Sealing-Wax Locket"],
+      },
+      notes: { 48: "a near copy of the Tin Sabre", 50: "a near copy of the Tin Sabre", 51: "too close to the Tin Sabre", 52: "a near copy of the Tin Sabre", 53: "a scarf without a sword", 54: "the bandana is skewered on the blade", 58: "a bandana without a sword", 59: "a bandana without a sword" },
+    },
+    // bead border_marches-bzc.159: a re-roll of the Corsair's Cutlass
+    "sea-cutlass-b": {
+      picks: {
+        "corsairs-cutlass": [9, "two crossed broad cutlasses tied with a red knot: pirate steel, plainly not the single Tin Sabre"],
+      },
+      notes: { 0: "a gold shell lamp: no blade", 2: "a near copy of the Tin Sabre", 14: "a bandana skewered on the blade", 1: "crossed cutlasses without the red knot" },
+    },
     "trinkets-a": {
       picks: {
         "tin-sabre": [0, "plain curved grey sabre"],

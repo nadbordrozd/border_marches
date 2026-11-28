@@ -464,6 +464,21 @@ export function isWaterCell(map: GameMap, x: number, y: number): boolean {
   return map.cells[y * map.width + x]?.terrain === "water";
 }
 
+/**
+ * Whether a planned step crosses water on foot, on Lily Road's pads (bead
+ * bzc.159: the path preview draws a pad there): the hero walks onto a
+ * water cell, neither afloat nor boarding, and does not stop short of it
+ * (an attack or a pickup step leaves the hero where it was).
+ */
+export function isLilyStep(map: GameMap, step: PathStep): boolean {
+  return (
+    step.afloat !== true &&
+    step.board === undefined &&
+    standsOn(step) &&
+    isWaterCell(map, step.x, step.y)
+  );
+}
+
 /** Ground or object makes the cell impassable (used for corner cutting). */
 export function isImpassableCell(
   ctx: MoveContext,

@@ -5,7 +5,8 @@
  * (unit-tested).
  */
 import { isSeaCell, shipAt, shipOfHero, shipsOf } from "../core/game/naval.ts";
-import type { GameState, HeroState } from "../core/game/types.ts";
+import type { GameEvent, GameState, HeroState } from "../core/game/types.ts";
+import { SHIP_PRICE } from "../data/naval.ts";
 import { playerColour } from "../data/players.ts";
 import type { MapShip } from "../render/map/map-view.ts";
 
@@ -63,4 +64,32 @@ export function mapShips(
       ...(aboard === undefined ? {} : { heroId: aboard.id }),
     };
   });
+}
+
+/**
+ * The message-log line of a Call the Boat (NAVAL 7.1, bead bzc.159): for
+ * the player's own hero what came and, for a new boat, its price
+ * (`quiet` false: it floats up from the hero); for another player only
+ * when the boat's cell is explored, and quietly. Null: nothing to say.
+ */
+export function shipCalledLine(
+  state: GameState,
+  event: Extract<GameEvent, { type: "ship-called" }>,
+  human: number,
+): { text: string; quiet: boolean } | null {
+  const hero = state.heroes.find((h) => h.id === event.heroId);
+  if (hero === undefined) return null;
+  if (hero.owner === human)
+    return {
+      text: event.built
+        ? `${hero.name} calls for a boat: a new one is built alongside (${SHIP_PRICE.gold} gold, ${SHIP_PRICE.wood} wood)`
+        : `${hero.name} calls the boat: it sails up alongside`,
+      quiet: false,
+    };
+  const explored = state.players[human]?.explored;
+  if (explored?.[event.y * state.map.width + event.x] !== true) return null;
+  return {
+    text: `${playerColour(hero.owner).name} calls a boat`,
+    quiet: true,
+  };
 }

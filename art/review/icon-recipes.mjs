@@ -673,6 +673,48 @@ const RECIPES = [
     ],
     { notes: "Bead border_marches-bzc.131: the Pocket Boiler, a Wonder that gives Stoke to any army (FACTION_DWARVES 5.2). A whole little copper boiler with its firebox, so it is not mistaken for the Steam icon (a whistle or a cloud)." },
   ],
+  // ------------------- bead border_marches-bzc.159: the naval spells, Seafaring and the sea artifacts (NAVAL 7)
+  [
+    "icons-spells",
+    "naval-a",
+    17109,
+    [
+      ["call-the-boat", "a small round wooden rowing boat with a blue sail and a shiny brass hand bell hanging above it"],
+      ["scuttle", "a small brown wooden boat tipped nose up and sinking, a big hole in its side and round purple bubbles rising"],
+      ["lily-road", "three round green lily pads in a row with one pink water lily flower on the middle pad"],
+      ["fair-wind", "a fat white canvas sail on a short wooden mast, bulging full, a pale blue swirl of wind behind it"],
+      ["tidal-wave", "a big curling deep blue ocean wave with a white foam crest"],
+      ["seafaring", "a round wooden ship's steering wheel with eight spokes and brass caps on the handles"],
+    ],
+    { notes: "Bead border_marches-bzc.159: the five naval spells (NAVAL 7.1-7.2) and the Seafaring skill (7.3, kind skill, picked as skill:seafaring). Fair Wind is a sail, not a cloud, so it is not mistaken for Gust; Seafaring is a wheel, not the Trailcraft compass." },
+  ],
+  [
+    "icons-artifacts",
+    "sea-a",
+    17213,
+    [
+      ["captains-tricorne", "a dark navy blue three-cornered tricorne captain's hat with gold braid trim and a white feather"],
+      ["brass-sextant", "a brass navigator's sextant: a fan-shaped arc frame with a small telescope and a swinging arm"],
+      ["mermaids-comb", "a pearly pink seashell hair comb with long teeth and one white pearl"],
+      ["ship-in-a-bottle", "a clear glass bottle lying on its side with a cork, a tiny wooden sailing ship with white sails inside it"],
+      ["ships-anchor", "a heavy grey iron ship's anchor with a brown rope coiled round its shank"],
+      ["conch-of-the-deep", "a big spiral conch seashell, cream outside and glossy pink inside"],
+      ["corsairs-cutlass", "a broad curved pirate cutlass with a shiny steel blade and a big gold basket guard, a red bandana tied round the grip"],
+      ["the-drowned-mans-locket", "an oval tarnished silver locket on a chain, covered in green seaweed and little barnacles, dripping water drops"],
+    ],
+    { notes: "Bead border_marches-bzc.159: the eight sea artifacts (NAVAL 7.4). The sextant is an arc frame, not the Spyglass tube; the cutlass has a gold basket guard and a red bandana, not the Tin Sabre's plain brass hilt; the Locket is seaweed-covered silver, not the gold Sealing-Wax Locket." },
+  ],
+  [
+    "icons-artifacts",
+    "sea-cutlass-b",
+    17214,
+    [
+      ["corsairs-cutlass", "a very short very wide pirate cutlass with a huge round gold seashell-shaped hand guard covering the grip, and a long red ribbon tail hanging from the pommel"],
+      ["corsairs-cutlass", "two crossed broad pirate cutlasses with gold guards and red grips, tied together in the middle with a red knot"],
+      ["corsairs-cutlass", "a broad curved pirate cutlass pointing up through a red pirate bandana hanging from its gold guard below the blade"],
+    ],
+    { notes: "Bead border_marches-bzc.159: a re-roll of the Corsair's Cutlass: the sea-a cutlasses were near copies of the Tin Sabre, or had the bandana skewered on the blade." },
+  ],
 ];
 
 const byId = new Map();

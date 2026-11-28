@@ -369,6 +369,78 @@
       "styleImage": "@dwarves",
       "subject": "Subject: each image a different one of these 5 cute steampunk dwarf buildings, three takes of each in this order: Marketplace (a stone market stall with a teal and white striped awning, crates and a brass scale); Resource Silo (a riveted copper hopper on iron legs with a chute over an ore cart); Deep Shaft (a mine head: a big iron winding wheel on a timber frame, an ore cart on rails); Repair Yard (a stone shed with a verdigris roof and an iron crane holding a little brass machine by a hook); The Great Boiler (a giant free-standing brass boiler, a huge pressure gauge on its front and a steam whistle on top). Colours: warm grey stone #9a8f80, verdigris teal #3aa38f, brass #d9a634, copper #c7683a, dark iron #4a4f57.",
       "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
+    },
+    {
+      "id": "harbour-realm-a",
+      "concept": "REALM harbour: Royal Docks, Harbour Light, Admiralty",
+      "bead": "border_marches-bzc.159",
+      "seed": 159101,
+      "styleImage": "@realm",
+      "subject": "Subject: each image a different one of these three storybook kingdom buildings, five takes of each in this order: Shipyard (a chunky timber boatshed with a blue roof, a fat little wooden sailboat hull on a wooden cradle in front of it and a coil of rope); Lighthouse (a fat stout round lighthouse of cream limestone with red-brown bands, a blue cone cap and a big glowing lamp room); Admiralty (a cream stone hall with a blue roof, a giant wooden ship's wheel on its front gable and a big iron anchor by the door). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f, warm lamp light #ffd36a.",
+      "negative": "water, sea, waves, slab"
+    },
+    {
+      "id": "harbour-restless-a",
+      "concept": "RESTLESS harbour: Bone Wharf, Corpse-Candle Tower, Ghost Fleet Office",
+      "bead": "border_marches-bzc.159",
+      "seed": 159201,
+      "styleImage": "@restless",
+      "subject": "Subject: each image a different one of these three haunted town buildings, five takes of each in this order: Shipyard (a crooked slate boatshed with a violet roof, a little black rowing boat on a cradle of big bone white fish bones in front of it); Lighthouse (a fat crooked slate lighthouse tower with a violet cap, on top a giant melting white candle with a pale green flame); Admiralty (a crooked slate office with a violet roof, a big round porthole window glowing violet and a ship's wheel of black iron on its front). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white #d8d0bc, black iron, pale green candle flame #b8f070; spooky but cute, never gory.",
+      "negative": "skeleton, ghost, blood, gore, water, sea, waves, slab"
+    },
+    {
+      "id": "harbour-horde-a",
+      "concept": "HORDE harbour: Raft Yard, Bonfire Beacon, Pirate King's Tent",
+      "bead": "border_marches-bzc.159",
+      "seed": 159301,
+      "styleImage": "@hordeR",
+      "subject": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Shipyard (a rusty iron lean-to with a moss green roof, a crude log raft with a patched dull red sail propped up beside it); Lighthouse (a fat squat scrap-wood tower on thick log stilts with a big crackling bonfire in an iron basket on top); Admiralty (a big tawny spotted hide tent with a dull red awning, a giant dark brown captain's tricorne hat on its top and a treasure chest by the door). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a, tawny spotted hide, fire orange #ff8a2a.",
+      "negative": "yellow roof, bright yellow, gold, skull, water, sea, waves, slab"
+    },
+    {
+      "id": "harbour-candy-a",
+      "concept": "CANDY harbour: Gumdrop Marina, Peppermint Light, Licorice Admiralty",
+      "bead": "border_marches-bzc.159",
+      "seed": 159401,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Shipyard (a gingerbread boatshed with a pink icing roof, a round little boat made of a giant red gumdrop on a wafer cradle in front of it); Lighthouse (a fat round lighthouse striped red and white like a peppermint stick, a pink cap and a big glowing lamp room); Admiralty (a gingerbread hall with a pink roof trimmed with black licorice, a giant black licorice wheel like a ship's wheel on its front). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24, warm lamp light #ffd36a.",
+      "negative": "purple, violet, gore, water, sea, waves, slab"
+    },
+    {
+      "id": "harbour-dwarves-a",
+      "concept": "DEEPFORGE harbour: Dry Dock, Lamp Engine, Ironclad Board",
+      "bead": "border_marches-bzc.159",
+      "seed": 159501,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Shipyard (a stone dry dock cradle holding a fat riveted iron boat hull on wooden blocks, a small brass crane over it); Lighthouse (a fat squat stone lighthouse with a verdigris cap and a giant round brass lamp with gears, a copper boiler at its foot); Admiralty (a stone office with a verdigris roof and a riveted dark iron ship's prow jutting out of its front, a brass ship's wheel over the door). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a, dark iron #4a4f57, steam white #f4f1ea.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, water, sea, waves, slab"
+    },
+    {
+      "id": "harbour-candy-r1",
+      "concept": "CANDY harbour re-roll: Gumdrop Marina, Licorice Admiralty",
+      "seed": 159402,
+      "styleImage": "@candy",
+      "subject": "Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Gumdrop Marina (a gingerbread boathouse with a pink icing roof and a wide open arch, and a huge wafer sailboat in front of it as big as the boathouse, with a giant red gumdrop hull and a white marshmallow sail); Licorice Admiralty (a white iced cake hall with a pink roof and a huge black licorice ship's wheel filling its white front, a black licorice anchor by the door). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24.",
+      "negative": "purple, violet, gore, water, sea, waves, slab, shadow",
+      "bead": "border_marches-bzc.159"
+    },
+    {
+      "id": "harbour-horde-r1",
+      "concept": "HORDE harbour re-roll: Bonfire Beacon",
+      "seed": 159302,
+      "styleImage": "@hordeR",
+      "subject": "Subject: a cute ramshackle goblin building, Bonfire Beacon: a tall open scaffold of crossed sharpened logs, see-through between the legs, a little moss green roofed hut at its foot, and on top a wide rusty iron bowl with a huge roaring bonfire, the fire the biggest part. No barrel. Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d, sharpened logs #b8733a, scrap planks #8a5a32, fire orange #ff8a2a and yellow #ffd23a.",
+      "negative": "yellow roof, gold, skull, horns, barrel, water, slab",
+      "bead": "border_marches-bzc.159"
+    },
+    {
+      "id": "harbour-dwarves-r1",
+      "concept": "DEEPFORGE harbour re-roll: Ironclad Board",
+      "seed": 159502,
+      "styleImage": "@dwarves",
+      "subject": "Subject: a cute steampunk dwarf building, Ironclad Board, the navy office: a squat wide hall plated in riveted dark iron like an armoured ship, a flat verdigris roof with a round iron gun turret and a brass periscope on top, a huge brass ship's wheel on its front over the door and a big anchor leaning beside it. No boat, no hull. Colours: dark iron #4a4f57 with #2e3238 shadows, warm grey stone #9a8f80, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, boat, water, slab",
+      "bead": "border_marches-bzc.159"
     }
   ],
   "outputs": [
@@ -3412,6 +3484,441 @@
           "op": "pad",
           "width": 51,
           "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/shipyard.png",
+      "from": "harbour-realm-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 7,
+          "width": 57,
+          "height": 51
+        },
+        {
+          "op": "pad",
+          "width": 57,
+          "height": 53,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/lighthouse.png",
+      "from": "harbour-realm-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 2,
+          "width": 32,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 32,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/admiralty.png",
+      "from": "harbour-realm-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 52,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 52,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/shipyard.png",
+      "from": "harbour-restless-a#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 3,
+          "width": 60,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/lighthouse.png",
+      "from": "harbour-restless-a#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 0,
+          "width": 30,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 30,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/admiralty.png",
+      "from": "harbour-restless-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 59,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/shipyard.png",
+      "from": "harbour-horde-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 10,
+          "width": 60,
+          "height": 46
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 48,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/lighthouse.png",
+      "from": "harbour-horde-r1#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              38,
+              2,
+              "transparent"
+            ],
+            [
+              39,
+              3,
+              "transparent"
+            ],
+            [
+              38,
+              3,
+              "transparent"
+            ],
+            [
+              25,
+              3,
+              "transparent"
+            ],
+            [
+              25,
+              4,
+              "transparent"
+            ]
+          ]
+        },
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 1,
+          "width": 42,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 42,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/admiralty.png",
+      "from": "harbour-horde-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 58,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/shipyard.png",
+      "from": "harbour-candy-r1#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 3,
+          "width": 63,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 63,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/lighthouse.png",
+      "from": "harbour-candy-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 2,
+          "width": 29,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 29,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/candy/admiralty.png",
+      "from": "harbour-candy-r1#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/shipyard.png",
+      "from": "harbour-dwarves-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/lighthouse.png",
+      "from": "harbour-dwarves-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 1,
+          "width": 45,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 45,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/admiralty.png",
+      "from": "harbour-dwarves-r1#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 56,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 62,
           "anchor": "top"
         },
         {

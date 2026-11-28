@@ -19,28 +19,15 @@ import {
   SKILL_IDS,
   findSkill,
 } from "../../src/data/skills.ts";
-import { NAVAL_ICONS_PENDING } from "../../src/data/naval.ts";
-
-/**
- * The naval content (bead bzc.154) has data rows but no catalogue icon yet:
- * its icons are art bead 9c (bzc.159). The explicit list lives in
- * src/data/naval.ts; each id there must be real content, and nothing else
- * may be missing from the catalogue.
- */
-const pending = (kind: keyof typeof NAVAL_ICONS_PENDING): string[] => [
-  ...NAVAL_ICONS_PENDING[kind],
-];
 
 const ids = (kind: keyof typeof catalogue): string[] =>
   Object.keys(catalogue[kind]);
 
 describe("catalogue coverage", () => {
-  it("skills: all 24 rows (none deferred)", () => {
-    expect(ids("skill")).toHaveLength(24);
-    expect([...SKILL_IDS].sort()).toEqual(
-      [...ids("skill"), ...pending("skill")].sort(),
-    );
-    for (const id of pending("skill")) expect(findSkill(id), id).toBeDefined();
+  it("skills: all 25 rows (none deferred)", () => {
+    // The 24 of CONTENT_HEROES and Seafaring (NAVAL 7.3).
+    expect(ids("skill")).toHaveLength(25);
+    expect([...SKILL_IDS].sort()).toEqual([...ids("skill")].sort());
     for (const id of ids("skill")) {
       const deferred = DEFERRED_SKILLS[id as keyof typeof DEFERRED_SKILLS];
       if (deferred !== undefined) {
@@ -75,18 +62,12 @@ describe("catalogue coverage", () => {
     // (FACTION_CANDY 5.2, icon bead bzc.112), the Deepforge's Pocket Boiler
     // (FACTION_DWARVES 5.2, icon wired in bead bzc.135) and the Keystone, a
     // relic of the map objects (not a catalogue kind) with an icon by its
-    // game id (bead 9is).
-    expect(ids("artifact")).toHaveLength(87);
-    // The 84, the Flypaper Ribbon and the Pocket Boiler, and the eight sea
-    // artifacts (bead bzc.154) whose icons are pending (bzc.159).
+    // game id (bead 9is), and the eight sea artifacts (NAVAL 7.4).
+    expect(ids("artifact")).toHaveLength(95);
+    // The 84, the Flypaper Ribbon, the Pocket Boiler and the sea eight.
     expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(94);
-    const listed = new Set([...ids("artifact"), ...pending("artifact")]);
+    const listed = new Set(ids("artifact"));
     for (const a of ARTIFACT_LIST) expect(listed.has(a.id), a.id).toBe(true);
-    for (const id of pending("artifact")) {
-      const def = findArtifact(id);
-      expect(def, id).toBeDefined();
-      expect(contentId(def!.name)).toBe(id);
-    }
     for (const id of ids("artifact")) {
       const def = findArtifact(id);
       expect(def, id).toBeDefined();
@@ -139,11 +120,11 @@ describe("catalogue coverage", () => {
     }
   });
 
-  it("spells: all 60 rows; the deferred adventure spells say why", () => {
-    expect(ids("spell")).toHaveLength(60);
+  it("spells: all 65 rows; the deferred adventure spells say why", () => {
+    // The 60 of CONTENT_SPELLS and the five naval spells (NAVAL 7).
+    expect(ids("spell")).toHaveLength(65);
     const known = new Set(allSpells().map((s) => s.id));
     for (const id of ids("spell")) expect(known.has(id), id).toBe(true);
-    for (const id of pending("spell")) expect(known.has(id), id).toBe(true);
     const deferred = allSpells()
       .filter((s) => s.kind === "adventure")
       .filter((s) => adventureSpell(s.id).deferred !== undefined);

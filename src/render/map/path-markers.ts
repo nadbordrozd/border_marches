@@ -10,7 +10,8 @@
  * that is not the target (bead bzc.107: the only way on) gets a ring at
  * its centre instead. On a naval map (bead bzc.149) a boarding step gets
  * an anchor and a landing that ends the day a ring labelled "lands: day
- * ends". Pure (no canvas), so the layout is unit-tested.
+ * ends"; a Lily Road step on water (bead bzc.159) gets a lily pad under
+ * its markers. Pure (no canvas), so the layout is unit-tested.
  */
 
 /** Markers per step of the path, the cell-centre one included. */
@@ -27,6 +28,8 @@ export interface PathMarkerStep {
   readonly board?: boolean;
   /** Lands from a ship and that ends the day: a ring and its label. */
   readonly landEndsDay?: boolean;
+  /** On foot over water on Lily Road's pads (bead bzc.159): a lily pad. */
+  readonly lily?: boolean;
 }
 
 /** The label of a day-ending landing (NAVAL 2.3). */
@@ -36,14 +39,26 @@ export interface PathMarker {
   /** Marker centre in cell units (a cell centre is x + 0.5). */
   readonly cx: number;
   readonly cy: number;
-  readonly kind: "arrow" | "cross" | "visit" | "anchor" | "landing";
-  /** Arrow direction in eighths of a turn, 0 = east, 2 = south. */
+  readonly kind: "arrow" | "cross" | "visit" | "anchor" | "landing" | "lily";
+  /**
+   * Arrow direction in eighths of a turn, 0 = east, 2 = south; a lily
+   * pad's variant ({@link lilyVariant}).
+   */
   readonly dir: number;
   readonly reachable: boolean;
   /** The path step this marker belongs to (fog check). */
   readonly cell: { readonly x: number; readonly y: number };
   /** Words drawn beside the marker (a day-ending landing). */
   readonly label?: string;
+}
+
+/**
+ * A lily pad's variant on a cell, 0-7: its turn in eighths (the `dir` of
+ * its marker); odd variants carry a flower. Fixed per cell, so a pad does
+ * not spin while the path is re-planned.
+ */
+export function lilyVariant(x: number, y: number): number {
+  return (((x * 3 + y * 5) % 8) + 8) % 8;
 }
 
 /** The 8-way direction from one cell toward another (0 = east, 2 = south). */
@@ -69,6 +84,16 @@ export function pathMarkers(
   let prev = from;
   steps.forEach((step, i) => {
     const cell = { x: step.x, y: step.y };
+    // The pad first, so the arrows that cross it are drawn over it.
+    if (step.lily === true)
+      out.push({
+        cx: step.x + 0.5,
+        cy: step.y + 0.5,
+        kind: "lily",
+        dir: lilyVariant(step.x, step.y),
+        reachable: step.reachable,
+        cell,
+      });
     if (prev !== null && (prev.x !== step.x || prev.y !== step.y)) {
       const dir = stepDirection(prev.x, prev.y, step.x, step.y);
       for (let k = 1; k < MARKERS_PER_STEP; k++) {

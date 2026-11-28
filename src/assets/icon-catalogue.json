@@ -369,6 +369,40 @@
       "school": "storm",
       "tier": 2,
       "adventure": true
+    },
+    "call-the-boat": {
+      "name": "Call the Boat",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 2,
+      "adventure": true
+    },
+    "scuttle": {
+      "name": "Scuttle",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 2,
+      "adventure": true
+    },
+    "lily-road": {
+      "name": "Lily Road",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 3,
+      "adventure": true
+    },
+    "fair-wind": {
+      "name": "Fair Wind",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 1,
+      "adventure": true
+    },
+    "tidal-wave": {
+      "name": "Tidal Wave",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 4
     }
   },
   "artifact": {
@@ -894,6 +928,54 @@
       "grade": "marvel",
       "slot": null,
       "relic": true
+    },
+    "captains-tricorne": {
+      "name": "Captain's Tricorne",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Head"
+    },
+    "brass-sextant": {
+      "name": "Brass Sextant",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "mermaids-comb": {
+      "name": "Mermaid's Comb",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "ship-in-a-bottle": {
+      "name": "Ship in a Bottle",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "ships-anchor": {
+      "name": "Ship's Anchor",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Shield"
+    },
+    "conch-of-the-deep": {
+      "name": "Conch of the Deep",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "corsairs-cutlass": {
+      "name": "Corsair's Cutlass",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Weapon"
+    },
+    "the-drowned-mans-locket": {
+      "name": "The Drowned Man's Locket",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Neck"
     }
   },
   "condition": {
@@ -1252,6 +1334,11 @@
     },
     "wayfinder": {
       "name": "Wayfinder",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "seafaring": {
+      "name": "Seafaring",
       "frame": "skill",
       "group": "journey"
     }

@@ -5074,5 +5074,851 @@
         "height": 32
       }
     ]
+  },
+  "sea-a": {
+    "id": "sea-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6c695dc0-bc03-461a-9fca-f26ab1a24cc1",
+    "submittedAt": "2026-11-28T20:10:25.536Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a dark navy blue three-cornered tricorne captain's hat with gold braid trim and a white feather; (2) a brass navigator's sextant: a fan-shaped arc frame with a small telescope and a swinging arm; (3) a pearly pink seashell hair comb with long teeth and one white pearl; (4) a clear glass bottle lying on its side with a cork, a tiny wooden sailing ship with white sails inside it; (5) a heavy grey iron ship's anchor with a brown rope coiled round its shank; (6) a big spiral conch seashell, cream outside and glossy pink inside; (7) a broad curved pirate cutlass with a shiny steel blade and a big gold basket guard, a red bandana tied round the grip; (8) an oval tarnished silver locket on a chain, covered in green seaweed and little barnacles, dripping water drops."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17213,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a dark navy blue three-cornered tricorne captain's hat with gold braid trim and a white feather; (2) a brass navigator's sextant: a fan-shaped arc frame with a small telescope and a swinging arm; (3) a pearly pink seashell hair comb with long teeth and one white pearl; (4) a clear glass bottle lying on its side with a cork, a tiny wooden sailing ship with white sails inside it; (5) a heavy grey iron ship's anchor with a brown rope coiled round its shank; (6) a big spiral conch seashell, cream outside and glossy pink inside; (7) a broad curved pirate cutlass with a shiny steel blade and a big gold basket guard, a red bandana tied round the grip; (8) an oval tarnished silver locket on a chain, covered in green seaweed and little barnacles, dripping water drops. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-28T20:12:40.663Z",
+    "usageUsd": 0.08202163489659628,
+    "candidates": [
+      {
+        "file": "sea-a-0.png",
+        "sha256": "b1037a84edf851f3b37e33a9404d896d470139d8c0b6e1c7fc75fea16497b20e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-1.png",
+        "sha256": "fa9887778d5f3aa7fd2939f455a9da81fd80a2c9430c72a5144f2003ba9c3ff6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-2.png",
+        "sha256": "3109fc94e812ff4e8f61fcaae53fce40eef69d3f06447fb63fb520c3c309cce0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-3.png",
+        "sha256": "696f997166fc45651479cb653b66e17848944d06e49fcf436f4811ad712f750c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-4.png",
+        "sha256": "d6df400b7c75bbe6fdbe1625be35aafc1ef0fcd9a9cb7c7fd34d2be3d036fa22",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-5.png",
+        "sha256": "e97c298b775c5e7ef66d268fbc42dae24547309fc855c1cac15f8d347740936c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-6.png",
+        "sha256": "8b874ed7ff7cd49d3d4c2fc2bdff56c2a93906689466c8ab4cda2eef2de75b52",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-7.png",
+        "sha256": "8d62fee57b03ac5c2c6d0c340cc88ea8b3299e51ef0c59a5e2565b94b2b14147",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-8.png",
+        "sha256": "e95145440dc711ef56053d870d981c2c801aeb7f8f86b939b837aa3f5bd41d40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-9.png",
+        "sha256": "8b0f4985789b79c3631219610752537c51c370f7e7d99f67c49aa24cec949034",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-10.png",
+        "sha256": "d5163d25e1c82e04215127989550369dae60a12bcde0315729a695fd37640aad",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-11.png",
+        "sha256": "9889e633ab8478b7875bd2c8d515fc2d729f8c4f67453b6908a927a22c673d3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-12.png",
+        "sha256": "63e4e5d46d04e04a544b35d6377b00430fd0389fa6edf4995f347445a18d77c6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-13.png",
+        "sha256": "66d755622633901d5d427585e851fe0a6ae2f85dd3447789ea9743a3da611212",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-14.png",
+        "sha256": "c40ae800cd931694bd42bb37b1d66c6a11758cf17894684ff962328cd809283d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-15.png",
+        "sha256": "d3657ef02ca21c133d8904a7a82b5e2dad16abe50af2a7c150e47832154fccad",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-16.png",
+        "sha256": "829d342e42302b62f5543d932fc778d2f507a22d3dc184933be07965a4edc86d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-17.png",
+        "sha256": "f15411f0c3d65467ff9a82e326d7896c9951996643b60e6db6ddd3f7ea8075dc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-18.png",
+        "sha256": "8faf9995a80d25e9be5af15ddb5610b15dd782538230923267802a524e0c9754",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-19.png",
+        "sha256": "42ab2db2ee3440ddfc434871c5315c43094d2a579f4beee57c62219720cff4e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-20.png",
+        "sha256": "be11c0b31a51e8282960090e1444d61f987088d662eccd93db962e34cf5dd9ea",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-21.png",
+        "sha256": "46f416402b08c2888f37ceaa7da2409d87ad2c6413b9b1882004a42ed58d7ab3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-22.png",
+        "sha256": "78dca9ae72ce30a94186ea0dc424e831ed1da8786d4a77ba02e0b5eb4b5bf151",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-23.png",
+        "sha256": "aaa3ee63727821f459ad9140fe27425a20e63c08d03227e89b37b10cd351a076",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-24.png",
+        "sha256": "f1835b2f2a4d075f2d2f3be6aacce22850b167bd2631d0f575165e2c169c8d92",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-25.png",
+        "sha256": "167dfc67cfcc1e0e5bc7cc177435b789a4527c447d39a380d48903352adcac94",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-26.png",
+        "sha256": "b2374aca5ceba448fd149cc2eb669bb2463d498d4348da2b1f6b0fa7e1f12fbe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-27.png",
+        "sha256": "6f7097268424465acbbc55dd6e206e0c232d4d0cb5d3419306620758d98f3de5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-28.png",
+        "sha256": "b0a38c770adc745fe39bbdb700f3515a2c62bda8bc49ddca13fff4695e3bb048",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-29.png",
+        "sha256": "7809ca859355fb37328f45e7e3c8a4e044f869b435e3a389c0e0d2231563c2b7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-30.png",
+        "sha256": "d558de1b00cd8d2daed9a3c1c0d9c9072f1472dd2829f07129fc90ac627c0541",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-31.png",
+        "sha256": "4104bf466c0ad080504335d982c9863a27be9b69ee5e620d8467b131baf4c370",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-32.png",
+        "sha256": "13d2d280379a99a35554bf91f14fca732736adb3b18931aef5b9ed730328ba71",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-33.png",
+        "sha256": "d06abc59b4d56f4706e0b69fee711f9dbf8e75c5988edce4f87b5690b7e846e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-34.png",
+        "sha256": "01017c5f91a49c9352d3ee1d271c7ccf11c32d4b3b501bad6a9d0652a29c60f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-35.png",
+        "sha256": "637427f3f52adb5ab545bdfcf4a59e8d4c49c7e1b45fce00529b20bdd6a8934e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-36.png",
+        "sha256": "7838afd665a937056663fbcce8fcd19c4beaafc8b7e9377368773fee5de01409",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-37.png",
+        "sha256": "76270b6c1714e360c903db5475ad55724764c862694150fcb21525883486bb91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-38.png",
+        "sha256": "938a0b3874973aedd0013438e9a29427581b4f5d32318c5886684c1d05e7d218",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-39.png",
+        "sha256": "9435c5f1b0a085014a7305ce2984e0cb806c1130fcf9a0059dfd7a67465c4b23",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-40.png",
+        "sha256": "d3e216ed7493f18886a6f9787be9d224255f6d89badff37e3af69faaab71ddc0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-41.png",
+        "sha256": "f29d1d895e1195921de5a9503f19df2ddbedbf4b7f0540dce7adb66658ab45c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-42.png",
+        "sha256": "60cf1972954ac1832f0eaf21f2cad646710f2df0bc2197439e327591a9f4282a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-43.png",
+        "sha256": "203bc8898b444381fa9f8aa49c6713108d24eb6f6e8d255a750e4af2223cb4d6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-44.png",
+        "sha256": "06cc37bf3ccf8ebdd231fd3ee28cb685cdd513e2a2919139876820a314832fd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-45.png",
+        "sha256": "522d0614a2a268166291de37f8cddaa2aff935cdf092811b9a70be48e3acd008",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-46.png",
+        "sha256": "9bfaf59338d85e016dac03622eb2f72868c4c4dd5a3247e7c116b0ee39f81330",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-47.png",
+        "sha256": "c791ea21bd0206356d37dbee66f12a3555dbdebcc1470bf51dbfedd8223e74b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-48.png",
+        "sha256": "ac4ace4600bd5d28c42aa3bfeb9546b2125fa5e2483d82e8d74c0db36563fd5c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-49.png",
+        "sha256": "439c4f0d585f915dcdc526c78d8b4c3e5a27a498b59261ed6a412799067230b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-50.png",
+        "sha256": "2435c8906c06fc1210a41efffc002c2c005974541f949de9be07fb1f0e42b9ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-51.png",
+        "sha256": "2247720548b9ccd0fa009264495abb3f6e8eb9b3554d26100ddea3dc2610a1d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-52.png",
+        "sha256": "711abfb7860cff5b51b20c55b1e98be58e3def99969ddf283ffe86427b85cc0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-53.png",
+        "sha256": "60c3559e4888e6f206caf053a2c2a55c93ff15c7e229a8de1b9e66707453d061",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-54.png",
+        "sha256": "7dc0c321c2f22439e3ab4b765b0e9636a4cf1f83570114aa00b37909f7d3204d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-55.png",
+        "sha256": "389c3db3911109e37c4e6a23246a859a80fb74d14d8a071341aadbbcf389583b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-56.png",
+        "sha256": "c922ee7fbc0a45d11333487259e28be3bed00e33219d215d0a22e2cb47a866c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-57.png",
+        "sha256": "7fbe7a88c6ab882e97acc74e70ef70cff61cb22d710ecad9deec9126f913a768",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-58.png",
+        "sha256": "71384b1c6d0b4d9d53a6818e81af7bb0351d1b45465b13d6df23a3c020ba4078",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-59.png",
+        "sha256": "c0add8ce7d481c2f94813f710883136a9782ae4fac44566ea565644cddda7127",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-60.png",
+        "sha256": "1e67f4fd11ab3a737423e21068823a6287b5ba4c0ee493b31b86044b25722e25",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-61.png",
+        "sha256": "c067fb8e359dcccbd7fda389ab8a44c9e8b533d2b99c4bce844c835e798a4cb5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-62.png",
+        "sha256": "c4d938728f033a6f8ce1600743cff4de7b7d23b85fd6ea0ea13c04be8418e6cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-a-63.png",
+        "sha256": "7fbe0731437ed75723666d038b8afa418a34efb10c84e2597fe6caa37acd5cab",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "sea-cutlass-b": {
+    "id": "sea-cutlass-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ebbcd0bf-dca2-4b9e-a37d-a3ddbee8e25f",
+    "submittedAt": "2026-11-28T20:13:02.630Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) a very short very wide pirate cutlass with a huge round gold seashell-shaped hand guard covering the grip, and a long red ribbon tail hanging from the pommel; (2) two crossed broad pirate cutlasses with gold guards and red grips, tied together in the middle with a red knot; (3) a broad curved pirate cutlass pointing up through a red pirate bandana hanging from its gold guard below the blade."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17214,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) a very short very wide pirate cutlass with a huge round gold seashell-shaped hand guard covering the grip, and a long red ribbon tail hanging from the pommel; (2) two crossed broad pirate cutlasses with gold guards and red grips, tied together in the middle with a red knot; (3) a broad curved pirate cutlass pointing up through a red pirate bandana hanging from its gold guard below the blade. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-28T20:15:48.506Z",
+    "usageUsd": 0.08349120688438416,
+    "candidates": [
+      {
+        "file": "sea-cutlass-b-0.png",
+        "sha256": "a138d2ad86c13453a5dd29e61a81768db1c95b027dfc53d3c988d0c34b3d8042",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-1.png",
+        "sha256": "cd31319005943228cecc3ebe907a0ee30e58dbaf75f17f103a778ac885258819",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-2.png",
+        "sha256": "d7ffe632bcd39c0661e70fa09f71ebaf30064829898c090a5d4328aae2952a6b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-3.png",
+        "sha256": "a070076f9c1931da81227e9de7f91e23be8b6a3fdb9ce3304387481de00fc790",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-4.png",
+        "sha256": "d11321f83d23cf6f791427b253cdae1d3108736d4d36ef80143bf7324c24ddf4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-5.png",
+        "sha256": "5fed07eab40c507ca44b4b1e46820416bceb24b3a10c05910b90b99c6949a78b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-6.png",
+        "sha256": "1552caa7811702c5bf04faa59ba5a1993e857fb0063bb71283fc4913ac6af8ab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-7.png",
+        "sha256": "fa0eec41041fb44e455fcd29331b34b665cb6057f68bbcae3f2a3f3b955ac0a9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-8.png",
+        "sha256": "fb57ab2449e92cedd655da6073e0115cd9e013040291dd8086b90c14bee99105",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-9.png",
+        "sha256": "796163da719c50bbfaf6143a70b5907ab2eb6d0d1b42f3d15dccd961d0072032",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-10.png",
+        "sha256": "391404f0278117bf10e20599c23cceed0f9fbf05cf41d03be5f9adcafe9cdc56",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-11.png",
+        "sha256": "902ef619bca123bf3901f34250695247282e9010178367cbaf4d555001360b91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-12.png",
+        "sha256": "dc359b698ba489a983a2381f93d8cfae985f58bc4db49ba916b4c1bae1f327e5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-13.png",
+        "sha256": "f2eb03c144a701b0a1f53ee0fa5e3b57e9df1089d689c779984a63739797ec11",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-14.png",
+        "sha256": "0cc37dc68404145c2d3129047e84a3859d0b33593308704e20382ecd77adc84f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-15.png",
+        "sha256": "0c8d6b584bc6ca1500b54e6fe68fe4c062cee5ec973df336ae3601140b7e5fd4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-16.png",
+        "sha256": "859584d4cd383badd586bbe790f82537fd82d74ee73a2a86c5d974646c0f4cbf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-17.png",
+        "sha256": "d540eafbae864501027aa3dd625d895d9ca4b24dddb73709ddcfd3f8b993271d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-18.png",
+        "sha256": "b7d716e24cae389dd776305eb6f8ae018def686dd795d5f70a27d2b741e48167",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-19.png",
+        "sha256": "3c3f22896f877512e494d7a9b69706d52c6795f312eeda280e2699f88d94c79f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-20.png",
+        "sha256": "a8b853b307f06d0a45112c4b23b722ec7468d6631ae7846f49ab13454b8af212",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-21.png",
+        "sha256": "b44d717e556870550d986db3da9af0bf730b1fb45f3fb848028912824a226fe5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-22.png",
+        "sha256": "4657128bddbaea7b32fdeb001666ade0ed192960cd25a1a61d12f65364f6fcb1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-23.png",
+        "sha256": "46d6b17fa92ce79630064245f477a47c54c6edbf5e89571b955ae0473f11e448",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-24.png",
+        "sha256": "4a75d46b24a1117988f572cd5e66ffc0234979dd0e18d4c8921238802645fc72",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-25.png",
+        "sha256": "6ce100adbea25b313acbbeae6ed5178eccad6f4d0309235897446b0e09482d53",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-26.png",
+        "sha256": "52fa7d5a19424142a73d9de609153a02ebe8204afa00f9a6b3cc0aa5d19fc234",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-27.png",
+        "sha256": "9858d14f6cefbf984c0050248c72e7dc1ea2c61d90ab4bfef769c2fe75cd39d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-28.png",
+        "sha256": "f38798c4cc7b359b1755ee548018238f46f6f81d24359acccf5789dcdcb59571",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-29.png",
+        "sha256": "63676d45aa4d72d235d016a255d2964f523477e1d822cdc79f7bfd9f8c05edf7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-30.png",
+        "sha256": "e00517bd7d15c15a25a083fd5f526f7019b2ea33c5568ad47c3cfe20b8e18acc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-31.png",
+        "sha256": "b8b7a3ef1d5628d0802d9c19d2cefd3b9075b571dddaf6b55428fe52b8b74e6c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-32.png",
+        "sha256": "c0482cb180aa5fba14d2359f9b9a3e4781560ad98b88de8603a778738394c795",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-33.png",
+        "sha256": "55a38bdce9d437a307811dfc9cb9b544341cba5c0c57094f1b4a63de5eef9ae2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-34.png",
+        "sha256": "1bd787c622aeb63aff442ebdb4990b48f2f45aaf1cd290d2e5e370120fe62028",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-35.png",
+        "sha256": "1c4e8bdc06167ebc3e9abd863740fa8ef977ce1a656c629c0ddcdf8f5e1a1d23",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-36.png",
+        "sha256": "6638ec48c5ac448b3ffed2a8656ce538a3ce2e1c1db55485edcd883110430789",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-37.png",
+        "sha256": "bfb2ba00a7ac410ff963fa24a05cbaa7a9332244628e1854802d7c711e884f4d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-38.png",
+        "sha256": "c8fbaab89b75c70c2e3ea870f5b7665ac4913aa5f14798ea4f45ed83ae85357a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-39.png",
+        "sha256": "80705f076d800049ee8434f7c86dc0e17ecb7cadafc601baeed51535435f57c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-40.png",
+        "sha256": "25b8bdcb12fd3a934f67eb94f1d6eca4cb156aa99c8d92593aba6f3551252a57",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-41.png",
+        "sha256": "527e48e20a98cff822b453634387f049cf5af683fab3841dfa364abe6efd04b3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-42.png",
+        "sha256": "d7081c60839037e1a99e263bed94b51f223ed0ece66101e56f1c64582eba0450",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-43.png",
+        "sha256": "f0a58d244a31bcac8e742996af175124f22a822d98570f793e50c2c34bc012d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-44.png",
+        "sha256": "864d781379595e04d4b18ef4cc41c2ea6269be4b5b0ab3c1f85f0de549495507",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-45.png",
+        "sha256": "a36f0ec1139a846e754c8957cfaf404f20f4824b3d18e4b9dc28392caa0d36ca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-46.png",
+        "sha256": "5f2432465d0a9346b7ed7a7014461abe25c667228ab15e704836643f88775a7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-47.png",
+        "sha256": "12ac2da92c32d3acbc17045714590ec427c6bde38984ca99c72a95af9b8ac285",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-48.png",
+        "sha256": "27a04a22d661f0f484c77501ee629d60d141da8acac95c67eff19d918092548c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-49.png",
+        "sha256": "8042a36e961a2ca083ea09d90e9a2915d054b98d09ae2de9991ed3a6dd9863cc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-50.png",
+        "sha256": "bddd0653e9b15ae0b091f55fb2df275502bdf2ad1ee282c4a082bc08d09d2c8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-51.png",
+        "sha256": "be2e382dad67271b38dcb81498d0c72d5c8bf814b6be81569b4724a3b93a0e0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-52.png",
+        "sha256": "a6cbae5cf9fa0861c25fb442a2de5f123618988918fe5f8de0526e35eb204d83",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-53.png",
+        "sha256": "941bf1048f6dc8c5e88d22d7e4a929d0a99957a5816bdf500e838a6fe4e5abab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-54.png",
+        "sha256": "9265978a9abd4622a95e16aa7bef22317010e3ef22da9e675254fc2351ee2fd0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-55.png",
+        "sha256": "5512dfbb3751d4737487ccde206637cea2c819da8fc8d3ed93455f578224991a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-56.png",
+        "sha256": "c480ccce8cc4ef7a38f3db8a634cac2513e57c78c83c233bc075b923017dd405",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-57.png",
+        "sha256": "bbdf9177ffd2e63df6a826a7c2469b8ea07f083e1e0ea5b3c86fbf06e198da80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-58.png",
+        "sha256": "32655cb01ceb939d201c1d0917b3455dddc0bc1f29706d6c1fd6504834ff71af",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-59.png",
+        "sha256": "797d996bc5860541065782cc0f2a0d54ba8bc4bdc4484d726dbb31a28ecb8e02",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-60.png",
+        "sha256": "8615ccf5bfd585360086c241c94ebb818594e4d98d6bd3ab29b03b92509d3550",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-61.png",
+        "sha256": "531f29f71a52caf74422e370f5c6f7f79dae2ae71de6928f7185acbeb21f4970",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-62.png",
+        "sha256": "9efc6b4cb4cc53232d3dae1e040cb848d4e6d97c4fb5c3fcc6befeffa3459934",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "sea-cutlass-b-63.png",
+        "sha256": "2ada80fe60f4a01eace2d028eab24c32dac4db12223e07f0d3ff848da96e0897",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

@@ -27,6 +27,7 @@ import {
   humanPlayer,
   heroStats,
   inSight,
+  isLilyStep,
   levelUpOffer,
   maxMana,
   moveHeroAlong,
@@ -50,7 +51,7 @@ import type {
 } from "../core/game/index.ts";
 import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
-import type { MapObject, MapObjectKind } from "../core/map/types.ts";
+import type { GameMap, MapObject, MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { OBJECT_TYPES } from "../data/objectTypes.ts";
@@ -61,6 +62,7 @@ import {
   carriedAtStart,
   carryStep,
   mapShips,
+  shipCalledLine,
   type CarriedShip,
 } from "./ships.ts";
 import type {
@@ -291,10 +293,10 @@ export const ADVENTURE_KEYS: ReadonlyArray<readonly [string, string]> = [
 
 /**
  * A planned step as the path preview draws it: today or later, a
- * building on the way (bzc.107), a boarding's anchor and a day-ending
- * landing's ring (bzc.149).
+ * building on the way (bzc.107), a boarding's anchor, a day-ending
+ * landing's ring (bzc.149) and Lily Road's pads (bzc.159).
  */
-function previewStep(s: Path["steps"][number]): PreviewStep {
+function previewStep(map: GameMap, s: Path["steps"][number]): PreviewStep {
   return {
     x: s.x,
     y: s.y,
@@ -303,6 +305,7 @@ function previewStep(s: Path["steps"][number]): PreviewStep {
     ...(s.building === undefined ? {} : { visit: true }),
     ...(s.board === undefined ? {} : { board: true }),
     ...(s.endsDay === true ? { landEndsDay: true } : {}),
+    ...(isLilyStep(map, s) ? { lily: true } : {}),
   };
 }
 
@@ -1388,7 +1391,7 @@ class GameScreen {
     }
     const hero = this.hero();
     this.view.setPathPreview(
-      this.plan.path.steps.map(previewStep),
+      this.plan.path.steps.map((s) => previewStep(this.state.map, s)),
       hero === undefined ? undefined : { x: hero.x, y: hero.y },
     );
   }
@@ -1434,6 +1437,7 @@ class GameScreen {
         if (events !== null) {
           this.syncHeroes();
           toast(aim.spell === "ask-the-dead" ? "The dead answer." : "Cast.");
+          this.announceCast(events);
         }
       }
       return;
@@ -1644,7 +1648,10 @@ class GameScreen {
       )
         remaining.shift();
       remaining.shift();
-      this.view.setPathPreview(remaining.map(previewStep), { x, y });
+      this.view.setPathPreview(
+        remaining.map((s) => previewStep(this.state.map, s)),
+        { x, y },
+      );
       this.view.setExplored(explored);
       carried = this.carryShip(this.state, carried, x, y);
       this.syncHeroes({ id: hero.id, x, y });
@@ -1845,6 +1852,13 @@ class GameScreen {
               e.heroId,
             );
           }
+          break;
+        }
+        case "ship-called": {
+          const line = shipCalledLine(this.state, e, this.human);
+          if (line === null) break;
+          if (line.quiet) this.note(line.text, "quiet");
+          else this.noteAtHero(line.text, "gain", e.heroId);
           break;
         }
         case "teleported": {
@@ -2532,7 +2546,19 @@ class GameScreen {
     if (events !== null) {
       this.syncHeroes();
       toast("Cast.");
+      this.announceCast(events);
     }
+  }
+
+  /**
+   * What a map cast says in the log: a called boat (bead bzc.159). A cast's
+   * other events speak for themselves on the map.
+   */
+  private announceCast(events: readonly GameEvent[]): void {
+    this.announce(
+      events.filter((e) => e.type === "ship-called"),
+      false,
+    );
   }
 
   /**

@@ -2,6 +2,9 @@
 //
 //   node art/review/icon-sheet.mjs <out.png> <folder under public/assets/icons>... [--scale 3]
 //
+// A folder may also be one icon of it ("spells/scuttle"), for a sheet of a
+// mixed family (bead bzc.159: the naval icons).
+//
 // Per icon: its id, then 1x on light and dark, 1x in its frame on light and
 // dark (the frame drawn exactly as src/ui/icons.ts draws it: a 2 px border
 // in the frame colour and a 1 px bevel, light on the left and bottom,
@@ -52,9 +55,11 @@ function tile(raster, bg, frame, k = 1) {
   return t;
 }
 
-const items = folders.flatMap((folder) => {
+const items = folders.flatMap((arg) => {
+  const [folder, one] = arg.split("/");
   const dir = path.join("public/assets/icons", folder);
-  return fs.readdirSync(dir).filter((f) => f.endsWith(".png")).sort().map((f) => {
+  const files = one === undefined ? fs.readdirSync(dir).filter((f) => f.endsWith(".png")).sort() : [`${one}.png`];
+  return files.map((f) => {
     const id = f.slice(0, -4);
     const entry = catalogue[KIND[folder]]?.[id];
     return { id, raster: decodePng(fs.readFileSync(path.join(dir, f))), frame: entry?.frame ? FRAMES[entry.frame] : null };

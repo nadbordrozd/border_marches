@@ -1,50 +1,17 @@
 /**
  * The town screen's harbour (docs/design/NAVAL.md 2.2 and 5.7, bead
- * bzc.150): pictures for the Shipyard, Lighthouse and Admiralty tiles and
- * the "Buy a ship" action.
- *
- * Building art is looked up by id (buildingArt), so the harbour sprites of
- * art bead 9c drop in by registering them in BUILDING_ART_ASSETS. Until
- * then each harbour building borrows a stand-in from the sea art already in
- * the game: the map's Shipwright, its Lighthouse and the sailing ship.
+ * bzc.150): the "Buy a ship" action. The Shipyard, Lighthouse and
+ * Admiralty have building sprites like every other building (bzc.159).
  */
-import { buildingArt } from "../assets/town-art.ts";
 import { shipBuyReason, shipBuyStatus, shipPrice } from "../core/game/index.ts";
 import type { GameState } from "../core/game/index.ts";
 import { buildingDef } from "../data/factions.ts";
 import { HARBOUR_SHIPYARD } from "../data/naval.ts";
-import type { BuildingId } from "../data/types.ts";
 import { button, costView, el, img } from "./dom.ts";
 import { setTip, tipCard } from "./tooltip.ts";
 
-/** Stand-in pictures (map art keys) until the harbour sprites exist. */
-export const HARBOUR_STAND_IN: Readonly<
-  Record<"shipyard" | "lighthouse" | "admiralty", string>
-> = {
-  shipyard: "map-object-shipwright",
-  lighthouse: "map-object-lighthouse",
-  admiralty: "map-object-ship-sailing",
-};
-
 /** The image key of the "Buy a ship" button: the moored boat. */
 export const BUY_SHIP_ART = "map-object-moored-boat";
-
-/**
- * A building's picture for the town screen: its own art when it has some,
- * else a harbour building's stand-in (flagged `standIn` so it is drawn
- * whole, not stretched to the tile), else null.
- */
-export function townBuildingArt(
-  faction: string,
-  id: BuildingId,
-): { key: string; standIn: boolean } | null {
-  const art = buildingArt(faction, id);
-  if (art !== null) return { key: art.key, standIn: false };
-  const harbour = buildingDef(faction, id)?.harbour;
-  return harbour === undefined
-    ? null
-    : { key: HARBOUR_STAND_IN[harbour], standIn: true };
-}
 
 /**
  * The "Buy a ship" button: the price on its face, greyed with the reason

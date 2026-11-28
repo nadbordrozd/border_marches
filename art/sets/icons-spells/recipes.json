@@ -134,9 +134,62 @@
         "opening-salvo"
       ],
       "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a green leafy archway over a brown dirt path; (2) a wooden ladle over a bowl overflowing with stew; (3) two hands shaking; (4) a magnifying glass over a red wax seal; (5) a golden sun with a small brass key; (6) a pink piggy bank with a small brass hourglass on its back; (7) a grey skull with glowing purple eyes and a brass ear trumpet; (8) a forked wooden dowsing rod with blue sparkles; (9) a coiled rope with an iron grappling hook and a yellow spark; (10) a small black cannon on wooden wheels firing a cannonball."
+    },
+    {
+      "id": "naval-a",
+      "concept": "call-the-boat scuttle lily-road fair-wind tidal-wave seafaring",
+      "width": 32,
+      "height": 32,
+      "seed": 17109,
+      "covers": [
+        "call-the-boat",
+        "scuttle",
+        "lily-road",
+        "fair-wind",
+        "tidal-wave",
+        "seafaring"
+      ],
+      "subject": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a small round wooden rowing boat with a blue sail and a shiny brass hand bell hanging above it; (2) a small brown wooden boat tipped nose up and sinking, a big hole in its side and round purple bubbles rising; (3) three round green lily pads in a row with one pink water lily flower on the middle pad; (4) a fat white canvas sail on a short wooden mast, bulging full, a pale blue swirl of wind behind it; (5) a big curling deep blue ocean wave with a white foam crest; (6) a round wooden ship's steering wheel with eight spokes and brass caps on the handles.",
+      "notes": "Bead border_marches-bzc.159: the five naval spells (NAVAL 7.1-7.2) and the Seafaring skill (7.3, kind skill, picked as skill:seafaring). Fair Wind is a sail, not a cloud, so it is not mistaken for Gust; Seafaring is a wheel, not the Trailcraft compass."
     }
   ],
   "outputs": [
+    {
+      "path": "public/assets/icons/spells/call-the-boat.png",
+      "from": "naval-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/scuttle.png",
+      "from": "naval-a#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/lily-road.png",
+      "from": "naval-a#27",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/fair-wind.png",
+      "from": "naval-a#32",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/tidal-wave.png",
+      "from": "naval-a#44",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/seafaring.png",
+      "from": "naval-a#57",
+      "width": 32,
+      "height": 32
+    },
     {
       "path": "public/assets/icons/spells/poultice.png",
       "from": "bloom-a#0",

@@ -111,6 +111,28 @@ addIdIfAbsent("artifact", "flypaper-ribbon", "Flypaper Ribbon", "wonder", { grad
 addIdIfAbsent("condition", "steam", "Steam", "storm", { school: "storm", polarity: "boon" });
 addIdIfAbsent("artifact", "pocket-boiler", "Pocket Boiler", "wonder", { grade: "wonder", slot: "Pocket" });
 
+// Bead bzc.159: the naval content (NAVAL 7) by its game ids, until the
+// CONTENT_* tables list it: the five naval spells, the Seafaring skill and
+// the eight sea artifacts.
+for (const [id, name, s, tier, adventure] of [
+  ["call-the-boat", "Call the Boat", "accord", 2, true],
+  ["scuttle", "Scuttle", "hush", 2, true],
+  ["lily-road", "Lily Road", "bloom", 3, true],
+  ["fair-wind", "Fair Wind", "storm", 1, true],
+  ["tidal-wave", "Tidal Wave", "storm", 4, false],
+]) addIdIfAbsent("spell", id, name, s, { school: s, tier, ...(adventure ? { adventure: true } : {}) });
+addIdIfAbsent("skill", "seafaring", "Seafaring", "skill", { group: "journey" });
+for (const [id, name, grade, slot] of [
+  ["captains-tricorne", "Captain's Tricorne", "trinket", "Head"],
+  ["brass-sextant", "Brass Sextant", "trinket", "Pocket"],
+  ["mermaids-comb", "Mermaid's Comb", "trinket", "Pocket"],
+  ["ship-in-a-bottle", "Ship in a Bottle", "wonder", "Pocket"],
+  ["ships-anchor", "Ship's Anchor", "wonder", "Shield"],
+  ["conch-of-the-deep", "Conch of the Deep", "wonder", "Pocket"],
+  ["corsairs-cutlass", "Corsair's Cutlass", "wonder", "Weapon"],
+  ["the-drowned-mans-locket", "The Drowned Man's Locket", "cursed", "Neck"],
+]) addIdIfAbsent("artifact", id, name, grade, { grade, slot });
+
 // Bead bzc.82: the hero screen's other numbers, each an icon (HoMM2 style).
 for (const s of ["Attack", "Defense", "Power", "Lore", "Mana", "Movement", "Experience", "Level", "Sight", "Morale", "Luck", "Command", "Spellbook", "Scroll case"]) add("stat", s, null);
 for (const s of ["Bloom", "Accord", "Clock", "Hush", "Storm"]) add("school", s, school(s));

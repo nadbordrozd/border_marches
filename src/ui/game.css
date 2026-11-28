@@ -3364,14 +3364,6 @@
   filter: saturate(0.5) brightness(0.75);
 }
 
-/*
- * A harbour building's stand-in picture (map sea art until its own sprite,
- * NAVAL 10.2): drawn whole inside the square, never stretched.
- */
-.gm-hall-stand-in {
-  object-fit: contain;
-}
-
 /* A harbour building of a town with no dock (NAVAL 5.7): greyed. */
 .gm-hall-landlocked .gm-hall-art-img {
   filter: grayscale(1) brightness(0.6);

@@ -179,6 +179,38 @@ whistles on a U pipe (a plumbing fitting), diagonal whistles (a horn at
 in a ring at 16 px (a red potion flask), boilers with loop handles (a bucket)
 and boilers without steam (a barrel).
 
+## Naval content (bead `border_marches-bzc.159`)
+
+The naval spells, Seafaring and the sea artifacts
+([NAVAL.md](../../design/NAVAL.md) 7), catalogue entries by game id in
+`icon-catalogue-build.mjs` until the CONTENT_* tables list them.
+
+| Id | Kind | Frame | Icon (take) |
+| --- | --- | --- | --- |
+| `call-the-boat` | spell | Accord | a rowing boat with a blue sail and a brass hand bell (`naval-a#2`) |
+| `scuttle` | spell | Hush | a pale wooden boat going down nose up with bubbles (`naval-a#11`) |
+| `lily-road` | spell | Bloom | lily pads with a pink water lily (`naval-a#27`) |
+| `fair-wind` | spell | Storm | a full sail with a blue swirl (`naval-a#32`); not Gust's cloud |
+| `tidal-wave` | spell | Storm | a curling blue wave (`naval-a#44`) |
+| `seafaring` | skill | Skill | a ship's wheel (`naval-a#57`) |
+| `captains-tricorne` | artifact | Trinket | a navy tricorne with a white feather (`sea-a#5`) |
+| `brass-sextant` | artifact | Trinket | a brass arc frame with its scope (`sea-a#14`) |
+| `mermaids-comb` | artifact | Trinket | a pink shell comb with a pearl (`sea-a#16`) |
+| `ship-in-a-bottle` | artifact | Wonder | a corked bottle with a ship inside (`sea-a#20`) |
+| `ships-anchor` | artifact | Wonder | a blue-grey anchor wound with rope (`sea-a#37`) |
+| `conch-of-the-deep` | artifact | Wonder | a spiral conch with a pink mouth (`sea-a#44`) |
+| `the-drowned-mans-locket` | artifact | Cursed | a silver locket wrapped in seaweed (`sea-a#61`) |
+| `corsairs-cutlass` | artifact | Wonder | two crossed cutlasses tied with a red knot (`sea-cutlass-b#9`) |
+
+The first cutlasses were near copies of the Tin Sabre (a bandana take had it
+skewered on the blade), so the re-roll asked for other shapes and the
+crossed pair was taken. Rejected too: dark wheels and black anchors that
+sink on a dark panel. 3 calls, US$0.25. Review sheet (not in git):
+`node art/review/icon-sheet.mjs <out.png> spells/scuttle artifacts/ships-anchor ...`.
+
+The Lily Road pads on the path preview are drawn in code
+(`src/render/map/map-view.ts`), not icons.
+
 ## Hero sheet stats (bead `border_marches-bzc.82`)
 
 The Heroes II style hero sheet shows every number as an icon. Recipe

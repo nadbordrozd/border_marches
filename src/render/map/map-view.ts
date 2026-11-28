@@ -169,6 +169,8 @@ export interface PathStep {
   readonly board?: boolean;
   /** A landing that ends the day: a ring and "lands: day ends". */
   readonly landEndsDay?: boolean;
+  /** On foot over water on Lily Road's pads (bead bzc.159): a lily pad. */
+  readonly lily?: boolean;
 }
 
 /**
@@ -371,12 +373,105 @@ const MAGMA_GLOW: readonly [number, number, number] = [255, 132, 40];
 /** Size of the path markers against their original 20 px drawing. */
 const PATH_MARKER_SCALE = 0.78;
 
+/** Side of a Lily Road pad's surface, drawn centred on its cell. */
+const LILY_PAD_PX = 64;
+
+/**
+ * A Lily Road pad (NAVAL 10.2, bead bzc.159): a round green lily pad
+ * with its notch, lit from the bottom left, under the path's arrows on a
+ * water step; `angle` turns the notch so a row of pads is not stamped.
+ * Every other pad carries a pink water lily.
+ */
+function lilyPad(angle: number, bloom: boolean): Surface {
+  const size = LILY_PAD_PX;
+  const surface = createSurface(size, size);
+  const ctx = context2d(surface);
+  const r = 26;
+  ctx.translate(size / 2, size / 2 + 2);
+  ctx.lineJoin = "round";
+  // A soft dark ring on the water under the pad.
+  ctx.fillStyle = "rgba(8, 32, 40, 0.35)";
+  ctx.beginPath();
+  ctx.ellipse(1, 3, r + 2, r * 0.62 + 2, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // The pad, squashed by the view, with its notch.
+  ctx.save();
+  ctx.scale(1, 0.66);
+  const notch = 0.32;
+  const pad = (): void => {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, r, angle + notch, angle - notch + Math.PI * 2);
+    ctx.closePath();
+  };
+  pad();
+  ctx.fillStyle = "#4f9e35";
+  ctx.fill();
+  // Lit toward the bottom left, shaded toward the top right.
+  ctx.save();
+  pad();
+  ctx.clip();
+  ctx.fillStyle = "#3b7d2a";
+  ctx.beginPath();
+  ctx.arc(r * 0.45, -r * 0.45, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#7cc94f";
+  ctx.beginPath();
+  ctx.arc(-r * 0.55, r * 0.5, r * 0.62, 0, Math.PI * 2);
+  ctx.fill();
+  // Veins from the notch.
+  ctx.strokeStyle = "rgba(196, 240, 150, 0.7)";
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  for (let k = 1; k < 6; k++) {
+    const a = angle + notch + ((Math.PI * 2 - 2 * notch) * k) / 6;
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.cos(a) * r * 0.8, Math.sin(a) * r * 0.8);
+  }
+  ctx.stroke();
+  ctx.restore();
+  pad();
+  ctx.strokeStyle = "#163a12";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.restore();
+  if (bloom) {
+    // A pink water lily sitting off centre, away from the arrows' line.
+    const bx = -r * 0.45;
+    const by = r * 0.2;
+    for (const [dx, dy] of [
+      [-4, 0],
+      [4, 0],
+      [0, -3],
+      [-2.5, 2.5],
+      [2.5, 2.5],
+    ] as const) {
+      ctx.beginPath();
+      ctx.ellipse(bx + dx, by + dy, 3.6, 2.6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = dy < 0 ? "#f4a6c8" : "#e2589b";
+      ctx.strokeStyle = "#5a1838";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.arc(bx, by, 1.8, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffd84a";
+    ctx.fill();
+  }
+  return surface;
+}
+
 /** The arrows and crosses of the path preview, code-drawn once each. */
 function pathMarker(
   kind: PathMarker["kind"],
   angle: number,
   green: boolean,
 ): Surface {
+  // A pad is not in the day colour: its arrows are (path-markers.ts).
+  // Its variant (path-markers.ts lilyVariant) turns it; odd ones bloom.
+  if (kind === "lily")
+    return lilyPad(angle, Math.round((angle * 4) / Math.PI) % 2 === 1);
   const size = 32;
   const surface = createSurface(size, size);
   const ctx = context2d(surface);
@@ -1237,10 +1332,11 @@ export function createMapView(
     if (path === null) return;
     for (const m of path) {
       if (!isExplored(m.cell.x, m.cell.y)) continue;
+      const surface = marker(m.kind, m.dir, m.reachable);
       ctx.drawImage(
-        marker(m.kind, m.dir, m.reachable),
-        m.cx * CELL - 16,
-        m.cy * CELL - 16,
+        surface,
+        m.cx * CELL - surface.width / 2,
+        m.cy * CELL - surface.height / 2,
       );
     }
     // Labels last, over every marker (a day-ending landing, bzc.149).

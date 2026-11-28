@@ -129,16 +129,3 @@ export const FAIR_WIND = { base: 200, per: 50, max: 700 } as const;
 export const SHIP_IN_A_BOTTLE_POWER = 2;
 /** Conch of the Deep: Hermit Crabs worth this much HP (12 of 10 HP). */
 export const CONCH_SUMMON_HP = 120;
-
-/**
- * Naval content without an icon of its own yet (NAVAL 10.2): the icon
- * catalogue (src/assets/icon-catalogue.json) and the art come with art bead
- * 9c (bzc.159). Until then iconFor gives each its kind's fallback icon, and
- * the catalogue coverage test (tests/data/catalogue-coverage.test.ts) skips
- * exactly these ids. Remove an id here when its icon lands.
- */
-export const NAVAL_ICONS_PENDING = {
-  spell: NAVAL_SPELLS,
-  skill: [SEAFARING_SKILL],
-  artifact: NAVAL_ARTIFACTS,
-} as const;

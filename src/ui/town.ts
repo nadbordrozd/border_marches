@@ -95,7 +95,7 @@ import {
   TILE_STATE_LABEL,
   tileState,
 } from "./town-hall.ts";
-import { buyShipButton, townBuildingArt } from "./town-harbour.ts";
+import { buyShipButton } from "./town-harbour.ts";
 import type { HallGroupId, HallLayout, TileState } from "./town-hall.ts";
 import {
   button,
@@ -899,16 +899,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       b.setAttribute("aria-pressed", String(on));
       b.setAttribute("aria-label", `${def.name}: ${TILE_STATE_LABEL[look]}`);
       const pic = el("span.gm-hall-art");
-      const art = townBuildingArt(town.faction, id);
-      if (art !== null)
-        pic.append(
-          img(
-            art.key,
-            art.standIn
-              ? "gm-hall-art-img gm-hall-stand-in"
-              : "gm-hall-art-img",
-          ),
-        );
+      const art = buildingArt(town.faction, id);
+      if (art !== null) pic.append(img(art.key, "gm-hall-art-img"));
       const creature = def.dwelling ?? def.drill?.creature;
       if (creature !== undefined)
         pic.append(
@@ -960,9 +952,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       };
 
       const pic = el("div.gm-hall-detail-art");
-      const art = townBuildingArt(town.faction, id);
-      if (art !== null)
-        pic.append(img(art.key, art.standIn ? "gm-hall-stand-in" : "", 2));
+      const art = buildingArt(town.faction, id);
+      if (art !== null) pic.append(img(art.key, "", 2));
       const creature = def.dwelling;
       if (creature !== undefined)
         pic.append(

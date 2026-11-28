@@ -100,6 +100,7 @@ export {
   navalStepKind,
   navalStepCost,
   isLilyCell,
+  isLilyStep,
   lilyStepCost,
   replayNavalSteps,
   type NavalMove,

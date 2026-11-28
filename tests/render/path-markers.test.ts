@@ -3,6 +3,7 @@
 // destination cross on the last step.
 import { describe, expect, it } from "vitest";
 import {
+  lilyVariant,
   MARKERS_PER_STEP,
   pathMarkers,
   stepDirection,
@@ -108,5 +109,42 @@ describe("pathMarkers", () => {
       1.5,
     ]);
     expect(pathMarkers([], { x: 0, y: 0 })).toEqual([]);
+  });
+});
+
+describe("Lily Road's pads (bead bzc.159)", () => {
+  const steps = [3, 4, 5].map((x) => ({
+    x,
+    y: 1,
+    reachable: true,
+    lily: true,
+  }));
+
+  it("puts one pad under each water step, before its arrows", () => {
+    const markers = pathMarkers([...steps, { x: 6, y: 1, reachable: true }], {
+      x: 2,
+      y: 1,
+    });
+    const pads = markers.filter((m) => m.kind === "lily");
+    expect(pads.map((m) => [m.cx, m.cy])).toEqual([
+      [3.5, 1.5],
+      [4.5, 1.5],
+      [5.5, 1.5],
+    ]);
+    for (const pad of pads) {
+      const first = markers.findIndex((m) => m.cell.x === pad.cell.x);
+      expect(markers[first]).toBe(pad);
+    }
+    // The land step after the water keeps its cross and gets no pad.
+    expect(markers.at(-1)).toMatchObject({ kind: "cross", cx: 6.5 });
+  });
+
+  it("keeps each cell's pad variant, whatever the path", () => {
+    expect(lilyVariant(3, 1)).toBe(lilyVariant(3, 1));
+    expect(new Set([3, 4, 5].map((x) => lilyVariant(x, 1))).size).toBe(3);
+    for (let x = 0; x < 20; x++) {
+      expect(lilyVariant(x, 7)).toBeGreaterThanOrEqual(0);
+      expect(lilyVariant(x, 7)).toBeLessThan(8);
+    }
   });
 });

@@ -2536,5 +2536,428 @@
         "height": 32
       }
     ]
+  },
+  "naval-a": {
+    "id": "naval-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "598e230f-4ce5-4fba-b7f0-b4b7c80ed04d",
+    "submittedAt": "2026-11-28T20:06:51.646Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a small round wooden rowing boat with a blue sail and a shiny brass hand bell hanging above it; (2) a small brown wooden boat tipped nose up and sinking, a big hole in its side and round purple bubbles rising; (3) three round green lily pads in a row with one pink water lily flower on the middle pad; (4) a fat white canvas sail on a short wooden mast, bulging full, a pale blue swirl of wind behind it; (5) a big curling deep blue ocean wave with a white foam crest; (6) a round wooden ship's steering wheel with eight spokes and brass caps on the handles."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17109,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a small round wooden rowing boat with a blue sail and a shiny brass hand bell hanging above it; (2) a small brown wooden boat tipped nose up and sinking, a big hole in its side and round purple bubbles rising; (3) three round green lily pads in a row with one pink water lily flower on the middle pad; (4) a fat white canvas sail on a short wooden mast, bulging full, a pale blue swirl of wind behind it; (5) a big curling deep blue ocean wave with a white foam crest; (6) a round wooden ship's steering wheel with eight spokes and brass caps on the handles. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-28T20:09:32.674Z",
+    "usageUsd": 0.08199744481510586,
+    "candidates": [
+      {
+        "file": "naval-a-0.png",
+        "sha256": "8ab2248e05ef382c53ec0d014e70aeae2e2fee512302f63c554ad602910e58e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-1.png",
+        "sha256": "b530c9b0da36452c8fa942927ca4aef7d22acc32e382d0bcad4d3151446c27c3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-2.png",
+        "sha256": "659ee68809d8d25b02f325afc7ca46e3daab83855d99b4d17e8adbb56303363f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-3.png",
+        "sha256": "cd545107b2c1369535a506ed8f39259538bdfad66675bccdcc26d2e97c8e20fc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-4.png",
+        "sha256": "1d7e7622c93ef6e3881955e3e7403969e7e3e9dd1b7b138874f70fffd7992084",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-5.png",
+        "sha256": "5f65d0eb59a7f1673eca0ee064f48cf405ab150a9e4fa201ec48536139ea6b62",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-6.png",
+        "sha256": "a827ba1a929dc687a50bdc95ae0a45690f096da8b6b868575640d6aec6fadcd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-7.png",
+        "sha256": "cfcc8de9eec75314e66b6fad0b0f39b0ce34df5d678d3861a7341bc3e19129d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-8.png",
+        "sha256": "695ed115fde1b8b5fcc6153aa97f9dcd5b65d5177ca549f3d1a0e756cc9f8c82",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-9.png",
+        "sha256": "205269a4c14e34b5afcb32c96a3e1b31b5e8545e345794f819ffc15ae86d9e9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-10.png",
+        "sha256": "f770267b08b486455936f58763503ab2a60a077bff33043802b468b86d3e2b0e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-11.png",
+        "sha256": "bc058b915d15edf05110c9917412f2a8792129b8879d06a43ee0ff3806499bdb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-12.png",
+        "sha256": "c59a2d42ef89193a3e7fdf39677b388817fb808c061e63fbad3c56780e825567",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-13.png",
+        "sha256": "429bef2131dbd3a7341b5f6f800ab591865d70ad12298754fa13bbca4bf52961",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-14.png",
+        "sha256": "72accaa3f07d03eb53b6e81f114457b102a10c5fd94dfc5a5596a43a118e2df8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-15.png",
+        "sha256": "6cb990405312126eec532784eada9bc044fff2e6cf5af1655c2ea96218cb8b58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-16.png",
+        "sha256": "478ea5030fc5e02edfc43b20cd653239054f456b1f74383ddd0e77bbcbb74ee3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-17.png",
+        "sha256": "48fc0e8cd55ae0187fcb2839286c1d42f8c4eeb54eb0f6072153a97ed18e26ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-18.png",
+        "sha256": "61643755a74d59b915fbdaa1bb4f1f162fdca50b909bec0e4fe6297a8d87b023",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-19.png",
+        "sha256": "0cd8bbb3ce09c726ac167d4614e087bcdc3917a684693d057d9bdc922351cbd2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-20.png",
+        "sha256": "d096f591888d80355b5817065c1d29b0375fe19c09d777f1eae5525a68d75cf5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-21.png",
+        "sha256": "b47bed772004fd9203f57c04cc34855e83464e608f0585c5f1ec0c75aff2696b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-22.png",
+        "sha256": "9eb835382436abe3714f115870693bc7d0f946764052300cf3ee541e164163a7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-23.png",
+        "sha256": "b1285ace10ba0f8eb1134df6d436f25ea2f2f1d98a32e5a6c7545176503bcfbe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-24.png",
+        "sha256": "f96d1c8b5e35abd41cf71cd209f00fb3f789f2f947bee54d5f145300b972e0b4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-25.png",
+        "sha256": "afad1da66d4c5bb181d3b78952db27ec06810e07254e917eafe2003084762304",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-26.png",
+        "sha256": "d610d4fbbf95a9f0fa604dc792d4deb122afd2a22166e76f73bb4ae5e6989acb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-27.png",
+        "sha256": "6983807e327d348ad95ea9df2c9279888b575a10d30d9f45861b142e57e75a54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-28.png",
+        "sha256": "051b59b7c0e2c0f70a13c93e4cf14c60381127176bc9f3f6ea5c876a05ef170a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-29.png",
+        "sha256": "da74270df603204528d7fd081876eb9b9635e21eba6498203a7e2387eb55e06d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-30.png",
+        "sha256": "dfd7881a91dcd77bb1aebda65dccd2243380c66081de16252d3cbca00f7dae10",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-31.png",
+        "sha256": "56d35d1c4cdede34f8cdbc292ffe60c80ef55378e592da86f2d95fda9f38275a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-32.png",
+        "sha256": "7ea0cdc02599c4923193019787ba8c992b29fb11acbfbe358364f4121aa2b96c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-33.png",
+        "sha256": "f9ae310a84979fc8dc3225989a9bbd7aef6063ea34654eca43573e3bfc365b79",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-34.png",
+        "sha256": "46e64ab7e100aa3a3d6e0d115e15a20ff7739149739262a1e9f21fc327046dbd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-35.png",
+        "sha256": "73e81a61224c0480f471d8d4c225bd6f74d5c8a872e69a914f8a8f147daae5e9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-36.png",
+        "sha256": "e83a627389d422faa6ef0891324b7eb3bc391ca5b40149a86b01ef2e5fc63f29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-37.png",
+        "sha256": "186774286fa570eb46a6ef99fab738ed7493056da1c3187fe65e272c659e2251",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-38.png",
+        "sha256": "ffc8411d7d9e335a9b6708176e742c269bdb116c5ba85bb630705e7d1f59a2d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-39.png",
+        "sha256": "05c5d9880e884f286e30f2626b5551256eb93e37791acfcb9b61f33fbcfd9838",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-40.png",
+        "sha256": "ae299efe30c8b853a54f9779dbb1b72d863fa7de08aaf1a68c291ccbc3f772e5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-41.png",
+        "sha256": "0870316da4b93c4eddfb21da940232c9f5f0f10c1f3027fbb7331c3dcec320d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-42.png",
+        "sha256": "ed049e51042b8740c5def4456564bef83cdef7ea00c7854ea5780970ea5caa58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-43.png",
+        "sha256": "8ab29f858cd9d4d0f50e8b87eafcb8c9d0a74f937f9f8f22139e1bec8ca3a7f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-44.png",
+        "sha256": "b637a40889e8f06949999706b0bc4784805e347f7bb058787a7539f1ffa078e2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-45.png",
+        "sha256": "a5bda03b2d1d4b35f7e556fdcf85a065efbccedfa8048d6651ef3814df3e7cd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-46.png",
+        "sha256": "750fd0cf2ea3106b024d1fcfef1ee2f650017e4d6aea09a7b309030492c88d4c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-47.png",
+        "sha256": "343a45d38cf4490b127ba12dfff6fa47c41a3555cb9bd6d015f0698d0aaa82e4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-48.png",
+        "sha256": "fc321bb34052579fa3a544b293f2d19d8a79cac7e6abadffc2894be10846d2cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-49.png",
+        "sha256": "24fe547181991fab60609627e4afe4fcf2117ff471e61e1344f1499a5c0cee50",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-50.png",
+        "sha256": "d58e3bea57dcc9d85e7a444f0589077e4690ae433379513850916b61efdefe6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-51.png",
+        "sha256": "aeb3a3e9473a7629a14d897de7efc3b813f054c79b0452426c4dec88c4660738",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-52.png",
+        "sha256": "b0d55bb9fda0d6d0f62e00970e7304940dba97565318135ce8d1f8d14ad734b5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-53.png",
+        "sha256": "a12c3494be91d8678b6e0237b80bf2cb1be8d1634c407e67d26a8db1aac70d77",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-54.png",
+        "sha256": "9752096ee6d75a8e68be9d8d2e33d2570946ef7c1ae41bd9a5381388b64859c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-55.png",
+        "sha256": "e2d5f4d1e2e116f4c57e51105180ff18d11b5b4c7f6a421126f57f0d838c660e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-56.png",
+        "sha256": "2e3326cfa0c5b626d886686a36c5a4255cabbc4745fa7d2de817df3605f27edd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-57.png",
+        "sha256": "f6d3126a48b6271aee717b3217b5ef9865419a829c995ff4bd9bba43ed709802",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-58.png",
+        "sha256": "169ae39754ba7866d67003cbe337339a7a1dec2283d31d2772658ce4e357e6b5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-59.png",
+        "sha256": "15fc19edeb89af80182234874882dd12c56ef1d9b30485e2a37c73b1eaccc36b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-60.png",
+        "sha256": "9a24583241988e7d05a8a4d07a8734e4e77bf86513bddd454fe13b9d34352301",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-61.png",
+        "sha256": "ffb39516af767f24218ca2ec9360062ef4c2abc62c433b5c1105afcef8d35b35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-62.png",
+        "sha256": "3c90e5536c4f85b08eeb5842eba0412b44010b17f84fbee89f356ffcda3e7b0d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "naval-a-63.png",
+        "sha256": "a48bf61b145d86229aa9e6306b0264f14dec4041ade40bf92b3e31407a9e2ebc",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

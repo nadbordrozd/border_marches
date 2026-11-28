@@ -14,6 +14,11 @@ import {
   SMALL_ICON_ASSETS,
 } from "../../src/assets/icons";
 import { ALL_ASSETS } from "../../src/assets/manifest";
+import {
+  NAVAL_ARTIFACTS,
+  NAVAL_SPELLS,
+  SEAFARING_SKILL,
+} from "../../src/data/naval";
 
 const ROOT = join(import.meta.dirname, "..", "..");
 
@@ -41,11 +46,11 @@ describe("content icons", () => {
       ICON_KINDS.map((kind) => [kind, iconIds(kind).length]),
     );
     expect(counts).toEqual({
-      spell: 60,
-      artifact: 87,
+      spell: 65,
+      artifact: 95,
       condition: 30,
       ground: 8,
-      skill: 24,
+      skill: 25,
       feat: 28,
       vow: 12,
       stat: 14,
@@ -181,6 +186,29 @@ describe("content icons", () => {
       16,
     ]);
     expect(ALL_ICON_ASSETS).toContain(shell[16]);
+  });
+
+  it("draws the naval spells, Seafaring and the sea artifacts", () => {
+    // bead border_marches-bzc.159 (NAVAL 7)
+    for (const [kind, ids] of [
+      ["spell", NAVAL_SPELLS],
+      ["skill", [SEAFARING_SKILL]],
+      ["artifact", NAVAL_ARTIFACTS],
+    ] as const)
+      for (const id of ids) {
+        const ref = iconFor(kind, id);
+        expect({ kind, id, fallback: ref.fallback }).toEqual({
+          kind,
+          id,
+          fallback: false,
+        });
+        expect(ref.frame).not.toBeNull();
+      }
+    expect(iconFor("spell", "Tidal Wave").frame).toBe(ICON_FRAMES.storm);
+    expect(iconFor("artifact", "Corsair's Cutlass").frame).toBe(
+      ICON_FRAMES.wonder,
+    );
+    expect(iconFor("skill", "Seafaring").frame).toBe(ICON_FRAMES.skill);
   });
 
   it("has 16 px overlays for conditions and 32 px elsewhere", () => {

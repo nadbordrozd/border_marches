@@ -23,7 +23,12 @@ import {
 import { pathSummary } from "../../src/ui/hints.ts";
 import { mapCard } from "../../src/ui/map-card.ts";
 import { displayObjects } from "../../src/ui/objects.ts";
-import { carriedAtStart, carryStep, mapShips } from "../../src/ui/ships.ts";
+import {
+  carriedAtStart,
+  carryStep,
+  mapShips,
+  shipCalledLine,
+} from "../../src/ui/ships.ts";
 import { ok } from "../core/game/helpers.ts";
 import { STRAIT, boat, navalGame } from "../core/game/naval-helpers.ts";
 
@@ -127,6 +132,49 @@ describe("the ship hover card", () => {
   it("calls open sea the sea", () => {
     const card = mapCard(game(), 0, 8, 8, "hero-0")!;
     expect(card.title).toBe("Sea");
+  });
+});
+
+describe("the log line of Call the Boat (bead bzc.159)", () => {
+  const event = {
+    type: "ship-called",
+    heroId: "hero-0",
+    shipId: "ship-1",
+    x: 5,
+    y: 5,
+    built: false,
+  } as const;
+
+  it("says what came to the player's own hero, with a new boat's price", () => {
+    const s = game();
+    const name = s.heroes[0]!.name;
+    expect(shipCalledLine(s, event, 0)).toEqual({
+      text: `${name} calls the boat: it sails up alongside`,
+      quiet: false,
+    });
+    expect(shipCalledLine(s, { ...event, built: true }, 0)?.text).toBe(
+      `${name} calls for a boat: a new one is built alongside (1000 gold, 10 wood)`,
+    );
+  });
+
+  it("tells of another player's boat only on explored water, quietly", () => {
+    const s = game();
+    const other = 1;
+    const seen = (explored: boolean): GameState => ({
+      ...s,
+      players: [
+        s.players[0]!,
+        {
+          ...s.players[0]!,
+          id: other,
+          explored: s.players[0]!.explored.map(() => explored),
+        },
+      ],
+    });
+    expect(shipCalledLine(seen(false), event, other)).toBeNull();
+    const line = shipCalledLine(seen(true), event, other);
+    expect(line?.quiet).toBe(true);
+    expect(line?.text).toMatch(/ calls a boat$/);
   });
 });
 

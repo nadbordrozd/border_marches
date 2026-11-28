@@ -2553,5 +2553,645 @@
     "verdict": "REJECTED",
     "notes": "great boiler: three boilers in a cluster, not one",
     "at": "2026-11-27T09:51:41.511Z"
+  },
+  "harbour-realm-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "shipyard (humans, Royal Docks): barrel-roofed blue boatshed with a sailboat on its cradle and rope coils; unlike any hall",
+    "at": "2026-11-28T20:16:29.302Z"
+  },
+  "harbour-realm-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "lighthouse (humans, Harbour Light): fat banded limestone tower, a mullioned lamp room and a blue cap",
+    "at": "2026-11-28T20:16:29.491Z"
+  },
+  "harbour-realm-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "admiralty (humans): buttressed cream hall, blue roof, a big ship's wheel on its gable and an anchor",
+    "at": "2026-11-28T20:16:29.653Z"
+  },
+  "harbour-restless-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "shipyard (undead, Bone Wharf): crooked violet boatshed among big rib bones with a black rowing boat",
+    "at": "2026-11-28T20:16:29.812Z"
+  },
+  "harbour-restless-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "lighthouse (undead, Corpse-Candle Tower): slate tower crowned by a fat melting candle with a pale green flame",
+    "at": "2026-11-28T20:16:29.955Z"
+  },
+  "harbour-restless-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "admiralty (undead, Ghost Fleet Office): violet-roofed slate office, a glowing porthole and a big black ship's wheel",
+    "at": "2026-11-28T20:16:30.087Z"
+  },
+  "harbour-horde-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "shipyard (goblins, Raft Yard): patched moss-roofed shed beside a log raft with a patched red sail",
+    "at": "2026-11-28T20:16:30.202Z"
+  },
+  "harbour-horde-r1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "lighthouse (goblins, Bonfire Beacon): open log scaffold, a roaring iron fire bowl and a moss hut; not the Skull Tower's barrel",
+    "at": "2026-11-28T20:16:30.324Z"
+  },
+  "harbour-horde-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "admiralty (goblins, Pirate King's Tent): spotted hide tent under a giant tricorne, dull red awning; unlike the horned Boss Tent",
+    "at": "2026-11-28T20:16:30.438Z"
+  },
+  "harbour-candy-r1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "shipyard (candy, Gumdrop Marina): barrel-roofed gingerbread boathouse and a big gumdrop sailboat",
+    "at": "2026-11-28T20:16:30.554Z"
+  },
+  "harbour-candy-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "lighthouse (candy, Peppermint Light): red and white peppermint tower with a fenced lamp room and a pink cap",
+    "at": "2026-11-28T20:16:30.671Z"
+  },
+  "harbour-candy-r1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "admiralty (candy, Licorice Admiralty): icing-white hall, pink roof, a huge black licorice wheel that reads, and a licorice anchor",
+    "at": "2026-11-28T20:16:30.777Z"
+  },
+  "harbour-dwarves-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "shipyard (dwarves, Dry Dock): a riveted iron hull in a stone dock with a brass crane; the stone trough is the dock itself",
+    "at": "2026-11-28T20:16:30.886Z"
+  },
+  "harbour-dwarves-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "lighthouse (dwarves, Lamp Engine): stone tower, verdigris cap, a giant brass gear lamp and copper boilers",
+    "at": "2026-11-28T20:16:30.992Z"
+  },
+  "harbour-dwarves-r1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "admiralty (dwarves, Ironclad Board): iron-plated office with a gun turret, periscope, brass wheel and anchor; no hull, unlike the Dry Dock",
+    "at": "2026-11-28T20:16:31.101Z"
+  },
+  "harbour-realm-a#0": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#1": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#4": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#5": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#6": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#7": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-realm-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take of a building covered by the accepted take (small boatshed without its boat, spindly tower or a plainer hall)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#0": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#1": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#3": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#6": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#7": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-restless-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare or weaker take: stray number marks, a hard-to-read black boat or a less clear candle or office than the accepted take",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#0": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#1": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#2": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#4": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#5": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#6": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#7": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#8": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#9": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#10": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#11": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#13": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#14": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-a#15": {
+    "verdict": "REJECTED",
+    "notes": "shed and tent: spare takes; every beacon here is a barrel on stilts, the Skull Tower's silhouette (re-rolled in harbour-horde-r1)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#0": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#1": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#2": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#3": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#4": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#5": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#6": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#8": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#9": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#10": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#11": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#12": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#13": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#14": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-a#15": {
+    "verdict": "REJECTED",
+    "notes": "shipyard takes have a tiny boat or a grey cast shadow; admiralty takes lose the black wheel on brown gingerbread (re-rolled in harbour-candy-r1); other lighthouses are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#1": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#2": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#3": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#4": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#5": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#6": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#8": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#9": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#10": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#11": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#12": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#13": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#14": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-a#15": {
+    "verdict": "REJECTED",
+    "notes": "admiralty takes repeat the Dry Dock's iron hull (re-rolled in harbour-dwarves-r1); other dock and lamp takes are spares",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#7": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-candy-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: the accepted boathouse and white hall read more clearly than these (cubes and tiered cakes collide with the halls)",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#4": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#5": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#7": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#9": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#11": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#12": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#14": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-horde-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "spare beacon: thinner legs or a fussier frame than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#0": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#3": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#6": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
+  },
+  "harbour-dwarves-r1#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: a darker or busier office than the accepted one",
+    "at": "2026-11-28T20:16:31.109Z"
   }
 }

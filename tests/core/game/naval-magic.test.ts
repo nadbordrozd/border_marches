@@ -13,6 +13,7 @@ import {
   heroSight,
   isAfloat,
   isLilyCell,
+  isLilyStep,
   lilyStepCost,
   moveContext,
   moveHeroAlong,
@@ -317,6 +318,13 @@ describe("Lily Road (NAVAL 7.1)", () => {
     expect(diag.total).toBe(3 * 200 + 141);
     const ctx = moveContext(s, hero(s), { ignoreFog: true });
     expect(lilyStepCost(ctx, 3, 1, 4, 2)).toBe(283);
+    // The path preview draws a pad on each water step (bead bzc.159).
+    expect(path.steps.map((x) => isLilyStep(s.map, x))).toEqual([
+      true,
+      true,
+      true,
+      false,
+    ]);
     expect(isLilyCell(ctx, 4, 2)).toBe(true);
     expect(isLilyCell(ctx, 6, 2)).toBe(false);
     const r = ok(moveHeroAlong(s, "hero-0", path.steps));

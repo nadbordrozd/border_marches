@@ -1,6 +1,6 @@
 /**
  * Town-screen art of the v0.2 factions, the Candy Kingdom and the Deepforge
- * (beads border_marches-bzc.15, bzc.114 and bzc.133,
+ * (beads border_marches-bzc.15, bzc.114 and bzc.133; the harbour bzc.159,
  * docs/art/classes/towns.md): one 64 x 64 building sprite per building of
  * each faction's tree and one 256 x 224 backdrop per faction. Studio sets
  * `chunky-buildings` (redrawn in the chunky map-town style, bead bzc.98)
@@ -45,7 +45,8 @@ export interface TownBackdropAsset extends ImageAsset {
 /**
  * Every building of each faction's tree (FACTION_*.md section 9) in display
  * order: halls, fort, economy, guild, tavern, dwellings by tier, Drills,
- * specials, the Keystone Hall.
+ * specials, the harbour (NAVAL 5.7: one id for every faction, the names
+ * differ), the Keystone Hall.
  */
 export const TOWN_BUILDING_IDS: Readonly<
   Record<TownArtFaction, readonly string[]>
@@ -72,6 +73,9 @@ export const TOWN_BUILDING_IDS: Readonly<
     "tiltyard",
     "tithe-barn",
     "chapel-of-oaths",
+    "shipyard",
+    "lighthouse",
+    "admiralty",
     "round-table",
   ],
   undead: [
@@ -96,6 +100,9 @@ export const TOWN_BUILDING_IDS: Readonly<
     "drawing-room",
     "essence-still",
     "family-crypt",
+    "shipyard",
+    "lighthouse",
+    "admiralty",
     "hall-of-ancestors",
   ],
   goblins: [
@@ -120,6 +127,9 @@ export const TOWN_BUILDING_IDS: Readonly<
     "racing-track",
     "loot-pile",
     "launch-ramp",
+    "shipyard",
+    "lighthouse",
+    "admiralty",
     "great-flinger",
   ],
   candy: [
@@ -144,6 +154,9 @@ export const TOWN_BUILDING_IDS: Readonly<
     "pulling-hooks",
     "bakery",
     "larder",
+    "shipyard",
+    "lighthouse",
+    "admiralty",
     "the-four-oclock",
   ],
   dwarves: [
@@ -168,6 +181,9 @@ export const TOWN_BUILDING_IDS: Readonly<
     "powder-magazine",
     "deep-shaft",
     "repair-yard",
+    "shipyard",
+    "lighthouse",
+    "admiralty",
     "the-great-boiler",
   ],
 };

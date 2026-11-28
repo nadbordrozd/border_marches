@@ -28,9 +28,10 @@ describe("town building art coverage", () => {
   it("has a sprite for every building of every v0.2 tree", () => {
     for (const faction of TOWN_ART_FACTIONS) {
       // 3 halls, 3 forts, marketplace, silo, guild, tavern, 6 dwellings,
-      // 3 Drills, 2 specials and the Keystone Hall (FACTION_*.md section 9).
-      expect(TOWN_BUILDING_IDS[faction]).toHaveLength(22);
-      expect(new Set(TOWN_BUILDING_IDS[faction]).size).toBe(22);
+      // 3 Drills, 2 specials and the Keystone Hall (FACTION_*.md section 9),
+      // and the harbour's Shipyard, Lighthouse and Admiralty (NAVAL 5.7).
+      expect(TOWN_BUILDING_IDS[faction]).toHaveLength(25);
+      expect(new Set(TOWN_BUILDING_IDS[faction]).size).toBe(25);
       for (const building of TOWN_BUILDING_IDS[faction]) {
         const art = buildingArt(faction, building);
         expect(art?.building).toBe(building);
@@ -43,7 +44,7 @@ describe("town building art coverage", () => {
         ]),
       );
     }
-    expect(BUILDING_ART_ASSETS).toHaveLength(110);
+    expect(BUILDING_ART_ASSETS).toHaveLength(125);
     for (const asset of [...BUILDING_ART_ASSETS, ...TOWN_BACKDROP_ASSETS]) {
       expect(existsSync(join(ROOT, "public", asset.path))).toBe(true);
       expect(assetByKey(asset.key)).toBe(asset);

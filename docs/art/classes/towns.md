@@ -225,6 +225,32 @@ recipe carries the negatives `yellow roofs, gold roofs, black smoke, lava`.
   Keystone Hall, `riveted-palisade`, `ironbound-wall` and `gun-keep` fort
   1-3.
 
+## Harbour buildings (bzc.159)
+
+The Shipyard, Lighthouse and Admiralty of every tree
+([NAVAL.md](../../design/NAVAL.md) 5.7), one call per faction (three
+buildings, five takes each) in `chunky-buildings`, style image the faction's
+chunky fort town (`@hordeR` for the Horde), seeds 159101-159501. Each
+building's signature prop says "sea": a hull or boat at the shipyard, a
+light or fire on the lighthouse, a ship's wheel or captain's hat on the
+admiralty; no water, flags or quay in a sprite.
+
+| Faction | Shipyard | Lighthouse | Admiralty |
+| --- | --- | --- | --- |
+| Realm | barrel-roofed blue boatshed, a sailboat on its cradle | banded limestone tower, blue cap | buttressed cream hall, a ship's wheel on the gable, an anchor |
+| Restless | crooked violet shed among rib bones, a black rowing boat | slate tower crowned by a candle with a pale green flame | violet-roofed office, glowing porthole, black wheel |
+| Horde | moss-roofed shed beside a log raft with a patched red sail | open log scaffold with a roaring fire bowl | spotted hide tent under a giant tricorne |
+| Candy | barrel-roofed gingerbread boathouse, a gumdrop sailboat | peppermint-striped tower | icing-white hall, a black licorice wheel and anchor |
+| Deepforge | riveted hull in a stone dry dock with a brass crane | stone tower with a giant brass gear lamp | iron-plated office with turret, periscope, wheel and anchor |
+
+Three re-roll calls: a beacon that was a barrel on stilts repeated the
+Skull Tower's silhouette (asked again as an open scaffold, "no barrel"); a
+black wheel vanished on brown gingerbread (asked on a white iced front); the
+first gumdrop boat was too small to read and cast a grey shadow; the first
+Ironclad Board repeated the Dry Dock's iron hull (asked again with "No boat,
+no hull"). The Dry Dock's stone trough is the dock itself, not a slab under
+a building. 8 calls, US$0.66.
+
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
@@ -233,7 +259,7 @@ recipe carries the negatives `yellow roofs, gold roofs, black smoke, lava`.
 | Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard,candy-palace,dwarves-forgehall}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
 | Lost World town, 3x2 | 240 x 184 | `chunky-towns` | `public/assets/towns/dinosaur-town-3x2.png` | `town3x2Asset(obj)` |
 | Level towns (Lost World, goblin; levels 1-3), neutral village | 88 x 96, 96 x 100, 96 x 104; 72 x 72 | `chunky-towns` | `public/assets/towns/{dinosaur,goblin}-city-{1,2,3}.png`, `village.png` | `townAsset(obj)`, the Lost World town screen |
-| Building sprite, one per building of each tree (22 x 5) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
+| Building sprite, one per building of each tree (25 x 5) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
 | Town-screen backdrop, one per faction | 256 x 224 (shown x2) | `town-backdrops` | `public/assets/towns/backdrops/<faction>.png` | `townBackdrop(faction)` |
 
 The lookups are in `src/assets/town-art.ts`; the data lists (building ids per
@@ -244,7 +270,8 @@ for the Skull Tower.
 
 Building ids are the faction documents' names (section 9 of
 `docs/design/FACTION_*.md`) in kebab case without apostrophes
-("Squires' Hall" is `squires-hall`). The Magic Guild levels share one sprite
+("Squires' Hall" is `squires-hall`); the harbour's are `shipyard`,
+`lighthouse` and `admiralty` in every faction, whatever it calls them. The Magic Guild levels share one sprite
 (`magic-guild`); `fort-1` to `fort-3` and `keystone-hall` are accepted as
 role aliases.
 

@@ -5248,5 +5248,1165 @@
         "height": 64
       }
     ]
+  },
+  "harbour-realm-a": {
+    "id": "harbour-realm-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5061b2a4-58bb-45a2-9074-8f7d6f10d49b",
+    "submittedAt": "2026-11-28T19:58:09.789Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three storybook kingdom buildings, five takes of each in this order: Shipyard (a chunky timber boatshed with a blue roof, a fat little wooden sailboat hull on a wooden cradle in front of it and a coil of rope); Lighthouse (a fat stout round lighthouse of cream limestone with red-brown bands, a blue cone cap and a big glowing lamp room); Admiralty (a cream stone hall with a blue roof, a giant wooden ship's wheel on its front gable and a big iron anchor by the door). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f, warm lamp light #ffd36a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three storybook kingdom buildings, five takes of each in this order: Shipyard (a chunky timber boatshed with a blue roof, a fat little wooden sailboat hull on a wooden cradle in front of it and a coil of rope); Lighthouse (a fat stout round lighthouse of cream limestone with red-brown bands, a blue cone cap and a big glowing lamp room); Admiralty (a cream stone hall with a blue roof, a giant wooden ship's wheel on its front gable and a big iron anchor by the door). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f, warm lamp light #ffd36a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, water, sea, waves, slab."
+    },
+    "at": "2026-11-28T19:59:42.533Z",
+    "usageUsd": 0.08221341445710924,
+    "candidates": [
+      {
+        "file": "harbour-realm-a-0.png",
+        "sha256": "477990ef7bf64d7bf7a281fef222faaf68accd9f20ec45c4df066cbea98c9d14",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-1.png",
+        "sha256": "a5abd5cc21d6aa289a0700d30f13080c3197b7f05b9b4259cf7f47ddcc736119",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-2.png",
+        "sha256": "a199d233db5c0ad17b077952ec44395675f7684f7c3bcfc4971f038e8ee5ca65",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-3.png",
+        "sha256": "5ed108164d299d09f26926fe35e201bb1cd638c9795db46e49b41801e1653a45",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-4.png",
+        "sha256": "bfead03ef5781b7fc84af7756ea1c107541c18440b0dc68a216e806f752d9fb4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-5.png",
+        "sha256": "0072a320ffe4daa42f5f96c8fab54fce94885d902d8f19c26239ec7847662613",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-6.png",
+        "sha256": "97931352c5dff75e41844c9e8ee5f78ce71be50d76ea56450b8afb8ce0afe08e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-7.png",
+        "sha256": "664161a5add7c07cd3563b243b055b277079e3571253d891934837eb171e0f91",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-8.png",
+        "sha256": "cc484aba5707752cb7d73516dbb232746021eb824744057fc2a3d8fc5ae16f56",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-9.png",
+        "sha256": "c0800e3ce92670480dd91fcd6c5cbf9b08894a2888be9d0f29bc8a181e72f538",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-10.png",
+        "sha256": "e6ed6f71bda101a6d97536dcb1b63fd652541b5a9afd91467af5b076c3972a01",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-11.png",
+        "sha256": "3129f8bfeba7b20a4c8c7adf183fa1dea3b06bc0222e78877912bcdea2a2a261",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-12.png",
+        "sha256": "5599aaaf0135db7f290d2759b8357539c32e5bf5a35de1f6f5c38c7588514614",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-13.png",
+        "sha256": "e7c5114f9b640c7e799e9b7f2384feec056dff926192719ac9aa0b9ed00b8d2a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-14.png",
+        "sha256": "601d64721e842a844ae24634f3d6c8992f61971a5d541c4105d87618fde4fc93",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-realm-a-15.png",
+        "sha256": "e745864c63533260b53c7f7205b1c3a8a229340eda4441c9c8449357787c4224",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-candy-a": {
+    "id": "harbour-candy-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "07fd382d-7f8d-459f-9b60-84a534dbd3bf",
+    "submittedAt": "2026-11-28T19:59:42.650Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Shipyard (a gingerbread boatshed with a pink icing roof, a round little boat made of a giant red gumdrop on a wafer cradle in front of it); Lighthouse (a fat round lighthouse striped red and white like a peppermint stick, a pink cap and a big glowing lamp room); Admiralty (a gingerbread hall with a pink roof trimmed with black licorice, a giant black licorice wheel like a ship's wheel on its front). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24, warm lamp light #ffd36a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159401,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three cute candy kingdom buildings, five takes of each in this order: Shipyard (a gingerbread boatshed with a pink icing roof, a round little boat made of a giant red gumdrop on a wafer cradle in front of it); Lighthouse (a fat round lighthouse striped red and white like a peppermint stick, a pink cap and a big glowing lamp room); Admiralty (a gingerbread hall with a pink roof trimmed with black licorice, a giant black licorice wheel like a ship's wheel on its front). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24, warm lamp light #ffd36a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore, water, sea, waves, slab."
+    },
+    "at": "2026-11-28T20:01:02.150Z",
+    "usageUsd": 0.08211745595932007,
+    "candidates": [
+      {
+        "file": "harbour-candy-a-0.png",
+        "sha256": "99d73d18d255a0ef4e6abf7191636ec710c9db49668637d4cceaaf36e27fdec1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-1.png",
+        "sha256": "d94a20ea50d431265e9dc507d580cf5719edf2dbdb24ddb91b12a9ea7dd96c27",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-2.png",
+        "sha256": "f18002601fe841d51d8034ec7ed4c2ba42eabf5a0dd7b850328e75234559dfc7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-3.png",
+        "sha256": "e9360928bab170d535c0f0628f45e4067f6364b8c82c99b5d7c130bac09c60ac",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-4.png",
+        "sha256": "b20c82fdfc9d01b24b8156f3b671b217fe39ff43374b431bd65288c9ae1d8710",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-5.png",
+        "sha256": "3ef9616a8fc2e8e8b48af95875294bb8171a00acc1cfcbfd32cae8fb824450b5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-6.png",
+        "sha256": "70c2a9dd431a13f6a2507a96a29631118548205e4f70a20c32201216c6ec2e01",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-7.png",
+        "sha256": "9c05cf35218ea53a56fb175597ee6228c678208a30c8c87a6270d75c7f2842e4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-8.png",
+        "sha256": "bbbaee45d23be9da3c09d407834eb1ebb553424b267e52d7cc6a455a6113d476",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-9.png",
+        "sha256": "bdf3c38da60dafcded3103cdf8d0682d1d2679cfa9d6a43e61adff157f655370",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-10.png",
+        "sha256": "20f6edcc3dd279e0cba9f20c0f2c9ad5cb039af4b25b2e772b3efed91b485971",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-11.png",
+        "sha256": "0fc13961f9ce029b30c87dd41b19ea2a58be3f5a3f11ed2c6bde74685b96a543",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-12.png",
+        "sha256": "3a6b7ede35b3dc926a4012ee38f7ce2e65632089881314a298a3a79ee4102d60",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-13.png",
+        "sha256": "04af7286ec22dfc9a63531c99683df25fbac7cc2521f9d9cab5dbaf090b44484",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-14.png",
+        "sha256": "4a528fd7a25daf3f58daed2394c2c7eca261f264a695a940f6d2fba5b6b7f0fa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-a-15.png",
+        "sha256": "8efa6aeb96eb01a39fa7c9e9709a76fd35ffb46c1c7be023580d040d7eb778ed",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-restless-a": {
+    "id": "harbour-restless-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "aea5863b-18fe-4374-8203-7caa34f38b4c",
+    "submittedAt": "2026-11-28T20:01:32.833Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three haunted town buildings, five takes of each in this order: Shipyard (a crooked slate boatshed with a violet roof, a little black rowing boat on a cradle of big bone white fish bones in front of it); Lighthouse (a fat crooked slate lighthouse tower with a violet cap, on top a giant melting white candle with a pale green flame); Admiralty (a crooked slate office with a violet roof, a big round porthole window glowing violet and a ship's wheel of black iron on its front). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white #d8d0bc, black iron, pale green candle flame #b8f070; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three haunted town buildings, five takes of each in this order: Shipyard (a crooked slate boatshed with a violet roof, a little black rowing boat on a cradle of big bone white fish bones in front of it); Lighthouse (a fat crooked slate lighthouse tower with a violet cap, on top a giant melting white candle with a pale green flame); Admiralty (a crooked slate office with a violet roof, a big round porthole window glowing violet and a ship's wheel of black iron on its front). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white #d8d0bc, black iron, pale green candle flame #b8f070; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, skeleton, ghost, blood, gore, water, sea, waves, slab."
+    },
+    "at": "2026-11-28T20:03:38.278Z",
+    "usageUsd": 0.08181923943095737,
+    "candidates": [
+      {
+        "file": "harbour-restless-a-0.png",
+        "sha256": "000a34032f949de87219d5775082fbdf145d9ed33808c458fe23f54a7fea997f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-1.png",
+        "sha256": "03c72d221037ae0a6313413a4375cf976d599b2c378e190737b1f561f2ba3d01",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-2.png",
+        "sha256": "57c1ed1109e4095ce650f67bab6f91e23c9712363e7d6c4be17cf2f0388915de",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-3.png",
+        "sha256": "b9bdb745a50d74979c44fbc6dc59b100dd62be9e4358f16b81590a165c03cf03",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-4.png",
+        "sha256": "3b460001d93b3e63e60a9bbcb0b80e8b501943eb3cedf65ecadfee6290ad2cdb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-5.png",
+        "sha256": "2295274da274f184f4580cb412e0e4a973cc64a436a3677aad0ac4bc04b5e609",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-6.png",
+        "sha256": "3bc7df7d4cca819d8714dca0922b06edc78febf9de67a785ec963c9923c13286",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-7.png",
+        "sha256": "c3c97bf2dc9aeaefb93eb3c8a05f9010c37c54a788c0660838b5b96bb76218a3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-8.png",
+        "sha256": "dcb25943bf5ee0e2fcf16c0cbed91133858c7dfe4acaf2f1f1352e44d4dcd779",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-9.png",
+        "sha256": "0a67882edecbb3c81fc5c0f1512612ebf1ea62859790ac6ca7586661c668a7c2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-10.png",
+        "sha256": "7e0c9070852bf58e154be9d542738410eb6c03fdb8002e5c431f8d44760d4158",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-11.png",
+        "sha256": "e08237eced7f65358af5eb7725d672e6d5f9dfecc98ea67a44b343b7be708e0e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-12.png",
+        "sha256": "327e3b980f34d3c2083a74c663f74d6f2807ee1b26fc9a440a4697c8fcb6f1d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-13.png",
+        "sha256": "4fe530540b0ac8bad49346436ea5ff13ec3f614143920cccf454e7a7e5e6e459",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-14.png",
+        "sha256": "de6a692a5345522f4f67ff7fb13cec77fdc4a60eea4c0139c26e7154a7fd5019",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-restless-a-15.png",
+        "sha256": "b48eb4c8dced9020c8fa5eba776dd55895da03bf407056d221781f32b0d95672",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-horde-a": {
+    "id": "harbour-horde-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "05e0ebec-a490-42e2-8a14-ea5c22f47890",
+    "submittedAt": "2026-11-28T20:03:38.509Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Shipyard (a rusty iron lean-to with a moss green roof, a crude log raft with a patched dull red sail propped up beside it); Lighthouse (a fat squat scrap-wood tower on thick log stilts with a big crackling bonfire in an iron basket on top); Admiralty (a big tawny spotted hide tent with a dull red awning, a giant dark brown captain's tricorne hat on its top and a treasure chest by the door). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a, tawny spotted hide, fire orange #ff8a2a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-r1-0.png sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Shipyard (a rusty iron lean-to with a moss green roof, a crude log raft with a patched dull red sail propped up beside it); Lighthouse (a fat squat scrap-wood tower on thick log stilts with a big crackling bonfire in an iron basket on top); Admiralty (a big tawny spotted hide tent with a dull red awning, a giant dark brown captain's tricorne hat on its top and a treasure chest by the door). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a, tawny spotted hide, fire orange #ff8a2a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roof, bright yellow, gold, skull, water, sea, waves, slab."
+    },
+    "at": "2026-11-28T20:05:06.196Z",
+    "usageUsd": 0.0819855804708269,
+    "candidates": [
+      {
+        "file": "harbour-horde-a-0.png",
+        "sha256": "c2a4c2c5283efe773b460e81cfe03bdf01ccf9ba0e76a84eff2996996e3db59b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-1.png",
+        "sha256": "9e8d9fd888ba9128d51652f7fb430f8d955f884e1c300323c5d9c49a2583b85c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-2.png",
+        "sha256": "1fb553f2c15c4e04011ccd864f9f805d2155d6fab2d2333e7ffad9957bb29db1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-3.png",
+        "sha256": "52a17b8867e18714f5e88478e8e5573f9e7af8a119d1a1d59df872c66056869b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-4.png",
+        "sha256": "6b490b7408de78e32eae21599a5ccc9d138f7796a0cb96e76eb5aba991364f70",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-5.png",
+        "sha256": "806a235ca957fba3c77ba51b2cf9692593f9a495c903afe01766ce254ec42672",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-6.png",
+        "sha256": "1fc1a10c14bed9b2b858a4c11f1274dc69e4000464ac64571b0431b238957189",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-7.png",
+        "sha256": "a262b468540ce3ca1cd6925025f5014f48b3b4869de4061a5f18d3e0bc61d47e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-8.png",
+        "sha256": "7cc560ad3e291dad883e5a5cb9b8358689adaef458c27dac6f5a5eb6857c1d44",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-9.png",
+        "sha256": "b159066316015a5b847a9411e31966995f31c99416b6ea4a9de714168406fa26",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-10.png",
+        "sha256": "0bba9159588e07deb32112f17e09f5849be701c1bc67c97ee5c0120d108ec893",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-11.png",
+        "sha256": "0acb7f044fcc267f3921168a0a9326f9cc7f8e02ffce70cd2335210cfd254008",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-12.png",
+        "sha256": "9c75b4f03c80a2270303187778dbc43491737bdbc7e0042deb076cc4682b067e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-13.png",
+        "sha256": "2fd3fbbd424fcd1ddde75ba70d2214a0e130862a147a444becb5ed8c7f80ad6e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-14.png",
+        "sha256": "8040b09723d4f8a2d7581ee8148755ae71c1a755e17fcf7ab9aadee68da570f2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-a-15.png",
+        "sha256": "3487fe2a6505b53e825f2e7f6fa028cb57ac2f26bf587a26c40d5b73bd34a340",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-dwarves-a": {
+    "id": "harbour-dwarves-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "800a89e2-c802-4147-bb80-c0cbabdbf3c6",
+    "submittedAt": "2026-11-28T20:05:06.317Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Shipyard (a stone dry dock cradle holding a fat riveted iron boat hull on wooden blocks, a small brass crane over it); Lighthouse (a fat squat stone lighthouse with a verdigris cap and a giant round brass lamp with gears, a copper boiler at its foot); Admiralty (a stone office with a verdigris roof and a riveted dark iron ship's prow jutting out of its front, a brass ship's wheel over the door). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a, dark iron #4a4f57, steam white #f4f1ea."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159501,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Shipyard (a stone dry dock cradle holding a fat riveted iron boat hull on wooden blocks, a small brass crane over it); Lighthouse (a fat squat stone lighthouse with a verdigris cap and a giant round brass lamp with gears, a copper boiler at its foot); Admiralty (a stone office with a verdigris roof and a riveted dark iron ship's prow jutting out of its front, a brass ship's wheel over the door). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a, dark iron #4a4f57, steam white #f4f1ea. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, water, sea, waves, slab."
+    },
+    "at": "2026-11-28T20:06:45.022Z",
+    "usageUsd": 0.08172462211714851,
+    "candidates": [
+      {
+        "file": "harbour-dwarves-a-0.png",
+        "sha256": "315ce15b0659ef3cd25813aeb89546ecfe0759b7712e408889a59ea2710d9cfe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-1.png",
+        "sha256": "f51bcd8f78e6641f46ea7ea871610f60d72fecf3487b57bf3daa6eba0a0652ba",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-2.png",
+        "sha256": "6d2162db3773914dddae5af937f0a6964504717302e664a9425b76170cf30e24",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-3.png",
+        "sha256": "a2967e60b8305d676f9f36f40866a2fc9e0e8d1137e95cc9f5746e288d51e252",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-4.png",
+        "sha256": "7f49f69eeb1f2e34c2fd85d6c1b44b3ba4bc25a410c9a21062b1e49c4b4309b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-5.png",
+        "sha256": "ab14f724eb6bed0aea4879832f907836d53d51d1d7a0223e254ffbf09f01cfff",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-6.png",
+        "sha256": "45fc6c1ee9c6a93dd8a4c2496178a93bed8e1a0b46f63070d422ab87cbe65147",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-7.png",
+        "sha256": "925e1ee3280cef3b6e1b1cdbd58fee389afbecf4920c22381e0a7b41d8b3082f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-8.png",
+        "sha256": "16bf5d6ea42f339d005e421f5284e957c6ed6aeb449e6ce7928bac307f0cbac7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-9.png",
+        "sha256": "d0c335d0033773d5b86e6cb2062abe0766a67b7eadbfe83029f21d7bee0b55e0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-10.png",
+        "sha256": "027dd4dfbf2f71a4a64c0282c39288679e3867264a55902b7468f6752aa2b933",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-11.png",
+        "sha256": "26e7a50998efd47b66441a18c86e05ba210d9ea5a47ace5d2ef72ab89aac9f40",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-12.png",
+        "sha256": "36cc0bd031eaebf6e3e819d03e7749e76510c0acf5aac1408b5659933fde7768",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-13.png",
+        "sha256": "22b7fbdabe14571cdd41208c19143cb921931a0b47e9cb4741b00673a52df705",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-14.png",
+        "sha256": "28b05df725419a82cdc57b2b35f8668482bdd5d5187bfdab1ae817103f47410e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-a-15.png",
+        "sha256": "29b824bd587163899d7456b30929d3c1a8faf8830a38e6cedd252303b7a64472",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-candy-r1": {
+    "id": "harbour-candy-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "45e91c7d-ddf4-4beb-aa9b-0870db0c037d",
+    "submittedAt": "2026-11-28T20:10:16.230Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Gumdrop Marina (a gingerbread boathouse with a pink icing roof and a wide open arch, and a huge wafer sailboat in front of it as big as the boathouse, with a giant red gumdrop hull and a white marshmallow sail); Licorice Admiralty (a white iced cake hall with a pink roof and a huge black licorice ship's wheel filling its white front, a black licorice anchor by the door). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/candy-fort-s1-0.png sha256 a59ef24eeb6a93cc6c4cf25a8ed4eeb99cc3ae80c52f3142764df042c79360ec",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its gingerbread houses and cake palace; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159402,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two cute candy kingdom buildings, eight takes of each in this order: Gumdrop Marina (a gingerbread boathouse with a pink icing roof and a wide open arch, and a huge wafer sailboat in front of it as big as the boathouse, with a giant red gumdrop hull and a white marshmallow sail); Licorice Admiralty (a white iced cake hall with a pink roof and a huge black licorice ship's wheel filling its white front, a black licorice anchor by the door). Colours: gingerbread #b86b34, white icing #fff4ec, strawberry pink #e2589b, candy-cane red #e03a3e, mint #7fd6b5, licorice black #2a1f24. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, purple, violet, gore, water, sea, waves, slab, shadow."
+    },
+    "at": "2026-11-28T20:11:55.494Z",
+    "usageUsd": 0.0835705992380778,
+    "candidates": [
+      {
+        "file": "harbour-candy-r1-0.png",
+        "sha256": "af2b500a9acff0df4faa676447c1450839e392eb12cadb3f63c40123e7e75572",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-1.png",
+        "sha256": "0d0dc7fae6e3fe50a554c2bfb54c815b1418758809dc8867d03ae20ceaefc594",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-2.png",
+        "sha256": "df8b185be5fd2c204bb93023cd03579dd4be13089ac3c746c224119a5557f998",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-3.png",
+        "sha256": "3405dd28237a2cdcd0ac5ff2fce1000f4197ae55d5acd968b365f9f79d972977",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-4.png",
+        "sha256": "2a996841d3a6257c7a9f11759aa9fce84d01ce68bf646fe8c251b03716b10bf1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-5.png",
+        "sha256": "053004aabedb48fb814b8413e1c79444d4dd2c744e8b07899af1b80929eabe9e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-6.png",
+        "sha256": "7da13c5bae483cf4696b105cbcde404ade0c5f800d8509535145cd39203403f5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-7.png",
+        "sha256": "696c0fdb3e3123c3c79724c0bfe5c7a1182841cb95e17667f78ec1e667e7adc4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-8.png",
+        "sha256": "740578ed59deee2988f0f0a75d07775673bb816cfbf7774e628f7134baac08d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-9.png",
+        "sha256": "5fe83f1a79b1b12acc10dd34d8a0db954560b68c1b40d729a8b2846abe6b2324",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-10.png",
+        "sha256": "f104b53cffcebd6f7a15b895d617c429d5ca29edd94d1f8c29e84710bd9ba16b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-11.png",
+        "sha256": "f912658da874b199f543cbf47b4aed9c31620629009db18f7b6fabce9277dcb6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-12.png",
+        "sha256": "f7541ec3279bfa93fc25ebf080fc3613bcaf89099c04877bfab3d9ec1e31df94",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-13.png",
+        "sha256": "fd853849d7fe722b98390a982577a54c230782505e1b1f560ea151b9813fbe43",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-14.png",
+        "sha256": "b92ce089a99b923cbdfe66a5e7b6a3fdf3bbabc496104efb5282d05287b504c5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-candy-r1-15.png",
+        "sha256": "0b872f6de11e31a035cf86029dc47aaa40bb8ecea91c13dafd172edded9bc272",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-horde-r1": {
+    "id": "harbour-horde-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1a29533b-dd5a-4e80-bc31-fd49fc304999",
+    "submittedAt": "2026-11-28T20:11:55.660Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute ramshackle goblin building, Bonfire Beacon: a tall open scaffold of crossed sharpened logs, see-through between the legs, a little moss green roofed hut at its foot, and on top a wide rusty iron bowl with a huge roaring bonfire, the fire the biggest part. No barrel. Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d, sharpened logs #b8733a, scrap planks #8a5a32, fire orange #ff8a2a and yellow #ffd23a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-r1-0.png sha256 8f1f0c4e0efe832e9f21015c9ad794d277d6b6481ea661db124fb11436104c6c",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159302,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: a cute ramshackle goblin building, Bonfire Beacon: a tall open scaffold of crossed sharpened logs, see-through between the legs, a little moss green roofed hut at its foot, and on top a wide rusty iron bowl with a huge roaring bonfire, the fire the biggest part. No barrel. Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d, sharpened logs #b8733a, scrap planks #8a5a32, fire orange #ff8a2a and yellow #ffd23a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roof, gold, skull, horns, barrel, water, slab."
+    },
+    "at": "2026-11-28T20:13:29.921Z",
+    "usageUsd": 0.0819654835065206,
+    "candidates": [
+      {
+        "file": "harbour-horde-r1-0.png",
+        "sha256": "2d1e224108c3049742e14ce7eedff0a93195c498d2833c2035e7cf752f525fa9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-1.png",
+        "sha256": "8e7f37efb4b73730994cad1bd3cae7ffca6d6b888789f20295652fd89782f17c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-2.png",
+        "sha256": "be59b04be83888b3ccfe765ebd6b4fdc115a7309a2f06867f956cad912f90b15",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-3.png",
+        "sha256": "afa16a88e51bf3ca0635fec2b8dc54eed63baad8860944b9f7c7065cc30d2b99",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-4.png",
+        "sha256": "5941ae4ed533a126637bbbfaacc10fc8d1bb698fdbbc1a7cf408e5008f7d65e3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-5.png",
+        "sha256": "3f4befd2cac08bc2966b00f5d3a5765b681fad51ccfeb1b604e2c3ab5bf9153b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-6.png",
+        "sha256": "91fea8e4b4cfe6b46bd31d3b0fb2b87e542aba0870fd528cca898bbf21eb6962",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-7.png",
+        "sha256": "26e4ca411a38ebb6109083ef1f74f089d4d40b581a016344f2550c93b0dc8cef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-8.png",
+        "sha256": "8c543bc84c4e8a06b014c546149abac319b93851b5dd558fcd95eeb9b93b36c0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-9.png",
+        "sha256": "9a1b41893340b9894185edf7c7222ff96a531bb6dee3afdbcc25244fc6342c7f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-10.png",
+        "sha256": "27e7b7673a46740bb7c0154c5144788f16b9e5ba767ad725847fd33d1fc533b7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-11.png",
+        "sha256": "6642c6b64710b736fecd0b113619d65b5da96056613f872c5fc18e6abfed9738",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-12.png",
+        "sha256": "1b1779a419cd8150f00124431c799dee6ea320122212b624a7b919d8f04b774c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-13.png",
+        "sha256": "939766397a0291b821d0c46a776a83b7b443c1a96ca9a8db22f934d30536b1f5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-14.png",
+        "sha256": "ccb36333336543de835b6d0b318321296e29153c661a04f10d13823156b64a07",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-horde-r1-15.png",
+        "sha256": "4fcaad970a446e524dec6374209c41ea78d6cbe6dbf7f4053606f9bd84d18235",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "harbour-dwarves-r1": {
+    "id": "harbour-dwarves-r1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b591121e-0501-4d4b-a323-2c541af5be73",
+    "submittedAt": "2026-11-28T20:13:30.133Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute steampunk dwarf building, Ironclad Board, the navy office: a squat wide hall plated in riveted dark iron like an armoured ship, a flat verdigris roof with a round iron gun turret and a brass periscope on top, a huge brass ship's wheel on its front over the door and a big anchor leaning beside it. No boat, no hull. Colours: dark iron #4a4f57 with #2e3238 shadows, warm grey stone #9a8f80, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 159502,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: a cute steampunk dwarf building, Ironclad Board, the navy office: a squat wide hall plated in riveted dark iron like an armoured ship, a flat verdigris roof with a round iron gun turret and a brass periscope on top, a huge brass ship's wheel on its front over the door and a big anchor leaning beside it. No boat, no hull. Colours: dark iron #4a4f57 with #2e3238 shadows, warm grey stone #9a8f80, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, boat, water, slab."
+    },
+    "at": "2026-11-28T20:15:03.070Z",
+    "usageUsd": 0.08203684271706475,
+    "candidates": [
+      {
+        "file": "harbour-dwarves-r1-0.png",
+        "sha256": "135666f3865f6b000b7b87162e85dac7c6161835c0f52d5709a9555d7ae28022",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-1.png",
+        "sha256": "56a62399d7847f524add6d864094072277883f3c636b6cdd4261e65412cc10ad",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-2.png",
+        "sha256": "224656755b7a9b724d2baea8334f798c63407a576ec8ed683cd8fd5eb2589783",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-3.png",
+        "sha256": "dbcf9a86fbc1c2da5f378b5ec5115ef8f3054322358c7b35fdecbf10d359f3ad",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-4.png",
+        "sha256": "693a337f054e031428aa4d34e3a8e23e377734456ebf34084073dee09a6706e0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-5.png",
+        "sha256": "85e6a1edb90be5a2eba3fa7cea6515be47d4bd8acdf5c06425b63c3aa8de9fdf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-6.png",
+        "sha256": "0672b22cedb6f4519402620a788f98320e5d241d96c4d43dab95cff1e9e9cbbd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-7.png",
+        "sha256": "29dab66f545912e98fadc6b775cbb75f3235892c1fe980cad6c3fa4287e26adb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-8.png",
+        "sha256": "5e4ac6139000c666391585ffb3acca46f26ac48721e45d7c04ede56b86d6e660",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-9.png",
+        "sha256": "9917b8f37dbcd7efa84b136bfe5b70f1f339e31de49b6bce3458d6ae38e4a707",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-10.png",
+        "sha256": "354f2284a6bc95a553f2fb6d70bb54113b6fc4f69537e1be29fecb396372a633",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-11.png",
+        "sha256": "c75a7b9930357c077d6088538451450cacdf8d74f8b0b35c931f32934b1f27f5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-12.png",
+        "sha256": "347b01e4b7ba68a1e9fbcac26928bd93b18dba83032a9d5fd6f66294fbdb862d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-13.png",
+        "sha256": "d83bd79ab138d506cd2db49f3b9d494a3b0d4af1613684bca042bdaf5d5d78b1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-14.png",
+        "sha256": "6353d2a3d52cd8263101e21ad8d121d688f73132feedf413b4629c714462213f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "harbour-dwarves-r1-15.png",
+        "sha256": "33b945c675b71b42f017550628a299c609c140ae3f11f66cde4011fb3850a0d7",
+        "width": 64,
+        "height": 64
+      }
+    ]
   }
 }
