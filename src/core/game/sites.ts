@@ -2223,7 +2223,14 @@ function teleport(
   }
   const p = findPlayer(state, hero.owner);
   if (p !== undefined) revealDisc(state.map, p.explored, to.x, to.y, 4);
-  events.push({ type: "teleported", heroId: hero.id, x: to.x, y: to.y });
+  events.push({
+    type: "teleported",
+    heroId: hero.id,
+    x: to.x,
+    y: to.y,
+    // The sea's crossings sound and read as their own (bead bzc.160).
+    ...(t === "whirlpool" || t === "ferry-landing" ? { via: t } : {}),
+  });
   if (t === "ferry-landing") {
     say(
       events,

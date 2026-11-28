@@ -47,7 +47,7 @@ import type {
 } from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { playSound } from "../audio/sound.ts";
-import { recruitCue, townCue } from "../audio/cues.ts";
+import { SHIP_BELL_DELAY, recruitCue, townCue } from "../audio/cues.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { bump, countUp } from "./anim.ts";
 import { buildingDef, FORT_DEFENSE, townTree } from "../data/factions.ts";
@@ -271,7 +271,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     /** Buys a ship at the Shipyard onto the dock (NAVAL 2.2). */
     const doBuyShip = (): void => {
       if (!run(buyShip(host.state(), townId))) return;
+      // Hammering and a bell (NAVAL 11).
       playSound("build");
+      playSound("ship.bought", { delay: SHIP_BELL_DELAY });
       toast("A new ship waits, moored, at the town's dock.", "gain");
     };
 

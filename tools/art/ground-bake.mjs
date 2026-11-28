@@ -250,11 +250,10 @@ function bakeGround(name, ground) {
       clamped[o + 3] = 255;
     }
   out.data.set(clamped);
-  const swatch = crop(out, 0, 0, 80, 80);
-  return [
-    { path: ground.output, raster: out, what: `${name} texture` },
-    { path: ground.swatch, raster: swatch, what: `${name} swatch` },
-  ];
+  const files = [{ path: ground.output, raster: out, what: `${name} texture` }];
+  // A battle surface (bead bzc.160) has no swatch.
+  if (ground.swatch !== undefined) files.push({ path: ground.swatch, raster: crop(out, 0, 0, 80, 80), what: `${name} swatch` });
+  return files;
 }
 
 function bakeEdge(edge) {
@@ -305,6 +304,8 @@ function deriveAll(only) {
   const files = [];
   for (const [name, ground] of Object.entries(recipe.grounds))
     if (only.length === 0 || only.includes(name)) files.push(...bakeGround(name, ground));
+  for (const [name, surface] of Object.entries(recipe.surfaces ?? {}))
+    if (only.length === 0 || only.includes(name)) files.push(...bakeGround(name, surface));
   if (only.length === 0 || only.includes("edge")) files.push(...bakeEdge(recipe.edge));
   return files;
 }

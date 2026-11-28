@@ -468,5 +468,90 @@
     "verdict": "ACCEPTED",
     "notes": "irregular metallic clanks over steady ringing partials for 0.8 s, a bright struck ding at 0.9 s, then a ringing decay: a foundry with gears and a bell, quiet one-shot, distinct from the other town sounds",
     "at": "2026-11-27T10:45:09.399Z"
+  },
+  "ship.board#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a wooden creak with small water ticks, short; level reached within the peak ceiling",
+    "at": "2026-11-28T20:11:52.258Z"
+  },
+  "ship.land#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a splash then soft steps, clear envelope",
+    "at": "2026-11-28T20:11:52.341Z"
+  },
+  "ship.sail.b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one wave slosh, short, good level",
+    "at": "2026-11-28T20:11:52.423Z"
+  },
+  "ship.sail.a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a dip with a swirl and enough level (-30 dB RMS); the first variant beside sail.b's wave lap",
+    "at": "2026-11-28T20:11:52.507Z"
+  },
+  "ship.sink#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a gurgle and a run of bubbles fading out",
+    "at": "2026-11-28T20:11:52.589Z"
+  },
+  "ship.whirlpool#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a rush that rises and swirls away, one clean swell",
+    "at": "2026-11-28T20:11:52.676Z"
+  },
+  "battle.deck-gun#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a short low boom with a rumbling tail",
+    "at": "2026-11-28T20:11:52.759Z"
+  },
+  "site.buoy-bell#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bell strikes with ringing partials",
+    "at": "2026-11-28T20:11:52.842Z"
+  },
+  "battle.siren-song#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a sung la-la-la of four clear notes, eerie and playful",
+    "at": "2026-11-28T20:11:52.928Z"
+  },
+  "spell.tidal-wave#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a rising wave that crashes and drains",
+    "at": "2026-11-28T20:11:53.017Z"
+  },
+  "ship.bought#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a bright ship's bell ding with long partials; the hammering of 'Hammering and a bell' is the build sound played under it",
+    "at": "2026-11-28T20:11:53.098Z"
+  },
+  "ship.sail.a#0": {
+    "verdict": "REJECTED",
+    "notes": "almost silent sparse blips (-41 dB RMS): the gain cannot lift it",
+    "at": "2026-11-28T20:11:53.446Z"
+  },
+  "ship.sail.a#1": {
+    "verdict": "REJECTED",
+    "notes": "a faint continuous hiss (-36 dB RMS), no oar dip",
+    "at": "2026-11-28T20:11:53.530Z"
+  },
+  "ship.bought#0": {
+    "verdict": "REJECTED",
+    "notes": "one knock only: no bell partials",
+    "at": "2026-11-28T20:11:53.616Z"
+  },
+  "ship.bought#1": {
+    "verdict": "REJECTED",
+    "notes": "two knocks, no bell",
+    "at": "2026-11-28T20:11:53.701Z"
+  },
+  "ship.bought#2": {
+    "verdict": "REJECTED",
+    "notes": "five knocks, no bell",
+    "at": "2026-11-28T20:11:53.791Z"
+  },
+  "ship.bought#4": {
+    "verdict": "REJECTED",
+    "notes": "bell fainter and shorter than #3",
+    "at": "2026-11-28T20:11:53.881Z"
   }
 }

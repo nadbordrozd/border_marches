@@ -1,0 +1,66 @@
+{
+  "set": "grounds-deck",
+  "bead": "border_marches-bzc.160",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "The naval battle's deck planks (bead bzc.160, docs/design/NAVAL.md 10.2 'Battle: deck plank texture'): Pixen takes with the high top-down view like the grounds-pixen set, lineless and calm because the deck is background under the creatures. The output is a crop of whole boards from a take's open interior (Pixen frames its ground); render/battle/naval.ts tiles it board by board with a seeded shift per board and a butt joint at each board's wrap, so the deck never shows its period (the take itself is never patch-bombed: Voronoi patches would break the boards). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "opts": {
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down"
+    },
+    "deck": "Subject: the wooden deck of a ship seen from straight above, the planks running off every edge of the picture with no frame, no rim and no plate. Long straight narrow planks lying left to right, all the same width, about twenty planks from the top of the picture to the bottom, warm honey-brown wood #9c6c40 separated by thin dark brown #5e3c20 seams, the plank ends butted at staggered places with two tiny dark nail heads at each end, soft fine wood grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker than the others. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game battle ground.",
+    "deckLong": "Subject: looking straight down at a ship's wooden deck: only long straight planks running from the top of the picture to the bottom, nothing else, filling the whole picture edge to edge. About eighteen narrow planks side by side across the picture, all exactly the same width and perfectly straight, warm honey-brown wood #9c6c40 with thin dark brown #6a4426 seams between them, plank ends butted at staggered places with two tiny dark nail heads, very soft fine grain in slightly darker #8c5e36 and lighter #ac7a4a, a few planks a little lighter or darker. Lit from the bottom left, very low contrast, calm and quiet. Painterly 16-bit strategy-game battle ground."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@opts",
+    "negative": "frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles"
+  },
+  "recipes": [
+    {
+      "id": "deck-a",
+      "concept": "DECK PLANKS (naval battle ground)",
+      "width": 400,
+      "height": 400,
+      "seed": 160101,
+      "subject": "@deck"
+    },
+    {
+      "id": "deck-b",
+      "concept": "DECK PLANKS (naval battle ground)",
+      "width": 400,
+      "height": 400,
+      "seed": 160102,
+      "subject": "@deck"
+    },
+    {
+      "id": "deck-c",
+      "concept": "DECK PLANKS, wider boards (naval battle ground)",
+      "width": 400,
+      "height": 400,
+      "seed": 160103,
+      "subject": "Subject: looking straight down at a ship's wooden deck: only long straight planks lying left to right, nothing else, filling the whole picture edge to edge. About sixteen planks from top to bottom, all the same width, warm honey-brown wood #9c6c40 with thin dark brown #5e3c20 seams between them, plank ends butted at staggered places with tiny dark nail heads, soft fine grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker. Lit from the bottom left, low contrast, calm. Painterly 16-bit strategy-game battle ground."
+    },
+    {
+      "id": "deck-d",
+      "concept": "DECK PLANKS, narrow straight boards running top to bottom (deck-c's direction: bow to stern on a field deck that is taller than wide)",
+      "width": 400,
+      "height": 400,
+      "seed": 160104,
+      "subject": "@deckLong"
+    },
+    {
+      "id": "deck-e",
+      "concept": "DECK PLANKS, narrow straight boards, a smaller canvas for narrower boards",
+      "width": 256,
+      "height": 256,
+      "seed": 160105,
+      "subject": "@deckLong"
+    }
+  ],
+  "outputs": []
+}

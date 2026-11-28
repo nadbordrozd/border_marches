@@ -400,7 +400,7 @@ export type GameEvent =
       x: number;
       y: number;
       /** What carried the hero (absent: a waystone). */
-      via?: "tow-line";
+      via?: "tow-line" | "whirlpool" | "ferry-landing";
     }
   /** A dig: what was found (null: nothing). */
   | { type: "dug"; heroId: string; found: string | null }

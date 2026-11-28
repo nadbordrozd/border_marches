@@ -1,0 +1,1163 @@
+{
+  "mast-a": {
+    "id": "mast-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "452d2a33-ba95-4022-ad9d-207732e78894",
+    "submittedAt": "2026-11-28T20:05:18.445Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a tall thick round wooden pole of warm brown #8a5a32 with a #5a3a1c shadow on its right side, a small round wooden crow's nest near the top, one short wooden yard crossing the pole a third of the way down with a fat furled cream sail #efe3c2 tied in a roll along it, a small plain white #ffffff triangular pennant flying to the right from the very tip, a coil of rope #c8b080 round its foot. The pole fills the image from top to bottom, narrow, centred."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/ships/sailing-b-2.png sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+      },
+      "image_size": {
+        "width": 48,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 160201,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a tall thick round wooden pole of warm brown #8a5a32 with a #5a3a1c shadow on its right side, a small round wooden crow's nest near the top, one short wooden yard crossing the pole a third of the way down with a fat furled cream sail #efe3c2 tied in a roll along it, a small plain white #ffffff triangular pennant flying to the right from the very tip, a coil of rope #c8b080 round its foot. The pole fills the image from top to bottom, narrow, centred. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, full sail, open sail, ship, hull, deck, rigging net, ladder, flag emblem, skull."
+    },
+    "at": "2026-11-28T20:06:56.301Z",
+    "usageUsd": 0.08214570315678915,
+    "candidates": [
+      {
+        "file": "mast-a-0.png",
+        "sha256": "94eb37c4afa26c44bef910fa27486d3f06da387082642cf81206bcc5f7eaa775",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-1.png",
+        "sha256": "a757435b861e07db5fbd57d47e513c1af42e37daa3232e4d5a35d3ba882a1f2f",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-2.png",
+        "sha256": "101ff6926e314cfe6a2742c1dce7e29459461f0dd9a576c57f243947ccd71c59",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-3.png",
+        "sha256": "c2eb29279c5667e302667663127720e041f7b286199c17f9a5193616f741acec",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-4.png",
+        "sha256": "0f36c21dad0ed3b3c41156a5828b58d019a672fdd699dd0b5ff5f18d9e55a3c0",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-5.png",
+        "sha256": "2d46fe16b534ac2fbd9703d3c9633b5b78dd35635e48233dac7f1a307695d968",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-6.png",
+        "sha256": "e2dabea41f54acab91865150240f5e4efbc703e63706df3904e6ad8561993266",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-7.png",
+        "sha256": "f8371d08015d8f18706917071b9e2a5ece0f13bfabbc81ccf42d5b272376e39f",
+        "width": 48,
+        "height": 112
+      },
+      {
+        "file": "mast-a-8.png",
+        "sha256": "edc49b3dab25cb57107e589891f9d13807e5f6564b019b139687af760dadc117",
+        "width": 48,
+        "height": 112
+      }
+    ]
+  },
+  "crates-a": {
+    "id": "crates-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "95d14bb8-be1f-4eb8-ac66-1814a06b5a49",
+    "submittedAt": "2026-11-28T20:06:56.419Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small pile of ship's cargo: two chunky square wooden crates of warm brown planks #a8743e with #6a4422 shadows and dark iron corner bands, the smaller crate stacked on the larger one a little to the back, and one fat round wooden barrel with dark iron hoops standing beside them on the left. About four fifths of the image wide, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/ships/sailing-b-2.png sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+      },
+      "image_size": {
+        "width": 56,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 160202,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: a small pile of ship's cargo: two chunky square wooden crates of warm brown planks #a8743e with #6a4422 shadows and dark iron corner bands, the smaller crate stacked on the larger one a little to the back, and one fat round wooden barrel with dark iron hoops standing beside them on the left. About four fifths of the image wide, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, ship, deck, rope net, treasure, gold, open lid, sack."
+    },
+    "at": "2026-11-28T20:08:30.313Z",
+    "usageUsd": 0.0813313693470425,
+    "candidates": [
+      {
+        "file": "crates-a-0.png",
+        "sha256": "3082b437129d93d90d202e2219109e6931ad1dac55af662f2481a6bce5dd9bd1",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-1.png",
+        "sha256": "c3011fad97d0211b4b90b3055c906fe3dc6bc893daa70b12b6d5096bc1ea8f65",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-2.png",
+        "sha256": "a1631763471f07b614430ddf651c088dca8915a2e38a11ad3ae759951f180537",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-3.png",
+        "sha256": "658e5902e6cc19a5b351241260c3a3b0163fc571584e56633b6834b653c09e20",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-4.png",
+        "sha256": "def4bcfce021f13b292e8f87fd9684bda5f1f6010c3bacd0070f1f8ef00bb25d",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-5.png",
+        "sha256": "4f79ab9eed71fb9fcd50925fcfba06fd4842c8445ca40a264cf8f8ffe60f233e",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-6.png",
+        "sha256": "d1d364a11562a1af6d85b9bc1c46f61e242f59de42efb24d34e97ceb28cf2189",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-7.png",
+        "sha256": "9a01cbb3f16d7f88646c0bf89bdf4d7d700b495795918d73e5382bc25f3d614a",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-8.png",
+        "sha256": "978616667ccbaeb70edce150f3cd32fa73fb5d01f2611fc408d9aac70c08161a",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-9.png",
+        "sha256": "1da30a0b7c8251396df22d99e3036d978d59994d5f6e7b9cae60ad366e444095",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-10.png",
+        "sha256": "52b33e336002ebef18c59e57537eca7647e1aed48f629642e0b5e7057c759632",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-11.png",
+        "sha256": "71bd9153d4e6425075ec3c697b4cefc728cdb7528f44f5bfd6298c202c5f4f38",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-12.png",
+        "sha256": "81f42358ebe8d36b6e2fe52bb0294f1fb9958a422127867e96ea9015e2230e11",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-13.png",
+        "sha256": "d8109dc4d45132f149ecb31994bce2b53dbb1ceb8bd6abf8e09acdfbcc86848a",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-14.png",
+        "sha256": "ee4f663cd9569155bf07ac4190ef5e33231044dc7391ed4a4c9e952daca5944f",
+        "width": 56,
+        "height": 48
+      },
+      {
+        "file": "crates-a-15.png",
+        "sha256": "5c5d91e53618a2b8b4d52017cdd3de6554d78ffd64b73f12dd58c776ec52d56f",
+        "width": 56,
+        "height": 48
+      }
+    ]
+  },
+  "gun-east-a": {
+    "id": "gun-east-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "3a5d18f7-3ecc-43db-b0ab-7ce0730569a6",
+    "submittedAt": "2026-11-28T20:08:30.398Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small chunky ship's cannon seen from its left side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the right, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/ships/sailing-b-2.png sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+      },
+      "image_size": {
+        "width": 48,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 160203,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: one small chunky ship's cannon seen from its left side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the right, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, smoke, fire, cannonball, ship, deck, rope, flag."
+    },
+    "at": "2026-11-28T20:10:14.614Z",
+    "usageUsd": 0.08351766562461853,
+    "candidates": [
+      {
+        "file": "gun-east-a-0.png",
+        "sha256": "d631c87d4d949271b8a1f121c5b7ac9f8f4f514636e317225ea08634f73e66cf",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-1.png",
+        "sha256": "2d79dc7b0ea9104a70459208f0d3377e0b109460b9ce20adc32ba946d0f8b38f",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-2.png",
+        "sha256": "6c6205177145717daf9dbfc45da21a82a1f8bb0543b3145e968e669f199b3d72",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-3.png",
+        "sha256": "688dab456706c47062d4c707411cb6928e5872d84f517eccbf10ba7cfafb245c",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-4.png",
+        "sha256": "af7e6a9281421823fc4d69fe7b8e36ae01ba7307f9c68335f05da1fca69437d3",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-5.png",
+        "sha256": "ee500dcffe12c1c65ebfd4f457af836aab061948416dcecf2e0b14a3e8c44f4a",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-6.png",
+        "sha256": "05bfd974e88ba72475947563b8444d326b706ad02cf9365debe39668f4fb03db",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-7.png",
+        "sha256": "c896191043739410d377a314eadf17d177538406444ef4cf6e08b76d92bad0c6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-8.png",
+        "sha256": "53d86b34e4b2d8a5d4b503dcfedc4647c873ed8eddd38cd96ab2c0fe74502152",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-9.png",
+        "sha256": "0184c20bf16ca9aee586420ff3c61982506f005bc35b01698c157d57c180c0dd",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-10.png",
+        "sha256": "5dd960bbb05ab2f5e2d2860df3699542706fa622f98f355b912353aa812000f8",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-11.png",
+        "sha256": "89e156099bd12b599f078649ee1b6513e31752b3c6ce694b4a8806e6a57569f7",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-12.png",
+        "sha256": "9bb879d71f7608b4110439fa1caff66fc9ad0327aa89f506b0ac434f42a1e189",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-13.png",
+        "sha256": "942eab9c74bf9d35fded28a13b477d5e2a0a276d48eef0acb1254ed8e83792dc",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-14.png",
+        "sha256": "9f64058e71a4ffa3800d11233a8f046f97abde3eb5e81b93b186c39e51d6af73",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-15.png",
+        "sha256": "0c340facd634755269e36b8243509fbc54a023167ba7c93e4bc4d0c367b1368e",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-16.png",
+        "sha256": "6f5d098f9b4d98e6517ca64188e1a59dbaf69eeeaebbde91c7ec953523be629d",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-17.png",
+        "sha256": "7a69ebe6cf6e1bfd186f425a4f16b508d3eb9fa82754a4f36ea0eaa723dd0722",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-18.png",
+        "sha256": "b9b622e4f78377f7a1e0988511a1b1cc726625becc14e12bec55165bc99e52b6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-19.png",
+        "sha256": "b6615ada30e1c064bcb0cc2948b804f5da5de849fa800b60353090e25a16b060",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-20.png",
+        "sha256": "ecbc3bcd75d532e250d4dd24c25109a9f2c65992e38a7ef5d70d46ab4e26e7af",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-21.png",
+        "sha256": "16254a270218d73672090cb40e16dc0ec352cf0fa589ea3fdc6bdc324ba4b443",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-22.png",
+        "sha256": "e48fb95de2ebc903243c5acb6e524c29c996359a2659e53fa40306c8c107544c",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-23.png",
+        "sha256": "7df3064fc51279192a9733e5d1894309963181eb4647e9ca20dc985b3a866bd6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-east-a-24.png",
+        "sha256": "7a3204092ccf2758210fea69e40bf5a33e9971c49994e075dc1b131d7df5d48d",
+        "width": 48,
+        "height": 40
+      }
+    ]
+  },
+  "gun-west-a": {
+    "id": "gun-west-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "37d7e999-4a13-4898-94a5-c91be60d9d6c",
+    "submittedAt": "2026-11-28T20:10:14.758Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small chunky ship's cannon seen from its right side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the left, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/ships/sailing-b-2.png sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+      },
+      "image_size": {
+        "width": 48,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 160204,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: one small chunky ship's cannon seen from its right side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the left, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, smoke, fire, cannonball, ship, deck, rope, flag, muzzle pointing right."
+    },
+    "at": "2026-11-28T20:11:58.223Z",
+    "usageUsd": 0.0821938062508901,
+    "candidates": [
+      {
+        "file": "gun-west-a-0.png",
+        "sha256": "3fb5027de663f941efd299c107db6aab6cc9aa2402e6718feb1be633055bbb94",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-1.png",
+        "sha256": "ffd7edd098c50a7c01a0b163e5d39a45b4f551fb4c45312e0cb34d34e9e9ae14",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-2.png",
+        "sha256": "d080c5632f6e44dcc95049b89d68bf88af480916775344be29904344f29a709f",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-3.png",
+        "sha256": "bdc8b2df0a22beb38ba59c491cee80ba38502428eccabe2fede64365fa8509a8",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-4.png",
+        "sha256": "bbdc7dc982893ede82a1624101a9c451bda09fe15decca8917c462dd1b35e2cf",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-5.png",
+        "sha256": "ac5483c5813a9068be8eac6b161532d069bebd1b13c8ac0df543d5ce358a41e6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-6.png",
+        "sha256": "0c055b471579390f2858debcda9374c0ec1b22d038d3c8c1527455da3b06bd49",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-7.png",
+        "sha256": "41262cef9670d6aa264b58e125dae8fae84fb06eabddb92b2518f915aa0a52f1",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-8.png",
+        "sha256": "97f84bf5b307f8566942f44072ab54f46427a6e71e78c8de29a511912d401741",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-9.png",
+        "sha256": "6569fc27fdd72ffb27e4d56de718c8f451b11cc9b89b9f19b87e7b2fe071fbbb",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-10.png",
+        "sha256": "07b05848d30a7d9ff8fb11c68ebb70da88bb5b257894b3517a79a0231947efa2",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-11.png",
+        "sha256": "6ea857787444911f02e8e229ce1fd2eaf5bae367f7c94cc85323d691d52b8b0b",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-12.png",
+        "sha256": "089b37ad6e85568f2a9912e1ab6d5d8e149c3798a531dead803338d7ca696bf4",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-13.png",
+        "sha256": "443c15bb089b99c22401d6c5444d91814add9bc94db4a8c7f12ef4cea511a609",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-14.png",
+        "sha256": "e469ce198b7180abd4d2c81967e8e7014e10658e86dc9564efa41b3cada601e6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-15.png",
+        "sha256": "8703c68337266c7166d0176615ea5a9afb253d6ecf3cf5c9c58ee478d078931b",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-16.png",
+        "sha256": "9c40304e480b7afee83ee0aa4a058bf9728bc2158eb18634f7bbea76d9c40422",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-17.png",
+        "sha256": "a681988c3dc8c1a2958b0c57176245189f4e1ca3c491e9b7b99c282990c98d63",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-18.png",
+        "sha256": "efc807ce810edfc80396b5091c0bf63558ef3d1bf24463da3311cea629b75ca2",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-19.png",
+        "sha256": "e7f6af93501c22b92c6bebe391aeb64e5e00453d1dae855820d1d2c5abd6f2e4",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-20.png",
+        "sha256": "13341ebbcd73d227ca0f29f0a09061a0ff17584aa209879e2baa0c306cdae5ff",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-21.png",
+        "sha256": "b2aff7591186241eae656e3fcdcb1e09bffd92fb340b7cf892a02cb2d5c3feb7",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-22.png",
+        "sha256": "4439aa19052fb5c39d5bdf05dd3a546161740bbddef47feef389d56074f1ede4",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-23.png",
+        "sha256": "02e366d16018103c582824c0645d4762f8894abc0f4ec5c3ce36aa248c497436",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-a-24.png",
+        "sha256": "a1a945fef460c80395a1aeb4206327c78b78411ca5ca610a8b53e5b9131c51bf",
+        "width": 48,
+        "height": 40
+      }
+    ]
+  },
+  "gun-west-c": {
+    "id": "gun-west-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-76d7cb59-e172-43b6-b274-26acb6e30a93",
+    "submittedAt": "2026-11-28T20:13:02.540Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 160207,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "west",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal."
+    },
+    "at": "2026-11-28T20:13:02.543Z",
+    "usageUsd": 0.007045400619506837,
+    "candidates": [
+      {
+        "file": "gun-west-c-0.png",
+        "sha256": "7b90c65b4bed38a7d7a86e942f9374dc1caad8f2014fe7d27f653d28d1e4f9e6",
+        "width": 48,
+        "height": 40
+      }
+    ]
+  },
+  "gun-west-d": {
+    "id": "gun-west-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-92433e73-ef39-4f5d-b0b8-4e4871baf673",
+    "submittedAt": "2026-11-28T20:13:23.322Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 160208,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "west",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal."
+    },
+    "at": "2026-11-28T20:13:23.325Z",
+    "usageUsd": 0.007023312250773113,
+    "candidates": [
+      {
+        "file": "gun-west-d-0.png",
+        "sha256": "3c174855349a57ccdf6ca8cb18de948a6d639c6e7c676ca49f3592781269e805",
+        "width": 48,
+        "height": 40
+      }
+    ]
+  },
+  "gun-west-b": {
+    "id": "gun-west-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "331e3d6b-94ee-4964-84bb-ab563ec6c902",
+    "submittedAt": "2026-11-28T20:13:31.633Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small chunky ship's cannon pointing LEFT: the wide open round muzzle mouth is at the LEFT end of the picture, the small round knob at the closed back end of the barrel is at the RIGHT end. A short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge, on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40. About four fifths of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "take battle-props/crates-a#2 sha256 a1631763471f07b614430ddf651c088dca8915a2e38a11ad3ae759951f180537",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the wood colours; not the subject"
+      },
+      "image_size": {
+        "width": 48,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 160206,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: one small chunky ship's cannon pointing LEFT: the wide open round muzzle mouth is at the LEFT end of the picture, the small round knob at the closed back end of the barrel is at the RIGHT end. A short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge, on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40. About four fifths of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, smoke, fire, cannonball, ship, deck, rope, flag, muzzle on the right, barrel pointing right."
+    },
+    "at": "2026-11-28T20:15:09.592Z",
+    "usageUsd": 0.08194957685470582,
+    "candidates": [
+      {
+        "file": "gun-west-b-0.png",
+        "sha256": "ace49d0595ee7adb7d531814c92b45528976907bd014ffe7bc99f677a35fd552",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-1.png",
+        "sha256": "e49ebe8a4a1163ce8f4c1af7a0c0197fc7c12f3195f519c5897f7771b78b9489",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-2.png",
+        "sha256": "2dcfa4e4fa81a0d5007006b8bb04f398d99d38b517e97cb5884e4c0f30a6c759",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-3.png",
+        "sha256": "efe3faa4b2417ff35e1eee2c930ace712ea8fae4bb68475a27cf154c2df96da6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-4.png",
+        "sha256": "930c4a627d9e93bf378a81a7ac02b318490de9973a1f2a171cac485c777ab75d",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-5.png",
+        "sha256": "7c39d87c826659b907cc0ca396d0ab704673d8940685ab801eb036e60a9358e4",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-6.png",
+        "sha256": "d414625b40dffbdbbc71ca7a337bd7091d18b7b009a4f44551107ad6b2456c12",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-7.png",
+        "sha256": "defc42083fc408bdd216814ab85a0a9ac30b0a2e153eebf4fa19325b8a0e57a9",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-8.png",
+        "sha256": "9ee544bc7cce9ef28e3eb680521f1e478ebf4e3fa7500a5b47c34f3fcbf6230a",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-9.png",
+        "sha256": "4b4cebaf17618aae57ab3db33842d569e901bd71f93a8add9165850c1e42f7a6",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-10.png",
+        "sha256": "5854b03b32d459308df2902e90c36ca4d1b224369326b8e7cb6deb8b265ccb69",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-11.png",
+        "sha256": "6eff5cac83a72b3953727020ee5a4071c4547ce27e300043112f28fea0ea4411",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-12.png",
+        "sha256": "0bf70a40c7e51e2ca178bdacf2c36d0261c282bf7a113f2a528261792618c84c",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-13.png",
+        "sha256": "cb56feadee61096512760d33c1c88bc0d817360ebf8fa66a88afe1c4594a7fb4",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-14.png",
+        "sha256": "d6238500524530507626798727774305eebbc8055a124d92f6db2388cdbefa9e",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-15.png",
+        "sha256": "01f06a931d6110c9dc900ec123ad0b1b2fceeefc097a866bf9af1a2ba54fb9ee",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-16.png",
+        "sha256": "6dd32c7decf270ded48d836738b18b86ef6110e21dfbac50c140a5c7b3b16322",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-17.png",
+        "sha256": "5b644cf24ef823664007ab5d450b4647344f7da3cc27b7c505de8c1890b20e8e",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-18.png",
+        "sha256": "db079d754a7278ad2dd374ad03c5a666e5f234d01601a305b1b4494c898d38f7",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-19.png",
+        "sha256": "1482b302924b1b7f44d242bcf42a58b6738f9f824b173e253fe7db9a0561973b",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-20.png",
+        "sha256": "d1538c2a1e727842fddfa9a5ed605c6d3e6dcc8f6eff522063c50eea0a0e6c72",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-21.png",
+        "sha256": "25f6a33c8f6dc55fad48a8ea17ecf3925bacde3bacb47ece3b8966d9a67437fe",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-22.png",
+        "sha256": "c8f67b9612d0141e00f89a4dee4af3d214928d9fa7c113c7aac0659a2e1356ef",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-23.png",
+        "sha256": "4635f327ab0777a65a2d51c0c8fa7e35a8bb3bfceeb44877b8935a9fc5e2dee3",
+        "width": 48,
+        "height": 40
+      },
+      {
+        "file": "gun-west-b-24.png",
+        "sha256": "dad61ec0608bf16fab0a7b0a7fb7fa1a8d4ebd1bb2bff40370ef7e45f8d7c2ee",
+        "width": 48,
+        "height": 40
+      }
+    ]
+  },
+  "reef-a": {
+    "id": "reef-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9421c717-bdb3-4fbb-a819-18a59da5dc4a",
+    "submittedAt": "2026-11-28T20:15:21.080Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a low reef at sea: a small cluster of three jagged dark grey sea rocks #5a6470 with #3a424c shadows, the middle one tallest, a few pale barnacles and one tuft of green seaweed #4f8a4a, rising out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image. About four fifths of the image wide and half of its height."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/sea-objects/sirens-rock-a-0.png sha256 478b6fb4987af7edb625bf83d276f52df55f2c257720a20f24a80aadd0180948",
+        "usage": "copy only the thick black outline, the pixel size, the chunky grey rock shapes with one shadow tone and the thin white foam at the waterline; not the subject, not the harp, mirror, oar or corals and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 160205,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: a low reef at sea: a small cluster of three jagged dark grey sea rocks #5a6470 with #3a424c shadows, the middle one tallest, a few pale barnacles and one tuft of green seaweed #4f8a4a, rising out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image. About four fifths of the image wide and half of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, island, sand, beach, palm, coral, shell, ship, lighthouse, water surface."
+    },
+    "at": "2026-11-28T20:17:19.855Z",
+    "usageUsd": 0.08158220026228163,
+    "candidates": [
+      {
+        "file": "reef-a-0.png",
+        "sha256": "0dbdd3703f6126745c435760514df1c6351deed26b9624c6f9d4e4043d850a71",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-1.png",
+        "sha256": "70e693f33e96f9260ecaddeedabbbafa171e3c2292e5868a8cadcd7dd5bc31e7",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-2.png",
+        "sha256": "b31ee0bc6a0f6b61efa369175a17154c09e06acd2cec2ed9384d6fb766f8eb70",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-3.png",
+        "sha256": "b441662804c9f9363262478adcdc2deeac66bb07b17e6509c9ec8a825ee2316c",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-4.png",
+        "sha256": "28be824d5333c92204d14c097b69f57d3ecd4bfa123e61802540a2400584d697",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-5.png",
+        "sha256": "a10798c555b5bea28594f0033841e64d1887503bf7812214409fb8a9b51a4a4f",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-6.png",
+        "sha256": "2120f5c9ee577860a2ece4e4ef3cdd4e5eda28dc514d0f1c115f32487d14cfb0",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-7.png",
+        "sha256": "2b2be7e3fb87cada557d2b1ac0150233cfb799523bfdedd2ac40311674534759",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-8.png",
+        "sha256": "a715fa66cf9948e606269cee27b94e322fd9ffa09d41e2723cebc60077908482",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-9.png",
+        "sha256": "f1b53b2d306ab29da94ceda23f74e6323712aa0ed22bc90fc06e9dba824e2083",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-10.png",
+        "sha256": "fa5e26ee720684fea547efb74859c1de8c58cceb9ef2a435aaba074d790bcee2",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-11.png",
+        "sha256": "ce237dd8da610b284ad076e1c1ab0252b3f1d09679209283df17d37578475531",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-12.png",
+        "sha256": "70cbc423da8d0d14b9007e0c2883bad0f05fb2be23d6da12f18edcdd11236413",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-13.png",
+        "sha256": "2126f5dd458b719836f9f9858f019cd6759c6ee3b050cb555bd007ecf8bbe793",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-14.png",
+        "sha256": "14bcf2067060bbca365cdbf5c84eab9fbc6c3f7d94d48827a5831fa2cd8c404c",
+        "width": 64,
+        "height": 48
+      },
+      {
+        "file": "reef-a-15.png",
+        "sha256": "6d2effb5042a19d4f978fdff643658f3e39370b1ce5aefe2fef01d0bc3742792",
+        "width": 64,
+        "height": 48
+      }
+    ]
+  },
+  "mast-b": {
+    "id": "mast-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "31bd6dd0-0fc9-42de-bbe0-67c7aaa33ac5",
+    "submittedAt": "2026-11-28T20:21:30.620Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-battle-prop.txt",
+          "text": "Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a very thick sturdy round wooden pole, about a quarter of the image wide, of warm brown #8a5a32 with a #5a3a1c shadow on its right side and two dark iron bands, a chunky round wooden crow's nest near the top, one long thick wooden yard spanning the whole image width with a fat furled cream sail #efe3c2 tied in a roll along it, a plain white #ffffff triangular pennant flying to the right from the very tip, a fat coil of rope #c8b080 round its foot. The mast fills the image from the very top to the very bottom."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/ships/sailing-b-2.png sha256 6a7c77db3431d926d838500fb354dcfb22870ffafb26502db79f03dd8f8cad10",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 160209,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one prop standing on a ship's deck in a turn-based battle, a chunky object seen from the front with the camera slightly above it, like the chibi creatures that fight beside it: we see its front face and a little of its top, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no deck boards, floor, platform or shadow; its bottom is the lowest thing in the image. Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a very thick sturdy round wooden pole, about a quarter of the image wide, of warm brown #8a5a32 with a #5a3a1c shadow on its right side and two dark iron bands, a chunky round wooden crow's nest near the top, one long thick wooden yard spanning the whole image width with a fat furled cream sail #efe3c2 tied in a roll along it, a plain white #ffffff triangular pennant flying to the right from the very tip, a fat coil of rope #c8b080 round its foot. The mast fills the image from the very top to the very bottom. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, floor, deck planks, ground plate, platform, pedestal, terrain slab, cast shadow, background, person, character, creature, animal, open sail, ship, hull, ladder, thin pole, lantern, second yard."
+    },
+    "at": "2026-11-28T20:22:39.386Z",
+    "usageUsd": 0.08097244479921129,
+    "candidates": [
+      {
+        "file": "mast-b-0.png",
+        "sha256": "20f9dba7d73576ccf5682e1f3fa2c89ffca4faff2e03dc427ed9bd0d83d062b4",
+        "width": 64,
+        "height": 128
+      },
+      {
+        "file": "mast-b-1.png",
+        "sha256": "1d9295807dbf46139641568fa05ffb88f86cc285286de1813a04a75606765dfc",
+        "width": 64,
+        "height": 128
+      },
+      {
+        "file": "mast-b-2.png",
+        "sha256": "77f6691ca876d46eea831f40508f7b164b482d6e6a1eb79a3bcfd9a1d3c22553",
+        "width": 64,
+        "height": 128
+      },
+      {
+        "file": "mast-b-3.png",
+        "sha256": "92d3dfbb70b9883c3a3b843a141c844490542b876c1efc98b0b6c854673119bd",
+        "width": 64,
+        "height": 128
+      }
+    ]
+  }
+}

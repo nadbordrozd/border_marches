@@ -81,6 +81,10 @@ export const FX_EVENTS = [
   "battle.command",
   "battle.item",
   "battle.ability",
+  // Naval (NAVAL 11).
+  "battle.deck-gun",
+  "battle.siren-song",
+  "spell.tidal-wave",
   "battle.wait",
   "battle.defend",
   // Turn flow.
@@ -170,6 +174,9 @@ export const FX_SOUNDS: Partial<Record<FxEvent, SoundId>> = {
   "battle.ground.mist": "ground.mist",
   "battle.command": "battle.command",
   "battle.item": "pickup",
+  "battle.deck-gun": "battle.deck-gun",
+  "battle.siren-song": "battle.siren-song",
+  "spell.tidal-wave": "spell.tidal-wave",
   "map.flag.raise": "map.flag",
   "ui.dialog.open": "ui.dialog.open",
   "ui.dialog.close": "ui.dialog.close",
@@ -214,6 +221,8 @@ export const FX_OPTIONS: Partial<Record<FxEvent, PlayOptions>> = {
   "battle.ground.brambles": { jitter: 0.06, gap: 0.45 },
   "battle.ground.mist": { gap: 0.6 },
   "battle.item": { volume: 0.7 },
+  // Two ships' guns fire one after the other.
+  "battle.deck-gun": { jitter: 0.05, gap: 0.1 },
   "map.flag.raise": { jitter: 0.04, gap: 0.3 },
   // After the hammer knocks of "build".
   "ui.build.complete": { delay: 0.5 },

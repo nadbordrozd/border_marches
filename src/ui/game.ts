@@ -70,7 +70,7 @@ import type {
   MapView,
   PathStep as PreviewStep,
 } from "../render/map/map-view.ts";
-import { pickupCue, siteCue } from "../audio/cues.ts";
+import { SHIP_BELL_DELAY, pickupCue, siteCue, stepCue } from "../audio/cues.ts";
 import { playSound } from "../audio/sound.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { burst as fxBurst, sparkle as fxSparkle } from "../render/fx/emit.ts";
@@ -1436,6 +1436,7 @@ class GameScreen {
         );
         if (events !== null) {
           this.syncHeroes();
+          for (const e of events) if (e.type === "ship-sunk") this.sinkSound(e);
           toast(aim.spell === "ask-the-dead" ? "The dead answer." : "Cast.");
           this.announceCast(events);
         }
@@ -1627,6 +1628,7 @@ class GameScreen {
     const sight = sightRadius(hero);
     let prev = { x: hero.x, y: hero.y };
     let carried = carriedAtStart(this.state, hero);
+    let step = 0;
     for (const [x, y] of cells) {
       for (
         let yy = Math.max(0, y - sight);
@@ -1653,12 +1655,15 @@ class GameScreen {
         { x, y },
       );
       this.view.setExplored(explored);
+      const wasAboard = carried !== null;
       carried = this.carryShip(this.state, carried, x, y);
       this.syncHeroes({ id: hero.id, x, y });
       const still = reducedMotion();
       if (still) this.view.centerOn(x, y);
       this.updateViewport();
-      playSound("hero.step", { jitter: 0.08 });
+      playSound(stepCue(wasAboard, carried !== null, step++), {
+        jitter: 0.08,
+      });
       if (!still) fxEvent("map.walk.bob");
       // The sprite walks from the last cell with a bob, the camera following.
       await this.view.walkHero(hero.id, prev, { x, y }, STEP_MS, still);
@@ -1864,18 +1869,25 @@ class GameScreen {
         case "teleported": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
           if (h?.owner === this.human) {
+            // A whirlpool or ferry speaks through its own visit's line and
+            // sound (siteCue).
+            const sea = e.via === "whirlpool" || e.via === "ferry-landing";
             // A waystone or the Tow Line: the same magical rush.
-            playSound("site.waystone");
+            if (!sea) playSound("site.waystone");
             // The camera follows the hero to where it lands.
             void this.view.glideTo(e.x, e.y, reducedMotion());
-            this.note(
-              e.via === "tow-line"
-                ? "The tow line hauls you to the pylon."
-                : "The waystone carries you.",
-            );
+            if (!sea)
+              this.note(
+                e.via === "tow-line"
+                  ? "The tow line hauls you to the pylon."
+                  : "The waystone carries you.",
+              );
           }
           break;
         }
+        case "ship-sunk":
+          this.sinkSound(e);
+          break;
         case "dug":
           if (
             this.state.heroes.find((h) => h.id === e.heroId)?.owner ===
@@ -2013,7 +2025,16 @@ class GameScreen {
     const obj = this.state.map.objects.find((o) => o.id === objectId);
     if (obj === undefined) return;
     const cue = siteCue(objectTypeOf(obj), text);
-    if (cue !== null) playSound(cue);
+    if (cue === "ship.bought") {
+      playSound("build");
+      playSound(cue, { delay: SHIP_BELL_DELAY });
+    } else if (cue !== null) playSound(cue);
+  }
+
+  /** A ship going down, heard where the player has explored. */
+  private sinkSound(e: Extract<GameEvent, { type: "ship-sunk" }>): void {
+    if (this.player()?.explored[e.y * this.state.map.width + e.x] === true)
+      playSound("ship.sink");
   }
 
   /** A sword drawn as the human's hero takes on a bank's guard. */
@@ -2545,6 +2566,7 @@ class GameScreen {
     );
     if (events !== null) {
       this.syncHeroes();
+      for (const e of events) if (e.type === "ship-sunk") this.sinkSound(e);
       toast("Cast.");
       this.announceCast(events);
     }

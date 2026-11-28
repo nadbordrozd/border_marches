@@ -1,15 +1,21 @@
 /**
- * The naval battlefield's look (docs/design/NAVAL.md 3.8, bead bzc.153),
- * drawn in code until the battle deck art (bead 9d) arrives: a plank deck,
- * the water with its glints, gangplanks and jetties, rails along the deck
- * edges, tall masts, crates, reefs and a deck gun at each ship's back rail.
+ * The naval battlefield's look (docs/design/NAVAL.md 3.8, bead bzc.153): a
+ * plank deck, the water with its glints, gangplanks and jetties, rails
+ * along the deck edges, tall masts, crates, reefs and a deck gun at each
+ * ship's back rail.
  *
- * Every piece is looked up by key ({@link NAVAL_PIECE_KEYS}), so the art
- * bead replaces a drawer with an image without touching the renderer. All
- * of it is deterministic: hashes of pixel and hex positions, never a
- * random number; the water's motion is a function of the scene clock.
+ * Every piece is looked up by key ({@link NAVAL_PIECE_KEYS}). The deck,
+ * masts, crates, reefs and deck guns have art (bead bzc.160,
+ * {@link NAVAL_PIECE_ART}); each also has a code drawer, used until its
+ * images are loaded and for a key without art. The water, gangplanks,
+ * rails and foam are drawn in code. All of it is deterministic: hashes of
+ * pixel and hex positions, never a random number; the water's motion is a
+ * function of the scene clock.
  */
 
+import { BATTLE_PIECE_ART, DECK_BOARDS } from "../../assets/battle-pieces.ts";
+import type { ImageAsset } from "../../assets/manifest.ts";
+import { clothRamp } from "../map/owner-flag.ts";
 import {
   BATTLE_HEIGHT,
   BATTLE_WIDTH,
@@ -41,14 +47,39 @@ import {
   type Point,
 } from "./geometry.ts";
 
-/** The keys of the naval battle pieces (bead 9d's art takes these keys). */
+/** The keys of the naval battle pieces (the art registry takes these). */
 export const NAVAL_PIECE_KEYS = {
+  deck: "battle-deck",
   mast: "battle-mast",
   crate: "battle-crate",
   reef: "battle-reef",
   deckGun: "battle-deck-gun",
   water: "battle-water",
 } as const;
+
+export type NavalPieceKey =
+  (typeof NAVAL_PIECE_KEYS)[keyof typeof NAVAL_PIECE_KEYS];
+
+/** The registered art; a key without an entry is drawn in code. */
+export const NAVAL_PIECE_ART: Partial<
+  Record<NavalPieceKey, readonly ImageAsset[]>
+> = BATTLE_PIECE_ART;
+
+/** An image of a piece, at its native size. */
+export type PieceImage = CanvasImageSource & {
+  readonly width: number;
+  readonly height: number;
+};
+
+/** Loaded images per key, in the registry's order. */
+export type NavalImages = Partial<Record<NavalPieceKey, readonly PieceImage[]>>;
+
+/** A texture's pixels (RGBA), as getImageData gives them. */
+export interface TexturePixels {
+  readonly width: number;
+  readonly height: number;
+  readonly data: Uint8ClampedArray;
+}
 
 export type NavalPieceKind = "mast" | "crate" | "reef";
 
@@ -57,6 +88,8 @@ export interface NavalPiece {
   readonly canvas: HTMLCanvasElement;
   /** Where the piece's foot sits below its hex centre (stage pixels). */
   readonly footBelow: number;
+  /** The side whose deck a mast stands on (its pennant's colour). */
+  readonly side?: BattleSide;
 }
 
 /** What the renderer needs to draw a sea layout. */
@@ -70,11 +103,17 @@ export interface NavalArt {
   readonly sea: readonly number[];
   /** Sides that fight from a ship with a deck gun. */
   readonly guns: readonly BattleSide[];
+  /** The code-drawn gun (muzzle right, mirrored for the defender). */
   readonly gun: HTMLCanvasElement | null;
+  /** The gun art per side, each its own facing; never mirrored. */
+  readonly gunArt?: Readonly<Record<BattleSide, PieceImage>>;
+  /** The deck art's pixels; absent: code-drawn boards. */
+  readonly deck?: TexturePixels;
 }
 
 const WOOD = ["#8a5a32", "#94643a", "#7f522c", "#9a6a40"] as const;
 const WOOD_SEAM = "#4a2c16";
+const PLANK = ["#ab7c4a", "#b68854", "#a07242", "#bd8f58"] as const;
 const WOOD_NAIL = "#2e1a0c";
 const SEA = ["#1f5a70", "#25687f", "#2c768d"] as const;
 const SEA_CREST = "#5fa6ba";
@@ -127,6 +166,57 @@ function nearestHex(p: Point): Hex {
   return best;
 }
 
+/** One stage column of the textured deck. */
+export interface DeckColumn {
+  /** The texture column it reads. */
+  readonly tx: number;
+  /** The board's slide down the texture. */
+  readonly shift: number;
+}
+
+/**
+ * The stage's columns cut from the deck texture's boards (`boards`: their
+ * left edges, the width last): boards picked by a hash, never the same one
+ * twice running, each slid down the texture by its own amount.
+ */
+export function deckColumns(
+  stageWidth: number,
+  boards: readonly number[],
+): DeckColumn[] {
+  const count = boards.length - 1;
+  const height = boards[count] ?? 0;
+  const out: DeckColumn[] = [];
+  let last = -1;
+  for (let n = 0; out.length < stageWidth && count > 0; n++) {
+    let pick = Math.floor(hash(n, 21) * count);
+    if (pick === last && count > 1) pick = (pick + 1) % count;
+    last = pick;
+    const shift = Math.floor(hash(n, 22) * height);
+    const end = boards[pick + 1] ?? 0;
+    for (let tx = boards[pick] ?? 0; tx < end; tx++) {
+      if (out.length >= stageWidth) break;
+      out.push({ tx, shift });
+    }
+  }
+  return out;
+}
+
+/**
+ * A textured deck pixel. Where a slid board wraps round the texture a butt
+ * joint is drawn, so the wrap reads as two planks meeting.
+ */
+function texturedDeckPixel(
+  texture: TexturePixels,
+  column: DeckColumn,
+  y: number,
+): [number, number, number] {
+  const ty = (y + column.shift) % texture.height;
+  if (ty === 0) return hexRgb(WOOD_SEAM);
+  const i = (ty * texture.width + column.tx) * 4;
+  const d = texture.data;
+  return [d[i] ?? 0, d[i + 1] ?? 0, d[i + 2] ?? 0];
+}
+
 /** A deck pixel: boards 8 px tall with staggered butt joints and nails. */
 function deckPixel(x: number, y: number): string {
   const board = Math.floor(y / 8);
@@ -163,10 +253,10 @@ function plankPixel(x: number, y: number, h: Hex): string {
   const c = hexToStage(h);
   // A walk 40 px wide (east to west) of boards 6 px wide.
   if (Math.abs(y - c.y) > 20) return seaPixel(x, y);
-  if (Math.abs(y - c.y) === 20) return WOOD_SEAM;
+  if (Math.abs(y - c.y) >= 18) return WOOD_SEAM;
   const k = Math.floor(x / 6);
   if (x % 6 === 0) return WOOD_SEAM;
-  return WOOD[Math.floor(hash(k, h.row, 9) * WOOD.length)] as string;
+  return PLANK[Math.floor(hash(k, h.row, 9) * PLANK.length)] as string;
 }
 
 /**
@@ -189,16 +279,23 @@ export function paintNavalField(
     }
     return v;
   };
+  const texture = naval.deck;
+  const columns = texture ? deckColumns(STAGE_W, DECK_BOARDS) : [];
   for (let y = 0; y < STAGE_H; y++) {
     for (let x = 0; x < STAGE_W; x++) {
       const h = nearestHex({ x: x + 0.5, y: y + 0.5 });
       const kind = naval.kinds[hexIndex(h)];
-      let c: string | null = null;
-      if (kind === "deck") c = deckPixel(x, y);
-      else if (kind === "sea") c = seaPixel(x, y);
-      else if (kind === "plank") c = plankPixel(x, y, h);
-      if (c === null) continue;
-      const [r, g, b] = rgb(c);
+      let px: [number, number, number];
+      if (kind === "deck") {
+        const column = columns[x];
+        px =
+          texture && column
+            ? texturedDeckPixel(texture, column, y)
+            : rgb(deckPixel(x, y));
+      } else if (kind === "sea") px = rgb(seaPixel(x, y));
+      else if (kind === "plank") px = rgb(plankPixel(x, y, h));
+      else continue;
+      const [r, g, b] = px;
       const i = (y * STAGE_W + x) * 4;
       data[i] = r;
       data[i + 1] = g;
@@ -323,6 +420,128 @@ function drawMast(side: BattleSide): HTMLCanvasElement {
   return c;
 }
 
+const PENNANT: Readonly<Record<BattleSide, string>> = {
+  attacker: "#3c6ec8",
+  defender: "#c83c3c",
+};
+
+/** The mast art's pennant: right of the pole's tip, above the crow's nest. */
+export const MAST_PENNANT = { minX: 34, maxY: 16 } as const;
+
+/**
+ * A copy of the mast art's pixels with its white pennant in the side's
+ * colour (its greys become the fold shade). Pure.
+ */
+export function tintPennant(
+  src: TexturePixels,
+  side: BattleSide,
+): TexturePixels {
+  const data = new Uint8ClampedArray(src.data);
+  const { shade, base, light } = clothRamp(PENNANT[side]);
+  for (let y = 0; y < Math.min(src.height, MAST_PENNANT.maxY); y++) {
+    for (let x = MAST_PENNANT.minX; x < src.width; x++) {
+      const i = (y * src.width + x) * 4;
+      const r = data[i] ?? 0;
+      const g = data[i + 1] ?? 0;
+      const b = data[i + 2] ?? 0;
+      const v = Math.max(r, g, b);
+      const lo = Math.min(r, g, b);
+      // The cloth: opaque, light and nearly grey (the art's warm whites).
+      if ((data[i + 3] ?? 0) === 0 || v - lo > 20 || lo < 150) continue;
+      const to = v >= 247 ? light : v >= 228 ? base : shade;
+      data[i] = to[0];
+      data[i + 1] = to[1];
+      data[i + 2] = to[2];
+    }
+  }
+  return { width: src.width, height: src.height, data };
+}
+
+function pixelsOf(image: PieceImage): TexturePixels | null {
+  const c = canvasOf(image.width, image.height);
+  const ctx = c.getContext("2d");
+  if (!ctx) return null;
+  ctx.drawImage(image, 0, 0);
+  return ctx.getImageData(0, 0, c.width, c.height);
+}
+
+function mastFromArt(image: PieceImage, side: BattleSide): NavalPiece | null {
+  const src = pixelsOf(image);
+  const canvas = canvasOf(image.width, image.height);
+  const ctx = canvas.getContext("2d");
+  if (!src || !ctx) return null;
+  const out = ctx.createImageData(src.width, src.height);
+  out.data.set(tintPennant(src, side).data);
+  ctx.putImageData(out, 0, 0);
+  return { kind: "mast", canvas, footBelow: 16, side };
+}
+
+function crateFromArt(image: PieceImage): NavalPiece | null {
+  const canvas = canvasOf(image.width, image.height);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  ctx.drawImage(image, 0, 0);
+  return { kind: "crate", canvas, footBelow: 14 };
+}
+
+/** The reef art standing in a ring of code-drawn foam at its waterline. */
+function reefFromArt(image: PieceImage): NavalPiece | null {
+  const canvas = canvasOf(image.width + 8, image.height + 5);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  const cx = canvas.width / 2;
+  const line = canvas.height - 7;
+  const rx = image.width / 2 + 3;
+  ctx.globalAlpha = 0.75;
+  ctx.fillStyle = FOAM;
+  ctx.beginPath();
+  ctx.ellipse(cx, line, rx, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = SEA[1];
+  ctx.beginPath();
+  ctx.ellipse(cx, line, rx - 3, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.drawImage(image, 4, canvas.height - 4 - image.height);
+  // The front of the ring laps over the rocks' feet.
+  ctx.strokeStyle = FOAM;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(cx, line, rx - 3, 4, 0, 0.15, Math.PI - 0.15);
+  ctx.stroke();
+  return { kind: "reef", canvas, footBelow: 16 };
+}
+
+/**
+ * The look with the registered art swapped in for the code drawers, piece
+ * by piece: a key with no image keeps its drawing.
+ */
+export function dressNaval(art: NavalArt, images: NavalImages): NavalArt {
+  if (typeof document === "undefined") return art;
+  const pieces = new Map<number, NavalPiece>();
+  for (const [index, piece] of art.pieces) {
+    const list = images[NAVAL_PIECE_KEYS[piece.kind]];
+    const image = list?.[Math.floor(hash(index, 31) * list.length)];
+    let dressed: NavalPiece | null = null;
+    if (image) {
+      if (piece.kind === "mast")
+        dressed = mastFromArt(image, piece.side ?? "attacker");
+      else if (piece.kind === "crate") dressed = crateFromArt(image);
+      else dressed = reefFromArt(image);
+    }
+    pieces.set(index, dressed ?? piece);
+  }
+  const deckImage = images[NAVAL_PIECE_KEYS.deck]?.[0];
+  const deck = deckImage ? pixelsOf(deckImage) : null;
+  const [east, west] = images[NAVAL_PIECE_KEYS.deckGun] ?? [];
+  return {
+    ...art,
+    pieces,
+    ...(deck ? { deck } : {}),
+    ...(east && west ? { gunArt: { attacker: east, defender: west } } : {}),
+  };
+}
+
 /** A wooden crate with a cross brace. */
 function drawCrate(): HTMLCanvasElement {
   const c = canvasOf(28, 26);
@@ -431,7 +650,12 @@ export function navalArtFor(
           zones !== null && g.hex.col <= zones.attackerTo
             ? "attacker"
             : "defender";
-        pieces.set(i, { kind: "mast", canvas: drawMast(side), footBelow: 16 });
+        pieces.set(i, {
+          kind: "mast",
+          canvas: drawMast(side),
+          footBelow: 16,
+          side,
+        });
       } else if (g.kind === "rock" && g.look === "crate") {
         pieces.set(i, { kind: "crate", canvas: drawCrate(), footBelow: 12 });
       } else if (g.kind === "rock" && g.look === "reef") {
@@ -503,20 +727,20 @@ export function drawPiece(
 /**
  * The deck guns on each ship's rail above the field (row 0's top edge,
  * over column 1 for the attacker and 13 for the defender), muzzles toward
- * the enemy. Placeholder art until bead 9d.
+ * the enemy.
  */
 export function drawDeckGuns(
   ctx: CanvasRenderingContext2D,
   naval: NavalArt,
 ): void {
-  const gun = naval.gun;
-  if (!gun) return;
   for (const side of naval.guns) {
+    const gun = naval.gunArt?.[side] ?? naval.gun;
+    if (!gun) continue;
     const h = side === "attacker" ? { col: 1, row: 0 } : { col: 13, row: 0 };
     const c = hexToStage(h);
     const y = Math.round(c.y - HEX_SIZE - gun.height + 6);
     const x = Math.round(c.x - gun.width / 2);
-    if (side === "attacker") {
+    if (naval.gunArt || side === "attacker") {
       ctx.drawImage(gun, x, y);
     } else {
       ctx.save();

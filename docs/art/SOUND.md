@@ -21,6 +21,13 @@ Music is out of scope (the user adds it later).
   hiss), victory (a small brass band's chord with a whistle edge) and town
   (clanking gears, a piston and a bell ding) sounds, one take each, all
   three accepted at the usual trims.
+- The sea (bead bzc.160, NAVAL.md 11): eleven cues for boarding, landing,
+  sailing (two takes in turn), a ship bought, a sinking, the whirlpool, the
+  deck gun, the buoy bell, Siren Song and Tidal Wave. They replace the
+  waystone, treasure and flag sounds the sea borrowed where section 11
+  lists a cue; sea finds keep the treasure sound and sea dwellings the flag,
+  and the Ferry Landing sounds like boarding. Seventeen takes, eleven
+  accepted.
 
 ## Where sounds come from
 
@@ -87,6 +94,9 @@ A test (`tests/audio/sound.test.ts`) keeps this table in step with
 | `battle.command` | `battle.command` | war horn fanfare |
 | `battle.item` | `pickup` | 70% volume |
 | `battle.ability` | none | frequent creature abilities stay quiet |
+| `battle.deck-gun` | `battle.deck-gun` | the deck gun fires; its harm follows; jitter 5%, gap 100 ms |
+| `battle.siren-song` | `battle.siren-song` | the Siren's Song, instead of the silent ability |
+| `spell.tidal-wave` | `spell.tidal-wave` | Tidal Wave's cast, delivery and impact in one (no Storm sounds) |
 | `battle.wait` | none | a click already sounds from the button |
 | `battle.defend` | none | a click already sounds from the button |
 | `battle.round` | none | every round; would tire |
@@ -190,7 +200,14 @@ jitter 5%, gap 100 ms.
 | Shrines, stones, wells, schools, temples, the observatory and other blessings | `site.shrine` | `siteCue` |
 | A hero takes on a bank's guard | `site.bank` | before the battle opens |
 | A find: chest, loose artifact or scroll, campfire, fallen adventurer, sealed box, a plundered bank | `site.treasure` | `siteCue`; chests on the offer |
-| A waystone | `site.waystone` | the `teleported` event |
+| A waystone or the Tow Line | `site.waystone` | the `teleported` event |
+| Stepping onto a ship, and a ferry ride | `ship.board` | the walk (`stepCue`); the Ferry Landing through `siteCue` |
+| A step at sea | `ship.sail.a`, `ship.sail.b` | in turn, as the land's `hero.step` (`stepCue`) |
+| Stepping ashore | `ship.land` | the walk (`stepCue`) |
+| A ship bought (town Shipyard or Shipwright) | `build`, then `ship.bought` 0.6 s later | hammering and a bell |
+| A ship sunk or scuttled on explored water | `ship.sink` | the `ship-sunk` event |
+| Whirlpool travel | `ship.whirlpool` | `siteCue` |
+| Buoy and Lighthouse visits | `site.buoy-bell` | `siteCue` |
 | A key from a keymaster, a quest gate opened | `site.gate` | `siteCue` |
 | Digging | `site.dig`, then `site.treasure` 0.3 s later when something turns up | the `dug` event |
 | A seer's quest done, a prisoner freed | `site.quest` | `siteCue` |
@@ -298,6 +315,24 @@ Rejected takes (each with its reason in `verdicts.json`):
 late snaps), `site.shrine#0` (noisy wash, no bell partials),
 `recruit.candy#0` (peaky crinkles: the peak ceiling holds it 10 dB under
 the other recruit sounds), `recruit.candy#1` (a faint pure tone).
+
+## Naval cues
+
+Judged like pass 2 (envelope, spectrogram and levels, without listening).
+
+| Sound | File | Length (s) | Accepted take | Rejected |
+| --- | --- | --- | --- | --- |
+| `ship.board` | `sfx/ship-board.mp3` | 0.8 | #0 | |
+| `ship.land` | `sfx/ship-land.mp3` | 1 | #0 | |
+| `ship.sail.a` | `sfx/ship-sail-a.mp3` | 0.48 | #2 | #0 near silent, #1 a hiss |
+| `ship.sail.b` | `sfx/ship-sail-b.mp3` | 0.48 | #0 | |
+| `ship.bought` | `sfx/ship-bought.mp3` | 1.48 | #3 (the bell) | #0-#2 knocks without a bell, #4 fainter |
+| `ship.sink` | `sfx/ship-sink.mp3` | 1.2 | #0 | |
+| `ship.whirlpool` | `sfx/ship-whirlpool.mp3` | 1.2 | #0 | |
+| `battle.deck-gun` | `sfx/deck-gun.mp3` | 0.8 | #0 | |
+| `site.buoy-bell` | `sfx/buoy-bell.mp3` | 1.2 | #0 | |
+| `battle.siren-song` | `sfx/siren-song.mp3` | 1.48 | #0 | |
+| `spell.tidal-wave` | `sfx/tidal-wave.mp3` | 1.48 | #0 | |
 
 ## Adding a sound
 

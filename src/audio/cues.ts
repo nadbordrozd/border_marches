@@ -47,6 +47,32 @@ export function pickupCue(resource: ResourceId): SoundId {
   return resource === "gold" ? "gold" : "pickup";
 }
 
+/**
+ * The sound of one step of a walk shown on the map (NAVAL 11, bead
+ * bzc.160): stepping onto a ship, stepping ashore, sailing (two takes in
+ * turn) or walking. `wasAboard` and `isAboard`: whether a ship carried the
+ * hero before and after the step.
+ */
+export function stepCue(
+  wasAboard: boolean,
+  isAboard: boolean,
+  step: number,
+): SoundId {
+  if (isAboard)
+    return !wasAboard
+      ? "ship.board"
+      : step % 2 === 0
+        ? "ship.sail.a"
+        : "ship.sail.b";
+  return wasAboard ? "ship.land" : "hero.step";
+}
+
+/**
+ * A ship bought sounds as hammering and a bell (NAVAL 11): the build knocks,
+ * then the ship's bell this many seconds later.
+ */
+export const SHIP_BELL_DELAY = 0.6;
+
 /** The five factions with their own recruit, victory and town sounds. */
 const VOICED = ["humans", "undead", "goblins", "candy", "dwarves"] as const;
 type VoicedFaction = (typeof VOICED)[number];
@@ -94,6 +120,12 @@ export function siteCue(
 ): SoundId | null {
   if (type === null || NOTHING_HAPPENED.test(text)) return null;
   switch (type) {
+    // The sea's own sounds (NAVAL 11, bead bzc.160).
+    case "buoy":
+    case "lighthouse":
+      return "site.buoy-bell";
+    case "whirlpool":
+      return "ship.whirlpool";
     case "seer-hut":
       return /quest complete/i.test(text) ? "site.quest" : null;
     case "quest-gate":
@@ -101,22 +133,19 @@ export function siteCue(
     case "keymasters-tent":
     case "border-gate":
       return "site.gate";
-    // Waystones, and the sea.s crossings (bead bzc.151) until the naval
-    // sounds come.
     case "two-way-waystone":
     case "one-way-waystone":
-    case "ferry-landing":
-    case "whirlpool":
       return "site.waystone";
-    // A ship bought at a Shipwright sounds like a sale; arriving flags it.
+    // The ferry is boarded like a ship.
+    case "ferry-landing":
+      return "ship.board";
+    // A ship bought at a Shipwright rings its bell; arriving flags it.
     case "shipwright":
       return /new ship/.test(text)
-        ? "site.market"
+        ? "ship.bought"
         : /flagged/.test(text)
           ? "map.flag"
           : null;
-    case "lighthouse":
-      return /flagged/.test(text) ? "map.flag" : "site.shrine";
     case "flotsam":
     case "sea-chest":
     case "message-in-a-bottle":

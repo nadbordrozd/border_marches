@@ -20,7 +20,14 @@ import { conditionKindIds, hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import { hashInts } from "../../core/rng.ts";
 import { MARKER_ICONS, iconFor } from "../../assets/icons.ts";
-import { waterTile, type NavalArt } from "./naval.ts";
+import {
+  NAVAL_PIECE_ART,
+  dressNaval,
+  waterTile,
+  type NavalArt,
+  type NavalImages,
+  type NavalPieceKey,
+} from "./naval.ts";
 
 const cache = new Map<string, Promise<HTMLImageElement>>();
 
@@ -223,6 +230,24 @@ export interface BattleArt {
   readonly portraits: ReadonlyMap<string, string>;
 }
 
+/**
+ * The registered naval art (bead bzc.160). A key with an image that fails
+ * to load is left out, so that piece is drawn in code.
+ */
+async function loadNavalImages(): Promise<NavalImages> {
+  const out: NavalImages = {};
+  await Promise.all(
+    Object.entries(NAVAL_PIECE_ART).map(async ([key, assets]) => {
+      try {
+        out[key as NavalPieceKey] = await Promise.all(assets.map(loadImage));
+      } catch {
+        // Keep the code drawing.
+      }
+    }),
+  );
+  return out;
+}
+
 /** Loads everything one battle draws. */
 export async function loadBattleArt(
   terrain: GroundTerrain,
@@ -265,10 +290,13 @@ export async function loadBattleArt(
   await iconsP;
   const water = naval ? waterTile() : null;
   const land = landP ? await landP : undefined;
+  const dressed = naval
+    ? dressNaval(naval.art, await loadNavalImages())
+    : undefined;
   return {
     ground: water ?? (await groundP),
     ...(land !== undefined ? { land } : {}),
-    ...(naval ? { naval: naval.art } : {}),
+    ...(dressed ? { naval: dressed } : {}),
     units,
     obstacles: new Map(obstacleEntries),
     portraits,

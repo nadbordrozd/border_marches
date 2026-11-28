@@ -1502,5 +1502,277 @@
     "file": "town.dwarves-0.mp3",
     "sha256": "58eb7bb65e6029c7f7f3af19eec5f373c74a5510280375f7a3c4db53bed7782f",
     "bytes": 40585
+  },
+  "ship.board#0": {
+    "id": "ship.board",
+    "n": 0,
+    "at": "2026-11-28T20:10:32.297Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a hero steps aboard a wooden boat: one clear wooden plank creak and a small water splash, short, close-up, cartoon, no voice, no music, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.board-0.mp3",
+    "sha256": "e28549b7691e883868a574d72ba7b7dd8e4a5075e7ff3d87c08d6e9e8a2c5428",
+    "bytes": 13835
+  },
+  "ship.land#0": {
+    "id": "ship.land",
+    "n": 0,
+    "at": "2026-11-28T20:10:33.901Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "stepping off a boat onto a beach: a water splash then two soft crunchy footsteps on wet sand, short, close-up, no voice, no music, no reverb",
+      "duration_seconds": 1,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.land-0.mp3",
+    "sha256": "6b1d5ed71d7b8b28c877f2deedd712f182c71f298ad47990e902a3268dabb2e4",
+    "bytes": 17179
+  },
+  "ship.sail.a#0": {
+    "id": "ship.sail.a",
+    "n": 0,
+    "at": "2026-11-28T20:10:35.562Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "one soft oar dipping into calm water and pulling, a gentle plop and swirl, short, close-up, clear, no voice, no music, no reverb",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.sail.a-0.mp3",
+    "sha256": "d697b915f23a007edf5af4ab47ad01a14fd58556b33e056cc8efd902e75721c8",
+    "bytes": 8820
+  },
+  "ship.sail.b#0": {
+    "id": "ship.sail.b",
+    "n": 0,
+    "at": "2026-11-28T20:10:37.805Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "one small gentle wave lapping against a wooden boat hull, a soft slosh, short, close-up, clear, no voice, no music, no reverb",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.sail.b-0.mp3",
+    "sha256": "87438f9bfaf17f55dd370be1242abccbd819983c1bb43cd0ace03a4e1431ded5",
+    "bytes": 8820
+  },
+  "ship.bought#0": {
+    "id": "ship.bought",
+    "n": 0,
+    "at": "2026-11-28T20:10:39.458Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a new wooden ship is finished at the shipyard: two quick hammer knocks on wood and then one bright brass ship bell ding, cheerful, short, cartoon fantasy, no voice, no reverb",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.bought-0.mp3",
+    "sha256": "22965f6d832a7e276556e1946d362b8f2ccac4d73a66fd725d72c11620c1534d",
+    "bytes": 20105
+  },
+  "ship.sink#0": {
+    "id": "ship.sink",
+    "n": 0,
+    "at": "2026-11-28T20:10:41.472Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a small wooden boat sinking: a deep watery gurgle and a stream of bubbles that fade away, short, cartoon, no voice, no music, no reverb",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.sink-0.mp3",
+    "sha256": "b68a70ecdd4049636f69110bd91bd6a0ac4b7a78e6f4783d44b9c1e3ae4cdece",
+    "bytes": 20105
+  },
+  "ship.whirlpool#0": {
+    "id": "ship.whirlpool",
+    "n": 0,
+    "at": "2026-11-28T20:10:43.018Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a boat pulled into a whirlpool: a swirling rushing water whoosh that spins round and rises, then a splash, short, cartoon magic, no voice, no music",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.whirlpool-0.mp3",
+    "sha256": "5618d5dc8c2ac88dcfbd154b9ce7393ed50ea8ca4c26aee6751e2f25e9b80f8b",
+    "bytes": 20105
+  },
+  "battle.deck-gun#0": {
+    "id": "battle.deck-gun",
+    "n": 0,
+    "at": "2026-11-28T20:10:44.881Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "one small ship cannon firing: a short punchy cartoon boom with a little thud and puff of smoke, close-up, no voice, no echo, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.deck-gun-0.mp3",
+    "sha256": "909e4faf9b543ef1406775461f5ed6b1bd728ab817ecff5d14b877bc9f38eed0",
+    "bytes": 13835
+  },
+  "site.buoy-bell#0": {
+    "id": "site.buoy-bell",
+    "n": 0,
+    "at": "2026-11-28T20:10:46.702Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a harbour buoy bell rocking on the waves: two clear metal bell clangs with a soft water slosh, short, close-up, no voice, no music",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.buoy-bell-0.mp3",
+    "sha256": "1bebd68fe2833ef736a127bc7c37b6e86cb91b1e005f6ff16098530f3e9979b7",
+    "bytes": 20105
+  },
+  "battle.siren-song#0": {
+    "id": "battle.siren-song",
+    "n": 0,
+    "at": "2026-11-28T20:10:48.361Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a mermaid siren singing a short eerie enchanting la-la-la melody, a high soft female voice, haunting and playful fantasy, short",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.siren-song-0.mp3",
+    "sha256": "9dedda052cadbca21ca9c290a1c17be7c6d519456c01f6122944c1dd6b570b25",
+    "bytes": 24702
+  },
+  "spell.tidal-wave#0": {
+    "id": "spell.tidal-wave",
+    "n": 0,
+    "at": "2026-11-28T20:10:50.591Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a big tidal wave: water rushing and rising, then a heavy crashing splash, cartoon fantasy spell, short, no voice, no music",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.tidal-wave-0.mp3",
+    "sha256": "173d2e9ee684b471cbda470865a463d8a30b6a8561471bf164e110517e63f7bb",
+    "bytes": 24702
+  },
+  "ship.sail.a#1": {
+    "id": "ship.sail.a",
+    "n": 1,
+    "at": "2026-11-28T20:11:13.245Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "one soft oar dipping into calm water and pulling, a gentle plop and swirl, short, close-up, clear, no voice, no music, no reverb",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.sail.a-1.mp3",
+    "sha256": "352ffdcd5904145ddfc5506cd764807fe6226e008e52509fcf01382c9fd74182",
+    "bytes": 8820
+  },
+  "ship.sail.a#2": {
+    "id": "ship.sail.a",
+    "n": 2,
+    "at": "2026-11-28T20:11:14.581Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "one soft oar dipping into calm water and pulling, a gentle plop and swirl, short, close-up, clear, no voice, no music, no reverb",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.sail.a-2.mp3",
+    "sha256": "d5dc10f34aba6501fa5e04fba6726f6a6af3587a65481f082610d86e0958e95b",
+    "bytes": 8820
+  },
+  "ship.bought#1": {
+    "id": "ship.bought",
+    "n": 1,
+    "at": "2026-11-28T20:11:15.828Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a new wooden ship is finished at the shipyard: two quick hammer knocks on wood and then one bright brass ship bell ding, cheerful, short, cartoon fantasy, no voice, no reverb",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.bought-1.mp3",
+    "sha256": "0da590856720e5f6c620c354eb3b17aaa841bcfdaaa0158077cce0f30e4a46a9",
+    "bytes": 20105
+  },
+  "ship.bought#2": {
+    "id": "ship.bought",
+    "n": 2,
+    "at": "2026-11-28T20:11:16.862Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a new wooden ship is finished at the shipyard: two quick hammer knocks on wood and then one bright brass ship bell ding, cheerful, short, cartoon fantasy, no voice, no reverb",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.bought-2.mp3",
+    "sha256": "ae7b0340ae86dbf2c31c3d16135eb604527c11fc5fa85efb667c559789091513",
+    "bytes": 20105
+  },
+  "ship.bought#3": {
+    "id": "ship.bought",
+    "n": 3,
+    "at": "2026-11-28T20:11:35.874Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a brass ship bell rings twice with a clear bright metallic ding ding that rings on, after two light wooden hammer taps, cheerful, short, close-up, no voice, no music",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.bought-3.mp3",
+    "sha256": "75ee9c8bc90f813efe625c4461c6aa553d4a81295ad5d6d06b51bebf0587ce24",
+    "bytes": 24702
+  },
+  "ship.bought#4": {
+    "id": "ship.bought",
+    "n": 4,
+    "at": "2026-11-28T20:11:37.029Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a brass ship bell rings twice with a clear bright metallic ding ding that rings on, after two light wooden hammer taps, cheerful, short, close-up, no voice, no music",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ship.bought-4.mp3",
+    "sha256": "50945e0844ccbb4681183b8051e0eba68a45d0d7f604ad2259994e06629cfb4c",
+    "bytes": 24702
   }
 }

@@ -112,6 +112,19 @@ const TRIM_DB = {
   "town.goblins": -8,
   "town.candy": -8,
   "town.dwarves": -8,
+  // The naval cues (bzc.160): steps sit with hero.step, the rest with the
+  // map objects and the battle's spells.
+  "ship.board": -3,
+  "ship.land": -4,
+  "ship.sail.a": -10,
+  "ship.sail.b": -10,
+  "ship.bought": -3,
+  "ship.sink": -3,
+  "ship.whirlpool": -3,
+  "battle.deck-gun": -3,
+  "site.buoy-bell": -4,
+  "battle.siren-song": -5,
+  "spell.tidal-wave": -2,
 };
 
 const db = (x) => (x > 0 ? 20 * Math.log10(x) : -120);

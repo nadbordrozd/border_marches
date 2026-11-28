@@ -400,7 +400,7 @@ describe("Buoys, Mermaid Rocks and Lighthouses (NAVAL 5.4)", () => {
       sites: Object.fromEntries(lights.map((l) => [l.id, { owner: 0 }])),
     };
     expect(lighthouseBonus(all, 0)).toBe(600);
-    expect(siteCue("lighthouse", texts(a.events)[0]!)).toBe("map.flag");
+    expect(siteCue("lighthouse", texts(a.events)[0]!)).toBe("site.buoy-bell");
   });
 });
 
@@ -482,6 +482,7 @@ describe("Ferry Landings (NAVAL 5.4)", () => {
       heroId: "hero-0",
       x: 15,
       y: 8,
+      via: "ferry-landing",
     });
     expect(isAfloat(r.state, h)).toBe(false);
   });
@@ -531,7 +532,7 @@ describe("Whirlpools (NAVAL 5.6)", () => {
     expect(shipAt(r.state, 8, 3)).toBeUndefined();
     expect(h.army[slot]?.count).toBe(army[slot]!.count - weakest!.lost);
     expect(texts(r.events)[0]).toMatch(/lost overboard/);
-    expect(siteCue("whirlpool", texts(r.events)[0]!)).toBe("site.waystone");
+    expect(siteCue("whirlpool", texts(r.events)[0]!)).toBe("ship.whirlpool");
   });
 
   it("take nothing from a hero with Seafaring rank 2", () => {

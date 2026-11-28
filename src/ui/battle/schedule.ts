@@ -11,7 +11,7 @@
  *   (damage, deaths, conditions, casts) hold briefly so they can be read.
  * - Otherwise the full timings, divided by the speed.
  */
-import { act, hasAct } from "../../core/battle/index.ts";
+import { DECK_GUN_EFFECT, act, hasAct } from "../../core/battle/index.ts";
 import type {
   BattleEvent,
   BattleState,
@@ -113,7 +113,9 @@ function groundCue(kind: string): FxEvent {
     : "battle.ground.other";
 }
 
-function castCues(look: ResolvedSpellFx): FxEvent[] {
+function castCues(look: ResolvedSpellFx, act: string): FxEvent[] {
+  // Tidal Wave has its own crash for cast, delivery and impact (NAVAL 11).
+  if (act === "tidal-wave") return ["spell.tidal-wave"];
   const s = look.school;
   return [
     `spell.cast.${s}` as FxEvent,
@@ -322,7 +324,7 @@ function describe(
       return {
         base: DURATIONS.cast,
         reducedBase: REDUCED_HOLD.cast,
-        cues: castCues(look),
+        cues: castCues(look, e.act),
         look,
         actKind: "cast",
       };
@@ -332,7 +334,7 @@ function describe(
       return {
         base: DURATIONS.cast,
         reducedBase: REDUCED_HOLD.cast,
-        cues: castCues(look),
+        cues: castCues(look, e.spell),
         look,
         actKind: "cast",
       };
@@ -341,8 +343,20 @@ function describe(
       return {
         base: DURATIONS.ability,
         reducedBase: REDUCED_HOLD.text,
-        cues: ["battle.ability"],
+        cues: [
+          e.ability === "siren-song" ? "battle.siren-song" : "battle.ability",
+        ],
         actKind: "ability",
+      };
+    case "schedule":
+      // The deck gun booms as it fires; its harm follows at once.
+      return {
+        base: 0,
+        reducedBase: 0,
+        cues:
+          e.change === "fired" && e.event.effect.id === DECK_GUN_EFFECT
+            ? ["battle.deck-gun"]
+            : [],
       };
     default:
       return { base: 0, reducedBase: 0, cues: [] };

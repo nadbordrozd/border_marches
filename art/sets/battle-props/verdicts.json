@@ -1,0 +1,612 @@
+{
+  "mast-a#0": {
+    "verdict": "REJECTED",
+    "notes": "superseded by mast-b#0: thin and small beside the creatures in the battle screenshot",
+    "at": "2026-11-28T20:22:58.756Z"
+  },
+  "crates-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "barrel and two X-braced crates: the clearest 'crate' read at 1x",
+    "at": "2026-11-28T20:12:41.686Z"
+  },
+  "gun-east-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky black barrel with lit top on a two-wheeled carriage, muzzle to the right",
+    "at": "2026-11-28T20:12:41.773Z"
+  },
+  "gun-west-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "the west facing of gun-east-a#0: same barrel, two-wheeled carriage, muzzle to the left; a take of its own, not a mirror",
+    "at": "2026-11-28T20:15:20.788Z"
+  },
+  "reef-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "three dark rocks with a tuft of weed, tall middle; the foam ring and waterline are drawn in code",
+    "at": "2026-11-28T20:17:37.629Z"
+  },
+  "reef-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "a lower, wider second shape so open water's reefs differ",
+    "at": "2026-11-28T20:17:37.724Z"
+  },
+  "mast-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:38.646Z"
+  },
+  "mast-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:38.742Z"
+  },
+  "mast-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:38.837Z"
+  },
+  "mast-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:38.934Z"
+  },
+  "mast-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:39.024Z"
+  },
+  "mast-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:39.118Z"
+  },
+  "mast-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:39.212Z"
+  },
+  "mast-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the cleanest mast (others add a second yard, a scaffold foot, a patched or open sail, rigging lines, a lantern, or no sail)",
+    "at": "2026-11-28T20:17:39.305Z"
+  },
+  "crates-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.396Z"
+  },
+  "crates-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.490Z"
+  },
+  "crates-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.584Z"
+  },
+  "crates-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.693Z"
+  },
+  "crates-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.808Z"
+  },
+  "crates-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:39.915Z"
+  },
+  "crates-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.023Z"
+  },
+  "crates-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.136Z"
+  },
+  "crates-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.247Z"
+  },
+  "crates-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.357Z"
+  },
+  "crates-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.469Z"
+  },
+  "crates-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.579Z"
+  },
+  "crates-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.687Z"
+  },
+  "crates-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.799Z"
+  },
+  "crates-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #2 reads as crates best at 1x (others: barrels stacked as crates, banded boxes that read as drawers)",
+    "at": "2026-11-28T20:17:40.910Z"
+  },
+  "gun-east-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.016Z"
+  },
+  "gun-east-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.127Z"
+  },
+  "gun-east-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.245Z"
+  },
+  "gun-east-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.359Z"
+  },
+  "gun-east-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.480Z"
+  },
+  "gun-east-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.586Z"
+  },
+  "gun-east-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.701Z"
+  },
+  "gun-east-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.815Z"
+  },
+  "gun-east-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:41.933Z"
+  },
+  "gun-east-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.050Z"
+  },
+  "gun-east-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.167Z"
+  },
+  "gun-east-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.280Z"
+  },
+  "gun-east-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.385Z"
+  },
+  "gun-east-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.501Z"
+  },
+  "gun-east-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.618Z"
+  },
+  "gun-east-a#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.728Z"
+  },
+  "gun-east-a#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.839Z"
+  },
+  "gun-east-a#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:42.952Z"
+  },
+  "gun-east-a#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.064Z"
+  },
+  "gun-east-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.175Z"
+  },
+  "gun-east-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.284Z"
+  },
+  "gun-east-a#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.392Z"
+  },
+  "gun-east-a#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.495Z"
+  },
+  "gun-east-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 is the clearest plain cannon (others: odd barrels, solid wheels, plates or stair carriages)",
+    "at": "2026-11-28T20:17:43.601Z"
+  },
+  "gun-west-a#0": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:43.711Z"
+  },
+  "gun-west-a#1": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:43.817Z"
+  },
+  "gun-west-a#2": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:43.923Z"
+  },
+  "gun-west-a#3": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.030Z"
+  },
+  "gun-west-a#4": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.144Z"
+  },
+  "gun-west-a#5": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.249Z"
+  },
+  "gun-west-a#6": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.360Z"
+  },
+  "gun-west-a#7": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.463Z"
+  },
+  "gun-west-a#8": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.570Z"
+  },
+  "gun-west-a#9": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.679Z"
+  },
+  "gun-west-a#10": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.787Z"
+  },
+  "gun-west-a#11": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:44.894Z"
+  },
+  "gun-west-a#12": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.001Z"
+  },
+  "gun-west-a#13": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.112Z"
+  },
+  "gun-west-a#14": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.224Z"
+  },
+  "gun-west-a#15": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.331Z"
+  },
+  "gun-west-a#16": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.439Z"
+  },
+  "gun-west-a#17": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.548Z"
+  },
+  "gun-west-a#18": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.656Z"
+  },
+  "gun-west-a#19": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.761Z"
+  },
+  "gun-west-a#20": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.865Z"
+  },
+  "gun-west-a#21": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:45.974Z"
+  },
+  "gun-west-a#22": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:46.080Z"
+  },
+  "gun-west-a#23": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:46.190Z"
+  },
+  "gun-west-a#24": {
+    "verdict": "REJECTED",
+    "notes": "muzzle points right, following the style ship's bow: no west facing",
+    "at": "2026-11-28T20:17:46.296Z"
+  },
+  "gun-west-b#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.417Z"
+  },
+  "gun-west-b#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.530Z"
+  },
+  "gun-west-b#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.647Z"
+  },
+  "gun-west-b#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.766Z"
+  },
+  "gun-west-b#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.879Z"
+  },
+  "gun-west-b#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:46.996Z"
+  },
+  "gun-west-b#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.109Z"
+  },
+  "gun-west-b#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.224Z"
+  },
+  "gun-west-b#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.334Z"
+  },
+  "gun-west-b#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.445Z"
+  },
+  "gun-west-b#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.548Z"
+  },
+  "gun-west-b#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.657Z"
+  },
+  "gun-west-b#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.764Z"
+  },
+  "gun-west-b#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.874Z"
+  },
+  "gun-west-b#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:47.979Z"
+  },
+  "gun-west-b#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.085Z"
+  },
+  "gun-west-b#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.219Z"
+  },
+  "gun-west-b#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.340Z"
+  },
+  "gun-west-b#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.451Z"
+  },
+  "gun-west-b#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.569Z"
+  },
+  "gun-west-b#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.693Z"
+  },
+  "gun-west-b#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.803Z"
+  },
+  "gun-west-b#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:48.919Z"
+  },
+  "gun-west-b#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #0 matches gun-east-a#0 best (others: banded or brass barrels, upturned mortars, odd wheels)",
+    "at": "2026-11-28T20:17:49.024Z"
+  },
+  "gun-west-c#0": {
+    "verdict": "REJECTED",
+    "notes": "brighter painterly style unlike the other pieces, and a ground plate under the wheels",
+    "at": "2026-11-28T20:17:49.131Z"
+  },
+  "gun-west-d#0": {
+    "verdict": "REJECTED",
+    "notes": "points left but glossier and more saturated than the accepted guns",
+    "at": "2026-11-28T20:17:49.244Z"
+  },
+  "reef-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.348Z"
+  },
+  "reef-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.457Z"
+  },
+  "reef-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.562Z"
+  },
+  "reef-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.668Z"
+  },
+  "reef-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.773Z"
+  },
+  "reef-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.882Z"
+  },
+  "reef-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:49.992Z"
+  },
+  "reef-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.100Z"
+  },
+  "reef-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.214Z"
+  },
+  "reef-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.319Z"
+  },
+  "reef-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.426Z"
+  },
+  "reef-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.534Z"
+  },
+  "reef-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.640Z"
+  },
+  "reef-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: #1 and #12 are kept (others have floating weed or near-identical shapes)",
+    "at": "2026-11-28T20:17:50.749Z"
+  },
+  "mast-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "thick banded pole, wide furled yard, crow's nest, plain white triangular pennant to recolour; reads as a mast beside the creatures",
+    "at": "2026-11-28T20:22:49.700Z"
+  },
+  "mast-b#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: rolled sail end and wavy pennant read busier than #0",
+    "at": "2026-11-28T20:22:50.087Z"
+  },
+  "mast-b#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: wavy two-tone pennant would tint unevenly; #0 cleaner",
+    "at": "2026-11-28T20:22:50.252Z"
+  },
+  "mast-b#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: loose ropes and a sprawling coil add noise",
+    "at": "2026-11-28T20:22:50.397Z"
+  }
+}

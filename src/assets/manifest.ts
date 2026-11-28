@@ -40,6 +40,7 @@ import type { ForestGround } from "./ground-family";
 import type { ResourceId, Terrain } from "../core/map/types";
 import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
+import { BATTLE_PIECE_ASSETS } from "./battle-pieces";
 import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS, SHIP_ASSETS } from "./map-objects";
 import { OWNER_FLAG } from "./owner-flag";
 import { PEAK_ASSETS } from "./peaks";
@@ -84,7 +85,8 @@ export type AssetCategory =
   | "building"
   | "town-backdrop"
   | "icon"
-  | "frame";
+  | "frame"
+  | "battle-piece";
 
 /** One PNG under public/. */
 export interface ImageAsset {
@@ -1417,6 +1419,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...TOWN_BACKDROP_ASSETS,
   ...ALL_ICON_ASSETS,
   ...SPELL_FRAME_ASSETS,
+  ...BATTLE_PIECE_ASSETS,
 ];
 
 const BY_KEY: ReadonlyMap<string, ImageAsset> = new Map(

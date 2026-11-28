@@ -5,6 +5,7 @@ import {
   pickupCue,
   recruitCue,
   siteCue,
+  stepCue,
   townCue,
   victoryCue,
 } from "../../src/audio/cues.ts";
@@ -396,6 +397,31 @@ describe("sound set and cues", () => {
     expect(siteCue("prison", "Prison: the cell is empty.")).toBeNull();
     expect(siteCue("sign", "Turn left at the oak.")).toBeNull();
     expect(siteCue(null, "Something")).toBeNull();
+  });
+
+  it("sounds boarding, sailing, landing and the sea's sites", () => {
+    expect(stepCue(false, false, 0)).toBe("hero.step");
+    expect(stepCue(false, true, 0)).toBe("ship.board");
+    expect(stepCue(true, true, 0)).toBe("ship.sail.a");
+    expect(stepCue(true, true, 1)).toBe("ship.sail.b");
+    expect(stepCue(true, false, 2)).toBe("ship.land");
+    expect(siteCue("buoy", "Buoy: +1 Morale until the next battle.")).toBe(
+      "site.buoy-bell",
+    );
+    expect(siteCue("lighthouse", "Lighthouse flagged.")).toBe("site.buoy-bell");
+    expect(siteCue("whirlpool", "Whirlpool: swept to its twin.")).toBe(
+      "ship.whirlpool",
+    );
+    expect(siteCue("whirlpool", "Whirlpool: its twin is blocked.")).toBeNull();
+    expect(siteCue("ferry-landing", "Ferry Landing: carried across.")).toBe(
+      "ship.board",
+    );
+    expect(siteCue("shipwright", "Shipwright: a new ship is moored.")).toBe(
+      "ship.bought",
+    );
+    expect(siteCue("two-way-waystone", "The waystone hums.")).toBe(
+      "site.waystone",
+    );
   });
 
   it("honours a sound's own gap, a start delay and the voice cap", async () => {

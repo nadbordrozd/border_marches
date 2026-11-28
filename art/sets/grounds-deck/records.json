@@ -1,0 +1,182 @@
+{
+  "deck-a": {
+    "id": "deck-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1aeac2f8-068c-4913-9007-f4e0a2b99069",
+    "submittedAt": "2026-11-28T19:59:29.341Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: the wooden deck of a ship seen from straight above, the planks running off every edge of the picture with no frame, no rim and no plate. Long straight narrow planks lying left to right, all the same width, about twenty planks from the top of the picture to the bottom, warm honey-brown wood #9c6c40 separated by thin dark brown #5e3c20 seams, the plank ends butted at staggered places with two tiny dark nail heads at each end, soft fine wood grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker than the others. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game battle ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 160101,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: the wooden deck of a ship seen from straight above, the planks running off every edge of the picture with no frame, no rim and no plate. Long straight narrow planks lying left to right, all the same width, about twenty planks from the top of the picture to the bottom, warm honey-brown wood #9c6c40 separated by thin dark brown #5e3c20 seams, the plank ends butted at staggered places with two tiny dark nail heads at each end, soft fine wood grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker than the others. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game battle ground. Must not include: frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles."
+    },
+    "at": "2026-11-28T19:59:29.351Z",
+    "usageUsd": 0.00974566994773017,
+    "candidates": [
+      {
+        "file": "deck-a-0.png",
+        "sha256": "25e13413f87cd57f5273bdd5e567631e8621b02030dc9b341b481e92767cce6e",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "deck-b": {
+    "id": "deck-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c2d94a22-96a2-49cb-8a53-87f3320fdd04",
+    "submittedAt": "2026-11-28T20:00:20.105Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: the wooden deck of a ship seen from straight above, the planks running off every edge of the picture with no frame, no rim and no plate. Long straight narrow planks lying left to right, all the same width, about twenty planks from the top of the picture to the bottom, warm honey-brown wood #9c6c40 separated by thin dark brown #5e3c20 seams, the plank ends butted at staggered places with two tiny dark nail heads at each end, soft fine wood grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker than the others. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game battle ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 160102,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: the wooden deck of a ship seen from straight above, the planks running off every edge of the picture with no frame, no rim and no plate. Long straight narrow planks lying left to right, all the same width, about twenty planks from the top of the picture to the bottom, warm honey-brown wood #9c6c40 separated by thin dark brown #5e3c20 seams, the plank ends butted at staggered places with two tiny dark nail heads at each end, soft fine wood grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker than the others. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game battle ground. Must not include: frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles."
+    },
+    "at": "2026-11-28T20:00:20.106Z",
+    "usageUsd": 0.01024775004386902,
+    "candidates": [
+      {
+        "file": "deck-b-0.png",
+        "sha256": "59f0674406024ca94640689b51b08b7f93d17b84e5593b6febf5b80c384febb7",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "deck-c": {
+    "id": "deck-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-dc10bc8d-a77e-4533-af92-22d230144df2",
+    "submittedAt": "2026-11-28T20:01:18.534Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a ship's wooden deck: only long straight planks lying left to right, nothing else, filling the whole picture edge to edge. About sixteen planks from top to bottom, all the same width, warm honey-brown wood #9c6c40 with thin dark brown #5e3c20 seams between them, plank ends butted at staggered places with tiny dark nail heads, soft fine grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker. Lit from the bottom left, low contrast, calm. Painterly 16-bit strategy-game battle ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 160103,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a ship's wooden deck: only long straight planks lying left to right, nothing else, filling the whole picture edge to edge. About sixteen planks from top to bottom, all the same width, warm honey-brown wood #9c6c40 with thin dark brown #5e3c20 seams between them, plank ends butted at staggered places with tiny dark nail heads, soft fine grain in slightly darker #86592f and lighter #b07e4c, a few planks a little lighter or darker. Lit from the bottom left, low contrast, calm. Painterly 16-bit strategy-game battle ground. Must not include: frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles."
+    },
+    "at": "2026-11-28T20:01:18.536Z",
+    "usageUsd": 0.01118077908621894,
+    "candidates": [
+      {
+        "file": "deck-c-0.png",
+        "sha256": "2b671ec6570c144a479e6927ed74959eaa8438d9b8d264e27bfa034ace3a00a8",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "deck-d": {
+    "id": "deck-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-622d3fba-3171-4899-a7b5-1fe63738d70b",
+    "submittedAt": "2026-11-28T20:03:12.495Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a ship's wooden deck: only long straight planks running from the top of the picture to the bottom, nothing else, filling the whole picture edge to edge. About eighteen narrow planks side by side across the picture, all exactly the same width and perfectly straight, warm honey-brown wood #9c6c40 with thin dark brown #6a4426 seams between them, plank ends butted at staggered places with two tiny dark nail heads, very soft fine grain in slightly darker #8c5e36 and lighter #ac7a4a, a few planks a little lighter or darker. Lit from the bottom left, very low contrast, calm and quiet. Painterly 16-bit strategy-game battle ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 160104,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a ship's wooden deck: only long straight planks running from the top of the picture to the bottom, nothing else, filling the whole picture edge to edge. About eighteen narrow planks side by side across the picture, all exactly the same width and perfectly straight, warm honey-brown wood #9c6c40 with thin dark brown #6a4426 seams between them, plank ends butted at staggered places with two tiny dark nail heads, very soft fine grain in slightly darker #8c5e36 and lighter #ac7a4a, a few planks a little lighter or darker. Lit from the bottom left, very low contrast, calm and quiet. Painterly 16-bit strategy-game battle ground. Must not include: frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles."
+    },
+    "at": "2026-11-28T20:03:12.500Z",
+    "usageUsd": 0.009816220892800227,
+    "candidates": [
+      {
+        "file": "deck-d-0.png",
+        "sha256": "e217321a6b61548f440940ba06d899ac3821c475bed01fb88893f30309e0c600",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "deck-e": {
+    "id": "deck-e",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-5650b47d-ed5e-46c0-a77c-3240bd6caa64",
+    "submittedAt": "2026-11-28T20:03:35.464Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a ship's wooden deck: only long straight planks running from the top of the picture to the bottom, nothing else, filling the whole picture edge to edge. About eighteen narrow planks side by side across the picture, all exactly the same width and perfectly straight, warm honey-brown wood #9c6c40 with thin dark brown #6a4426 seams between them, plank ends butted at staggered places with two tiny dark nail heads, very soft fine grain in slightly darker #8c5e36 and lighter #ac7a4a, a few planks a little lighter or darker. Lit from the bottom left, very low contrast, calm and quiet. Painterly 16-bit strategy-game battle ground."
+        }
+      ],
+      "image_size": {
+        "width": 256,
+        "height": 256
+      },
+      "no_background": false,
+      "seed": 160105,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a ship's wooden deck: only long straight planks running from the top of the picture to the bottom, nothing else, filling the whole picture edge to edge. About eighteen narrow planks side by side across the picture, all exactly the same width and perfectly straight, warm honey-brown wood #9c6c40 with thin dark brown #6a4426 seams between them, plank ends butted at staggered places with two tiny dark nail heads, very soft fine grain in slightly darker #8c5e36 and lighter #ac7a4a, a few planks a little lighter or darker. Lit from the bottom left, very low contrast, calm and quiet. Painterly 16-bit strategy-game battle ground. Must not include: frame, border, rim, railing, hatch, trapdoor, mast, rope, barrel, crate, cannon, object, character, water, sky, perspective, text, circles, knots, vertical planks, diagonal planks, parquet, tiles."
+    },
+    "at": "2026-11-28T20:03:35.465Z",
+    "usageUsd": 0.007339327149920994,
+    "candidates": [
+      {
+        "file": "deck-e-0.png",
+        "sha256": "632ab7954ba4be5dfb8d4b457d1bcb07b5619946f774bfa4d318262e2b33678d",
+        "width": 256,
+        "height": 256
+      }
+    ]
+  }
+}

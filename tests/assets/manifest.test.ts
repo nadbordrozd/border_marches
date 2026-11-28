@@ -93,10 +93,12 @@ const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
 const BAKED: ReadonlySet<string> = (() => {
   const recipe = readJson<{
     grounds: Record<string, { output: string; swatch: string }>;
+    surfaces: Record<string, { output: string }>;
     edge: { output: string };
   }>(join(ROOT, "art/bake/grounds.json"));
   const paths = [
     ...Object.values(recipe.grounds).flatMap((g) => [g.output, g.swatch]),
+    ...Object.values(recipe.surfaces).map((s) => s.output),
     recipe.edge.output,
   ];
   return new Set(paths.map((path) => path.slice("public/".length)));

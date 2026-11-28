@@ -1,0 +1,303 @@
+{
+  "set": "battle-props",
+  "bead": "border_marches-bzc.160",
+  "class": "battle-props",
+  "exploration": false,
+  "_doc": "The naval battle's pieces (bead bzc.160, docs/design/NAVAL.md 10.2 'Battle: mast, crates, deck gun', looked up by NAVAL_PIECE_KEYS in src/render/battle/naval.ts): the mast, the crates, the deck gun in two facings (east for the attacker, west for the defender: never mirrored, the sun stays at the bottom left) and the reef. generate-image-v2 at display size with the accepted sailing ship (ships/sailing-b#2) as style image, so the deck's wood, outline and pixel size match the ship on the map; the reef takes Sirens' Rock (sea-objects/sirens-rock-a#0) for its rocks and foam. Layers: style, light-south-west, class-battle-prop, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleShip": {
+      "file": "art/masters/ships/sailing-b-2.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the warm brown wood colours with one shadow tone and the slightly-from-above viewing angle; not the subject, not the sail and not the layout"
+    },
+    "styleRock": {
+      "file": "art/masters/sea-objects/sirens-rock-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky grey rock shapes with one shadow tone and the thin white foam at the waterline; not the subject, not the harp, mirror, oar or corals and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-battle-prop"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleShip",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "mast-a",
+      "concept": "MAST (a blocking deck hex, drawn tall)",
+      "width": 48,
+      "height": 112,
+      "seed": 160201,
+      "subject": "Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a tall thick round wooden pole of warm brown #8a5a32 with a #5a3a1c shadow on its right side, a small round wooden crow's nest near the top, one short wooden yard crossing the pole a third of the way down with a fat furled cream sail #efe3c2 tied in a roll along it, a small plain white #ffffff triangular pennant flying to the right from the very tip, a coil of rope #c8b080 round its foot. The pole fills the image from top to bottom, narrow, centred.",
+      "negative": "full sail, open sail, ship, hull, deck, rigging net, ladder, flag emblem, skull"
+    },
+    {
+      "id": "crates-a",
+      "concept": "CRATES (a blocking deck hex: rock with look 'crate')",
+      "width": 56,
+      "height": 48,
+      "seed": 160202,
+      "subject": "Subject: a small pile of ship's cargo: two chunky square wooden crates of warm brown planks #a8743e with #6a4422 shadows and dark iron corner bands, the smaller crate stacked on the larger one a little to the back, and one fat round wooden barrel with dark iron hoops standing beside them on the left. About four fifths of the image wide, its front facing the viewer.",
+      "negative": "ship, deck, rope net, treasure, gold, open lid, sack"
+    },
+    {
+      "id": "gun-east-a",
+      "concept": "DECK GUN, facing east (the attacker's, at the left rail)",
+      "width": 48,
+      "height": 40,
+      "seed": 160203,
+      "subject": "Subject: one small chunky ship's cannon seen from its left side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the right, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide.",
+      "negative": "smoke, fire, cannonball, ship, deck, rope, flag, person"
+    },
+    {
+      "id": "gun-west-a",
+      "concept": "DECK GUN, facing west (the defender's, at the right rail; a take of its own, never a mirror)",
+      "width": 48,
+      "height": 40,
+      "seed": 160204,
+      "subject": "Subject: one small chunky ship's cannon seen from its right side: a short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge and two raised bands, its open muzzle pointing to the left, lying on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40 on dark axles. About four fifths of the image wide.",
+      "negative": "smoke, fire, cannonball, ship, deck, rope, flag, person, muzzle pointing right"
+    },
+    {
+      "id": "gun-west-b",
+      "concept": "DECK GUN, facing west, again (every gun-west-a candidate pointed right, following the style ship's bow): a direction-free style image and the muzzle said twice",
+      "width": 48,
+      "height": 40,
+      "seed": 160206,
+      "styleImage": {
+        "take": "crates-a#2",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the wood colours; not the subject"
+      },
+      "subject": "Subject: one small chunky ship's cannon pointing LEFT: the wide open round muzzle mouth is at the LEFT end of the picture, the small round knob at the closed back end of the barrel is at the RIGHT end. A short fat round black iron barrel #2a2d33 with a lighter #5a606a top edge, on a low wooden carriage of brown planks #6a4422 with two round wooden wheels #9a6a40. About four fifths of the image wide.",
+      "negative": "smoke, fire, cannonball, ship, deck, rope, flag, person, muzzle on the right, barrel pointing right"
+    },
+    {
+      "id": "gun-west-c",
+      "concept": "DECK GUN, facing west, Pixen with its direction option",
+      "endpoint": "create-image-pixen",
+      "width": 48,
+      "height": 40,
+      "seed": 160207,
+      "styleImage": null,
+      "options": {
+        "outline": "single color black outline",
+        "detail": "low detail",
+        "view": "side",
+        "direction": "west"
+      },
+      "subject": "Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels."
+    },
+    {
+      "id": "gun-west-d",
+      "concept": "DECK GUN, facing west, Pixen, second seed",
+      "endpoint": "create-image-pixen",
+      "width": 48,
+      "height": 40,
+      "seed": 160208,
+      "styleImage": null,
+      "options": {
+        "outline": "single color black outline",
+        "detail": "low detail",
+        "view": "low top-down",
+        "direction": "west"
+      },
+      "subject": "Subject: a small chunky ship's cannon seen from the side, pointing left: a short fat black iron barrel with its open muzzle at the left end and a round knob at the right end, on a low brown wooden carriage with two round wooden wheels."
+    },
+    {
+      "id": "mast-b",
+      "concept": "MAST, sturdier (mast-a#0 reads thin and small beside the creatures in a battle screenshot)",
+      "width": 64,
+      "height": 128,
+      "seed": 160209,
+      "subject": "Subject: one ship's mast standing straight up, seen whole from its foot to its tip: a very thick sturdy round wooden pole, about a quarter of the image wide, of warm brown #8a5a32 with a #5a3a1c shadow on its right side and two dark iron bands, a chunky round wooden crow's nest near the top, one long thick wooden yard spanning the whole image width with a fat furled cream sail #efe3c2 tied in a roll along it, a plain white #ffffff triangular pennant flying to the right from the very tip, a fat coil of rope #c8b080 round its foot. The mast fills the image from the very top to the very bottom.",
+      "negative": "open sail, ship, hull, ladder, thin pole, lantern, second yard"
+    },
+    {
+      "id": "reef-a",
+      "concept": "REEF (a blocking sea hex in open water: rock with look 'reef')",
+      "width": 64,
+      "height": 48,
+      "seed": 160205,
+      "styleImage": "@styleRock",
+      "subject": "Subject: a low reef at sea: a small cluster of three jagged dark grey sea rocks #5a6470 with #3a424c shadows, the middle one tallest, a few pale barnacles and one tuft of green seaweed #4f8a4a, rising out of calm sea water that is not drawn: its bottom is a flat waterline hugged by a thin band of white foam #f2fbfc only two or three pixels high, the lowest thing in the image. About four fifths of the image wide and half of its height.",
+      "negative": "island, sand, beach, palm, coral, shell, creature, ship, lighthouse, water surface"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/battle/mast.png",
+      "from": "mast-b#0",
+      "width": 64,
+      "height": 122,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 3,
+          "width": 64,
+          "height": 122
+        }
+      ]
+    },
+    {
+      "path": "public/assets/battle/crates.png",
+      "from": "crates-a#2",
+      "width": 50,
+      "height": 40,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 5,
+          "width": 50,
+          "height": 40
+        },
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              39,
+              1,
+              "#1e0f0a"
+            ],
+            [
+              42,
+              3,
+              "#1e0f0a"
+            ],
+            [
+              43,
+              4,
+              "#1e0f0a"
+            ],
+            [
+              4,
+              13,
+              "#1e0f0a"
+            ],
+            [
+              3,
+              14,
+              "#1e0f0a"
+            ],
+            [
+              47,
+              18,
+              "#1e0f0a"
+            ],
+            [
+              48,
+              19,
+              "#1e0f0a"
+            ],
+            [
+              0,
+              20,
+              "#1e0f0a"
+            ],
+            [
+              0,
+              21,
+              "#1e0f0a"
+            ],
+            [
+              23,
+              35,
+              "#1e0f0a"
+            ],
+            [
+              21,
+              36,
+              "#1e0f0a"
+            ],
+            [
+              20,
+              37,
+              "#1e0f0a"
+            ],
+            [
+              4,
+              38,
+              "#1e0f0a"
+            ],
+            [
+              19,
+              38,
+              "#1e0f0a"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "path": "public/assets/battle/deck-gun-east.png",
+      "from": "gun-east-a#0",
+      "width": 38,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 8,
+          "width": 38,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/battle/deck-gun-west.png",
+      "from": "gun-west-b#0",
+      "width": 43,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 7,
+          "width": 43,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/battle/reef-a.png",
+      "from": "reef-a#1",
+      "width": 48,
+      "height": 38,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 4,
+          "width": 48,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/battle/reef-b.png",
+      "from": "reef-a#12",
+      "width": 48,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 9,
+          "width": 48,
+          "height": 34
+        }
+      ]
+    }
+  ]
+}

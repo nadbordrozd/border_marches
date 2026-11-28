@@ -1,0 +1,27 @@
+{
+  "deck-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "straight narrow planks bow to stern with staggered butt joints and nails; the open interior (crop 59,62 259x259) is calm and even; baked with the colour warmed to the ship's wood",
+    "at": "2026-11-28T20:17:37.818Z"
+  },
+  "deck-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a parquet of short crosswise blocks with a framed rim and barrels: not long ship planks",
+    "at": "2026-11-28T20:17:38.246Z"
+  },
+  "deck-b#0": {
+    "verdict": "REJECTED",
+    "notes": "short wide blocks running both ways, heavy frame and hatches in the field",
+    "at": "2026-11-28T20:17:38.349Z"
+  },
+  "deck-d#0": {
+    "verdict": "REJECTED",
+    "notes": "a lit oval in the middle with dark edges (a vignette that would not tile) and a hull rim",
+    "at": "2026-11-28T20:17:38.453Z"
+  },
+  "deck-e#0": {
+    "verdict": "REJECTED",
+    "notes": "wide boards with a lit band and a framed hatch; too much dark edge to crop a clean square",
+    "at": "2026-11-28T20:17:38.552Z"
+  }
+}

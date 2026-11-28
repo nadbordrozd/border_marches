@@ -1,5 +1,5 @@
 {
-  "_doc": "Ground bake (bead bzc.138): tools/art/ground-bake.mjs derives every land ground's texture and swatch, and the border brush, from these accepted takes. mean: the ground's colour before bzc.138 (its old texture's mean; the steppe as calmed in game). spread: the luma standard deviation over the mean luma. flatten: how much of each take's slow light and dark patches is pulled to its mean (box radius px). Crops keep each take's open interior (pixen frames its ground). Edit a value, run `bake`, review, commit the recipe and the files together.",
+  "_doc": "Ground bake (bead bzc.138): tools/art/ground-bake.mjs derives every land ground's texture and swatch, and the border brush, from these accepted takes. mean: the ground's colour before bzc.138 (its old texture's mean; the steppe as calmed in game). spread: the luma standard deviation over the mean luma. flatten: how much of each take's slow light and dark patches is pulled to its mean (box radius px). Crops keep each take's open interior (pixen frames its ground). surfaces (bead bzc.160): battle surfaces without a swatch; the deck is the naval battle's planks, recoloured to the ship's warm wood (render/battle/naval.ts cuts it into boards and staggers them, so it needs no torus). Edit a value, run `bake`, review, commit the recipe and the files together.",
   "grounds": {
     "grass": {
       "mean": "#8bb95e",
@@ -303,6 +303,30 @@
       ],
       "output": "public/assets/terrain/grounds/swamp.png",
       "swatch": "public/assets/terrain/grounds/swamp-swatch.png"
+    }
+  },
+  "surfaces": {
+    "deck": {
+      "mean": "#8e5f36",
+      "spread": 0.17,
+      "flatten": {
+        "radius": 24,
+        "amount": 0.5
+      },
+      "mode": "repeat",
+      "period": 259,
+      "takes": [
+        {
+          "take": "grounds-deck/deck-c#0",
+          "crop": [
+            59,
+            62,
+            259,
+            259
+          ]
+        }
+      ],
+      "output": "public/assets/battle/deck.png"
     }
   },
   "edge": {

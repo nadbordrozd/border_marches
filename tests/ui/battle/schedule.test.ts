@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  DECK_GUN_EFFECT,
   applyAction,
   chooseAiAction,
   createBattle,
@@ -125,6 +126,43 @@ describe("animation scheduler", () => {
     const beats = planBatch(events, before, { speed: 1, reduced: false });
     expect(beats.map((b) => b.index)).toEqual(events.map((e) => e.index));
     expect(beats.map((b) => b.order)).toEqual(beats.map((_, i) => i));
+  });
+
+  it("cues the deck gun, Siren Song and Tidal Wave (NAVAL 11)", () => {
+    const { before } = meleeStep();
+    const fired = (id: string): BattleEvent => ({
+      ...meta(0),
+      type: "schedule",
+      change: "fired",
+      event: {
+        id: 1,
+        round: 2,
+        phase: "start",
+        side: "attacker",
+        source: id,
+        effect: { id, args: { harm: 40 } },
+      },
+    });
+    const cuesOf = (e: BattleEvent) =>
+      planBatch([e], before, { speed: 1, reduced: false })[0]?.cues;
+    expect(cuesOf(fired(DECK_GUN_EFFECT))).toEqual(["battle.deck-gun"]);
+    expect(cuesOf(fired("engine:get-up"))).toEqual([]);
+    expect(
+      cuesOf({
+        ...meta(0),
+        type: "ability",
+        stackId: "d0",
+        ability: "siren-song",
+      }),
+    ).toEqual(["battle.siren-song"]);
+    expect(
+      cuesOf({
+        ...meta(0),
+        type: "heroAct",
+        side: "attacker",
+        act: "tidal-wave",
+      }),
+    ).toEqual(["spell.tidal-wave"]);
   });
 
   it("gives every beat its effect names and full timings", () => {
